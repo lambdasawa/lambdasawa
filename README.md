@@ -1,3 +1,1 @@
-# lambdasawa/lambdasawa/README.md
-
-![GitHub Stats](https://github-readme-stats.vercel.app/api?username=lambdasawa&count_private=true&show_icons=true&theme=monokai&layout=compact) ![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=lambdasawa&theme=monokai&layout=compact)
+![Metrics](https://metrics.lecoq.io/lambdasawa?template=classic&base.metadata=0&isocalendar=1&isocalendar.duration=half-year&config.timezone=Asia%2FTokyo)
