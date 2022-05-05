@@ -1,7 +1,7 @@
-<h1 align="center">I'm λ沢 (pronounced as lambda sour)</h1>
-
+- I'm λ沢 (pronounced as lambda sour)
+- https://lambdasawa.me
 - I am currently working at [microCMS](https://microcms.io/) as a backend engineer 
-- How to reach me **lambdasawa@gmail.com**
 - Go
 - TypeScript
 - AWS
+- How to reach me **lambdasawa@gmail.com**
