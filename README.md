@@ -1,7 +1,5 @@
 - I'm λ沢 (pronounced as lambda sour)
 - https://lambdasawa.me
-- I am currently working at [microCMS](https://microcms.io/) as a backend engineer 
 - Go
 - TypeScript
 - AWS
-- How to reach me **lambdasawa@gmail.com**
