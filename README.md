@@ -1,5 +1,2 @@
 - I'm λ沢 (pronounced as lambda sour)
 - [λ沢.me](https://www.lambdasawa.me)
-- Go
-- TypeScript
-- AWS
