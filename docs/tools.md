@@ -1,8 +1,25 @@
 # λ沢を支える技術
 
+## summary
+
+- [fish](https://gist.github.com/lambdasawa/bde654db8278d1b625e19ac10eed3099#fish)
+  - カスタマイズしなくても高度な補完が使えて便利
+- [zoxide](https://gist.github.com/lambdasawa/bde654db8278d1b625e19ac10eed3099#zoxide)
+  - `cd` を使うならぜひ
+- [Raycast](https://gist.github.com/lambdasawa/bde654db8278d1b625e19ac10eed3099#raycast)
+  - Mac を使ってるならぜひ
+- [VSCode Code Ace Jumper](https://gist.github.com/lambdasawa/bde654db8278d1b625e19ac10eed3099#code-ace-jumper)
+  - VSCode を使ってるならぜひ
+- [VSCode expand-region](https://gist.github.com/lambdasawa/bde654db8278d1b625e19ac10eed3099#expand-region)
+  - VSCode を使ってるならぜひ
+
+## ToC
+
 <!-- Markdown All in One: Update Table of Contents -->
 
 - [λ沢を支える技術](#λ沢を支える技術)
+  - [summary](#summary)
+  - [ToC](#toc)
   - [CLI](#cli)
     - [fish](#fish)
     - [asdf](#asdf)
