@@ -1,4 +1,4 @@
-# nekuro-youtube
+# transcribe-channel-archives
 
 ## <https://www.youtube.com/channel/UCs-lYkwb-NYKE9_ssTRDK3Q/videos>
 
@@ -224,15 +224,15 @@ TODO
 ```sh
 sudo apt update -y && sudo apt install -y youtube-dl awscli
 
-curl -sSLO https://gist.githubusercontent.com/lambdasawa/9e57a958549cff2f6ddc748aa2d3e8eb/raw/120a94f6258fa529cf105ee557bff3b76bb10fbe/nekuro-youtube.md
+curl -sSLO https://raw.githubusercontent.com/lambdasawa/lambdasawa/bba6e3864d5b5721247a6d17da46326fe62ce632/docs/transcribe-channel-archives.md
 
-cp nekuro-youtube.md public-video-ids.txt
+cp transcribe-channel-archives.md public-video-ids.txt
 vim public-video-ids.txt
 
-cp nekuro-youtube.md private-video-ids.txt
+cp transcribe-channel-archives.md private-video-ids.txt
 vim private-video-ids.txt
 
-cp nekuro-youtube.md backup.sh
+cp transcribe-channel-archives.md backup.sh
 vim backup.sh
 chmod u+x backup.sh
 
