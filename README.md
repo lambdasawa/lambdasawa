@@ -5,4 +5,4 @@
 - Gopher
 - Japanese
 - [λ沢.me](https://www.lambdasawa.me)
-- [λ沢を支える技術](https://gist.github.com/lambdasawa/bde654db8278d1b625e19ac10eed3099)
+- [λ沢を支える技術](https://github.com/lambdasawa/lambdasawa/blob/main/docs/tools.md)
