@@ -23,9 +23,6 @@ asdf plugin update --all
 
 for p in $(asdf plugin list); do
   v=latest
-  if [ "$p" = golang ]; then
-    v=1.17
-  fi
   if [ "$p" = java ]; then
     v=openjdk-17
   fi
