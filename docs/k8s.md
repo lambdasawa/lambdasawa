@@ -1,7 +1,9 @@
-### [kubectl](https://kubernetes.io/ja/docs/reference/kubectl/overview/)
+# Kubernetes, k8s
 
-### [Lens](https://docs.k8slens.dev/main/)
+## [kubectl](https://kubernetes.io/ja/docs/reference/kubectl/overview/)
+
+## [Lens](https://docs.k8slens.dev/main/)
 
 kubectlのGUI。
 
-### [Skaffold](https://skaffold.dev/)
+## [Skaffold](https://skaffold.dev/)

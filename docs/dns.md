@@ -1,3 +1,5 @@
+# DNS
+
 <https://nip.io/>
 
 <https://domainwat.ch/>
@@ -8,7 +10,7 @@
 
 ローカルキャッシュ削除
 
-```
+```sh
 uname | grep Darwin 2>&1 >/dev/null && sudo killall -HUP mDNSResponder
 ```
 

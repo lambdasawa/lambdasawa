@@ -1,3 +1,5 @@
+# struct generator
+
 <https://transform.tools/json-to-go>
 
 <https://app.quicktype.io/>

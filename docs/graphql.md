@@ -1,11 +1,13 @@
-### [Syntax](https://graphql.org/learn/queries/)
+# GraphQL
 
-### [Hasura](https://hasura.io/)
+## [Syntax](https://graphql.org/learn/queries/)
 
-### [AWS AppSync](https://docs.aws.amazon.com/ja_jp/appsync/latest/devguide/what-is-appsync.html)
+## [Hasura](https://hasura.io/)
 
-### [StepZen](https://stepzen.com/)
+## [AWS AppSync](https://docs.aws.amazon.com/ja_jp/appsync/latest/devguide/what-is-appsync.html)
 
-### [Insomnia](https://insomnia.rest/)
+## [StepZen](https://stepzen.com/)
+
+## [Insomnia](https://insomnia.rest/)
 
 GUIのHTTPクライアント。

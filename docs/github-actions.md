@@ -1,4 +1,4 @@
-ワークフローを書くときに参照するべきドキュメント
+# GitHub Actions
 
 ## 全体的な構文
 
@@ -54,9 +54,9 @@ GitHub Actions では式を書ける。
 
 <https://docs.github.com/en/actions/creating-actions/creating-a-composite-action>
 
-# デバッグ方法
+## デバッグ方法
 
-## ローカル実行
+### ローカル実行
 
 <https://github.com/nektos/act>
 
@@ -65,7 +65,7 @@ GitHub Actions では式を書ける。
 デフォルトでは実際の GitHub Actions 環境との差分が多いが [Runner として使う Docker イメージを指定できる](
 https://github.com/nektos/act#use-an-alternative-runner-image)ので、そのオプションを使うと似たような環境で実行できる。
 
-## GitHub Actions  の実行環境に SSH でアクセス
+### GitHub Actions  の実行環境に SSH でアクセス
 
 <https://github.com/mxschmitt/action-tmate>
 
@@ -321,7 +321,7 @@ jobs:
 ワークフローのステップを JS で書ける。
 GitHub の API を叩いたり (`github` を使う)、ワークフローコマンド相当の処理をしたり (`core` を使う) するのが楽。
 
-# ワークフロー間の連携について
+## ワークフロー間の連携について
 
 - ワークフロー内にあるパラメータを少し変えて複数パターンで実行したい場合は `workflow_call` が使える
 - ワークフローの開始か終了をトリガーにして別のワークフローを起動をする場合は `workflow_run` が使える

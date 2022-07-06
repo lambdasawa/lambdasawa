@@ -71,7 +71,7 @@ linter
 本当にドキュメント通りに API が実装されているか？
 ドキュメントと実装に剥離があることは多々あるけど、それを防止するツールがある。
 
-# プロキシ型 (Prism)
+## プロキシ型 (Prism)
 
 こういう OpenAPI があるとする。
 
@@ -110,7 +110,7 @@ app.listen(8888);
 
 以下のようなコマンドを叩くとバリデーション付きのプロキシサーバが建てられる。
 
-```
+```sh
 $ prism proxy openapi.yaml http://localhost:8888 --errors
 [21:11:59] › [CLI] …  awaiting  Starting Prism…
 [21:11:59] › [CLI] ℹ  info      GET        http://127.0.0.1:4010/
@@ -119,7 +119,7 @@ $ prism proxy openapi.yaml http://localhost:8888 --errors
 
 ここで `curl` でプロキシサーバにリクエストを発行するとエラーが返ってくることを確認できる。
 
-```
+```sh
 $ curl -v http://127.0.0.1:4010
 *   Trying 127.0.0.1:4010...
 * Connected to 127.0.0.1 (127.0.0.1) port 4010 (#0)

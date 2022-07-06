@@ -1,9 +1,11 @@
+# Helix OLED
+
 <https://btoshop.jp/products/adskbcc> で購入した Corne を使いました。
 
 まず適当な画像を用意して ImageMagick で二値化します。
 `threshold` は適宜変換後のファイルを目視で確認しながら調整してください。
 
-```
+```sh
 convert image.png -threshold 3000 binary_image.png
 ```
 
@@ -11,7 +13,7 @@ convert image.png -threshold 3000 binary_image.png
 以下の例では `-resize 128x128` で 128px の正方形にしてから、 `-crop 128x32+0+64` で縦 64px の位置から 32px 分を切り抜いてます。
 つまり画像を縦に4等分したときの真ん中2つを切り抜いてます。
 
-```
+```sh
 convert binary_image.png -resize 128x128 -crop 128x32+0+64 small_binary_image.png
 ```
 

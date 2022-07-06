@@ -1,31 +1,33 @@
-### [Dockerfile reference](https://docs.docker.jp/engine/reference/builder.html)
+# Docker
 
-### [Dockerfile best practice](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)
+## [Dockerfile reference](https://docs.docker.jp/engine/reference/builder.html)
 
-### [docker-compose.yml reference](https://docs.docker.jp/compose/compose-file.html)
+## [Dockerfile best practice](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)
 
-### [wait](https://github.com/ufoscout/docker-compose-wait)
+## [docker-compose.yml reference](https://docs.docker.jp/compose/compose-file.html)
+
+## [wait](https://github.com/ufoscout/docker-compose-wait)
 
 主に docker-compose と一緒に使うコマンド。他のコンテナのポートが開くのを待つのに使える。
 `wait` などを使わずに `depends_on` で依存を指定したときに保証されることはポートが開いていることではなく、あくまでコンテナが起動していることまで。
 
-### [Docker Hub: MySQL](https://hub.docker.com/_/mysql)
+## [Docker Hub: MySQL](https://hub.docker.com/_/mysql)
 
-### [Docker Hub: Redis](https://hub.docker.com/_/redis)
+## [Docker Hub: Redis](https://hub.docker.com/_/redis)
 
-### [Docker Hub: LocalStack](https://hub.docker.com/r/localstack/localstack)
+## [Docker Hub: LocalStack](https://hub.docker.com/r/localstack/localstack)
 
 AWS の各種サービスをローカルでモックできる。
 
-### [Docker Hub: MinIO](https://hub.docker.com/r/minio/minio/)
+## [Docker Hub: MinIO](https://hub.docker.com/r/minio/minio/)
 
 S3 をモックできる。
 
-### [Docker Hub: MailHog](https://hub.docker.com/r/mailhog/mailhog)
+## [Docker Hub: MailHog](https://hub.docker.com/r/mailhog/mailhog)
 
 メールをモックできる。
 
-### プラットフォームを指定して docker-compose.yml 内にある全てのイメージを docker pull
+## プラットフォームを指定して docker-compose.yml 内にある全てのイメージを docker pull
 
 ```sh
 for image in (cat docker-compose.yml | jc --yaml | jq -r '.[0] | .services[] | .image' | grep -v null); docker pull --platform linux/amd64 $image; end
@@ -49,7 +51,7 @@ $ docker run \
 $ mysql -uroot -proot -h127.0.0.1 -P3306 -e 'use demo; show tables;'
 ```
 
-```
+```sh
 $ cat init_bucket.sh
 set -xeu
 
@@ -70,7 +72,7 @@ $ env \
     aws --endpoint http://127.0.0.1:4566 s3 ls
 ```
 
-```
+```sh
 $ docker run \
     -itd \
     -p 9000:9000 \
@@ -87,7 +89,7 @@ $ aws --endpoint http://127.0.0.1:9000 s3 ls
 2022-03-19 22:10:25 test
 ```
 
-```
+```sh
 $ docker run \
   -itd \
   -p 9200:9200 \

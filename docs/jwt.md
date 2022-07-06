@@ -1,14 +1,14 @@
-RFC
+# JWT
 
 <https://openid-foundation-japan.github.io/draft-ietf-oauth-json-web-token-11.ja.html>
 
-# デコードする
+## デコードする
 
-## ブラウザ上で
+### ブラウザ上で
 
 <https://jwt.io/>
 
-## CLI で
+### CLI で
 
 <https://github.com/mike-engel/jwt-cli>
 
@@ -31,7 +31,7 @@ $ jwt decode -j eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiw
 }
 ```
 
-# 構造
+## 構造
 
 - ヘッダー、ペイロード、シグネチャの3つがある
 - ヘッダーは Base64 エンコードされた JSON
@@ -41,7 +41,7 @@ $ jwt decode -j eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiw
 - シグネチャはヘッダーとペイロードを `.` で繋げた文字列の署名を Base64 エンコードしたもの
 - JWT とはヘッダーとペイロードとシグネチャを `.` で繋げた文字列
 
-# 検証
+## 検証
 
 - 署名検証
   - ヘッダーとペイロードから作ったシグネチャと、 `.` で区切った文字列の末尾が一致するか検証する

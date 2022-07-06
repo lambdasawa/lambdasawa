@@ -1,3 +1,5 @@
+# Elasticsearch and OpenSearch
+
 <https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html>
 
 <https://github.com/dzharii/awesome-elasticsearch>
@@ -11,7 +13,7 @@
 <https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster.html>
 <https://www.elastic.co/guide/en/elasticsearch/reference/current/cat.html>
 
-# 用語集
+## 用語集
 
 - ドキュメント
   - MySQL などの RDB で言うところのレコード

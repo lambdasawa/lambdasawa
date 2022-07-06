@@ -1,4 +1,6 @@
-# adb
+# Android debug
+
+## adb
 
 まず有線で接続して、 Android の設定画面から USB デバッグとワイヤレスデバッグを有効化。
 

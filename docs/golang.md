@@ -1,4 +1,4 @@
-# go tips
+# golang
 
 ## IDE
 

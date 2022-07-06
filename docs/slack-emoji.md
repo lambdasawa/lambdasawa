@@ -1,3 +1,5 @@
+# Slack emoji
+
 <https://emoji-gen.ninja/>
 
 <https://zk-phi.github.io/MEGAMOJI/>

@@ -1,21 +1,14 @@
-# [ドキュメント](https://docs.aws.amazon.com/ja_jp/)
+# AWS
+
+## [ドキュメント](https://docs.aws.amazon.com/ja_jp/)
 
 - <https://github.com/aws-samples>
 - [AWS ざっくり料金計算](https://aws-rough.cc/)
 
 ## IaC
 
-
-### AWS CDK
-
-[プロジェクト初期化](https://docs.aws.amazon.com/cdk/latest/guide/hello_world.html#hello_world_tutorial_create_app)
-
-```sh
-read project_name
-mkdir -p $project_name
-cd $project_name
-npx cdk init app --language typescript
-```
+- [Terraform](./aws-terraform.md)
+- [CDK](./aws-cdk.md)
 
 ## CLI
 

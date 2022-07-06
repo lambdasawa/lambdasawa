@@ -1,3 +1,5 @@
+# DynamoDB
+
 <https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide>
 
 <https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/best-practices.html>
@@ -6,12 +8,12 @@
 
 <https://www.youtube.com/watch?v=16RYHfe89WY&t=1257s>
 
-# エミュレータ
+## エミュレータ
 
 - [dynamodb-local](https://hub.docker.com/r/amazon/dynamodb-local)
 - [LocalStack](https://hub.docker.com/r/localstack/localstack)
 
-# GUI クライアント
+## GUI クライアント
 
 ## [NoSQL Workbench](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/workbench.settingup.html)
 
@@ -25,7 +27,7 @@ GUIクライアント。有料。
 
 ローカルで動く管理画面。
 
-```
+```sh
 $ env DYNAMO_ENDPOINT=http://localhost:8000 PORT=8001 dynamodb-admin
 open http://localhost:8001
 ```
