@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -xeuo pipefail
+
+now="$(now)"
+
+mkdir -p ~/tmp/"$now"
+
+name=$(basename ~/tmp/"$now" | head -c18 | sed 's/\./-/g')
+
+tmux new-session -d -c ~/tmp/"$now" -s "$name"
+echo test "$TMUX" && tmux switch-client -t "$name" || tmux attach-session -t "$name"

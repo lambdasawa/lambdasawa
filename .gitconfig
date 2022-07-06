@@ -1,0 +1,11 @@
+[user]
+email = lambdasawa@gmail.com
+name = Tsubasa Irisawa
+
+[init]
+defaultBranch = main
+
+[include]
+path = ~/.config/git/alias
+path = ~/.config/git/ghq
+path = ~/.config/git/delta

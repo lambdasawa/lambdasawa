@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -e
+
+if [ -z "$1" ]; then
+	n=128
+else
+	n=$1
+fi
+ruby -e "require 'securerandom' ; puts SecureRandom.alphanumeric($n)"

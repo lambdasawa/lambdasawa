@@ -1,0 +1,6 @@
+[core]
+pager = delta
+
+[delta]
+theme = 'Monokai Extended'
+side-by-side = true

@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -e
+
+pushd "$PWD"
+
+cd ~/dotfiles
+git add .
+git stash
+git pull
+./setup.sh
+
+popd

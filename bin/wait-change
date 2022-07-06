@@ -1,0 +1,28 @@
+#!/bin/bash
+
+set -e
+
+cmd=$1
+
+echo
+printf '\033[0;35m#%.0s\033[0m' $(jot $(tput cols))
+echo
+
+first_result=$(eval "$cmd")
+echo "$first_result"
+
+while true; do
+	sleep 1
+
+	echo
+	printf '\033[0;35m#%.0s\033[0m' $(jot $(tput cols))
+	echo
+
+	result=$(eval "$cmd")
+	echo "$result"
+
+	if [ "$result" != "$first_result" ]; then
+		echo "Change detected!"
+		break
+	fi
+done

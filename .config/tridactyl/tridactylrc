@@ -1,0 +1,258 @@
+################################################################################
+#### Document ##################################################################
+################################################################################
+#
+# default setting.
+# https://github.com/tridactyl/tridactyl/blob/af61d8a42e55fa8590ef91e90f474528bcd82ba5/src/config.ts#L34
+#
+# examples.
+# https://github.com/tridactyl/tridactyl/wiki/Exemplar-.tridactylrc-files
+#
+# themes.
+# https://github.com/tridactyl/tridactyl/tree/master/src/static/themes
+#
+
+################################################################################
+#### Basic #####################################################################
+################################################################################
+
+# wipe settings
+sanitize tridactyllocal tridactylsync
+
+set hintchars jfkdhglsamvurceixwozqp
+
+set smoothscroll true
+
+set findcase smart
+
+set editorcmd /opt/homebrew/bin/code --wait
+
+set rsscmd open %u
+
+colors my
+
+################################################################################
+#### Command ###################################################################
+################################################################################
+
+command translateselection js -r js/translateSelection.js
+command translatepage js -r js/translatePage.js
+
+command addfeedly js -r js/addfeedly.js
+
+command gitclone js -r js/gitclone.js
+
+command openvscode js -r js/openvscode.js
+
+command opentwitterintent js -r js/opentwitterintent.js
+
+command openamazonshorturl js -r js/openamazonshorturl.js
+
+command youtubedl js -r js/youtubedl.js
+
+command highlightcloudwatchlogs js -r js/highlightCloudWatchLogs.js
+
+################################################################################
+#### Shortcut  #################################################################
+################################################################################
+
+# reset all
+unbind <F1>
+unbind o
+unbind O
+unbind w
+unbind W
+unbind t
+unbind ]]
+unbind [[
+unbind [c
+unbind ]c
+unbind <c-x>
+unbind <c-a>
+unbind T
+unbind yy
+unbind ys
+unbind yc
+unbind gh
+unbind gH
+unbind p
+unbind P
+unbind j
+unbind <c-e>
+unbind k
+unbind <c-y>
+unbind h
+unbind l
+unbind G
+unbind gg
+unbind <c-u>
+unbind <c-d>
+unbind $
+unbind ^
+unbind <c-6>
+unbind H
+unbind L
+unbind <c-i>
+unbind <c-o>
+unbind D
+unbind d
+unbind gx$
+unbind gx0
+unbind r
+unbind u
+unbind gi
+unbind R
+unbind gt
+unbind g;
+unbind g^
+unbind gT
+unbind g$
+unbind g0
+unbind gu
+unbind gr
+unbind gf
+unbind gU
+unbind s
+unbind :
+unbind M
+unbind S
+unbind ZZ
+unbind b
+unbind F
+unbind f
+unbind ;I
+unbind ;i
+unbind ;y
+unbind ;k
+unbind ;P
+unbind ;p
+unbind ;s
+unbind ;r
+unbind ;a
+unbind ;S
+unbind ;;
+unbind ;A
+unbind ;v
+unbind ;#
+unbind <S-Insert>
+unbind ;w
+unbind <CA-`>
+unbind <CA-Esc>
+unbind a
+unbind I
+unbind zi
+unbind A
+unbind zz
+unbind zo
+unbind <SA-ArrowUp><SA-ArrowUp><SA-ArrowDown><SA-ArrowDown><SA-ArrowLeft><SA-ArrowRight><SA-ArrowLeft><SA-ArrowRight>ba
+unbind .
+unbind ,y
+unbind /
+
+# mode
+bind I mode ignore
+
+# cmd
+bind x fillcmdline_notrail
+
+# edit text by vscode
+bind c-i editor
+
+# move page
+bind f hint
+bind F hint -b
+bind s hint -h
+
+# scroll
+bind j scrollline 10
+bind k scrollline -10
+bind G scrollto 100
+bind gg scrollto 0
+
+# find
+bind / fillcmdline find
+bind ? fillcmdline find -?
+bind n findnext 1
+bind N findnext -1
+
+# tab move
+bind h tabprev
+bind l tabnext
+bind b fillcmdline buffer
+
+# new tab
+bind o fillcmdline open
+bind t fillcmdline tabopen
+bind p clipboard open
+bind P clipboard tabopen
+
+# close tab
+bind d tabclose
+
+# pin tab
+bind p pin
+
+# history
+bind H back
+bind L forward
+
+# reload page
+bind r reload
+bind R reloadhard
+
+# zoom
+bind zi zoom 0.1 true
+bind zo zoom -0.1 true
+bind zz zoom 1
+
+# edit
+bind e editor
+
+# reload settings
+bind ,r composite js alert('tridactylrc loading...'); source; js alert('tridactylrc loaded!')
+
+# test js
+bind ,x js alert('~/.trydactylrc loaded!')
+
+# translate selected text to japanese
+bind a translateselection
+bind A translatepage
+
+# add current page to feedly
+bind ,f addfeedly
+
+# exec git clone at github
+bind ,g gitclone
+
+# open vscode at github
+bind ,e openvscode
+
+# open github compare page
+bind ,c js location.href = location.href.match(new RegExp('https://github.com/[^/]+/[^/]+'))[0] + "/compare"
+
+# open twitter share link
+bind ,t opentwitterintent
+
+# open amazon short url
+bind ,a openamazonshorturl
+
+# exec youtube-dl
+bind ,y youtubedl
+
+################################################################################
+#### Hook ######################################################################
+################################################################################
+
+autocmd DocStart ^https://mail.google.com mode ignore
+
+autocmd DocStart ^https://tweetdeck.twitter.com mode ignore
+
+autocmd DocStart ^https://feedly.com/ mode ignore
+
+autocmd DocStart ^https://gather.town/ mode ignore
+
+autocmd DocStart ^https://app.slack.com/ mode ignore
+
+autocmd DocStart ^https://www.notion.so/ mode ignore
+
+autocmd DocStart ^https://ap-northeast-1.console.aws.amazon.com/cloudwatch/ highlightcloudwatchlogs

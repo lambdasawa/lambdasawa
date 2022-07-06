@@ -1,0 +1,33 @@
+#!/bin/bash
+
+set -e
+
+file=$1
+if [ -z "$file" ]; then
+  exit 0
+fi
+
+mime=$(file --mime "$file")
+
+if echo "$mime" | grep inode/directory >/dev/null; then
+  list "$file"
+  exit 0
+fi
+
+if echo "$mime" | grep application/zip >/dev/null; then
+  unzip -l "$file"
+  exit 0
+fi
+
+if echo "$file" | grep '\.md$' >/dev/null; then
+  glow "$file"
+  exit 0
+fi
+
+if echo "$mime" | grep 'charset=binary' >/dev/null; then
+  file "$file"
+  hexyl -n 128 "$file"
+  exit 0
+fi
+
+env COLORTERM=truecolor bat -f --theme="Monokai Extended" "$file"

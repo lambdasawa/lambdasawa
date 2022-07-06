@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set -e
+
+git log --date=short --decorate=short --pretty=format:'%h %cd %cn %d %s' | filter | awk '{print $1}'

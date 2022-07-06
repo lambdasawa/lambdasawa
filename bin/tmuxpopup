@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set -e
+
+tmux popup -w80% -h50% -E 'env TERM=xterm tmuxselect && exit'

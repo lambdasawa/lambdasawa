@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set -e
+
+git ls-files | xargs hgrep --theme ayu-dark "$@"

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -e
+
+local=$(jc ifconfig | jq -r '.[] | .ipv4_addr | select(. != null) | select(. != "127.0.0.1")')
+echo "local: $local"
+
+global=$(curl -sSL https://checkip.amazonaws.com/)
+echo "global: $global"

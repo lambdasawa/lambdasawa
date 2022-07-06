@@ -1,0 +1,23 @@
+#!/bin/bash
+
+set -e
+
+if [ -z "$1" ]; then
+	repo=$(ghq list | filter)
+	if [ -z "$repo" ]; then
+		exit 1
+	fi
+	path="$HOME/src/$repo"
+else
+	path=$1
+fi
+echo "$path"
+
+name=$(basename $(realpath "$path") | head -c18 | sed 's/\./-/g')
+
+if ! tmux has-session -t "$name" 2>/dev/null; then
+	realpath "$path"
+	tmux new-session -d -c $(realpath "$path") -s "$name"
+fi
+
+test "$TMUX" && tmux switch-client -t "$name" || tmux attach-session -t "$name"

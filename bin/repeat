@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -e
+
+while true; do
+  eval $@
+
+  echo
+  printf '\033[0;35m#%.0s\033[0m' $(jot $(tput cols))
+  echo
+
+  sleep 1
+done

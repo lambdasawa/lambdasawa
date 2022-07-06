@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set -e
+
+tmuxinator start "$(tmuxinator ls | grep -v 'tmuxinator projects:' | filter)"

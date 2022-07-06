@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set -e
+
+if [ -z "$1" ]; then
+  path=$(fd | filter-file)
+  if [ -z "$path" ]; then
+    code -r .
+  else
+    code -r $path
+  fi
+else
+  code -r $@
+fi

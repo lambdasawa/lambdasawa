@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set -e
+
+exa -labghT --time-style iso --git $@

@@ -1,0 +1,10 @@
+#!/bin/bash
+
+vault=openv
+shell=fish
+
+eval "$(op signin)"
+
+op item get --format json --vault "$vault" "$(dirslug)" | jq -r '.fields[] | select(.value) | .label' | sed -E "s|(.+)|\1=op://openv/$(dirslug)/\1|" >.openv
+
+op run --env-file .openv --no-masking "$shell"

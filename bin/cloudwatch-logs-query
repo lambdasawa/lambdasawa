@@ -1,0 +1,30 @@
+#!/bin/bash
+
+set -Eeuo pipefail
+
+start=$1
+end=$2
+group=$3
+query=$4
+
+start_ts=$(gdate -d"$start" +%s)
+end_ts=$(gdate -d"$end" +%s)
+
+query_id=$(
+  aws logs start-query \
+    --start-time "$start_ts" \
+    --end-time "$end_ts" \
+    --log-group-name "$group" \
+    --query-string "$query" | jq -r '.queryId'
+)
+
+while true; do
+  response=$(aws logs get-query-results --query-id "$query_id")
+
+  if echo "$response" | jq -e '.status == "Complete"' >/dev/null; then
+    echo "$response" | jq '.results[] | map({ key: .field, value: .value }) | from_entries | del(.["@ptr"])' | jq -s
+    exit $?
+  fi
+
+  sleep 1
+done

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set -xeuo pipefail
+
+ngrok http --region jp "${1:-8888}"

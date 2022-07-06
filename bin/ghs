@@ -1,0 +1,13 @@
+#!/usr/bin/env node
+
+const { exec } = require("child_process");
+
+const [node, file, query] = process.argv;
+
+const querystring = new URLSearchParams();
+querystring.set("q", query ? `user:lambdasawa ${query}` : "user:lambdasawa");
+
+[
+  `https://github.com/search?${querystring.toString()}`,
+  `https://gist.github.com/search?${querystring.toString()}`,
+].forEach((url) => exec(`open "${url}"`));

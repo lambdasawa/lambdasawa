@@ -1,0 +1,38 @@
+#!/bin/bash
+
+set -xeuo pipefail
+
+name="${1:-}"
+
+if [ -z "$name" ]; then
+	name=$(gh repo list | grep -v lambdasawa/sandbox | grep sandbox | sed -E 's|lambdasawa/(.*)-sandbox.*|\1|' | filter)
+fi
+
+[ -z "$name" ] && echo "No name specified" && exit 1
+
+repo_name="$name"-sandbox
+slug=lambdasawa/"$repo_name"
+dir=~/src/github.com/"$slug"
+
+if [ ! -e "$dir"/.git ]; then
+	if gh repo view "$slug"; then
+		ghq get "$slug"
+		cd "$dir"
+	else
+		echo "# $repo_name" >README.md
+		mkdir -p "$dir"
+		cd "$dir"
+		git setup
+	fi
+fi
+cd "$dir"
+
+if ! gh repo view; then
+	gh repo create --private --push --source .
+fi
+gh repo view -w
+
+if ! gh codespace list | grep "$repo_name"; then
+  gh codespace create --repo "$slug"
+fi
+gh codespace code -c "$(gh codespace list | grep "$slug" | awk '{print $1}')"

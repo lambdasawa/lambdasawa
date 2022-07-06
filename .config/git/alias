@@ -1,0 +1,51 @@
+[alias]
+# start a working area (see also: git help tutorial)
+cl = clone
+i = init
+
+# work on the current change (see also: git help everyday)
+a = add
+mv = mv
+rs = restore
+rm = rm
+sc = sparse-checkout
+st = stash
+cp = cherry-pick
+
+# examine the history and state (see also: git help revisions)
+bi = bisect
+d = diff
+g = grep
+l = log
+sh = show
+# s = status
+rl = reflog
+bl = blame
+
+# grow, mark and tweak your common history
+# c = checkout
+br = branch
+cm = commit
+m = merge
+rb = rebase
+rs = reset
+s = switch
+t = tag
+
+# collaborate (see also: git help workflows)
+f = fetch
+pl = pull
+ps = push
+
+# extra
+cf = !yes | git clear-soft
+cb = create-branch -r
+lv = log -p
+rebase-default-branch = !bash -c 'git fetch && git rebase $(git rev-parse --abbrev-ref origin/HEAD)'
+prv = !gh pr view -w
+rpv = !gh repo view -w
+detail = !bash -c 'git summary && git info'
+day = standup -d 1 -B
+week = standup -w 7 -B
+sbx = sandbox
+prune-codespace = !gh codespace delete --all --force

@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -eu
+
+pushd $PWD 2>&1 >/dev/null
+builtin cd $(reporoot)
+
+echo -n $PWD/ && fd | grep package.json | sed 's/package.json//' | awk '{print "./" $0}' | filter-file
+
+popd 2>&1 >/dev/null

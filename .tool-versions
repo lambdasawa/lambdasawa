@@ -1,0 +1,15 @@
+golang 1.17
+rust 1.62.0
+java openjdk-17
+nodejs 18.4.0
+python 3.10.5
+ruby 3.1.2
+terraform 1.2.4
+flutter 3.0.4-stable
+mysql 8.0.29
+tflint 0.38.1
+aws-vault 6.6.0
+awscli 2.7.12
+golangci-lint 1.46.2
+jq 1.6
+yq 4.25.3
