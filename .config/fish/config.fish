@@ -2,7 +2,6 @@ if [ -e /opt/homebrew/bin/brew ]
     eval (/opt/homebrew/bin/brew shellenv)
 end
 
-
 if which asdf -v >/dev/null 2>&1 && [ -e (brew --prefix asdf)/libexec/asdf.fish ]
     . (brew --prefix asdf)/libexec/asdf.fish
 end

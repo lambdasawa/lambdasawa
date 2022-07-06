@@ -1,4 +1,4 @@
-set -gx PATH "$PATH:$HOME/.local/bin:$HOME/bin"
+set -gx PATH "$PATH:$HOME/.local/bin:$HOME/bin:$HOME/.cargo/bin/"
 
 if which code >/dev/null 2>&1
     set -gx EDITOR "code --wait"
