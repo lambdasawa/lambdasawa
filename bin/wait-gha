@@ -1,25 +1,27 @@
 #!/bin/bash
 
+# shellcheck disable=SC2046
+
 set -e
 
-pushd $PWD
-cd $(git rev-parse --show-toplevel)
+pushd "$PWD"
+cd "$(git rev-parse --show-toplevel)"
 
 while true; do
-  echo "["$(date)"] Wait action..."
-  set id $(
-    gh api /repos/$(basename $(realpath $PWD/..))/$(basename $PWD)/actions/runs |
+  echo "[$(date)] Wait action..."
+  id=$(
+    gh api /repos/$(basename $(realpath "$PWD/.."))/$(basename "$PWD")/actions/runs |
       jq -r '.workflow_runs[] | select(.status == "in_progress") | .id' |
       head -n 1
   )
   if [ -n "$id" ]; then
 
-    if gh run watch $id --exit-status; then
+    if gh run watch "$id" --exit-status; then
       noti "GitHub Action succeeded!"
     else
       noti "GitHub Action failed..."
     fi
-    gh run view $id --log
+    gh run view "$id" --log
   fi
   sleep 5
 done

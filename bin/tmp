@@ -9,4 +9,9 @@ mkdir -p ~/tmp/"$now"
 name=$(basename ~/tmp/"$now" | head -c18 | sed 's/\./-/g')
 
 tmux new-session -d -c ~/tmp/"$now" -s "$name"
-echo test "$TMUX" && tmux switch-client -t "$name" || tmux attach-session -t "$name"
+
+if test "$TMUX"; then
+  tmux switch-client -t "$name"
+else
+  tmux attach-session -t "$name"
+fi

@@ -2,9 +2,9 @@
 
 set -eu
 
-pushd $PWD 2>&1 >/dev/null
-builtin cd $(reporoot)
+pushd "$PWD" >/dev/null 2>&1
+builtin cd "$(reporoot)"
 
-echo -n $PWD/ && fd | grep package.json | sed 's/package.json//' | awk '{print "./" $0}' | filter-file
+echo -n "$PWD/" && fd | grep package.json | sed 's/package.json//' | awk '{print "./" $0}' | filter-file
 
-popd 2>&1 >/dev/null
+popd >/dev/null 2>&1

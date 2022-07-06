@@ -2,5 +2,5 @@
 
 set -e
 
-mkdir -p $(dirname "$1")
+mkdir -p "$(dirname "$1")"
 touch "$1"

@@ -3,4 +3,4 @@
 set -e
 
 read x
-echo $x
+echo "$x"

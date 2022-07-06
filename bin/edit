@@ -5,10 +5,11 @@ set -e
 if [ -z "$1" ]; then
   path=$(fd | filter-file)
   if [ -z "$path" ]; then
-    code -r .
+    code -a .
   else
-    code -r $path
+    code -a "$path"
   fi
 else
-  code -r $@
+  # shellcheck disable=SC2068
+  code -a $@
 fi
