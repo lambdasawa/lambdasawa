@@ -2,13 +2,11 @@ if [ -e /opt/homebrew/bin/brew ]
     eval (/opt/homebrew/bin/brew shellenv)
 end
 
-if [ -z "$ASDF_DIR" ]
-    if [ -e (brew --prefix asdf)/libexec/asdf.fish ]
-        . (brew --prefix asdf)/libexec/asdf.fish
-    end
-    if [ -e ~/.asdf/asdf.fish ]
-        . ~/.asdf/asdf.fish
-    end
+if [ -e (brew --prefix asdf)/libexec/asdf.fish ]
+    . (brew --prefix asdf)/libexec/asdf.fish
+end
+if [ -e ~/.asdf/asdf.fish ]
+    . ~/.asdf/asdf.fish
 end
 
 if command -v starship >/dev/null 2>&1
