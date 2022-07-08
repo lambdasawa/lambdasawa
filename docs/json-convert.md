@@ -1,5 +1,8 @@
 # JSON convert
 
+- https://github.com/kellyjonbrazil/jc
+- https://github.com/ericchiang/pup
+
 ## yaml2json, yml2json
 
 ```sh
