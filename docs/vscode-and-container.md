@@ -10,6 +10,7 @@
 
 ### example
 
+- <https://github.com/microsoft/vscode-dev-containers/tree/main/containers>
 - <https://github.com/microsoft/vscode-remote-try-go>
 - <https://github.com/allaboutapps/go-starter>
 - <https://github.com/qdm12/godevcontainer>
