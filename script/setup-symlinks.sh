@@ -8,6 +8,7 @@ for path in \
   .config/git/* \
   .config/gh/config.yml \
   .config/fish/* \
+  .config/ongaku \
   .tigrc \
   .tmux.conf \
   .tool-versions \
