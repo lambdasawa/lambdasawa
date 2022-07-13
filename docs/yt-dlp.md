@@ -36,3 +36,24 @@ cat *.json | jq -s
 yt-dlp --write-subs --no-download 'https://www.youtube.com/watch?v=xxxx'
 cat *live_chat.json | jq -s | gron | grep 'purchaseAmountText.simpleText' | sed -E 's/.*= "(.*)".*/\1/g' | sed -E 's/[¥,]//g' | paste -s -d+ - | bc
 ```
+
+## クリップのメタデータを取得
+
+```sh
+$ yt-dlp -j https://www.youtube.com/clip/xxxx | jq '{start: .section_start, end: .section_end, url: .original_url}'
+{
+  "start": 20818.6,
+  "end": 20833.6,
+  "url": "https://www.youtube.com/clip/xxxx"
+}
+```
+
+## クリップの URL 一覧を取得
+
+```sh
+open https://www.youtube.com/feed/clips
+```
+
+```js
+[...document.querySelectorAll('.yt-simple-endpoint.style-scope.ytd-grid-video-renderer')].map(e => ({link: e.href, title: e.title}))
+```
