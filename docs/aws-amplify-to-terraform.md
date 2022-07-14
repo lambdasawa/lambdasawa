@@ -1,6 +1,8 @@
-# amplify to terraform
+# Apmlify to Terraform
 
-## GraphQL で作成した `@model` を Terraform に移行する
+## DynamoDB
+
+GraphQL で作成した `@model` を Terraform に移行する。
 
 - amplify の中身は CloudFormation
 - `@model` を削除するとテーブルが消える

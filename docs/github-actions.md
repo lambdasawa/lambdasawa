@@ -1,21 +1,21 @@
 # GitHub Actions
 
-## 全体的な構文
+## syntax
 
 <https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions>
 
-## キャッシュ
+## cache
 
 <https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows>
 
-## サービスコンテナ
+## service container
 
 ジョブごとにバックグラウンドで動作するコンテナを指定できる。
 ユニットテストが DB などを必要としているケースなどで便利。
 
 <https://docs.github.com/en/actions/using-containerized-services/about-service-containers>
 
-## `if` などで動的な値を使う
+## dynamic value
 
 GitHub Actions では式を書ける。
 
@@ -28,11 +28,11 @@ GitHub Actions では式を書ける。
 <https://docs.github.com/en/actions/learn-github-actions/expressions>
 <https://docs.github.com/en/actions/learn-github-actions/contexts>
 
-## 環境変数
+## environment variables
 
 <https://docs.github.com/en/actions/learn-github-actions/environment-variables>
 
-## ワークフローコマンド
+## workflow command
 
 他のステップにパラメータを渡したり、赤いログを出したり、 PATH を追加したり…そういう操作がワークフローコマンドとして実行できる。
 
@@ -40,23 +40,25 @@ GitHub Actions では式を書ける。
 
 アクションを作るときに参照するべきドキュメント
 
-## JS or TS で作るとき
+## JS or TS action
 
 <https://docs.github.com/en/actions/creating-actions/creating-a-javascript-action>
 
 <https://github.com/actions/toolkit>
 
-## Docker で作るとき
+## Docker action
 
 <https://docs.github.com/en/actions/creating-actions/creating-a-docker-container-action>
 
-## シェルスクリプトのみ、他のアクションとの組み合わせなどで作るとき
+## composite action
+
+シェルスクリプトのみ、他のアクションとの組み合わせなどで作るとき。
 
 <https://docs.github.com/en/actions/creating-actions/creating-a-composite-action>
 
-## デバッグ方法
+## debug
 
-### ローカル実行
+### local
 
 <https://github.com/nektos/act>
 
@@ -65,7 +67,7 @@ GitHub Actions では式を書ける。
 デフォルトでは実際の GitHub Actions 環境との差分が多いが [Runner として使う Docker イメージを指定できる](
 https://github.com/nektos/act#use-an-alternative-runner-image)ので、そのオプションを使うと似たような環境で実行できる。
 
-### GitHub Actions  の実行環境に SSH でアクセス
+### ssh
 
 <https://github.com/mxschmitt/action-tmate>
 
@@ -321,7 +323,7 @@ jobs:
 ワークフローのステップを JS で書ける。
 GitHub の API を叩いたり (`github` を使う)、ワークフローコマンド相当の処理をしたり (`core` を使う) するのが楽。
 
-## ワークフロー間の連携について
+## refactor workflow
 
 - ワークフロー内にあるパラメータを少し変えて複数パターンで実行したい場合は `workflow_call` が使える
 - ワークフローの開始か終了をトリガーにして別のワークフローを起動をする場合は `workflow_run` が使える

@@ -1,42 +1,42 @@
+<!-- markdownlint-disable MD041 -->
 [λ沢.me](https://www.lambdasawa.me) / [λ沢.dev](https://www.lambdasawa.dev) / [Twitter](https://twitter.com/lambdasawa) / [RESUME](https://www.resume.id/lambdasawa)
-
+<!-- markdownlint-enable MD041 -->
 ## Web development
 
-- [http-tools](./http-tools.md)
-- [json](./json.md)
-- [testdata](./testdata.md)
+- [HTTP tools](./http-tools.md)
+- [JSON tools](./json.md)
+- [Test data](./test-data.md)
 
 ## AWS
 
-- [aws](./aws.md)
-- [aws-terraform](./aws-terraform.md)
-- [aws-cdk](./aws-cdk.md)
-- [aws-amplify-to-terraform](./aws-amplify-to-terraform.md)
-- [aws-cloudwatch-logs](./aws-cloudwatch-logs.md)
-- [aws-cloudwatch-synthetics](./aws-cloudwatch-synthetics.md)
-- [aws-dynamodb](./aws-dynamodb.md)
-- [aws-ec2-ssh](./aws-ec2-ssh.md)
-- [aws-ecs](./aws-ecs.md)
-- [aws-lambda](./aws-lambda.md)
-- [aws-transcribe-youtube-channel-archives](./aws-transcribe-youtube-channel-archives.md)
-- [tts](./tts.md)
+- [AWS](./aws.md)
+- [Terraform](./aws-terraform.md)
+- [AWS CDK](./aws-cdk.md)
+- [Amplify to Terraform](./aws-amplify-to-terraform.md)
+- [CloudWatch Log](./aws-cloudwatch-logs.md)
+- [CloudWatch Synthetics](./aws-cloudwatch-synthetics.md)
+- [DynamoDB](./aws-dynamodb.md)
+- [EC2 SSH](./aws-ec2-ssh.md)
+- [ECS](./aws-ecs.md)
+- [Lambda](./aws-lambda.md)
+- [Transcribe YouTube Channel Archives](./aws-transcribe-youtube-channel-archives.md)
 
 ## Container
 
-- [docker](./docker.md)
-- [k8s](./k8s.md)
-- [vscode-and-container](./vscode-and-container.md)
+- [Docker](./docker.md)
+- [Kuberneters](./k8s.md)
+- [VSCode and Container](./vscode-and-container.md)
 
 ## Middleware
 
-- [elasticsearch-and-opensearch](./elasticsearch-and-opensearch.md)
-- [mysql](./mysql.md)
-- [redis](./redis.md)
+- [Elasticsearch (OpenSearch)](./elasticsearch-and-opensearch.md)
+- [MySQL](./mysql.md)
+- [Redis](./redis.md)
 
 ## Mobile development
 
-- [flutter](./flutter.md)
-- [android-debug](./android-debug.md)
+- [Flutter](./flutter.md)
+- [Android](./android.md)
 
 ## Media
 
@@ -45,36 +45,37 @@
 
 ## Schema driven development
 
-- [openapi](./openapi.md)
-- [graphql](./graphql.md)
-- [struct-generator](./struct-generator.md)
+- [OpenAPI](./openapi.md)
+- [GraphQL](./graphql.md)
+- [Struct Generator](./struct-generator.md)
 
 ## Secret management
 
-- [secret-management](./secret-management.md)
-- [op-cli](./op-cli.md)
+- [シークレット管理](./secret-management.md)
+- [1Password CLI](./op-cli.md)
 
 ## Network
 
+- [DNS](./dns.md)
 - [hostctl](./hostctl.md)
-- [dns](./dns.md)
 
 ## Programming language
 
-- [golang](./golang.md)
-- [typescript](./typescript.md)
-- [javacript-unicode](./javacript-unicode.md)
+- [Go](./golang.md)
+- [TypeScript](./typescript.md)
+- [JavaScript and Unicode](./javacript-unicode.md)
 
 ## Other
 
-- [tools](./tools.md)
-- [github-actions](./github-actions.md)
-- [regex](./regex.md)
-- [jwt](./jwt.md)
-- [load-test](./load-test.md)
-- [gcp](./gcp.md)
-- [crkbd-oled](./crkbd-oled.md)
-- [online-compiler](./online-compiler.md)
-- [globalization](./globalization.md)
-- [slack-emoji](./slack-emoji.md)
-- [math](./math.md)
+- [λ沢を支える技術](./tools.md)
+- [GitHub Actions](./github-actions.md)
+- [正規表現](./regex.md)
+- [JWT](./jwt.md)
+- [負荷テスト](./load-test.md)
+- [GCP](./gcp.md)
+- [crkbd の OLED](./crkbd-oled.md)
+- [オンラインコンパイラ](./online-compiler.md)
+- [グローバリゼーション](./globalization.md)
+- [TTS](./tts.md)
+- [Slack 絵文字](./slack-emoji.md)
+- [数学](./math.md)

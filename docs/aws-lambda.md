@@ -10,11 +10,11 @@
 
 ## [デプロイ](https://zenn.dev/lambdasawa/scraps/ce0726a90f006e)
 
-## チューニング
+## optimization
 
 <https://aws.amazon.com/jp/blogs/news/operating-lambda-performance-optimization-part-1/>
 
-## デプロイ
+## deployment
 
 - [AWS CDK](https://docs.aws.amazon.com/cdk/api/v1/docs/aws-lambda-readme.html)
 - [SAM](https://github.com/aws/aws-sam-cli)

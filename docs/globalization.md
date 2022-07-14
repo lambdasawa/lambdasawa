@@ -1,6 +1,6 @@
 # globalization
 
-## 参考記事
+## reference
 
 - <https://zenn.dev/ucwork/articles/aws_globalization>
   - 考え方
@@ -12,31 +12,34 @@
 - <https://qiita.com/hachi8833/items/4666638e930de65dcdef>
   - 多言語化のハマりどころについての話
 
-## 世界中のロケーションからのレイテンシを計測して比較するには？
+## measure
 
-TODO
+- 世界中のロケーションからのレイテンシを計測して比較するには？
+  - TODO
 
-## DynamoDB へのアクセスを高速化するには？
+## DynamoDB
 
 <https://aws.amazon.com/jp/dynamodb/global-tables/>
 
-## S3 へのアクセスを高速化するには？
+## S3
 
 <https://dev.classmethod.jp/articles/s3-multi-region-access-points/>
 
-## API Gateway へのアクセスを高速化するには？
+## API Gateway
 
 TODO
 
-## AppSync へのアクセスを高速化するには？
+## AppSync
 
 TODO
 
-## Cognito へのアクセスを高速化するには？
+## Cognito
 
 TODO
 
 ## GDPR
+
+TODO
 
 ## Elasticsearch
 

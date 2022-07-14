@@ -1,4 +1,4 @@
-# tts
+# TTS
 
 - [NVIDIA/tacotron2 で日本語の音声合成を試す (1) - 事始め](https://note.com/npaka/n/n2a91c3ca9f34)
 - [NVIDIA/tacotron2 で日本語の音声合成を試す (2) - JSUTで学習](https://note.com/npaka/n/n2eec2558ede1)

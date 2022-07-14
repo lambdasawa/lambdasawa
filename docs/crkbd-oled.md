@@ -1,4 +1,4 @@
-# Helix OLED
+# Corne OLED
 
 <https://btoshop.jp/products/adskbcc> で購入した Corne を使いました。
 

@@ -1,4 +1,4 @@
-# testdata
+# Test data
 
 - <https://www.jsontest.com/>
 - <https://dummyimage.com/>

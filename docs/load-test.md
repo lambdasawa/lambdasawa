@@ -1,5 +1,11 @@
 # Load testing
 
-## [k6 + TypeScript](https://github.com/grafana/k6-template-typescript)
+## k6
 
-## [Gatling](https://gatling.io/docs/gatling/)
+- JavaScript or TypeScript
+- [k6 + TypeScript](https://github.com/grafana/k6-template-typescript)
+
+## Gatling
+
+- <https://gatling.io/docs/gatling/>
+- Scala

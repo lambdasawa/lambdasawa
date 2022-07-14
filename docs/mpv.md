@@ -3,13 +3,13 @@
 - <https://github.com/mpv-player/mpv>
 - <https://mpv.io/manual/master/#keyboard-control>
 
-## YouTube 1曲リピート
+## YouTube music loop
 
 ```sh
 mpv --loop --no-video --volume=50 'https://www.youtube.com/watch?v=xxxx'
 ```
 
-## YouTube ストリーミング再生
+## YouTube streaming
 
 ```sh
 mpv --volume=50 --ytdl-format="bestvideo+bestaudio" 'https://www.youtube.com/watch?v=xxxx'

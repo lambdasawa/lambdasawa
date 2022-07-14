@@ -1,6 +1,6 @@
 # 正規表現
 
-## ビジュアライズ
+## visualization
 
 ### [Regulex](https://jex.im/regulex)
 
@@ -61,9 +61,9 @@ TODO
 
 <https://www.google.com/search?q=site%3Adeveloper.mozilla.org+Regular_Expressions>
 
-## おまけ
+## omake
 
-### クロスワード
+### crossword
 
 <https://regexcrossword.com/>
 
@@ -71,6 +71,6 @@ TODO
 
 <https://www.autoregex.xyz/>
 
-### ライブラリ
+### library
 
 <https://regexlib.com/>

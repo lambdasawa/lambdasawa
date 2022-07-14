@@ -1,8 +1,12 @@
 # Secret Management
 
-## [mozilla/sops](https://github.com/mozilla/sops)
+## sops
 
-## [Doppler](https://docs.doppler.com/docs/cli)
+- [github](https://github.com/mozilla/sops)
+
+## Doppler
+
+- <https://docs.doppler.com/docs/cli>
 
 ```sh
 set name (basename $PWD)
@@ -15,8 +19,14 @@ doppler projects create $name
 doppler setup
 ```
 
-## [git-crypt](https://github.com/AGWA/git-crypt)
+## git-crypt
 
-## <https://github.com/zricethezav/gitleaks>
+- [github](https://github.com/AGWA/git-crypt)
 
-## <https://github.com/secretlint/secretlint>
+## gitleaks
+
+- <https://github.com/zricethezav/gitleaks>
+
+## secretlint
+
+- <https://github.com/secretlint/secretlint>

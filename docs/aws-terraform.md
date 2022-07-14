@@ -1,15 +1,15 @@
 # aws-terraform
 
-## リファレンス
+## reference
 
 - <https://registry.terraform.io/providers/hashicorp/aws/latest/docs>
 
-## チュートリアル
+## tutorial
 
 - <https://learn.hashicorp.com/tutorials/terraform/aws-build?in=terraform/aws-get-started>
 - <https://github.com/bregman-arie/devops-exercises/blob/master/exercises/terraform/README.md>
 
-## ベストプラクティス
+## best practice
 
 - <https://github.com/shuaibiyy/awesome-terraform>
 - <https://github.com/ozbillwang/terraform-best-practices>
@@ -26,18 +26,18 @@
 - <https://github.com/marketplace/actions/hashicorp-setup-terraform>
 - <https://github.com/runatlantis/atlantis>
 
-## インポート
+## import
 
 - <https://github.com/GoogleCloudPlatform/terraformer/blob/master/docs/aws.md>
 - <https://github.com/cycloidio/terracognita>
 - <https://zenn.dev/gosarami/articles/dd938001eac988e44d11>
 
-## セキュリティ
+## security
 
 - <https://github.com/aquasecurity/tfsec>
 - <https://github.com/tenable/terrascan>
 
-## テスト
+## test
 
 - <https://github.com/gruntwork-io/terratest>
 - <https://www.contino.io/insights/top-3-terraform-testing-strategies-for-ultra-reliable-infrastructure-as-code>

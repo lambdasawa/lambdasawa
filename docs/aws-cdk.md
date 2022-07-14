@@ -9,7 +9,7 @@
   - [aws-samples/aws-cdk-examples](https://github.com/aws-samples/aws-cdk-examples)
   - [cdk-patterns/serverless](https://github.com/cdk-patterns/serverless)
 
-## プロジェクト作成
+## generate project
 
 ```sh
 read project_name

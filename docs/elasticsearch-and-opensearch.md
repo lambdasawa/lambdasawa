@@ -13,7 +13,7 @@
 <https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster.html>
 <https://www.elastic.co/guide/en/elasticsearch/reference/current/cat.html>
 
-## 用語集
+## glossary
 
 - ドキュメント
   - MySQL などの RDB で言うところのレコード

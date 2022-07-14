@@ -1,37 +1,50 @@
 # Docker
 
-## [Dockerfile reference](https://docs.docker.jp/engine/reference/builder.html)
+## Dockerfile
 
-## [Dockerfile best practice](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)
+- [reference](https://docs.docker.jp/engine/reference/builder.html)
+- [best practive](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)
 
-## [docker-compose.yml reference](https://docs.docker.jp/compose/compose-file.html)
+## Docker Compose
 
-## [wait](https://github.com/ufoscout/docker-compose-wait)
+- [reference](https://docs.docker.jp/compose/compose-file.html)
 
-主に docker-compose と一緒に使うコマンド。他のコンテナのポートが開くのを待つのに使える。
-`wait` などを使わずに `depends_on` で依存を指定したときに保証されることはポートが開いていることではなく、あくまでコンテナが起動していることまで。
+## wait
 
-## [Docker Hub: MySQL](https://hub.docker.com/_/mysql)
+- [github](https://github.com/ufoscout/docker-compose-wait)
+- 主に docker-compose と一緒に使うコマンド。他のコンテナのポートが開くのを待つのに使える
+- `wait` などを使わずに `depends_on` で依存を指定したときに保証されることはポートが開いていることではなく、あくまでコンテナが起動していることまで
 
-## [Docker Hub: Redis](https://hub.docker.com/_/redis)
+## MySQL
 
-## [Docker Hub: LocalStack](https://hub.docker.com/r/localstack/localstack)
+- [docker hub](https://hub.docker.com/_/mysql)
 
-AWS の各種サービスをローカルでモックできる。
+## Redis
 
-## [Docker Hub: MinIO](https://hub.docker.com/r/minio/minio/)
+- [docker hub](https://hub.docker.com/_/redis)
 
-S3 をモックできる。
+## LocalStack
 
-## [Docker Hub: MailHog](https://hub.docker.com/r/mailhog/mailhog)
+- [docker hub](https://hub.docker.com/r/localstack/localstack)
+- AWS の各種サービスをローカルでモックできる
 
-メールをモックできる。
+## MinIO
 
-## プラットフォームを指定して docker-compose.yml 内にある全てのイメージを docker pull
+- [docker hub](https://hub.docker.com/r/minio/minio/)
+- S3 をモックできる
+
+## MailHog
+
+- [docker hub](https://hub.docker.com/r/mailhog/mailhog)
+- メールをモックできる
+
+## run docker pull per services in docker-compose.yml with platform option
 
 ```sh
 for image in (cat docker-compose.yml | jc --yaml | jq -r '.[0] | .services[] | .image' | grep -v null); docker pull --platform linux/amd64 $image; end
 ```
+
+---
 
 ```sh
 $ cat schema.sql

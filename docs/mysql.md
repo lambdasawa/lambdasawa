@@ -7,11 +7,17 @@
 - <https://hub.docker.com/_/mysql>
 - <https://www.percona.com/doc/percona-toolkit/LATEST/pt-query-digest.html>
 
-## [実行計画の読み方](http://nippondanji.blogspot.com/2009/03/mysqlexplain.html)
+## explain
 
-## [大量データをインポートする際の高速化手法](http://nippondanji.blogspot.com/2010/03/innodb.html)
+- [実行計画の読み方](http://nippondanji.blogspot.com/2009/03/mysqlexplain.html)
 
-コンテナの `general_log` を `tail -f` する
+## import
+
+- [大量データをインポートする際の高速化手法](http://nippondanji.blogspot.com/2010/03/innodb.html)
+
+## general log
+
+コンテナの `general_log` を `tail -f` する。
 
 ```sh
 $ set u user

@@ -1,39 +1,47 @@
 # HTTP tools
 
-## [curlie](https://github.com/rs/curlie)
+## curlie
 
-リッチなcurl。
+- [github](https://github.com/rs/curlie)
+- リッチなcurl。
 
-## [Insomnia](https://insomnia.rest/)
+## Insomnia
 
-GUIのHTTPクライアント。
-GraphQL にも対応してる。
+- <https://insomnia.rest>
+- GUIのHTTPクライアント
+- GraphQL にも対応してる
 
-## [Postman](https://www.postman.com/)
+## Postman
 
-GUIのHTTPクライアント。
+- <https://www.postman.com>
+- GUIのHTTPクライアント
 
-## [Hoppscotch](https://hoppscotch.io/ja/)
+## Hoppscotch
 
-ブラウザで動作するGUIのHTTPクライアント。
+- <https://hoppscotch.io/ja/>
+- ブラウザで動作するGUIのHTTPクライアント
 
-## [httpbin](https://httpbin.org/)
+## httpbin
 
-色んな種類のレスポンスを返すWebサーバ。HTTPクライアントの検証として使える。
+- <https://httpbin.org/>
+- 色んな種類のレスポンスを返すWebサーバ。HTTPクライアントの検証として使える。
 
-## [ngrok](https://ngrok.com/docs)
+## ngrok
 
-tunneling.
+- [ngrok](https://ngrok.com/docs)
+- tunneling tool
 
-## [webhook.site](https://webhook.site/)
+## webhook.site
 
-Webhookの受け側を生成するサイト。
-Webhookの受け側を作るときにリクエストを観察するために使う。
+- <https://webhook.site/>
+- Webhookの受け側を生成するサイト
+- Webhookの受け側を作るときにリクエストを観察するために使う
 
-## [mitmproxy](https://mitmproxy.org/)
+## mitmproxy
 
-ローカルで使うプロキシ。
-ブラウザを介さないWebサーバを作るときにreq/resを観察するために使う。
+- <https://mitmproxy.org/>
+- ローカルで使うプロキシ
+- ブラウザを介さないWebサーバを作るときにreq/resを観察するために使う
 
 ```sh
 python -m http.server 8000
@@ -42,6 +50,7 @@ curl localhost:8001
 open http://locahost:8002
 ```
 
-## [BurpSuite](https://portswigger.net/burp)
+## BurpSuite
 
-proxy.
+- <https://portswigger.net/burp>
+- proxy

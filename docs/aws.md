@@ -1,7 +1,8 @@
 # AWS
 
-## [ドキュメント](https://docs.aws.amazon.com/ja_jp/)
+## reference
 
+- [ドキュメント](https://docs.aws.amazon.com/ja_jp/)
 - <https://github.com/aws-samples>
 - [AWS ざっくり料金計算](https://aws-rough.cc/)
 
@@ -12,30 +13,37 @@
 
 ## CLI
 
-### [aws-cli](https://docs.aws.amazon.com/cli/latest/reference/)
+### aws-cli
 
-### [aws-vault](https://github.com/99designs/aws-vault)
+- [ref](https://docs.aws.amazon.com/cli/latest/reference)
 
-<https://blog.microcms.io/aws-vault-introduction/>
+### aws-vault
 
-### [starship](https://starship.rs/ja-JP/config/#aws)
+- [github](https://github.com/99designs/aws-vault)
+- [blog](https://blog.microcms.io/aws-vault-introduction)
 
-プロンプトに現在アクティブな AWS のプロファイル名を出せる。
-間違ったプロファイルで作業を防止するのに役立つ。
+### starship
 
-### [awscurl](https://github.com/okigan/awscurl)
+- [github](https://starship.rs/ja-JP/config/#aws)
+- プロンプトに現在アクティブな AWS のプロファイル名を出せる。
+- 間違ったプロファイルで作業を防止するのに役立つ。
 
-SigV4 の署名付きで直接 API を叩きたいときに使える。
-例えば OpenSearch の `_search` を直接叩いてデバッグしたいときなど…。
+### awscurl
 
-### [former2](https://github.com/iann0036/former2)
+- [github](https://github.com/okigan/awscurl)
+- SigV4 の署名付きで直接 API を叩きたいときに使える。
+- 例えば OpenSearch の `_search` を直接叩いてデバッグしたいときなど…。
 
-既存のAWSリソースを読み込んで CFn,Terraform,AWS CDKのコードを生成してくれるツール。
+### former2
 
-### [iamlive](https://github.com/iann0036/iamlive)
+- [github](https://github.com/iann0036/former2)
+- 既存のAWSリソースを読み込んで CFn,Terraform,AWS CDKのコードを生成してくれるツール。
 
-ローカルマシンのAPI呼び出しを監視してIAMポリシーを生成してくれるツール。
+### iamlive
 
-## ブラウザ拡張
+- [github](https://github.com/iann0036/iamlive)
+- ローカルマシンのAPI呼び出しを監視してIAMポリシーを生成してくれるツール。
+
+## browser xtension
 
 - [AWS Extend Switch Roles](https://addons.mozilla.org/ja/firefox/addon/aws-extend-switch-roles3/)

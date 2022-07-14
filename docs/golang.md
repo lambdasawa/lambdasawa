@@ -18,13 +18,13 @@
 - [Goにおけるポインタの使いどころ](https://zenn.dev/uji/articles/f6ab9a06320294146733)
 - [Go Cheat Sheet](https://github.com/a8m/golang-cheat-sheet)
 
-## トータルのカバレッジ取得
+## total coverage
 
 ```sh
 go test ./... -cover -coverpkg=./... | grep -v 'no test files' | sed -E 's/.*coverage: (.+)%.*/\\1/' | paste -s -d+ - | bc
 ```
 
-## 依存関係の有効グラフ描画
+## render dependency graph
 
 ```sh
 godepgraph -p $(cat go.sum | awk '{print $1}' | sort -u | paste -s -d, -) -novendor -s $(go list) | dot -Tpng -o godepgraph.png

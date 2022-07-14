@@ -1,29 +1,14 @@
 # Online Compiler
 
-<https://www.ideone.com/>
-
-<https://wandbox.org/>
-
-<https://paiza.io/ja>
-
-<https://go.dev/play/>
-
-<https://www.typescriptlang.org/play?#code/PTAEHUFMBsGMHsC2lQ…mdWkgR1QjgUrmkeFATjNOmGWH0KAQiGhwkuNok4uiIgMHGxCyYrA4PCCJSAA>
-
-<https://scastie.scala-lang.org/>
-
-<https://replit.com/languages/c>
-
-<https://onecompiler.com/c>
-
-<https://www.tutorialspoint.com/compile_c_online.php>
-
-<https://www.codechef.com/ide>
-
-<https://codepen.io/>
-
-<https://jsfiddle.net/>
-
-<https://codesandbox.io/>
-
-<https://stackblitz.com/>
+- [Ideone](https://www.ideone.com/)
+- [wandbox](https://wandbox.org/)
+- [paiza.io](https://paiza.io/ja)
+- [replit](https://replit.com/languages/c)
+- [OneCompiler](https://onecompiler.com/c)
+- [Go Playground](https://go.dev/play/)
+- [TypeScript Playground](https://www.typescriptlang.org/play?#code/PTAEHUFMBsGMHsC2lQ…mdWkgR1QjgUrmkeFATjNOmGWH0KAQiGhwkuNok4uiIgMHGxCyYrA4PCCJSAA)
+- [Scastie](https://scastie.scala-lang.org/)
+- [CodePen](https://codepen.io/)
+- [JSFiddle](https://jsfiddle.net/)
+- [CodeSandbox](https://codesandbox.io/)
+- [StackBlitz](https://stackblitz.com/)

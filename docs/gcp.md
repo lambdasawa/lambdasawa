@@ -1,4 +1,4 @@
-# [GCP](https://cloud.google.com/products?hl=ja)
+# GCP
 
 ## Terraform
 

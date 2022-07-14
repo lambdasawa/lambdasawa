@@ -15,7 +15,9 @@ Puppeteer の API とある程度の互換性があるようで、 Puppeteer 上
 Synthetics 上で使えるクラス、関数のリファレンスは以下にある。
 <https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library_Nodejs.html>
 
-## 画像の見た目を検証するサンプルコード
+## check response image
+
+画像の見た目を検証するサンプルコード.
 
 一般的なユースケースは HTML を返すページにアクセスしてスクショが想定通りか検証…というものだと思われるが、動的なサイトだと毎回微妙に結果が違ったりするため少し考慮事項が多い。
 そのためまずはシンプルに特定の画像 URL にアクセスして、その見た目が変わってないことを検証するコードを考える。
@@ -44,7 +46,9 @@ exports.handler = async () => {
 };
 ```
 
-## API のレスポンスが期待通りであるか検証するサンプルコード
+## check response json
+
+API のレスポンスが期待通りであるか検証するサンプルコード。
 
 画像の次にシンプルなのが DOM が絡まず単純に API をテストするケース。
 自社サービスのバックエンドに `GET /healthcheck` などのエンドポイントが実装されており、そこを監視したい場合などに便利。
