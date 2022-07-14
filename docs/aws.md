@@ -39,5 +39,3 @@ SigV4 の署名付きで直接 API を叩きたいときに使える。
 ## ブラウザ拡張
 
 - [AWS Extend Switch Roles](https://addons.mozilla.org/ja/firefox/addon/aws-extend-switch-roles3/)
-
-foo

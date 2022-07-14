@@ -1,6 +1,5 @@
 # I'm λ沢 (pronounced as lambda sour)
 
-[λ沢.me](https://www.lambdasawa.me) / [λ沢を支える技術](https://github.com/lambdasawa/lambdasawa/blob/main/docs/tools.md) / [Twitter](https://twitter.com/lambdasawa) / [RESUME](https://www.resume.id/lambdasawa)
+[λ沢.me](https://www.lambdasawa.me) / [λ沢.dev](https://www.lambdasawa.dev) / [Twitter](https://twitter.com/lambdasawa) / [RESUME](https://www.resume.id/lambdasawa)
 
 ![Metrics](/github-metrics.svg)
-
