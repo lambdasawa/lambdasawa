@@ -1,5 +1,7 @@
 # GitHub Actions
 
+{% raw %}
+
 ## syntax
 
 <https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions>
@@ -335,3 +337,5 @@ GitHub の API を叩いたり (`github` を使う)、ワークフローコマ�
 <https://stackoverflow.com/questions/67550727/push-event-doesnt-trigger-workflow-on-push-paths-github-actions>
 
 <https://github.com/slackapi/slack-github-action>
+
+{% endraw %}
