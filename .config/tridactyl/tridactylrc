@@ -40,6 +40,8 @@ command translatepage js -r js/translatePage.js
 
 command addfeedly js -r js/addfeedly.js
 
+command readitlater js -r js/readItLater.js
+
 command gitclone js -r js/gitclone.js
 
 command openvscode js -r js/openvscode.js
@@ -220,6 +222,9 @@ bind A translatepage
 
 # add current page to feedly
 bind ,f addfeedly
+
+# read-it-later
+bind ,i readitlater
 
 # exec git clone at github
 bind ,g gitclone
