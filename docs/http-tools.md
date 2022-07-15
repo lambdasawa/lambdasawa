@@ -1,9 +1,15 @@
 # HTTP tools
 
+## httpie
+
+- [doc](https://httpie.io/docs/cli)
+- [example](https://httpie.io/docs/cli/examples)
+- リッチなcurl
+
 ## curlie
 
 - [github](https://github.com/rs/curlie)
-- リッチなcurl。
+- リッチなcurl
 
 ## Insomnia
 
