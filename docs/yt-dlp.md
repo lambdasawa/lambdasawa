@@ -10,6 +10,12 @@ brew install yt-dlp/taps/yt-dlp
 yt-dlp --remux-video mp4 'https://www.youtube.com/watch?v=xxxx'
 ```
 
+## 高速にダウンロード
+
+```sh
+yt-dlp --concurrent-fragments 8 --downloader aria2c 'https://www.youtube.com/watch?v=xxxx'
+```
+
 ## firefox のクッキーを使って認証を行い mp4 でダウンロード
 
 メン限もダウンロードも可能。

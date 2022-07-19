@@ -63,13 +63,15 @@ TODO
 
 ## omake
 
+- <https://www.autoregex.xyz/>
+  - 英語で正規表現の説明を書く → 正規表現を生成する
+  - GPT-3
+
 ### crossword
 
 <https://regexcrossword.com/>
 
 <https://jimbly.github.io/regex-crossword/>
-
-<https://www.autoregex.xyz/>
 
 ### library
 
