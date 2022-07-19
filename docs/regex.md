@@ -1,78 +1,75 @@
 # 正規表現
 
+- <https://github.com/aloisdg/awesome-regex>
+- <https://www.regexplanet.com/cookbook/index.html>
+- <https://www.regexplanet.com/support/index.html>
+
 ## visualization
 
-### [Regulex](https://jex.im/regulex)
+- [正規表現チェックツール - Kaizen Platform](https://docs.kaizenplatform.net/ja/regexp/)
+  - マッチさせたい文字列、マッチさせたくない文字列、正規表現を入力するとそれらがマッチしたか表示してくれる
+  - 全部期待通りなら全部緑に表示される
+  - マッチさせたいのにマッチしなかったか、逆にマッチさせたくないのにマッチしたなら赤く表示される
+  - 日本語
+- [regex101](https://regex101.com/)
+  - 正規表現とテキストを入力すると、どの部分にマッチしたか表示してくれる
+  - 書いた正規表現の解説が表示される
+- [RegExr](https://regexr.com/)
+  - 正規表現とテキストを入力すると、どの部分にマッチしたか表示してくれる
+  - 正規表現の説明がグラフィカルで見やすい
+- [Debuggex](https://www.debuggex.com)
+  - 正規表現を入力すると syntax diagram を表示してくれる
+  - テキスト上のカーソルに合わせてその文字が syntax diagram のどこに位置するか表示してくれる
+- [Regulex](https://jex.im/regulex)
+  - 正規表現を入力すると syntax diagram を表示してくれる
+  - カラフルで分かりやすい
+- [RegEx to Strings](https://www.wimpyprogrammer.com/regex-to-strings)
+  - 正規表現を入力するとそれにマッチする文字列を生成してくれる
 
-- 正規表現がグラフ形式でビジュアライズされる
-- OSS
-- [サンプル](https://jex.im/regulex/#!flags=&re=%5Emicro(CMS%7Ccms)(.io)%3F%24)
-- JS only
+## generators
 
-### [RegExr](https://regexr.com/)
+### grex
 
-- 正規表現がシンタックスハイライトされる
-- 1文字ごとに正規表現の解説を読める
-- テストケースをシェアできる
-- OSS
-- [サンプル](https://regexr.com/6gptn)
-- PCRE, JS
+- [github](https://github.com/pemistahl/grex)
+- コマンドライン引数で受け取った文字列にマッチする正規表現を生成してくれるコマンド。
 
-### [regex101](https://regex101.com/)
+使用例
 
-- 正規表現がシンタックスハイライトされる
-- ツリー形式で正規表現の解説を読める
-- テストケースをシェアできる
-- マッチしたグループごとにテキストがハイライトされる
-- [サンプル](https://regex101.com/r/M0ls46/4)
-- PCRE, JS, Python, Go, Java, C#
+```txt
+$ grex microCMS MicroCMS microcms Microcms
+^[Mm]icro(?:CMS|cms)$
+```
 
-### [debuggex](https://www.debuggex.com/)
+## autoregex.xyz
 
-- 正規表現がシンタックスハイライトされる
-- マッチ対象の文字列を書いて、特定の文字をクリックするとその文字が正規表現のどの部分にマッチしてるかを表示してくれる
-- PCRE, JS, Python
+- <https://www.autoregex.xyz/>
+- 英語で正規表現の説明を書くと正規表現を生成してくれるサイト
+- GPT-3
 
-### <https://regex-vis.com/>
+## crossword
 
-TODO
-
-### その他
-
-- [Regex Nodes](https://johannesvollmer.com/regex-nodes/)
-  - GUI で正規表現を表す木構造を組み立てると、正規表現の文字列が表示される
-  - 面白いけど便利かと言われると違うかも
-  - OSS
-  - JS only
-- [Regex Previewer](https://marketplace.visualstudio.com/items?itemName=chrmarti.regex)
-  - VS Code の extension
-  - 左のペインで正規表現を書いて、右のペインでテスト文字列を書くと、マッチした部分がハイライトされる
-  - OSS
-  - JS, PHP, Haxe
-- <https://www.regexplanet.com/>
-- <https://docs.kaizenplatform.net/ja/regexp/>
-- <https://www.regexpal.com/>
-- <https://extendsclass.com/regex-tester.html>
-- <https://regexper.com/#%5E%28a%7Cb%29*%3F%24>
+- <https://regexcrossword.com/>
+- <https://jimbly.github.io/regex-crossword/>
 
 ## JavaScript
 
-<https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Regular_Expressions>
+- <https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Regular_Expressions>
+- <https://www.npmjs.com/package/re2>
 
-<https://www.google.com/search?q=site%3Adeveloper.mozilla.org+Regular_Expressions>
+## Go
+
+- <https://pkg.go.dev/regexp>
+
+## Ruby
+
+- <https://docs.ruby-lang.org/ja/latest/doc/spec=2fregexp.html>
+- <https://docs.ruby-lang.org/ja/latest/class/Regexp.html>
 
 ## omake
 
-- <https://www.autoregex.xyz/>
-  - 英語で正規表現の説明を書く → 正規表現を生成する
-  - GPT-3
-
-### crossword
-
-<https://regexcrossword.com/>
-
-<https://jimbly.github.io/regex-crossword/>
-
-### library
-
-<https://regexlib.com/>
+- [正規表現の落とし穴（ReDoS - Regular Expressions DoS）](https://qiita.com/prograti/items/9b54cf82a08302a5d2c7)
+- [Regex Nodes](https://johannesvollmer.com/regex-nodes/)
+- [Nodeexpr](https://www.nodexr.net/)
+- [Regex Previewer](https://marketplace.visualstudio.com/items?itemName=chrmarti.regex)
+- [Regex Viz](https://regex-vis.com/)
+- [Regexper](https://regexper.com)

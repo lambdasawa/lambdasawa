@@ -1,17 +1,14 @@
 # Elasticsearch and OpenSearch
 
-<https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html>
-
-<https://github.com/dzharii/awesome-elasticsearch>
-
-<http://elasticsearch-cheatsheet.jolicode.com/>
-
-<https://dev.classmethod.jp/referencecat/enter-elasticsearch/>
-<https://www.elastic.co/guide/en/elasticsearch/reference/current/docs.html>
-<https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html>
-<https://www.elastic.co/guide/en/elasticsearch/reference/current/indices.html>
-<https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster.html>
-<https://www.elastic.co/guide/en/elasticsearch/reference/current/cat.html>
+- <https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html>
+- <https://github.com/dzharii/awesome-elasticsearch>
+- <http://elasticsearch-cheatsheet.jolicode.com/>
+- <https://dev.classmethod.jp/referencecat/enter-elasticsearch/>
+- <https://www.elastic.co/guide/en/elasticsearch/reference/current/docs.html>
+- <https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html>
+- <https://www.elastic.co/guide/en/elasticsearch/reference/current/indices.html>
+- <https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster.html>
+- <https://www.elastic.co/guide/en/elasticsearch/reference/current/cat.html>
 
 ## glossary
 
@@ -93,7 +90,7 @@
       - 1:1:3 に分断されても 1 の方はマスターにならない
       - 1:2:2 に分断されるとどれもマスターにならない
 
-<https://www.elastic.co/jp/blog/found-elasticsearch-from-the-bottom-up>  
-<https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-node.html>
-<https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules.html>
-<https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules-merge.html>
+- <https://www.elastic.co/jp/blog/found-elasticsearch-from-the-bottom-up>  
+- <https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-node.html>
+- <https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules.html>
+- <https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules-merge.html>
