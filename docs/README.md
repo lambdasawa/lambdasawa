@@ -69,6 +69,7 @@
 ## Other
 
 - [λ沢を支える技術](./tools.md)
+- [bash](./bash.md)
 - [GitHub Actions](./github-actions.md)
 - [正規表現](./regex.md)
 - [JWT](./jwt.md)
