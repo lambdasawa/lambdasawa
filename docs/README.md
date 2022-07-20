@@ -55,6 +55,11 @@
 - [シークレット管理](./secret-management.md)
 - [1Password CLI](./op-cli.md)
 
+## Authentication, Authorization
+
+- [JWT](./jwt.md)
+- [OpenID Connect, OIDC](./oidc.md)
+
 ## Network
 
 - [DNS](./dns.md)
@@ -72,7 +77,6 @@
 - [bash](./bash.md)
 - [GitHub Actions](./github-actions.md)
 - [正規表現](./regex.md)
-- [JWT](./jwt.md)
 - [負荷テスト](./load-test.md)
 - [GCP](./gcp.md)
 - [crkbd の OLED](./crkbd-oled.md)
