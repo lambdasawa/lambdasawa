@@ -85,3 +85,5 @@
 - [TTS](./tts.md)
 - [Slack 絵文字](./slack-emoji.md)
 - [数学](./math.md)
+- [deno](./deno.md)
+- [bun](./bun.md)
