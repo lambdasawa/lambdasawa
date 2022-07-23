@@ -32,6 +32,6 @@ ngrok http --basic-auth foo:hogehoge 8888
 ngrok http --oauth=google --oauth-allow-email=foo@gmail.com,bar@gmail.com 8888
 ```
 
-- `google` 以外に `facebook`, `github`, `microcms` に対応
+- `google` 以外に `facebook`, `github`, `microsoft` に対応
 - `--oauth-allow-email` はオプショナル
   - この設定の場合、 `foo@gmail.com`, `bar@gmail.com` のアカウントだけが `localhost:8888` にアクセスできる
