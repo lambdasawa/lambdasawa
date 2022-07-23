@@ -87,3 +87,5 @@
 - [数学](./math.md)
 - [deno](./deno.md)
 - [bun](./bun.md)
+- [OCR (tesseract)](./tesseract.md)
+- [文字化け](./mojibake.md)
