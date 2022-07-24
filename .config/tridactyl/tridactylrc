@@ -238,6 +238,9 @@ bind ,c js location.href = location.href.match(new RegExp('https://github.com/[^
 # open twitter share link
 bind ,t opentwitterintent
 
+# show markdown link
+bind ,m clipboard yankmd
+
 # open amazon short url
 bind ,a openamazonshorturl
 
