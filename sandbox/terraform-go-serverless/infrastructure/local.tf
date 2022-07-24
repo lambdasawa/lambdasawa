@@ -6,4 +6,6 @@ locals {
   }
 
   s3_origin_id = "MyS3Origin"
+
+  create_open_search = false
 }
