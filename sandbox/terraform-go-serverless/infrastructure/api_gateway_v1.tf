@@ -1,5 +1,7 @@
 resource "aws_api_gateway_rest_api" "main" {
   name = "sandbox-terraform-go-serverless-main"
+
+  tags = local.tags
 }
 
 resource "aws_api_gateway_resource" "main" {
