@@ -1,12 +1,13 @@
 # golang
 
-## IDE
+## link
 
-<https://www.jetbrains.com/ja-jp/go/>
-
-## linter
-
-<https://golangci-lint.run/>
+- [Playground](https://go.dev/play/)
+- [Standard Library](https://pkg.go.dev/std)
+- [spec](https://go.dev/ref/spec)
+- [GoLand](https://www.jetbrains.com/ja-jp/go/)
+- [awesome go](https://github.com/avelino/awesome-go)
+- [golangci-lint](https://golangci-lint.run/)
 
 ## best practice
 
@@ -18,13 +19,35 @@
 - [Goにおけるポインタの使いどころ](https://zenn.dev/uji/articles/f6ab9a06320294146733)
 - [Go Cheat Sheet](https://github.com/a8m/golang-cheat-sheet)
 
+## init
+
+```sh
+mkdir foo
+cd foo
+
+go mod init $(basename $PWD)
+
+cat <<EOF > main.go
+package main
+
+func main() { println("Hello, world!") }
+EOF
+
+go run main.go
+```
+
 ## total coverage
+
+パッケージ全体のカバレッジを計測するコマンド。
+普通にやると個別のパッケージごとのカバレッジしか表示されない。
 
 ```sh
 go test ./... -cover -coverpkg=./... | grep -v 'no test files' | sed -E 's/.*coverage: (.+)%.*/\\1/' | paste -s -d+ - | bc
 ```
 
 ## render dependency graph
+
+パッケージ間の依存関係を有向グラフの画像にするコマンド。
 
 ```sh
 godepgraph -p $(cat go.sum | awk '{print $1}' | sort -u | paste -s -d, -) -novendor -s $(go list) | dot -Tpng -o godepgraph.png
