@@ -1,20 +1,17 @@
 package main
 
 import (
-	"context"
-	"fmt"
+	"io"
+	"net/http"
 
 	"github.com/aws/aws-lambda-go/lambda"
+	"github.com/awslabs/aws-lambda-go-api-proxy/httpadapter"
 )
 
-type MyEvent struct {
-	Name string `json:"name"`
-}
-
-func HandleRequest(ctx context.Context, name MyEvent) (string, error) {
-	return fmt.Sprintf("Hello %s!", name.Name), nil
-}
-
 func main() {
-	lambda.Start(HandleRequest)
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		io.WriteString(w, "Hello")
+	})
+
+	lambda.Start(httpadapter.New(http.DefaultServeMux).ProxyWithContext)
 }
