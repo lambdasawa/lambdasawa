@@ -12,8 +12,3 @@ resource "aws_lambda_permission" "apigateway_main" {
   function_name = aws_lambda_function.main.arn
   source_arn    = "${aws_apigatewayv2_api.main.execution_arn}/*/*"
 }
-
-output "api_endpoint_main" {
-  description = "API Endpoint"
-  value       = aws_apigatewayv2_api.main.api_endpoint
-}

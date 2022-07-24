@@ -10,12 +10,6 @@ resource "aws_lambda_function" "main" {
   tags = local.tags
 }
 
-data "archive_file" "application" {
-  type        = "zip"
-  source_file = "${path.module}/../application/bin/app"
-  output_path = "${path.module}/dist.zip"
-}
-
 resource "aws_iam_role" "iam_for_lambda_main" {
   name = "sandbox-terraform-go-serverless-main"
 

@@ -1,7 +1,3 @@
-locals {
-  s3_origin_id = "MyS3Origin"
-}
-
 resource "aws_cloudfront_distribution" "main" {
   enabled = "true"
 
