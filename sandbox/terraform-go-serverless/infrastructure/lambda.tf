@@ -6,6 +6,8 @@ resource "aws_lambda_function" "main" {
   handler  = "./app"
 
   role = aws_iam_role.iam_for_lambda_main.arn
+
+  tags = local.tags
 }
 
 data "archive_file" "application" {

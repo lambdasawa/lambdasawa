@@ -12,3 +12,9 @@ terraform {
 provider "aws" {
   region = "ap-northeast-1"
 }
+
+locals {
+  tags = {
+    Project = "github.com/lambdasawa/lambdasawa/sandbox/terraform-go-serverless"
+  }
+}

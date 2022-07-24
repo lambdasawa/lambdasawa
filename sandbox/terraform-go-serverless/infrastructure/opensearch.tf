@@ -10,4 +10,6 @@ resource "aws_opensearch_domain" "main" {
     ebs_enabled = true
     volume_size = 10
   }
+
+  tags = local.tags
 }

@@ -1,6 +1,8 @@
 resource "aws_cloudwatch_event_rule" "every_minutes" {
   name                = "sandbox-terraform-go-serverless-main-every-minutes"
   schedule_expression = "cron(* * * * ? *)"
+
+  tags = local.tags
 }
 
 resource "aws_cloudwatch_event_target" "every_minutes_lambda_main" {

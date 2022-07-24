@@ -47,6 +47,8 @@ resource "aws_cloudfront_distribution" "main" {
   }
 
   wait_for_deployment = false
+
+  tags = local.tags
 }
 
 resource "aws_cloudfront_origin_access_identity" "main" {

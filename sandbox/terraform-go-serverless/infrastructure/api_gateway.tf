@@ -2,6 +2,8 @@ resource "aws_apigatewayv2_api" "main" {
   name          = "sandbox-terraform-go-serverless-main"
   protocol_type = "HTTP"
   target        = aws_lambda_function.main.arn
+
+  tags = local.tags
 }
 
 resource "aws_lambda_permission" "apigateway_main" {
