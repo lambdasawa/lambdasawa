@@ -95,13 +95,19 @@ $ op item get --format json --vault foo bar
 }
 ```
 
-## item get (key value object)
+## item get (JSON format)
 
 ```sh
 $ op item get --format json --vault foo bar | jq '.fields[] | select(.label != null and .value != null) | {key: .label, value: .value}' | jq -s 'from_entries'
 {
   "fizz": "buzz"
 }
+```
+
+## item get (.env format)
+
+```
+op item get --format json --vault foo bar | jq -r '.fields[] | select(.label != null and .value != null) | {key: .label, value: .value} | "\\(.key)=\\"\\(.value)\\""'
 ```
 
 ## run with values as environment variables
