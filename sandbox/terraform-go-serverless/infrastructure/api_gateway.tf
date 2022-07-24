@@ -4,10 +4,10 @@ resource "aws_apigatewayv2_api" "main" {
   target        = aws_lambda_function.main.arn
 }
 
-resource "aws_lambda_permission" "example" {
-  function_name = aws_lambda_function.main.arn
+resource "aws_lambda_permission" "apigateway_main" {
   principal     = "apigateway.amazonaws.com"
   action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.main.arn
   source_arn    = "${aws_apigatewayv2_api.main.execution_arn}/*/*"
 }
 
