@@ -4,8 +4,7 @@ test:
 
 	cd infrastructure &&\
 		terraform fmt &&\
-		terraform validate &&\
-		terraform plan
+		terraform validate
 
 build: test
 	cd application &&\
