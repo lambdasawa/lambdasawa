@@ -318,7 +318,7 @@ better sed.
 
 ## ターミナル
 
-Mac 標準のターミナルを使っている。 iTerm2, Alacrity などサードパーティのターミナルエミュレータは使っていない。VSCode 内のターミナルもほとんど使っていない。
+Mac 標準のターミナルを使っている。 iTerm2, Alacritty などサードパーティのターミナルエミュレータは使っていない。VSCode 内のターミナルもほとんど使っていない。
 
 テーマは [Monokai Pro](https://github.com/Monokai/monokai-pro-sublime-text/issues/45#issuecomment-341005595) を使っている。
 
