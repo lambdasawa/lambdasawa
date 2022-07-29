@@ -2,6 +2,10 @@
 
 ## [仕事ですぐに使えるTypeScript](https://future-architect.github.io/typescript-guide/)
 
+## [サバイバルTypeScrip](https://typescriptbook.jp/)
+
+## [JavaScript Primer](https://jsprimer.net/)
+
 ## [ライブラリを探すやつ](https://www.typescriptlang.org/dt/search?search=)
 
 ## [Utility Type](https://www.typescriptlang.org/docs/handbook/utility-types.html)
