@@ -42,7 +42,7 @@ go run main.go
 普通にやると個別のパッケージごとのカバレッジしか表示されない。
 
 ```sh
-go test ./... -cover -coverpkg=./... | grep -v 'no test files' | sed -E 's/.*coverage: (.+)%.*/\\1/' | paste -s -d+ - | bc
+go test ./... -cover -coverpkg=./... | grep -v 'no test files' | sed -E 's/.*coverage: (.+)%.*/\\1/' | jq -s 'add'
 ```
 
 ## render dependency graph

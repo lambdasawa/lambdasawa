@@ -76,7 +76,7 @@ yt-dlp --cookies-from-browser firefox --wait-for-video 10 --remux-video mp4 --wr
 
 ```sh
 yt-dlp --write-subs --no-download 'https://www.youtube.com/watch?v=xxxx'
-cat *live_chat.json | jq -s | gron | grep 'purchaseAmountText.simpleText' | sed -E 's/.*= "(.*)".*/\1/g' | sed -E 's/[¥,]//g' | paste -s -d+ - | bc
+cat *live_chat.json | jq -s | gron | grep 'purchaseAmountText.simpleText' | sed -E 's/.*= "(.*)".*/\1/g' | sed -E 's/[¥,]//g' | jq -s 'add'
 ```
 
 ## クリップのメタデータを取得
