@@ -8,10 +8,7 @@
 
 pretty print したり独自のクエリ言語で一部の要素を抜き出したりできる。
 
-フィルタリングには `select` が使える。
-
-`[{"key": "foo", "value": "bar"}]` を `{"foo": "bar"}` に変換するには `from_entries` が使える。
-逆に変換するには `to_entries` が使える。
+詳しくは[こちら](./jq.md)。
 
 ### gron
 
