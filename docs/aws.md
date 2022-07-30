@@ -45,6 +45,10 @@
 - [github](https://github.com/iann0036/iamlive)
 - ローカルマシンのAPI呼び出しを監視してIAMポリシーを生成してくれるツール。
 
-## browser xtension
+## browser extension
 
 - [AWS Extend Switch Roles](https://addons.mozilla.org/ja/firefox/addon/aws-extend-switch-roles3/)
+
+## other
+
+- <https://github.com/donnemartin/awesome-aws>

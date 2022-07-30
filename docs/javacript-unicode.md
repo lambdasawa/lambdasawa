@@ -185,8 +185,8 @@ Array.from("👨‍👩‍👧‍👧").map(c => c.codePointAt(0).toString(16))
 
 ## 参考リンク
 
-- <https://www.tohoho-web.com/ex/charset.html#unicode>
 - <https://blog.jxck.io/entries/2017-03-02/unicode-in-javascript.html>
+- <https://engineering.linecorp.com/ja/blog/the-7-ways-of-counting-characters/>
 - <https://github.com/jagracey/Awesome-Unicode>
 - 検索系
   - <https://graphemica.com/>

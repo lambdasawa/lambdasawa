@@ -18,6 +18,7 @@
 - [CloudWatch Log](./aws-cloudwatch-logs.md)
 - [CloudWatch Synthetics](./aws-cloudwatch-synthetics.md)
 - [DynamoDB](./aws-dynamodb.md)
+- [S3](./aws-s3.md)
 - [EC2 SSH](./aws-ec2-ssh.md)
 - [ECS](./aws-ecs.md)
 - [Lambda](./aws-lambda.md)
