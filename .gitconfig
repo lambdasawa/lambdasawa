@@ -5,6 +5,9 @@ name = Tsubasa Irisawa
 [init]
 defaultBranch = main
 
+[push]
+autoSetupRemote = true
+
 [include]
 path = ~/.config/git/alias
 path = ~/.config/git/ghq
