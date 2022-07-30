@@ -30,4 +30,3 @@ source ~/.config/fish/alias.fish
 # bun
 set -Ux BUN_INSTALL "/Users/tsubasa.irisawa/.bun"
 fish_add_path "/Users/tsubasa.irisawa/.bun/bin"
-
