@@ -7,8 +7,8 @@ ruby 3.1.2
 terraform 1.2.6
 flutter 3.0.5-stable
 mysql 8.0.29
-tflint 0.39.0
+tflint 0.39.1
 aws-vault 6.6.0
-awscli 2.7.19
+awscli 2.7.20
 golangci-lint 1.47.2
 jq 1.6
