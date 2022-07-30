@@ -198,3 +198,5 @@ Array.from("👨‍👩‍👧‍👧").map(c => c.codePointAt(0).toString(16))
   - <https://emojipedia.org/>
   - <http://emojitracker.com/>
   - <http://www.unicode.org/emoji/charts/full-emoji-list.html>
+- <https://github.com/jagracey/Awesome-Unicode#readme>
+- <https://github.com/Codepoints/awesome-codepoints#readme>

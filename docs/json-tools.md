@@ -239,3 +239,7 @@ jc --xml
 ```sh
 pup 'body json{}'
 ```
+
+## その他
+
+- <https://github.com/burningtree/awesome-json#readme>
