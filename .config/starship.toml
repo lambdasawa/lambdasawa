@@ -58,7 +58,7 @@ untracked = "untracked "
 disabled = false
 format = '[$time](white) '
 time_format = "%T"
-utc_time_offset = "-5"
+utc_time_offset = "+0"
 
 [cmd_duration]
 format = "[$duration](white) "
