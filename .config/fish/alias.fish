@@ -45,3 +45,6 @@ alias apw='amplify env pull && amplify push -y && noti "amplify hotswap ready!" 
 alias amp='amplify'
 alias cdk1='npx aws-cdk@1.x'
 alias cdk='npx aws-cdk@2.x'
+alias push='git push'
+alias pull='git pull'
+alias rebase='git rebase-default-branch'
