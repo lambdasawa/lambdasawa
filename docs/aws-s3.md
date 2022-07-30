@@ -6,10 +6,10 @@
 
 ## ~/.aws/config
 
+- [ref](https://docs.aws.amazon.com/cli/latest/topic/s3-config.html)
+
 ```txt
 [profile hoge]
-aws_access_key_id=foo
-aws_secret_access_key=bar
 s3 =
   max_concurrent_requests = 20
   max_queue_size = 10000
@@ -35,8 +35,7 @@ b.delete()
 - [ref](https://github.com/aws/aws-sdk-go/blob/16b6a407abb192af7335d72005c6f08b454f8042/service/s3/s3manager/download.go#L122-L135)
 
 ```go
-sess := session.Must(session.NewSession()
-s3Client := s3.New(sess)
+s3Client := s3.New(session.Must(session.NewSession()))
 s3Downloader := s3manager.NewDownloaderWithClient(s3Client, func(d *s3manager.Downloader) {
   d.PartSize = 8 * 1024 * 1024
   d.Concurrency = 8

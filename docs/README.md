@@ -27,7 +27,7 @@
 ## Container
 
 - [Docker](./docker.md)
-- [Kuberneters](./k8s.md)
+- [Kubernetes](./k8s.md)
 - [VSCode and Container](./vscode-and-container.md)
 
 ## Database
