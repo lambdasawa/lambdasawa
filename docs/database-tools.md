@@ -4,7 +4,6 @@
 
 - <https://www.jetbrains.com/datagrip/>
 - <https://arctype.com/>
-- <https://github.com/sqlpad/sqlpad>
 - <https://github.com/mtxr/vscode-sqltools>
 - <https://github.com/golang-migrate/migrate>
 - <https://github.com/k0kubun/sqldef>
