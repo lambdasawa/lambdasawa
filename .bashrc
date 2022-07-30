@@ -69,7 +69,7 @@ rm() {
   fi
 }
 
-mcd() {
+md() {
   mkdir -p "$@"
   cd "$@" || exit
 }
