@@ -44,6 +44,7 @@
 
 - [yt-dlp](./yt-dlp.md)
 - [mpv](./mpv.md)
+- [ffmpeg](./ffmpeg.md)
 
 ## Schema driven development
 
@@ -90,3 +91,5 @@
 - [bun](./bun.md)
 - [OCR (tesseract)](./tesseract.md)
 - [文字化け](./mojibake.md)
+- [macOS](./macos.md)
+- [圧縮、展開、解凍](./compress.md)
