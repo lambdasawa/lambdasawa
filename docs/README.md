@@ -74,6 +74,7 @@
 - [Go](./golang.md)
 - [TypeScript](./typescript.md)
 - [JavaScript and Unicode](./javacript-unicode.md)
+- [Ruby](./ruby.md)
 
 ## Other
 
