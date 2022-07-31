@@ -2,5 +2,7 @@ remote_theme: lambdasawa/hacker@master
 plugins:
   - jekyll-remote-theme
 title: "λ沢.dev"
-description: "cheatsheet"
+description: "lambdasawa cheatsheet"
 show_downloads: false
+lang: "ja_JP"
+google_analytics: "G-B83BFJQ7GD"
