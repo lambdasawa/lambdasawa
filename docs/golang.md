@@ -56,3 +56,5 @@ godepgraph -p $(cat go.sum | awk '{print $1}' | sort -u | paste -s -d, -) -noven
 ## lib
 
 - <https://github.com/cockroachdb/errors>
+- <https://github.com/golang-migrate/migrate/tree/master/cmd/migrate>
+- <https://docs.sqlc.dev/en/latest/tutorials/getting-started-mysql.html>
