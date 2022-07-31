@@ -96,4 +96,4 @@
 - [OCR (tesseract)](./tesseract.md)
 - [文字化け](./mojibake.md)
 - [macOS](./macos.md)
-- [圧縮、展開、解凍](./compress.md)
+- [圧縮、展開、解凍、伸長](./compress.md)

@@ -1,4 +1,4 @@
-# 圧縮、展開、解凍
+# 圧縮、展開、解凍、伸長
 
 - <https://github.com/ouch-org/ouch>
 - <https://github.com/sstadick/crabz>
