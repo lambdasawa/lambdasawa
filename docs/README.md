@@ -52,6 +52,7 @@
 
 - [OpenAPI](./openapi.md)
 - [GraphQL](./graphql.md)
+- [gRPC](./grpc.md)
 - [Struct Generator](./struct-generator.md)
 
 ## Secret management
