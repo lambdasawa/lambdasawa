@@ -27,13 +27,7 @@ npx typesync && npx npm-check-updates -u && npm i
 ## 依存のリスト化
 
 ```sh
-cat $(fd package.json) |\
-  jq -rs '
-    map([
-        if .dependencies == null then [] else .dependencies | to_entries end,
-        if .devDependencies == null then [] else .devDependencies | to_entries end
-    ] | flatten | map(.key)) | flatten | unique | .[]
-  '
+cat (fd package.json) | jq -rs 'map((.dependencies // {}) * (.devDependencies // {}) | to_entries | .[] | .key) | unique | sort | .[]'
 ```
 
 ## bundle
