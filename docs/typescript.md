@@ -24,6 +24,18 @@ npx typesync && npx npm-check-updates -u && npm i
 
 <https://github.com/millsp/ts-toolbelt>
 
+## 依存のリスト化
+
+```sh
+cat $(fd package.json) |\
+  jq -rs '
+    map([
+        if .dependencies == null then [] else .dependencies | to_entries end,
+        if .devDependencies == null then [] else .devDependencies | to_entries end
+    ] | flatten | map(.key)) | flatten | unique | .[]
+  '
+```
+
 ## bundle
 
 ### <https://github.com/microsoft/TypeScript>
