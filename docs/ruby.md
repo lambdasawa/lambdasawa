@@ -7,3 +7,4 @@
 
 - [Guide](https://railsguides.jp/)
 - [API](https://api.rubyonrails.org/)
+- [nil? empty? blank? present?](https://medium.com/le-wagon/how-to-use-nil-blank-present-exists-in-rails-5-fe03e78ab979)
