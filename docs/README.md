@@ -73,8 +73,8 @@
 ## Programming language
 
 - [Go](./golang.md)
+- [Rust](./rust.md)
 - [TypeScript](./typescript.md)
-- [JavaScript and Unicode](./javacript-unicode.md)
 - [Ruby](./ruby.md)
 
 ## Other
@@ -94,6 +94,7 @@
 - [deno](./deno.md)
 - [bun](./bun.md)
 - [OCR (tesseract)](./tesseract.md)
+- [JavaScript and Unicode](./javacript-unicode.md)
 - [文字化け](./mojibake.md)
 - [macOS](./macos.md)
 - [圧縮、展開、解凍、伸長](./compress.md)
