@@ -94,3 +94,15 @@
 - <https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-node.html>
 - <https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules.html>
 - <https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules-merge.html>
+
+## [cerebro](https://github.com/lmenezes/cerebro)
+
+ブラウザベースの Elasticsearch の管理ツール。
+
+node, index, shard の状態をグラフィカルに確認したり、シャードを移動したりできる。
+
+```sh
+docker run -d -p 9000:9000 lmenezes/cerebro
+export OPENSEARCH_ENDPOINT=$(aws opensearch describe-domain --domain-name $(aws opensearch list-domain-names | jq -r '.DomainNames[] | .DomainName' | fzf) | jq -r .DomainStatus.Endpoint)
+open $(node -e 'console.log("http://localhost:9000/#!/overview?host=" + encodeURIComponent(`https://${process.env.OPENSEARCH_ENDPOINT}`))')
+```

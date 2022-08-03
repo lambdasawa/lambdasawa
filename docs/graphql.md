@@ -16,6 +16,10 @@ TODO
 
 TODO
 
+## [graphqurl](https://github.com/hasura/graphqurl)
+
+GraphQL を扱う CLI クライアント。
+
 ## [Insomnia](https://insomnia.rest/)
 
 GUIのHTTPクライアント。

@@ -6,6 +6,16 @@
 - [example](https://httpie.io/docs/cli/examples)
 - リッチなcurl
 
+```sh
+# こんな感じで JSON を POST できる
+$ http -v "https://httpbin.org/anything" "x-my-header: xxxx" foo[bar]=fizz
+
+# 同等の処理を curl でやるとこんな感じ
+$ curl -v "https://httpbin.org/anything" -X POST -H "x-my-header: xxxx" --data '{"foo": {"bar": "fizz"}}'
+```
+
+レスポンスは自動的にインデントとシンタックスハイライトがされる。
+
 ## curlie
 
 - [github](https://github.com/rs/curlie)
@@ -39,6 +49,11 @@
 - [doc](https://ngrok.com/docs)
 - [ngrok \| λ沢.dev](https://www.lambdasawa.dev/ngrok)
 
+## Caddy
+
+- ACME を実装した Web サーバ (certbot + nginx 的なイメージ)
+- <https://caddyserver.com/docs/getting-started>
+
 ## webhook.site
 
 - <https://webhook.site/>
@@ -62,3 +77,19 @@ open http://locahost:8002
 
 - <https://portswigger.net/burp>
 - proxy
+
+## [CyberChef](https://gchq.github.io/CyberChef/)
+
+雑多な変換処理を行えるウェブサイト。
+
+- base64
+- URL エンコード/デコード
+- gunzip
+- zlib deflate
+- JWT デコード
+- などなど
+
+使用例:
+
+- [Unix timestamp to RFC3339(JST)](https://gchq.github.io/CyberChef/#recipe=From_UNIX_Timestamp('Milliseconds%20(ms)')Translate_DateTime_Format('Standard%20date%20and%20time','ddd%20DD%20MMM%20YYYY%20HH:mm:ss','UTC','YYYY-MM-DDTHH:mm:ss','Asia/Tokyo')&input=MTY1NjI4NzU2NDE5Ng)
+- [JWT decode](https://gchq.github.io/CyberChef/#recipe=JWT_Decode()&input=ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnpkV0lpT2lJeE1qTTBOVFkzT0Rrd0lpd2libUZ0WlNJNklrcHZhRzRnUkc5bElpd2lhV0YwSWpveE5URTJNak01TURJeWZRLlNmbEt4d1JKU01lS0tGMlFUNGZ3cE1lSmYzNlBPazZ5SlZfYWRRc3N3NWM)

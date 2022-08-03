@@ -15,6 +15,13 @@
 
 - [github](https://github.com/awslabs/dynein)
 
+DynamoDB へのアクセスを考えた時、 awscli は網羅的であるが `expression-attribute-values` の指定が面倒だったりする。
+
+`dynein` を使うとその辺りをシンプルに書ける。
+
+まだ成熟してない(例えばページング処理が実装されてない)が、 基本的なユースケースでは awscli より便利。
+リポジトリにコミットしてシェアするようなスクリプトでは awscli を使ったほうが良いと思うが、一時的な調査の作業などには便利。
+
 ## GUI client
 
 ## NoSQL Workbench

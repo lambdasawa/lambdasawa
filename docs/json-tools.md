@@ -143,6 +143,20 @@ $ cat /etc/hosts | jc --hosts | jq
   },
   // ... 省略 ...
 ]
+
+# docker compose のサービス一覧を確認
+$ cat docker-compose.yml | jc --yaml | jq -r '.[0].services | to_entries[] | .key'
+mysql
+redis
+app
+
+# GitHub の RSS を XML としてパース最新バージョンを確認
+$ curl -sSL https://github.com/docker/docker/releases.atom | jc --xml | jq -r '.feed.entry[0].title'
+v20.10.17
+
+# ifconfig の結果を JSON に変換して jq でフィルタリングしてローカル IP アドレスを確認
+$ jc ifconfig | jq -r '.[] | .ipv4_addr | select(. != null) | select(. != "127.0.0.1")'
+xxx.xxx.xxx.xxx
 ```
 
 xml, yaml, csv, ini, .env もパイプで JSON にできる。
