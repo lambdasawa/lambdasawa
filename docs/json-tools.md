@@ -99,9 +99,9 @@ $ curl -sSL "https://api.github.com/repos/lambdasawa/lambdasawa" | gron | grep o
 }
 ```
 
-### jsondiffpatch
+### difft
 
-<https://github.com/benjamine/jsondiffpatch>
+<https://github.com/Wilfred/difftastic>
 
 ```sh
 $ cat foo.json
@@ -114,10 +114,12 @@ $ cat bar.json
   "text": "Right value"
 }
 
-$ jsondiffpatch foo.json bar.json
-{
-  text: "Left value" => "Right value"
-}
+$ difft --display inline foo.json bar.json
+foo.json --- JSON
+1    {
+2      "text": "Left value"
+   2   "text": "Right value"
+   3 }
 ```
 
 ### jc
