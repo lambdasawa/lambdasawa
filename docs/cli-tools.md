@@ -140,6 +140,7 @@ better cat/less.
 
 better grep.
 
+- [guide](https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md#basics)
 - [ripgrep は {grep, ag, git grep, ucg, pt, sift} より速い (翻訳)](https://inzkyk.xyz/misc/ripgrep/#%e5%bc%be%e4%b8%b8%e3%83%84%e3%82%a2%e3%83%bc)
 
 ### [hgrep](https://github.com/rhysd/hgrep)
@@ -152,13 +153,13 @@ better grep.
 
 better find.
 
-### [delta](https://github.com/dandavison/delta)
-
-better diff.
-
 ### [difft](https://github.com/Wilfred/difftastic)
 
 better diff.
+
+### [delta](https://github.com/dandavison/delta)
+
+better diff for git.
 
 ### [rip](https://github.com/nivekuil/rip)
 

@@ -9,6 +9,6 @@ flutter 3.0.5-stable
 mysql 8.0.29
 tflint 0.39.1
 aws-vault 6.6.0
-awscli 2.7.20
+awscli 2.7.21
 golangci-lint 1.47.3
 jq 1.6
