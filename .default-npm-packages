@@ -1,3 +1,5 @@
 yarn
 eslint
 prettier
+@devcontainers/cli
+@redocly/cli
