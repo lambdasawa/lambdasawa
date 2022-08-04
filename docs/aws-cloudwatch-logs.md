@@ -23,3 +23,11 @@ utern --no-log-stream --filter '-"START RequestId" -"END RequestId" -"REPORT Req
 ## cw
 
 [github](https://github.com/lucagrulla/cw)
+
+## ロググループをまとめて削除
+
+```sh
+aws logs describe-log-groups --max-items 1000 |\
+  jq -r '.logGroups[] | .logGroupName | select(test("irisawa"))' |\
+  xargs -n 1 aws logs delete-log-group --log-group-name
+```
