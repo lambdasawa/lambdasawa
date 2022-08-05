@@ -1,0 +1,19 @@
+{
+  "name": "call-js-from-go",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "esbuild index.js --outfile=bundle.js --bundle --minify --sourcemap --target=es2017"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "validator": "^13.7.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.14.53"
+  }
+}
