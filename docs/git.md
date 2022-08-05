@@ -82,3 +82,11 @@ github.com/raycast/script-commands
 
 - 特定の言語に依存していないのが良い
 - `lefthook run hoge` でタスクランナーとしても使用できるのが良い
+
+### tips
+
+このリポジトリでのみ `.tool-versions` を gitignore する。
+
+```sh
+echo .tool-versions >> .git/info/exclude
+```
