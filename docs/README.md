@@ -115,3 +115,4 @@
 - [Amplify to Terraform](./aws-amplify-to-terraform.md)
 - [数学](./math.md)
 - [Slack 絵文字](./slack-emoji.md)
+- [go-chromecast](./go-chromecast.md)
