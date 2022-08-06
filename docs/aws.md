@@ -5,6 +5,7 @@
 - [ドキュメント](https://docs.aws.amazon.com/ja_jp/)
 - <https://github.com/aws-samples>
 - [AWS ざっくり料金計算](https://aws-rough.cc/)
+- [IAM Policy](https://docs.aws.amazon.com/ja_jp/service-authorization/latest/reference/reference_policies_actions-resources-contextkeys.html)
 
 ## IaC
 
