@@ -43,7 +43,7 @@ $ printf '{"foo": 1}\n{"foo": 2}' | jq -s '.'
 ]
 ```
 
-## printf, format
+## printf, string format, string template
 
 ```sh
 $ echo '[{ "n": 1 }, { "n": 2 }, { "n": 3 }]' | jq 'map("n => \(.n + 1)")'
@@ -54,11 +54,45 @@ $ echo '[{ "n": 1 }, { "n": 2 }, { "n": 3 }]' | jq 'map("n => \(.n + 1)")'
 ]
 ```
 
-## 合計
+## string join
+
+```sh
+$ echo '[{ "n": 1 }, { "n": 2 }, { "n": 3 }]' | jq -r 'map(.n) | join(",")'
+1,2,3
+```
+
+### string split
+
+```sh
+$ echo -n foo,bar,baz | jq -R 'split(",")'
+[
+  "foo",
+  "bar",
+  "baz"
+]
+```
+
+## regexp
+
+```sh
+$ curl -sSL https://api.github.com/users/lambdasawa/repos | jq 'map(select(.name | test("lambda(?!sawa)")) | .name)'
+[
+  "aws-lambda-versions"
+]
+```
+
+## 合計 (配列)
 
 ```sh
 $ echo '[{ "n": 1 }, { "n": 2 }, { "n": 3 }]' | jq 'map(.n) | add'
 6
+```
+
+## 合計 (line separated string)
+
+```sh
+$ seq 10 | jq -s add
+55
 ```
 
 ## 配列の長さ
@@ -73,15 +107,6 @@ $ echo '[{ "n": 1 }, { "n": 2 }, { "n": 3 }]' | jq 'length'
 ```sh
 $ echo '[{ "n": 1 }, { "n": 2 }, { "n": 3 }]' | jq 'map(.n) as $ns | ($ns | add) / ($ns | length)'
 2
-```
-
-## 正規表現でフィルタリング
-
-```sh
-$ curl -sSL https://api.github.com/users/lambdasawa/repos | jq 'map(select(.name | test("lambda(?!sawa)")) | .name)'
-[
-  "aws-lambda-versions"
-]
 ```
 
 ## 先頭3個
@@ -140,8 +165,27 @@ $ echo '{"data": "{\\"data\\": 1}"}' | jq '.data | fromjson'
 ## URIエンコード
 
 ```sh
-$ jq -nr --arg value abcあいうえお '$value | @uri'
-abc%E3%81%82%E3%81%84%E3%81%86%E3%81%88%E3%81%8A
+$ echo -n aiuえお | jq -Rr @uri
+aiu%E3%81%88%E3%81%8A
+```
+
+## URIデコード
+
+jq には URI デコードをするコマンドはない。 Node.js でやるとしたら以下。
+
+```sh
+$ echo -n aiu%E3%81%88%E3%81%8A | node -e 'console.log(decodeURIComponent(require("fs").readFileSync("/dev/stdin", "utf-8")))'
+aiuえお
+```
+
+## JSON 組み立て
+
+```sh
+$ jq -n --arg FOO hoge --argjson BAR 1 '$ARGS.named'
+{
+  "FOO": "hoge",
+  "BAR": 1
+}
 ```
 
 ## fizzbuzz
@@ -152,24 +196,43 @@ jq -rn 'range(1;100+1) | if . % 15 == 0 then "fizzbuzz" elif . % 3 == 0 then "fi
 
 ## Cookbook
 
-EC2 をインスタンス名で絞って表示。
+### コマンドライン引数で JSON を組み立て
+
+```sh
+jq -n \
+  --arg HOGE_API_KEY foo \
+  --arg FUGA_API_KEY bar \
+  '$ARGS.named'
+```
+
+### 環境変数を JSON にする
+
+```sh
+jq -n 'env | {HOME, PWD}'
+```
+
+### .env ファイルを JSON にする
+
+jc にも依存する。
+
+```sh
+cat .env | jc --env | jq 'from_entries'
+```
+
+一部の値だけ。
+
+```sh
+cat .env | jc --env | jq 'from_entries | {FOO_API_KEY}'
+```
+
+## EC2 をインスタンス名で絞って表示
 
 ```sh
 aws ec2 describe-instances |\
   jq -r '.Reservations[] | .Instances[] | select(.Tags[] | .Key == "Name" and .Value == "test") | .InstanceId'
 ```
 
-EC2 一覧を TSV で表示する。
-
-```sh
-aws ec2 describe-instances |\
-  jq -r '.Reservations[] | .Instances[] | "\(.InstanceId)\t\(.Tags[] | select(.Key == "Name") | .Value)"'
-```
-
-```sh
-aws ec2 describe-instances |\
-  jq -r '.Reservations[] | .Instances[] | [.InstanceId, (.Tags[] | select(.Key == "Name") | .Value)] | join("\t")'
-```
+### EC2 一覧を TSV で表示する
 
 ```sh
 aws ec2 describe-instances |\

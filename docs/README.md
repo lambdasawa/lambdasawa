@@ -64,6 +64,7 @@
 ## Secret management
 
 - [シークレット管理](./secret-management.md)
+- [AWS Secrets Manager](./aws-secrets-manager.md)
 - [1Password CLI](./op-cli.md)
 
 ## Authentication, Authorization
