@@ -225,7 +225,7 @@ cat .env | jc --env | jq 'from_entries'
 cat .env | jc --env | jq 'from_entries | {FOO_API_KEY}'
 ```
 
-## EC2 をインスタンス名で絞って表示
+### EC2 をインスタンス名で絞って表示
 
 ```sh
 aws ec2 describe-instances |\
