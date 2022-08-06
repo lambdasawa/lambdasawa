@@ -1,4 +1,4 @@
-## Git
+# Git
 
 `git-wrapper` というシェルスクリプトを用意してある。
 
@@ -46,16 +46,16 @@
 - `g clear`
   - `git clone` 直後のような状態にする
 
-### [tig](https://jonas.github.io/tig/)
+## [tig](https://jonas.github.io/tig/)
 
 TUI の git クライアント。
 設定をテキストファイルで管理できる点、全ての操作がキーボードで行える点が良い。
 
-### [git-extras](https://github.com/tj/git-extras/blob/master/Commands.md)
+## [git-extras](https://github.com/tj/git-extras/blob/master/Commands.md)
 
 `git` を用いた便利なサブコマンド集。
 
-### [ghq](https://github.com/x-motemen/ghq)
+## [ghq](https://github.com/x-motemen/ghq)
 
 リポジトリ管理をするツール。
 リポジトリの URL とローカルのディレクトリを紐付けて管理できる。
@@ -76,17 +76,25 @@ github.com/raycast/script-commands
 
 これでリポジトリをどこにクローンするか悩まなくて済む。
 
-### [lefthook](https://github.com/evilmartians/lefthook)
+## [lefthook](https://github.com/evilmartians/lefthook)
 
 `git hooks` を管理するツール
 
 - 特定の言語に依存していないのが良い
 - `lefthook run hoge` でタスクランナーとしても使用できるのが良い
 
-### tips
+## tips
 
-このリポジトリでのみ `.tool-versions` を gitignore する。
+### このリポジトリでのみ `.tool-versions` を gitignore する
 
 ```sh
 echo .tool-versions >> .git/info/exclude
+```
+
+### テンプレから `.gitignore` を生成
+
+```sh
+curl -sSL https://raw.githubusercontent.com/github/gitignore/main/$(
+  curl -sSL 'https://api.github.com/repos/github/gitignore/git/trees/main?recursive=1' | jq -r '.tree | map(.path) | .[]' | grep '.gitignore$' | sk
+)
 ```
