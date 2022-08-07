@@ -1,14 +1,14 @@
 # Elasticsearch and OpenSearch
 
-- <https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html>
-- <https://github.com/dzharii/awesome-elasticsearch>
-- <http://elasticsearch-cheatsheet.jolicode.com/>
-- <https://dev.classmethod.jp/referencecat/enter-elasticsearch/>
-- <https://www.elastic.co/guide/en/elasticsearch/reference/current/docs.html>
-- <https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html>
-- <https://www.elastic.co/guide/en/elasticsearch/reference/current/indices.html>
-- <https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster.html>
-- <https://www.elastic.co/guide/en/elasticsearch/reference/current/cat.html>
+- [guide](https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html)
+- [awesome](https://github.com/dzharii/awesome-elasticsearch)
+- [cheatsheet](http://elasticsearch-cheatsheet.jolicode.com/)
+- [DevelopersIO Elasticsearch入門](https://dev.classmethod.jp/referencecat/enter-elasticsearch/)
+- [Compact and aligned text (CAT) APIs](https://www.elastic.co/guide/en/elasticsearch/reference/current/cat.html)
+- [Cluster API](https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster.html)
+- [Index API](https://www.elastic.co/guide/en/elasticsearch/reference/current/indices.html)
+- [Document API](https://www.elastic.co/guide/en/elasticsearch/reference/current/docs.html)
+- [Query DSL](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html)
 
 ## glossary
 
@@ -90,10 +90,10 @@
       - 1:1:3 に分断されても 1 の方はマスターにならない
       - 1:2:2 に分断されるとどれもマスターにならない
 
-- <https://www.elastic.co/jp/blog/found-elasticsearch-from-the-bottom-up>  
-- <https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-node.html>
-- <https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules.html>
-- <https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules-merge.html>
+- [Elasticsearch from the Bottom Up, Part 1](https://www.elastic.co/jp/blog/found-elasticsearch-from-the-bottom-up)
+- [Node](https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-node.html)
+- [Index](https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules.html)
+- [Merge](https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules-merge.html)
 
 ## [cerebro](https://github.com/lmenezes/cerebro)
 
@@ -103,6 +103,7 @@ node, index, shard の状態をグラフィカルに確認したり、シャー�
 
 ```sh
 docker run -d -p 9000:9000 lmenezes/cerebro
-export OPENSEARCH_ENDPOINT=$(aws opensearch describe-domain --domain-name $(aws opensearch list-domain-names | jq -r '.DomainNames[] | .DomainName' | fzf) | jq -r .DomainStatus.Endpoint)
-open $(node -e 'console.log("http://localhost:9000/#!/overview?host=" + encodeURIComponent(`https://${process.env.OPENSEARCH_ENDPOINT}`))')
+export OPENSEARCH_ENDPOINT=$(aws opensearch describe-domain --domain-name $(aws opensearch list-domain-names | jq -r '.DomainNames[] | .DomainName' | filter) | jq -r .DomainStatus.Endpoint)
+sleep 60
+open "http://localhost:9000/#!/overview?host=$(jq -nr '"https://\(env.OPENSEARCH_ENDPOINT)" | @uri')"
 ```

@@ -2,12 +2,14 @@
 
 ## Dockerfile
 
-- [reference](https://docs.docker.jp/engine/reference/builder.html)
-- [best practive](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)
+- [ref](https://docs.docker.com/engine/reference/builder/)
+- [ref (ja)](https://docs.docker.jp/engine/reference/builder.html)
+- [best practice](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)
 
-## Docker Compose
+## docker-compose.yml
 
-- [reference](https://docs.docker.jp/compose/compose-file.html)
+- [ref](https://docs.docker.com/compose/compose-file/)
+- [ref (ja)](https://docs.docker.jp/compose/compose-file.html)
 
 ## wait
 
@@ -18,33 +20,6 @@
 ## MySQL
 
 - [docker hub](https://hub.docker.com/_/mysql)
-
-## Redis
-
-- [docker hub](https://hub.docker.com/_/redis)
-
-## LocalStack
-
-- [docker hub](https://hub.docker.com/r/localstack/localstack)
-- AWS の各種サービスをローカルでモックできる
-
-## MinIO
-
-- [docker hub](https://hub.docker.com/r/minio/minio/)
-- S3 をモックできる
-
-## MailHog
-
-- [docker hub](https://hub.docker.com/r/mailhog/mailhog)
-- メールをモックできる
-
-## run docker pull per services in docker-compose.yml with platform option
-
-```sh
-for image in (cat docker-compose.yml | jc --yaml | jq -r '.[0] | .services[] | .image' | grep -v null); docker pull --platform linux/amd64 $image; end
-```
-
----
 
 ```sh
 $ cat schema.sql
@@ -63,6 +38,15 @@ $ docker run \
 
 $ mysql -uroot -proot -h127.0.0.1 -P3306 -e 'use demo; show tables;'
 ```
+
+## Redis
+
+- [docker hub](https://hub.docker.com/_/redis)
+
+## LocalStack
+
+- [docker hub](https://hub.docker.com/r/localstack/localstack)
+- AWS の各種サービスをローカルでモックできる
 
 ```sh
 $ cat init_bucket.sh
@@ -85,6 +69,11 @@ $ env \
     aws --endpoint http://127.0.0.1:4566 s3 ls
 ```
 
+## MinIO
+
+- [docker hub](https://hub.docker.com/r/minio/minio/)
+- S3 をモックできる
+
 ```sh
 $ docker run \
     -itd \
@@ -102,6 +91,10 @@ $ aws --endpoint http://127.0.0.1:9000 s3 ls
 2022-03-19 22:10:25 test
 ```
 
+## Elasticsearch
+
+- <https://www.docker.elastic.co/r/elasticsearch>
+
 ```sh
 $ docker run \
   -itd \
@@ -112,5 +105,18 @@ $ docker run \
 
 $ curl -X PUT localhost:9200/foo
 ```
+
+## MailHog
+
+- [docker hub](https://hub.docker.com/r/mailhog/mailhog)
+- メールをモックできる
+
+## プラットフォームを指定して docker-compose.yml に書かれているイメージを全てダウンロード
+
+```sh
+for image in (cat docker-compose.yml | jc --yaml | jq -r '.[0] | .services[] | .image' | grep -v null); docker pull --platform linux/amd64 $image; end
+```
+
+## Other
 
 <https://github.com/abiosoft/colima>
