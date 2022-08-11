@@ -91,6 +91,7 @@
 
 ## Other
 
+- [git](./git.md)
 - [Test data](./test-data.md)
 - [dsq](./dsq.md)
 - [bash](./bash.md)

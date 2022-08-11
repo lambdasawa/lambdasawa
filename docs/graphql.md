@@ -1,6 +1,6 @@
 # GraphQL
 
-## [Syntax](https://graphql.org/learn/queries/)
+- [Syntax](https://graphql.org/learn/queries/)
 
 TODO
 
@@ -20,6 +20,29 @@ TODO
 
 GraphQL を扱う CLI クライアント。
 
+```sh
+gq --introspect https://api.spacex.land/graphql -H 'Content-Type: application/json'
+```
+
+```sh
+gq -i https://api.spacex.land/graphql
+```
+
+```sh
+gq https://api.spacex.land/graphql/ -H 'Content-Type: application/json' \
+  -q 'query Foo { dragons { id } }'
+```
+
+```sh
+gq https://api.spacex.land/graphql/ -H 'Content-Type: application/json' \
+  -q 'query Foo($dragonId: ID!) { dragon(id: $dragonId) { id name } }' \
+  -v 'dragonId=dragon2'
+```
+
 ## [Insomnia](https://insomnia.rest/)
 
 GUIのHTTPクライアント。
+
+---
+
+- [awesome-graphql](https://github.com/chentsulin/awesome-graphql)

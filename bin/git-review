@@ -1,6 +1,0 @@
-#!/bin/bash
-
-set -e
-
-owner=$(git remote get-url origin | sed -E 's|.+github.com/([^/]+)/.+|\1|')
-gh pr list -S "review-requested:@me user:$owner" | awk '{print $1}' | xargs -n 1 gh pr view -w

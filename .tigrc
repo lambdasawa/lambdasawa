@@ -47,7 +47,7 @@ bind status  c ?git commit -v
 bind status  + ?git commit -v --amend
 bind status  S ?git stash
 bind status  p ?git push
-bind status  P ?bash -c 'git push -u origin $(git current-branch) && gh pr create --assignee @me --draft --fill && gh pr view -w'
+bind status  P ?gh pr create --assignee @me --draft --fill
 bind status  G ?gh pr view -w
 
 bind stage   u status-update

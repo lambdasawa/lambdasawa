@@ -12,3 +12,4 @@ autoSetupRemote = true
 path = ~/.config/git/alias
 path = ~/.config/git/ghq
 path = ~/.config/git/delta
+path = ~/.config/git/difftastic

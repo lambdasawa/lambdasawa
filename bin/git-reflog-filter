@@ -1,5 +1,0 @@
-#!/bin/bash
-
-set -e
-
-git reflog | filter | awk '{print $1}'

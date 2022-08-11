@@ -1,52 +1,177 @@
 [alias]
-# start a working area (see also: git help tutorial)
-cl = clone
-i = init
-
-# work on the current change (see also: git help everyday)
-a = add
-mv = mv
-rs = restore
-rm = rm
-sc = sparse-checkout
-st = stash
-cp = cherry-pick
-
-# examine the history and state (see also: git help revisions)
-bi = bisect
-d = diff
+# a =
+# b =
+# c =
+# d =
+# e =
+# f =
 g = grep
-l = log
-sh = show
-# s = status
-rl = reflog
-bl = blame
-
-# grow, mark and tweak your common history
-# c = checkout
-br = branch
-cm = commit
-m = merge
-rb = rebase
-rs = reset
-s = switch
-t = tag
-
-# collaborate (see also: git help workflows)
-f = fetch
-pl = pull
-ps = push
-
-# extra
 h = hgrep
-cf = !yes | git clear-soft
-cb = create-branch -r
-lv = log -p
-rebase-default-branch = !bash -c 'git fetch && git rebase $(git rev-parse --abbrev-ref origin/HEAD)'
-prv = !gh pr view -w
-rpv = !gh repo view -w
-detail = !bash -c 'git summary && git info'
+# i =
+# j =
+# k =
+l = log -p
+# m =
+# n =
+# o =
+# p =
+# q =
+# r =
+# s =
+# t =
+# u =
+# v =
+# w =
+# x =
+# y =
+# z =
+
+# util
+difft = !GIT_EXTERNAL_DIFF=difft git diff
+log-difft = !GIT_EXTERNAL_DIFF=difft git log -p --ext-diff
+prune-hard = !bash -c 'git clean -d -f -x && git reset --hard'
+prune = !bash -c 'git clean -d -f && git reset --hard'
+switch-branch = !bash -c 'git switch $(git branch --format="%(refname:short)" | filter)'
+switch-pr = !gh pr checkout $(gh pr list --json 'assignees,author,createdAt,id,number,state,title' | jq -r '.[] | [.number, .state, .createdAt, .author.login, .title] | @tsv' | filter | cut -f1)
+wip = !bash -c 'git add . && git commit -m "wip"'
+rebase-upstream = !bash -c 'git fetch && git rebase $(git default-branch)'
+pick = !bash -c 'git cherry-pick $(git reflog-filter)'
+review = !gh pr list -S "review-requested:@me" | awk '{print $1}' | xargs -n 1 gh pr view -w
+log-fitler = !git log --date=short --decorate=short --pretty=format:'%h %cd %cn %d %s' | filter | awk '{print $1}'
+reflog-filter = !git reflog | filter | awk '{print $1}'
+hgrep = !git ls-files | xargs hgrep --theme ayu-dark "$@"
+toplevel = rev-parse --show-toplevel
+default-branch = !bash -c 'basename $(git symbolic-ref refs/remotes/origin/HEAD)'
+current-branch = rev-parse --abbrev-ref HEAD
+open-repo = !gh repo view -w
+open-pr = !gh pr view -w
 day = standup -d 1 -B
 week = standup -w 7 -B
-sbx = sandbox
-prune-codespace = !gh codespace delete --all --force
+gitignore-template = !curl -sSL https://raw.githubusercontent.com/github/gitignore/main/$(curl -sSL 'https://api.github.com/repos/github/gitignore/git/trees/main?recursive=1' | jq -r '.tree | map(.path) | .[]' | grep '.gitignore$' | filter)
+
+# git --help | rg '^   (.+)\s+\w+' | sd '   (\w*)\s.*' '# = $1'
+# = clone
+# = init
+# = add
+# = mv
+# = restore
+# = rm
+# = bisect
+# = diff
+# = grep
+# = log
+# = show
+# = status
+# = branch
+# = commit
+# = merge
+# = rebase
+# = reset
+# = switch
+# = tag
+# = fetch
+# = pull
+# = push
+
+# curl -sSL https://raw.githubusercontent.com/tj/git-extras/master/Commands.md | rg '^## ' | sd '## git (.+)' '# = $1'
+# = extras
+# = gh-pages
+# = feature
+# = contrib
+# = summary
+# = effort
+# = bulk
+# = brv
+# = repl
+# = coauthor
+# = commits-since
+# = count
+# = fork
+# = force-clone
+# = release
+# = rename-branch
+# = rename-tag
+# = rename-remote
+# = reauthor
+# = alias
+# = ignore
+# = ignore-io
+# = info
+# = cp
+# = create-branch
+# = delete-branch
+# = delete-submodule
+# = delete-tag
+# = delete-merged-branches
+# = delete-squashed-branches
+# = fresh-branch
+# = guilt
+# = merge-into
+# = graft
+# = squash
+# = authors
+# = changelog
+# = undo
+# = sed
+# = setup
+# = scp
+# = show-merged-branches
+# = show-unmerged-branches
+# = show-tree
+# = stamp
+# = standup
+# = touch
+# = obliterate
+# = local-commits
+# = archive-file
+# = missing
+# = lock
+# = locked
+# = unlock
+# = reset-file
+# = mr
+# = paste
+# = pr
+# = root
+# = delta
+# = clear
+# = clear-soft
+# = merge-repo
+# = psykorebase
+# = pull-request
+# = rebase-patch
+# = sync
+# = browse
+# = browse-ci
+# = utimes
+# = abort
+# = magic
+
+# gh --help | rg '^  (.+): ' | sd '  (.+): .+' '# = $1'
+# = auth
+# = browse
+# = codespace
+# = gist
+# = issue
+# = pr
+# = release
+# = repo
+# = run
+# = workflow
+# = alias
+# = api
+# = completion
+# = config
+# = extension
+# = gpg-key
+# = help
+# = label
+# = search
+# = secret
+# = ssh-key
+# = status
+# = actions
+# = environment
+# = formatting
+# = mintty
+# = reference
