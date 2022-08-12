@@ -9,9 +9,14 @@ import (
 	"os/signal"
 	"strconv"
 
-	"go.opencensus.io/trace"
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/attribute"
+	"go.opentelemetry.io/otel/codes"
+	"go.opentelemetry.io/otel/exporters/stdout/stdouttrace"
+	"go.opentelemetry.io/otel/sdk/resource"
+	sdkTrace "go.opentelemetry.io/otel/sdk/trace"
+	semconv "go.opentelemetry.io/otel/semconv/v1.12.0"
+	"go.opentelemetry.io/otel/trace"
 )
 
 const name = "fib"
@@ -20,6 +25,10 @@ const name = "fib"
 func Fibonacci(n uint) (uint64, error) {
 	if n <= 1 {
 		return uint64(n), nil
+	}
+
+	if n > 93 {
+		return 0, fmt.Errorf("unsupported fibonacci number %d: too large", n)
 	}
 
 	var n2, n1 uint64 = 0, 1
@@ -84,7 +93,12 @@ func (a *App) Write(ctx context.Context, n uint) {
 	f, err := func(ctx context.Context) (uint64, error) {
 		_, span := otel.Tracer(name).Start(ctx, "Fibonacci")
 		defer span.End()
-		return Fibonacci(n)
+		f, err := Fibonacci(n)
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, err.Error())
+		}
+		return f, err
 	}(ctx)
 	if err != nil {
 		a.l.Printf("Fibonacci(%d): %v\n", n, err)
@@ -93,8 +107,55 @@ func (a *App) Write(ctx context.Context, n uint) {
 	}
 }
 
+// newExporter returns a console exporter.
+func newExporter(w io.Writer) (sdkTrace.SpanExporter, error) {
+	return stdouttrace.New(
+		stdouttrace.WithWriter(w),
+		// Use human-readable output.
+		stdouttrace.WithPrettyPrint(),
+		// Do not print timestamps for the demo.
+		stdouttrace.WithoutTimestamps(),
+	)
+}
+
+func newResource() *resource.Resource {
+	r, _ := resource.Merge(
+		resource.Default(),
+		resource.NewWithAttributes(
+			semconv.SchemaURL,
+			semconv.ServiceNameKey.String("fib"),
+			semconv.ServiceVersionKey.String("v0.1.0"),
+			attribute.String("environment", "demo"),
+		),
+	)
+	return r
+}
+
 func main() {
 	l := log.New(os.Stdout, "", 0)
+
+	// Write telemetry data to a file.
+	f, err := os.Create("traces.txt")
+	if err != nil {
+		l.Fatal(err)
+	}
+	defer f.Close()
+
+	exp, err := newExporter(f)
+	if err != nil {
+		l.Fatal(err)
+	}
+
+	tp := sdkTrace.NewTracerProvider(
+		sdkTrace.WithBatcher(exp),
+		sdkTrace.WithResource(newResource()),
+	)
+	defer func() {
+		if err := tp.Shutdown(context.Background()); err != nil {
+			l.Fatal(err)
+		}
+	}()
+	otel.SetTracerProvider(tp)
 
 	sigCh := make(chan os.Signal, 1)
 	signal.Notify(sigCh, os.Interrupt)
