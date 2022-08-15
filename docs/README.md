@@ -107,7 +107,7 @@
 - [オンラインコンパイラ](./online-compiler.md)
 - [圧縮、展開、解凍、伸長](./compress.md)
 - [正規表現](./regex.md)
-- [Unicode and JavaScript](./javacript-unicode.md)
+- [Unicode and JavaScript](./javascript-unicode.md)
 - [文字化け](./mojibake.md)
 - [tesseract](./tesseract.md)
 - [GCP](./gcp.md)
