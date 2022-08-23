@@ -118,3 +118,4 @@
 - [数学](./math.md)
 - [Slack 絵文字](./slack-emoji.md)
 - [go-chromecast](./go-chromecast.md)
+- [AWS OpenTelemetry](./aws-otel.md)
