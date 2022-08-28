@@ -6,3 +6,4 @@ github.com/rhysd/actionlint/cmd/actionlint@latest
 github.com/lambdasawa/noti@latest
 mvdan.cc/sh/v3/cmd/shfmt@latest
 golang.org/x/tools/gopls@latest
+github.com/jwilder/dockerize@latest
