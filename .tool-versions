@@ -2,13 +2,13 @@ golang 1.19
 rust 1.63.0
 java openjdk-17
 nodejs 18.7.0
-python 3.10
+python 3.10.6
 ruby 3.1.2
-terraform 1.2.7
+terraform 1.2.8
 flutter 3.0.5-stable
 mysql 8.0.29
 tflint 0.39.3
 aws-vault 6.6.0
-awscli 2.7.22
-golangci-lint 1.48.0
+awscli 2.7.27
+golangci-lint 1.49.0
 jq 1.6
