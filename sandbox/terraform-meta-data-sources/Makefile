@@ -36,6 +36,6 @@ deploy: init
 destroy: init
 	terraform destroy -auto-approve
 
-.PHONY: listwbuckets
+.PHONY: list-buckets
 list-buckets:
 	aws s3 ls | rg lamb-terraform-metadata-sources
