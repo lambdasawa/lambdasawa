@@ -21,13 +21,9 @@ s3 =
 
 ## バージョニングされたバケットを削除
 
-```py
-import boto3
-
-s3 = boto3.resource('s3')
-b = s3.Bucket('CHANGEME')
-b.object_versions.all().delete()
-b.delete()
+```sh
+pip install boto3
+BUCKET=xxxx python -c 'import os; import boto3; s3 = boto3.resource("s3"); b = s3.Bucket(os.getenv("BUCKET")); b.object_versions.all().delete(); b.delete()'
 ```
 
 ## aws-go-sdk でダウンロード
