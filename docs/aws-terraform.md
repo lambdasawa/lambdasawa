@@ -20,6 +20,7 @@
   - [depends_on](https://www.terraform.io/language/meta-arguments/depends_on)
   - [count](https://www.terraform.io/language/meta-arguments/count)
   - [for_each](https://www.terraform.io/language/meta-arguments/for_each)
+  - [lifecycle](https://www.terraform.io/language/meta-arguments/lifecycle)
 - [local-exec provisioner](https://www.terraform.io/language/resources/provisioners/local-exec)
 
 ## tutorial
