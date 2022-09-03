@@ -13,11 +13,16 @@ terraform {
   backend "s3" {}
 }
 
+locals {
+  common_tags = {
+    Project = "foo"
+    Environment = "development"
+  }
+}
+
 provider "aws" {
   default_tags {
-    tags = {
-      env = "sandbox"
-    }
+    tags = local.common_tags
   }
 }
 
@@ -26,9 +31,7 @@ provider "aws" {
   alias  = "us_east_1"
 
   default_tags {
-    tags = {
-      env = "sandbox"
-    }
+    tags = local.common_tags
   }
 }
 
