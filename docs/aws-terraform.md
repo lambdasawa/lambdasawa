@@ -51,6 +51,7 @@ terraform plan
 ## best practice
 
 - [Terraform を使用するためのベスト プラクティス  \|  Google Cloud](https://cloud.google.com/docs/terraform/best-practices-for-terraform?hl=ja)
+- [ベストな Terraform ディレクトリ構成を考察してみた](https://speakerdeck.com/harukasakihara/besutona-terraform-deirekutorigou-cheng-wokao-cha-sitemita)
 - [12 Terraform Best Practices to Improve your TF workflow](https://spacelift.io/blog/terraform-best-practices)
 - [Terraform Best Practices](https://www.terraform-best-practices.com/)
 - <https://github.com/shuaibiyy/awesome-terraform>
