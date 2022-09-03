@@ -40,6 +40,7 @@
 - [github](https://github.com/99designs/aws-vault)
 - [usage](https://github.com/99designs/aws-vault/blob/master/USAGE.md)
 - [blog](https://blog.microcms.io/aws-vault-introduction)
+- [Pass environment variables into docker](https://github.com/99designs/aws-vault/issues/378#issuecomment-501114949)
 
 ### starship
 
