@@ -1,5 +1,64 @@
 # aws-terraform
 
+## init
+
+```sh
+$ cat main.tf
+terraform {
+  # https://github.com/hashicorp/terraform/releases
+  required_version = ">= 1.2.8"
+
+  required_providers {
+    aws = {
+      # https://github.com/hashicorp/terraform-provider-aws/releases
+      source  = "hashicorp/aws"
+      version = "~> 4.29"
+    }
+  }
+
+  backend "s3" {}
+}
+
+provider "aws" {
+  default_tags {
+    tags = {
+      env = "sandbox"
+    }
+  }
+}
+
+provider "aws" {
+  region = "us-east-1"
+  alias  = "us_east_1"
+
+  default_tags {
+    tags = {
+      env = "sandbox"
+    }
+  }
+}
+
+data "aws_caller_identity" "current" {}
+
+data "aws_region" "current" {}
+
+$ read BUCKET_NAME
+
+$ aws s3 mb "s3://$BUCKET_NAME" &&\
+    aws s3api put-bucket-versioning \
+      --bucket "$BUCKET_NAME" \
+      --versioning-configuration Status=Enabled &&\
+    aws s3api put-public-access-block \
+      --bucket "$BUCKET_NAME" \
+      --public-access-block-configuration "BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true"
+
+$ terraform init \
+    -backend-config="bucket=$BUCKET_NAME" \
+    -backend-config="key=terraform.tfstate"
+
+$ terraform plan
+```
+
 ## reference
 
 - [AWS provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs)
@@ -13,6 +72,8 @@
   - [CloudFront](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_distribution)
   - [WAF](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafv2_web_acl)
   - [API Gateway](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_rest_api)
+  - [Caller info (account id, user id, ...)](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity)
+  - [Region info](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region)
 - [null_resource provider](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource)
 - [Functions](https://www.terraform.io/language/functions)
 - meta arguments
