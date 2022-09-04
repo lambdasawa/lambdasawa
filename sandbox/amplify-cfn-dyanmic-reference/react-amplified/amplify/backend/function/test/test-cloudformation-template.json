@@ -69,7 +69,8 @@
             },
             "REGION": {
               "Ref": "AWS::Region"
-            }
+            },
+            "HOGE_API_KEY": "{{resolve:secretsmanager:lamb-sbx-amplify-cfn-dynamic-reference:SecretString:HOGE_API_KEY}}"
           }
         },
         "Role": {
