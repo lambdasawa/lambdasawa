@@ -28,3 +28,5 @@ while true; do
 		break
 	fi
 done
+
+# wait-change "aws cloudformation describe-stacks --stack-name $STACK_NAME | jq -r '.Stacks[0].StackStatus'"
