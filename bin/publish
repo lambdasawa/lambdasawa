@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -eo pipefail
+
+port="${1:-8888}"
+domain="${2}"
+
+if [ -z "$domain" ]; then
+  ngrok http "$port"
+else
+  ngrok http --subdomain="$domain" "$port"
+fi
