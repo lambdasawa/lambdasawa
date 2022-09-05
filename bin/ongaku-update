@@ -7,7 +7,7 @@ cd ~/.config/ongaku/
 rm playlist.txt
 
 while read -r playlist; do
-  yt-dlp --print urls --flat-playlist "$playlist" >>playlist.txt
+	yt-dlp --print urls --flat-playlist "$playlist" >>playlist.txt
 done <youtube-playlists.txt
 
 cat youtube-videos.txt >>playlist.txt

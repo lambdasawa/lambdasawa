@@ -6,7 +6,7 @@ port="${1:-8888}"
 domain="${2}"
 
 if [ -z "$domain" ]; then
-  ngrok http "$port"
+	ngrok http "$port"
 else
-  ngrok http --subdomain="$domain" "$port"
+	ngrok http --subdomain="$domain" "$port"
 fi

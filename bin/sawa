@@ -10,7 +10,7 @@ if ! tmux has-session -t "$session_name" 2>/dev/null; then
 	tmux new-session -d -c "$path" -s "$session_name"
 fi
 
-if test "$TMUX" ; then
+if test "$TMUX"; then
 	tmux switch-client -t "$session_name"
 else
 	tmux attach-session -t "$session_name"

@@ -20,7 +20,7 @@ if ! tmux has-session -t "$name" 2>/dev/null; then
 	tmux new-session -d -c "$(realpath "$path")" -s "$name"
 fi
 
-if test "$TMUX" ; then
+if test "$TMUX"; then
 	tmux switch-client -t "$name"
 else
 	tmux attach-session -t "$name"
