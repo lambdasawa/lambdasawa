@@ -38,7 +38,7 @@ func main() {
 		jobs[id] = 0
 
 		go func() {
-			for i := 0; i < 100; i++ {
+			for i := 0; i < 60*60*2; i++ {
 				jobs[id] += 1
 				time.Sleep(time.Second)
 			}
