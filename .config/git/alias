@@ -1,27 +1,27 @@
 [alias]
 # a =
-# b =
+b = switch-branch
 # c =
-# d =
+d = difft
 # e =
 # f =
 g = grep
 h = hgrep
-# i =
+i = gitignore
 # j =
 # k =
-l = log -p
+l = log-difft
 # m =
 # n =
-# o =
-# p =
+o = open-repo
+p = switch-pr
 # q =
-# r =
-# s =
-# t =
+r = rebase-upstream
+s = switch
+t = toplevel
 # u =
 # v =
-# w =
+w = wip
 # x =
 # y =
 # z =
@@ -34,7 +34,7 @@ prune = !bash -c 'git clean -d -f && git reset --hard'
 switch-branch = !bash -c 'git switch $(git branch --format="%(refname:short)" | filter)'
 switch-pr = !gh pr checkout $(gh pr list --json 'assignees,author,createdAt,id,number,state,title' | jq -r '.[] | [.number, .state, .createdAt, .author.login, .title] | @tsv' | filter | cut -f1)
 wip = !bash -c 'git add . && git commit -m "wip"'
-rebase-upstream = !bash -c 'git fetch && git rebase $(git default-branch)'
+rebase-upstream = !bash -c 'git fetch origin $(git default-branch) && git rebase origin/$(git default-branch)'
 pick = !bash -c 'git cherry-pick $(git reflog-filter)'
 review = !gh pr list -S "review-requested:@me" | awk '{print $1}' | xargs -n 1 gh pr view -w
 log-fitler = !git log --date=short --decorate=short --pretty=format:'%h %cd %cn %d %s' | filter | awk '{print $1}'
@@ -45,9 +45,7 @@ default-branch = !bash -c 'basename $(git symbolic-ref refs/remotes/origin/HEAD)
 current-branch = rev-parse --abbrev-ref HEAD
 open-repo = !gh repo view -w
 open-pr = !gh pr view -w
-day = standup -d 1 -B
-week = standup -w 7 -B
-gitignore-template = !curl -sSL https://raw.githubusercontent.com/github/gitignore/main/$(curl -sSL 'https://api.github.com/repos/github/gitignore/git/trees/main?recursive=1' | jq -r '.tree | map(.path) | .[]' | grep '.gitignore$' | filter)
+gitignore = !curl -sSL https://raw.githubusercontent.com/github/gitignore/main/$(curl -sSL 'https://api.github.com/repos/github/gitignore/git/trees/main?recursive=1' | jq -r '.tree | map(.path) | .[]' | grep '.gitignore$' | filter)
 
 # git --help | rg '^   (.+)\s+\w+' | sd '   (\w*)\s.*' '# = $1'
 # = clone
