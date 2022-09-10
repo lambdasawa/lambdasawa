@@ -1,6 +1,7 @@
 [user]
 email = lambdasawa@gmail.com
 name = Tsubasa Irisawa
+signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPhi6C9SMCWwpyodGGtBd9i7dXtPr9PISPmrk1KDNqE6
 
 [init]
 defaultBranch = main
@@ -13,3 +14,10 @@ path = ~/.config/git/alias
 path = ~/.config/git/ghq
 path = ~/.config/git/delta
 path = ~/.config/git/difftastic
+
+[gpg]
+format = ssh
+[gpg "ssh"]
+program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+[commit]
+gpgsign = true
