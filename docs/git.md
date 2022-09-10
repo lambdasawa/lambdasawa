@@ -6,7 +6,6 @@
 
 ## tips
 
-- [git-extras](https://github.com/tj/git-extras/blob/master/Commands.md)
 - [.config/git/alias](https://github.com/lambdasawa/lambdasawa/blob/main/.config/git/alias)
 
 ### git setup
