@@ -7,7 +7,7 @@ set wrap-lines = yes
 set tab-size = 2
 set line-graphics = utf-8
 
-set diff-highlight = false
+set diff-highlight = true
 
 set refresh-mode = after-command
 
@@ -28,7 +28,7 @@ bind generic s view-status
 bind generic c view-stage
 bind generic y view-stash
 bind generic g view-grep
-bind generic r refresh
+bind generic u refresh
 
 bind generic j move-down
 bind generic k move-up
@@ -49,6 +49,7 @@ bind status  S ?git stash
 bind status  p ?git push
 bind status  P ?bash -c 'gh pr create --assignee @me --draft --fill && gh pr view -w'
 bind status  G ?gh pr view -w
+bind status  D ?rm %(file)
 
 bind stage   u status-update
 bind stage   U status-revert
@@ -59,15 +60,9 @@ bind stash   A ?git stash apply %(stash)
 bind stash   P ?git stash pop %(stash)
 bind stash   ! ?git stash drop %(stash)
 
-bind refs    c ?git checkout %(branch)
-bind refs    C !@git checkout -b %(prompt)
+bind refs    s !git switch %(branch)
+bind refs    S !@git switch -c %(prompt)
 bind refs    D !?@git branch -d %(branch)
 
 bind reflog  C ?git checkout %(branch)
 bind reflog  ! ?git reset --hard %(commit)
-
-# Colors
-# ----
-
-color diff-add-highlight black green bold
-color diff-del-highlight black red bold

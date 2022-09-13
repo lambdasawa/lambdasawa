@@ -10,6 +10,10 @@ set -gx SKIM_DEFAULT_COMMAND 'fd --type f || git ls-tree -r --name-only HEAD || 
 
 set -gx BAT_THEME 'Monokai Extended'
 
+if [ -e /opt/homebrew/share/git-core/contrib/diff-highlight/ ]
+    set -gx PATH "$PATH:/opt/homebrew/share/git-core/contrib/diff-highlight/"
+end
+
 if [ -e /usr/libexec/java_home ]
     set java_home (/usr/libexec/java_home -v 1.8.0 >/dev/null 2>&1)
     set -gx JAVA_HOME $java_home
