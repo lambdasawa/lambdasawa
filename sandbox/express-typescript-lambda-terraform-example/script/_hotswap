@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -xeuo pipefail
+
+cd "${REPOSITORY_ROOT:?}/application"
+time npm run build
+
+cd "${REPOSITORY_ROOT:?}/infrastructure"
+time terraform apply -auto-approve
