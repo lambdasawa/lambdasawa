@@ -7,3 +7,7 @@
 - [pentester.land](https://pentester.land/list-of-bug-bounty-writeups.html)
 - [medium.com bug-bounty-writeup tag](https://medium.com/tag/bug-bounty-writeup)
 - [infosecwriteups.com](https://infosecwriteups.com/tagged/bug-bounty)
+
+## payload
+
+- [PayloadsAllTheThings](https://github.com/swisskyrepo/PayloadsAllTheThings)
