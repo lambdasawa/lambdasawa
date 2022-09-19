@@ -5,10 +5,10 @@ nodejs 18.9.0
 python 3.10.7
 ruby 3.1.2
 terraform 1.2.9
-flutter 3.3.1-stable
+flutter 3.3.2-stable
 mysql 8.0.30
-tflint 0.40.0
+tflint 0.40.1
 aws-vault 6.6.0
-awscli 2.7.31
+awscli 2.7.33
 golangci-lint 1.49.0
 jq 1.6
