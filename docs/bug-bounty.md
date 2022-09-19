@@ -11,3 +11,7 @@
 ## payload
 
 - [PayloadsAllTheThings](https://github.com/swisskyrepo/PayloadsAllTheThings)
+
+## owasp
+
+- [OWASP Top Ten 2021 : Related Cheat Sheets](https://cheatsheetseries.owasp.org/IndexTopTen.html)
