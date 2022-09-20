@@ -22,6 +22,7 @@
 - [AWS](./aws.md)
 - [Terraform](./aws-terraform.md)
 - [AWS CDK](./aws-cdk.md)
+- [IAM](./aws-iam.md)
 - [CloudWatch Logs](./aws-cloudwatch-logs.md)
 - [CloudWatch Synthetics](./aws-cloudwatch-synthetics.md)
 - [DynamoDB](./aws-dynamodb.md)

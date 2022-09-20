@@ -18,9 +18,7 @@ IAM Role, IAM Group, IAM User にアタッチして使用する。
 - インラインポリシー (inline policy)
   - 二重管理になりやすいのでカスタマー管理ポリシーを使うべき
 
-- デフォルトで全て拒否
-- 明示的な許可と拒否の両方が書かれている場合は拒否が優先される
-- 安全側に倒れる設計になっている
+その他リファレンス:
 
 - [各フィールドのリファレンス](https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/reference_policies_elements.html)
 - [Condition で使える式のリファレンス](https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/reference_policies_condition-keys.html)
