@@ -1,5 +1,0 @@
-#!/bin/bash
-
-set -xeuo pipefail
-
-curl -sSL https://raw.githubusercontent.com/lambdasawa/lambdasawa/main/script/install/$"${1:?}".sh | bash

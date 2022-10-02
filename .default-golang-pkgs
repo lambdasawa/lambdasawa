@@ -1,9 +1,6 @@
-github.com/multiprocessio/dsq@latest
 github.com/ericchiang/pup@latest
-github.com/x-motemen/ghq@latest
 github.com/knqyf263/utern@latest
 github.com/rhysd/actionlint/cmd/actionlint@latest
 github.com/lambdasawa/noti@latest
-mvdan.cc/sh/v3/cmd/shfmt@latest
 golang.org/x/tools/gopls@latest
 github.com/jwilder/dockerize@latest

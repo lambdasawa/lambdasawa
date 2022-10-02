@@ -1,5 +1,0 @@
-#!/bin/bash
-
-set -euo pipefail
-
-pwd | sed "s|$HOME/src/||" | sed "s|[/_\.]|-|g"

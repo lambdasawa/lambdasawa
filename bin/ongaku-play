@@ -1,5 +1,0 @@
-#!/bin/bash
-
-set -xeuo pipefail
-
-mpv --shuffle --volume=50 --no-video --playlist=$HOME/.config/ongaku/playlist.txt

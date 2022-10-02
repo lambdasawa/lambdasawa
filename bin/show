@@ -30,4 +30,5 @@ if echo "$mime" | grep 'charset=binary' >/dev/null; then
 	exit 0
 fi
 
-env COLORTERM=truecolor bat -f --theme="Monokai Extended" "$file"
+# shellcheck disable=SC2068
+env COLORTERM=truecolor bat -f --theme="Monokai Extended" $@
