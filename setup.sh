@@ -78,8 +78,9 @@ asdf() {
   fi
 
   # update
-  asdf update
-  asdf plugin update --all
+  asdf update || true
+  asdf plugin update --all || true
+  cat .tool-versions | awk '{print $1}' | xargs -n 1 asdf plugin add || true
   asdf install
 }
 
