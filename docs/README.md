@@ -1,122 +1,130 @@
+# lambdasawa.dev
+
 <!-- markdownlint-disable MD041 -->
 [GitHub](https://github.com/lambdasawa) / [Twitter](https://twitter.com/lambdasawa) / [λ沢.me](https://www.lambdasawa.me) / [λ沢.dev](https://www.lambdasawa.dev) / [RESUME](https://www.resume.id/lambdasawa)
 <!-- markdownlint-enable MD041 -->
 
-## CLI
+## timeline
 
-- [CLI tools](./cli-tools.md)
-- [ターミナル](./terminal.md)
+- 2022-05-05 [1Password の CLI で環境変数を管理する](https://zenn.dev/lambdasawa/articles/op-cli-and-environment-variables)
+- 2022-04-30 [Tridactyl を使って Firefox を Vim のように制御/拡張する](https://zenn.dev/lambdasawa/articles/tridactyl-introduction)
+- 2022-04-23 [ブラウザから家電を操作しよう (microCMS × Nature Remo)](https://blog.microcms.io/microcms-and-nature-remo/)
+- 2022-04-20 microCMS × OpenAPIで高速かつ安全な開発を行う話 ([スライド](https://speakerdeck.com/microcms/microcms-x-openapidegao-su-hua-tuan-quan-nakai-fa-woxing-uhua)) ([動画](https://www.youtube.com/watch?v=2BBsCR1Mop8&t=3575s))
+- 2022-03-10 [microCMS のコンテンツを Stripe に同期する](https://blog.microcms.io/sync-microcms-to-stripe/)
+- 2022-02-03 [aws-vault を使って AWS のアクセスキーを暗号化して扱おう](https://blog.microcms.io/aws-vault-introduction/)
+- 2022-01-20 [microCMS でバックエンドエンジニアとして働いています](/blog/microcms-backend-engineering)
+- 2022-01-18 [microCMS のカスタム通知をローカル環境で受け取って開発をスムーズにする](https://blog.microcms.io/local-custom-notification/)
+- 2022-01-12 [microCMS のカスタム通知を使ってコンテンツ更新をTwitterに投稿する](https://blog.microcms.io/custom-notification-twitter/)
+- 2021-12-08 microCMS のカスタムドメインについて ([スライド](https://slide.lambdasawa.me/jamjamjamstack-3/index.html)) ([動画](https://youtu.be/bnKf48CEDdM?t=2888))
+- 2021-12-08 [Amplify で function の hotswap を実現する方法について](/blog/amplify-hotswap)
+- 2021-10-30 [Serverless Stack の Live Lambda Development の仕組み](/blog/serverless-stack-live-lambda-developmet-internal)
+- 2021-09-20 株式会社microCMS 入社
+- 2021-08-26 [Lambda のパッチバージョンが見れるサイトを機械可読にした](/blog/machine-readable-aws-lambda-versions)
+- 2021-08-08 [ブログをリニューアルしました](/blog/blog-renewal)
+- 2021-07-26 [ヘッドレスなLGTM画像ジェネレータを作りました](/blog/headless-lgtm-generator-blog)
+- 2021-07-25 [headless-lgtm-generator](/blog/headless-lgtm-generator-release)
+- 2021-06-21 [Google Authenticator的なやつをGoで実装した](/blog/google-authentiator-golang)
+- 2021-06-13 [郡道美玲非公式ファンサイト](/blog/gundou-mirei-fansite-unofficial)
+- 2021-05-03 [microCMS の API クライアントを生成するツールを作った](/blog/microcms-sdk-generator)
+- 2021-05-02 [microcms-sdk-generator](/blog/microcms-sdk-generator-release)
+- 2021-04-07 [AWS SAA に合格するまでにやったこと](/blog/aws-saa)
+- 2021-04-04 [AWS Certified Solutions Architect – Associate](/blog/certified-solutions-architect-associate)
+- 2021-02-24 [AWS Lambda のパッチバージョンを確認できるサイトを作りました](/blog/aws-lambda-runtime-patch-versions)
+- 2021-02-23 [aws-lambda-versions](/blog/lambda-versions-com)
+- 2021-02-18 [convert-datetime-to-cloudwatch-cron-expression](/blog/convert-datetime-to-cloudwatch-cron-expression)
+- 2020-08-21 [Hack The Box: Traceback](/blog/hack-the-box-traceback)
+- 2020-05-28 [郡道美玲にモーニングコールをしてもらう](/blog/gundou-mirei-morning-call)
+- 2020-05-03 [郡道美玲Text to Speech](/blog/mirei-tts-release)
+- 2020-05-03 [direnv と sops で設定を管理する](/blog/direnv-sops)
+- 2020-04-16 [おしゃべり郡道のインフラ](/blog/mirei-tts-infra)
+- 2020-03-29 [自分のブログ & ポートフォリオ的なサイトを作りました](/blog/www-lambdasawa-net)
+- 2020-03-15 [郡道美玲版の棒読みちゃん的なサイトを作りました](/blog/mirei-tts)
+- 2020-02-21 [郡道美玲ボタン](/blog/mirei-button-release)
+- 2020-01-13 ANYCOLOR株式会社 入社
+- 2019-09-28 [郡道美玲誤字bot](/blog/gundou-mirei-typo-bot)
+- 2016-11-30 株式会社Abby 入社
+- 2015-08-10 セキュリティキャンプ 2015 全国大会 参加
+- 2015-05-06 [セキュリティキャンプ 2015 応募用紙](/blog/security-camp)
+- 2014-06-19 情報セキュリティスペシャリスト試験 合格
+- 2014-06-19 Ruby Association Certified Ruby Programmer Gold 合格
+- 2014-03-31 [太田情報商科専門学校 総合カリキュラム学科](/blog/ota-ac-jp)
+- 2013-11-08 [パソコン甲子園 本戦出場](/blog/pc-concours-final)
+- 2012-10-15 応用情報技術者試験 合格
+- 2011-04-01 高崎商科大学附属高等学校 総合ビジネス科 入学
 
-## Web development
+## cheatsheet
 
-- [HTTP tools](./http-tools.md)
-- [ngrok](./ngrok.md)
-
-## JSON
-
-- [JSON tools](./json-tools.md)
-- [jq](./jq.md)
-
-## AWS
-
-- [AWS](./aws.md)
-- [Terraform](./aws-terraform.md)
-- [AWS CDK](./aws-cdk.md)
-- [IAM](./aws-iam.md)
-- [CloudWatch Logs](./aws-cloudwatch-logs.md)
-- [CloudWatch Synthetics](./aws-cloudwatch-synthetics.md)
-- [DynamoDB](./aws-dynamodb.md)
-- [S3](./aws-s3.md)
-- [EC2 SSH](./aws-ec2-ssh.md)
-- [ECS](./aws-ecs.md)
-- [Lambda](./aws-lambda.md)
-
-## Container
-
-- [Docker](./docker.md)
-- [Kubernetes](./k8s.md)
-- [VSCode and Container](./vscode-and-container.md)
-
-## Database
-
-- [Database tools](./database-tools.md)
-- [Elasticsearch (OpenSearch)](./elasticsearch-and-opensearch.md)
-- [MySQL](./mysql.md)
-- [Redis](./redis.md)
-
-## Mobile development
-
-- [Flutter](./flutter.md)
-- [Android](./android.md)
-
-## Media
-
-- [ffmpeg](./ffmpeg.md)
-- [yt-dlp](./yt-dlp.md)
-- [mpv](./mpv.md)
-
-## Schema driven development
-
-- [OpenAPI](./openapi.md)
-- [GraphQL](./graphql.md)
-- [gRPC](./grpc.md)
-- [Struct Generator](./struct-generator.md)
-
-## Secret management
-
-- [シークレット管理](./secret-management.md)
-- [AWS Secrets Manager](./aws-secrets-manager.md)
-- [1Password CLI](./op-cli.md)
-
-## Authentication, Authorization
-
-- [JWT](./jwt.md)
-- [OpenID Connect, OIDC](./oidc.md)
-
-## Network
-
-- [IP](./ip.md)
-- [DNS](./dns.md)
-- [hostctl](./hostctl.md)
-
-## Programming language
-
-- [Go](./golang.md)
-- [Rust](./rust.md)
-- [TypeScript](./typescript.md)
-- [Ruby](./ruby.md)
-
-## CI/CD
-
-- [GitHub Actions](./github-actions.md)
-
-## Other
-
-- [git](./git.md)
-- [Test data](./test-data.md)
-- [dsq](./dsq.md)
-- [bash](./bash.md)
-- [deno](./deno.md)
-- [bun](./bun.md)
-- [WebSocket](./websocket.md)
-- [Desktop Application](./desktop-application.md)
-- [Firefox](./firefox.md)
-- [VSCode](./vscode.md)
-- [macOS](./macos.md)
-- [ガジェット](./gadget.md)
-- [crkbd の OLED](./crkbd-oled.md)
-- [オンラインコンパイラ](./online-compiler.md)
-- [圧縮、展開、解凍、伸長](./compress.md)
-- [正規表現](./regex.md)
-- [Unicode and JavaScript](./javascript-unicode.md)
-- [文字化け](./mojibake.md)
-- [tesseract](./tesseract.md)
-- [GCP](./gcp.md)
-- [負荷テスト](./load-test.md)
-- [TTS](./tts.md)
-- [Transcribe YouTube Channel Archives](./aws-transcribe-youtube-channel-archives.md)
-- [Amplify to Terraform](./aws-amplify-to-terraform.md)
-- [数学](./math.md)
-- [Slack 絵文字](./slack-emoji.md)
-- [go-chromecast](./go-chromecast.md)
-- [AWS OpenTelemetry](./aws-otel.md)
+- [CLI tools](/cheatsheet/cli-tools.md)
+- [ターミナル](/cheatsheet/terminal.md)
+- [HTTP tools](/cheatsheet/http-tools.md)
+- [ngrok](/cheatsheet/ngrok.md)
+- [JSON tools](/cheatsheet/json-tools.md)
+- [jq](/cheatsheet/jq.md)
+- [AWS](/cheatsheet/aws.md)
+- [Terraform](/cheatsheet/aws-terraform.md)
+- [AWS CDK](/cheatsheet/aws-cdk.md)
+- [IAM](/cheatsheet/aws-iam.md)
+- [CloudWatch Logs](/cheatsheet/aws-cloudwatch-logs.md)
+- [CloudWatch Synthetics](/cheatsheet/aws-cloudwatch-synthetics.md)
+- [DynamoDB](/cheatsheet/aws-dynamodb.md)
+- [S3](/cheatsheet/aws-s3.md)
+- [EC2 SSH](/cheatsheet/aws-ec2-ssh.md)
+- [ECS](/cheatsheet/aws-ecs.md)
+- [Lambda](/cheatsheet/aws-lambda.md)
+- [Docker](/cheatsheet/docker.md)
+- [Kubernetes](/cheatsheet/k8s.md)
+- [VSCode and Container](/cheatsheet/vscode-and-container.md)
+- [Database tools](/cheatsheet/database-tools.md)
+- [Elasticsearch (OpenSearch)](/cheatsheet/elasticsearch-and-opensearch.md)
+- [MySQL](/cheatsheet/mysql.md)
+- [Redis](/cheatsheet/redis.md)
+- [Flutter](/cheatsheet/flutter.md)
+- [Android](/cheatsheet/android.md)
+- [ffmpeg](/cheatsheet/ffmpeg.md)
+- [yt-dlp](/cheatsheet/yt-dlp.md)
+- [mpv](/cheatsheet/mpv.md)
+- [OpenAPI](/cheatsheet/openapi.md)
+- [GraphQL](/cheatsheet/graphql.md)
+- [gRPC](/cheatsheet/grpc.md)
+- [Struct Generator](/cheatsheet/struct-generator.md)
+- [シークレット管理](/cheatsheet/secret-management.md)
+- [AWS Secrets Manager](/cheatsheet/aws-secrets-manager.md)
+- [1Password CLI](/cheatsheet/op-cli.md)
+- [JWT](/cheatsheet/jwt.md)
+- [OpenID Connect, OIDC](/cheatsheet/oidc.md)
+- [IP](/cheatsheet/ip.md)
+- [DNS](/cheatsheet/dns.md)
+- [hostctl](/cheatsheet/hostctl.md)
+- [Go](/cheatsheet/golang.md)
+- [Rust](/cheatsheet/rust.md)
+- [TypeScript](/cheatsheet/typescript.md)
+- [Ruby](/cheatsheet/ruby.md)
+- [GitHub Actions](/cheatsheet/github-actions.md)
+- [git](/cheatsheet/git.md)
+- [Test data](/cheatsheet/test-data.md)
+- [dsq](/cheatsheet/dsq.md)
+- [bash](/cheatsheet/bash.md)
+- [deno](/cheatsheet/deno.md)
+- [bun](/cheatsheet/bun.md)
+- [WebSocket](/cheatsheet/websocket.md)
+- [Desktop Application](/cheatsheet/desktop-application.md)
+- [Firefox](/cheatsheet/firefox.md)
+- [VSCode](/cheatsheet/vscode.md)
+- [macOS](/cheatsheet/macos.md)
+- [ガジェット](/cheatsheet/gadget.md)
+- [crkbd の OLED](/cheatsheet/crkbd-oled.md)
+- [オンラインコンパイラ](/cheatsheet/online-compiler.md)
+- [圧縮、展開、解凍、伸長](/cheatsheet/compress.md)
+- [正規表現](/cheatsheet/regex.md)
+- [Unicode and JavaScript](/cheatsheet/javascript-unicode.md)
+- [文字化け](/cheatsheet/mojibake.md)
+- [tesseract](/cheatsheet/tesseract.md)
+- [GCP](/cheatsheet/gcp.md)
+- [負荷テスト](/cheatsheet/load-test.md)
+- [TTS](/cheatsheet/tts.md)
+- [Transcribe YouTube Channel Archives](/cheatsheet/aws-transcribe-youtube-channel-archives.md)
+- [Amplify to Terraform](/cheatsheet/aws-amplify-to-terraform.md)
+- [数学](/cheatsheet/math.md)
+- [Slack 絵文字](/cheatsheet/slack-emoji.md)
+- [go-chromecast](/cheatsheet/go-chromecast.md)
+- [AWS OpenTelemetry](/cheatsheet/aws-otel.md)
