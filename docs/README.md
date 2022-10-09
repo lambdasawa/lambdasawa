@@ -34,9 +34,9 @@
 - 2020-04-16 [おしゃべり郡道のインフラ](/blog/mirei-tts-infra)
 - 2020-03-29 [自分のブログ & ポートフォリオ的なサイトを作りました](/blog/www-lambdasawa-net)
 - 2020-03-15 [郡道美玲版の棒読みちゃん的なサイトを作りました](/blog/mirei-tts)
-- 2020-02-21 [郡道美玲ボタン](/blog/mirei-button-release)
+<!-- - 2020-02-21 [郡道美玲ボタン](/blog/mirei-button-release) -->
 - 2020-01-13 ANYCOLOR株式会社 入社
-- 2019-09-28 [郡道美玲誤字bot](/blog/gundou-mirei-typo-bot)
+<!-- - 2019-09-28 [郡道美玲誤字bot](/blog/gundou-mirei-typo-bot) -->
 - 2016-11-30 株式会社Abby 入社
 - 2015-08-10 セキュリティキャンプ 2015 全国大会 参加
 - 2015-05-06 [セキュリティキャンプ 2015 応募用紙](/blog/security-camp)
