@@ -21,14 +21,14 @@ bind generic b view-refs
 bind generic L view-reflog
 bind generic t view-tree
 bind generic f view-blob
-bind generic r view-refs
+bind generic b view-refs
 bind generic p view-pager
 bind generic h view-help
 bind generic s view-status
 bind generic c view-stage
 bind generic y view-stash
 bind generic g view-grep
-bind generic u refresh
+bind generic r refresh
 
 bind generic j move-down
 bind generic k move-up
