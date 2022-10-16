@@ -6,6 +6,7 @@
 
 ## timeline
 
+- 2022-10-16 [AWS SDK for Go v1 の API 呼び出しごとに OpenTelemetry の Span を自動で作成する](https://zenn.dev/lambdasawa/articles/aws-sdk-go-v1-otel-auto-instrumentation)
 - 2022-10-16 [Goで複雑な検索クエリをパースする](https://zenn.dev/lambdasawa/articles/golang-parser-library-participle)
 - 2022-10-16 [GoからJavaScriptのライブラリを呼び出す](https://zenn.dev/lambdasawa/articles/call-js-library-from-golang)
 - 2022-05-05 [1Password の CLI で環境変数を管理する](https://zenn.dev/lambdasawa/articles/op-cli-and-environment-variables)
