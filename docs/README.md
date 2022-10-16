@@ -6,6 +6,7 @@
 
 ## timeline
 
+- 2022-10-16 [Goで複雑な検索クエリをパースする](https://zenn.dev/lambdasawa/articles/golang-parser-library-participle)
 - 2022-10-16 [GoからJavaScriptのライブラリを呼び出す](https://zenn.dev/lambdasawa/articles/call-js-library-from-golang)
 - 2022-05-05 [1Password の CLI で環境変数を管理する](https://zenn.dev/lambdasawa/articles/op-cli-and-environment-variables)
 - 2022-04-30 [Tridactyl を使って Firefox を Vim のように制御/拡張する](https://zenn.dev/lambdasawa/articles/tridactyl-introduction)
