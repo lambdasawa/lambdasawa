@@ -39,6 +39,21 @@ $ docker run \
 $ mysql -uroot -proot -h127.0.0.1 -P3306 -e 'use demo; show tables;'
 ```
 
+## PostgreSQL
+
+- [docker hub](https://hub.docker.com/_/postgres)
+
+```sh
+$ docker run \
+    -itd \
+    -p 5432:5432 \
+    -e POSTGRES_PASSWORD=postgres \
+    -e POSTGRES_DB=demo \
+    postgres:15.0
+
+$ psql postgresql://postgres:postgres@127.0.0.1:5432/diesel_demo -c 'CREATE TABLE posts (id SERIAL PRIMARY KEY)'
+```
+
 ## Redis
 
 - [docker hub](https://hub.docker.com/_/redis)
