@@ -8,3 +8,8 @@
   - [Rust By Example](https://doc.rust-jp.rs/rust-by-example-ja/index.html)
   - [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/intro.html)
   - [CLI in Rust](https://rust-cli.github.io/book/index.html)
+- axum
+  - <https://docs.rs/axum/latest/axum/>
+  - <https://github.com/tokio-rs/axum/tree/main/axum/src/docs>
+- diesel
+  - <https://diesel.rs/guides/getting-started.html>
