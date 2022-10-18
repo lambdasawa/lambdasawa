@@ -3,6 +3,5 @@ eslint
 prettier
 @devcontainers/cli
 @redocly/cli
-graphqurl
 json-diff
 quicktype

@@ -1,5 +1,4 @@
 github.com/ericchiang/pup@latest
-github.com/knqyf263/utern@latest
 github.com/rhysd/actionlint/cmd/actionlint@latest
 github.com/lambdasawa/noti@latest
 golang.org/x/tools/gopls@latest
