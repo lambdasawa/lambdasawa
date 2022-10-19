@@ -1,6 +1,4 @@
-use std::time::{SystemTime, UNIX_EPOCH};
-
-use crate::models::users::User;
+use crate::{models::users::User, utils::jwt::sign_jwt_token};
 use axum::{
     extract::Extension,
     http::StatusCode,
@@ -63,29 +61,4 @@ fn verify_password(user: &User, password: String) -> argon2::password_hash::Resu
     let parsed_hash = PasswordHash::new(user.password_digest.as_ref())?;
 
     Ok(Argon2::default().verify_password(password.as_bytes(), &parsed_hash)?)
-}
-
-#[derive(Debug, Serialize, Deserialize)]
-struct Claims {
-    sub: String,
-    exp: usize,
-}
-
-fn sign_jwt_token(user: &User) -> jsonwebtoken::errors::Result<String> {
-    jsonwebtoken::encode(
-        &jsonwebtoken::Header::default(),
-        &Claims {
-            sub: user.slug.clone(),
-            exp: (SystemTime::now()
-                .duration_since(UNIX_EPOCH)
-                .unwrap()
-                .as_secs()
-                + 3600) as usize,
-        },
-        &jsonwebtoken::EncodingKey::from_secret(
-            std::env::var("JWT_SECRET")
-                .unwrap_or("default secret".to_string())
-                .as_bytes(),
-        ),
-    )
 }
