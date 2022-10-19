@@ -4,7 +4,7 @@ mod schema;
 mod utils;
 
 use axum::{
-    routing::{get, post},
+    routing::{get, patch, post},
     Extension, Router,
 };
 use diesel::{
@@ -23,6 +23,14 @@ async fn main() {
         .route("/signup", post(handlers::sign_up::handler))
         .route("/signin", post(handlers::sign_in::handler))
         .route("/me", get(handlers::me_get::handler))
+        .route(
+            "/tasks",
+            post(handlers::tasks::create::handler).get(handlers::tasks::read_list::handler),
+        )
+        .route(
+            "/tasks/:id",
+            patch(handlers::tasks::update::handler).delete(handlers::tasks::delete::handler),
+        )
         .layer(Extension(pool));
 
     axum::Server::bind(&"0.0.0.0:8096".parse().unwrap())
