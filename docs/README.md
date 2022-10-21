@@ -1,7 +1,7 @@
 # lambdasawa.dev
 
 <!-- markdownlint-disable MD041 -->
-[GitHub](https://github.com/lambdasawa) / [Twitter](https://twitter.com/lambdasawa) / [RESUME](https://www.resume.id/lambdasawa)
+[GitHub](https://github.com/lambdasawa) / [Twitter](https://twitter.com/lambdasawa) / [Wantedly](https://www.wantedly.com/id/lambdasawa)
 <!-- markdownlint-enable MD041 -->
 
 ## timeline
