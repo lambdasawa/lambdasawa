@@ -1,3 +1,5 @@
+# https://fly.io/docs/reference/configuration/
+
 # fly.toml file generated for young-surf-3549 on 2022-10-25T21:58:02+09:00
 
 app = "young-surf-3549"
