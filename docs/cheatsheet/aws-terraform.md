@@ -3,7 +3,7 @@
 ## init
 
 ```sh
-curl -o main.tf https://www.lambdasawa.dev/aws-terraform-template.tf
+curl -o main.tf https://www.lambdasawa.dev/data/aws-terraform-template.tf
 read TF_BACKEND_BUCKET_NAME
 aws s3 mb "s3://$TF_BACKEND_BUCKET_NAME" &&\
   aws s3api put-bucket-versioning \
