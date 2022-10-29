@@ -1,0 +1,6 @@
+name = "cloudflare-workers-schedule"
+main = "src/index.ts"
+compatibility_date = "2022-10-29"
+
+[triggers]
+crons = [ "1 * * * *" ]
