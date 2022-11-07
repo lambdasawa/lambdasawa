@@ -1,0 +1,2 @@
+format:
+	dart format --fix .
