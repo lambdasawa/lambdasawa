@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  # https://hub.docker.com/_/elasticsearch/
+  es01:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.1
+    environment:
+      - discovery.type=single-node
+    volumes:
+      - data01:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+      - 9300:9300
+
+  cerebro:
+    image: lmenezes/cerebro:0.9.4
+    ports:
+      - 9000:9000
+    environment:
+      HOSTS: |
+        ES1,http://es01:9200
+
+volumes:
+  data01:
+    driver: local
