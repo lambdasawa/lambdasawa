@@ -127,3 +127,4 @@
 - [Slack 絵文字](/cheatsheet/slack-emoji.md)
 - [go-chromecast](/cheatsheet/go-chromecast.md)
 - [AWS OpenTelemetry](/cheatsheet/aws-otel.md)
+- [競技プログラミング](./cheatsheet/competitive-programming.md)
