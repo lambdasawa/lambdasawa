@@ -53,3 +53,4 @@ alias review='git review'
 alias reshim='asdf reshim'
 alias cc='pbcopy'
 alias cv='pbpaste'
+alias ac="cargo compete"
