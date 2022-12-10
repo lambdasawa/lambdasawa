@@ -1,6 +1,6 @@
 use num::{integer::Roots, Integer};
 use proconio::input;
-use std::collections::{HashMap, HashSet};
+use std::collections::{BinaryHeap, HashMap, HashSet, VecDeque};
 
 // 素数判定
 // O(√n)
@@ -62,6 +62,7 @@ fn prime_factorization(n: usize) -> HashMap<usize, usize> {
 }
 
 // 互いに素であるかを返す。
+// (1以外の共通の約数がないことを判定する)
 fn is_disjoint(n: usize, m: usize) -> bool {
     n.gcd(&m) == 1 // O(log n)?
 }
@@ -123,20 +124,62 @@ fn eratosthenes(n: usize) -> Vec<bool> {
 fn main() {
     input! {}
 
-    println!(
-        "is_prime {:?}",
-        (1..=10)
-            .map(|i| (i, is_prime(i)))
-            .collect::<HashMap<usize, bool>>()
+    assert_eq!(is_prime(0), false);
+    assert_eq!(is_prime(1), false);
+    assert_eq!(is_prime(2), true);
+    assert_eq!(is_prime(3), true);
+    assert_eq!(is_prime(4), false);
+
+    assert_eq!(
+        enumerate_divisors(2022),
+        HashSet::from([2, 3, 6, 337, 674, 1011])
     );
 
-    println!("enumerate_divisors {:?}", enumerate_divisors(2022));
+    assert_eq!(
+        prime_factorization(280),
+        HashMap::from([(2, 3), (5, 1), (7, 1)])
+    );
 
-    println!("prime_factorization {:?}", prime_factorization(280));
+    assert_eq!(
+        eratosthenes(10),
+        //   0,     1,     2,    3,    4,     5,    6,     7,    8,     9,     10
+        vec![false, false, true, true, false, true, false, true, false, false, false]
+    );
 
-    println!("eratosthenes {:?}", eratosthenes(10));
+    assert_eq!(euler_phi_function(12), 4);
 
-    println!("euler_phi_function {:?}", euler_phi_function(12));
+    assert_eq!(legendre(30, 3), 10);
 
-    println!("legendre {:?}", legendre(30, 3));
+    {
+        // stack
+        let mut s = vec![];
+        s.push(1);
+        s.push(2);
+        s.push(3);
+        assert_eq!(s.pop(), Some(3));
+        assert_eq!(s.pop(), Some(2));
+        assert_eq!(s.pop(), Some(1));
+    }
+
+    {
+        // queue
+        let mut q = VecDeque::new();
+        q.push_back(1);
+        q.push_back(2);
+        q.push_back(3);
+        assert_eq!(q.pop_front(), Some(1));
+        assert_eq!(q.pop_front(), Some(2));
+        assert_eq!(q.pop_front(), Some(3));
+    }
+
+    {
+        // priority queue
+        let mut h = BinaryHeap::new();
+        h.push(1);
+        h.push(3);
+        h.push(2);
+        assert_eq!(h.pop(), Some(3));
+        assert_eq!(h.pop(), Some(2));
+        assert_eq!(h.pop(), Some(1));
+    }
 }

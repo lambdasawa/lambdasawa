@@ -8,3 +8,4 @@ edition = "2021"
 [dependencies]
 proconio = "0.4.3"
 num = "0.4"
+petgraph = "=0.5.0"
