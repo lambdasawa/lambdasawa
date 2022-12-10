@@ -1,4 +1,5 @@
 use num::{integer::Roots, Integer};
+use petgraph::{graph::NodeIndex, graph::UnGraph, unionfind::UnionFind};
 use proconio::input;
 use std::collections::{BinaryHeap, HashMap, HashSet, VecDeque};
 
@@ -181,5 +182,23 @@ fn main() {
         assert_eq!(h.pop(), Some(3));
         assert_eq!(h.pop(), Some(2));
         assert_eq!(h.pop(), Some(1));
+    }
+
+    {
+        // graph
+        let g = UnGraph::<usize, usize, usize>::from_edges(&[(0, 1), (1, 2), (1, 3), (2, 3)]);
+        assert_eq!(g.contains_edge(NodeIndex::new(0), NodeIndex::new(1)), true);
+        assert_eq!(g.contains_edge(NodeIndex::new(0), NodeIndex::new(3)), false);
+    }
+
+    {
+        // union find
+        let mut uf = UnionFind::<usize>::new(10);
+        uf.union(1, 2);
+        uf.union(3, 4);
+        uf.union(3, 5);
+        assert_eq!(uf.equiv(4, 5), true);
+        assert_eq!(uf.equiv(1, 3), false);
+        assert_eq!(uf.find(2), 1);
     }
 }
