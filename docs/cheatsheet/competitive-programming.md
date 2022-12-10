@@ -10,4 +10,6 @@
   - [実装テクニックを学ぶ](https://kato-hiro.github.io/AtCoderClans/articles/implementation/)
 - [レッドコーダーが教える、競プロ・AtCoder上達のガイドライン【中級編：目指せ水色コーダー！】](https://qiita.com/e869120/items/eb50fdaece12be418faa#2-2-2-12-%E5%80%8B%E3%81%AE%E5%9F%BA%E6%9C%AC%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0%E3%82%92%E3%83%9E%E3%82%B9%E3%82%BF%E3%83%BC%E3%81%99%E3%82%8B)
 - [競プロ典型 90 問](https://atcoder.jp/contests/typical90)
-- [lambdasawa/lambdasawa sandbox/rust-atcoder](https://github.com/lambdasawa/lambdasawa/blob/main/sandbox/rust-atcoder/src/main.rs)
+- Rust
+  - [rust-lang-ja/atcoder-rust-resources Wiki / 2020 Update](https://github.com/rust-lang-ja/atcoder-rust-resources/wiki/2020-Update)
+  - [lambdasawa/lambdasawa sandbox/rust-atcoder](https://github.com/lambdasawa/lambdasawa/blob/main/sandbox/rust-atcoder/src/main.rs)
