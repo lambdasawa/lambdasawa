@@ -205,6 +205,42 @@ fn main() {
     }
 
     {
+        // binary search
+        // https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_k
+        let source = AutoSource::from(
+            r#"
+            15 47
+            11 13 17 19 23 29 31 37 41 43 47 53 59 61 67
+            "#,
+        );
+        input! {
+            from source,
+            N: usize,
+            X: usize,
+            A: [usize; N],
+        };
+
+        let mut l = 0;
+        let mut r = N - 1;
+        let mut found = None;
+        while l <= r {
+            let m = (l + r) / 2;
+            let x = A[m];
+            if x < X {
+                l = m + 1;
+            }
+            if x > X {
+                r = m - 1;
+            }
+            if x == X {
+                found = Some(x);
+                break;
+            }
+        }
+        assert_eq!(found, Some(47));
+    }
+
+    {
         // DP
         // https://algo-method.com/tasks/307
         let source = AutoSource::from(
