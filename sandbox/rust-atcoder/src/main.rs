@@ -1,6 +1,6 @@
 use num::{integer::Roots, Integer};
 use petgraph::{graph::NodeIndex, graph::UnGraph, unionfind::UnionFind};
-use proconio::input;
+use proconio::{input, source::auto::AutoSource};
 use std::collections::{BinaryHeap, HashMap, HashSet, VecDeque};
 
 // 素数判定
@@ -64,6 +64,7 @@ fn prime_factorization(n: usize) -> HashMap<usize, usize> {
 
 // 互いに素であるかを返す。
 // (1以外の共通の約数がないことを判定する)
+#[allow(dead_code)]
 fn is_disjoint(n: usize, m: usize) -> bool {
     n.gcd(&m) == 1 // O(log n)?
 }
@@ -122,6 +123,7 @@ fn eratosthenes(n: usize) -> Vec<bool> {
     result
 }
 
+#[allow(non_snake_case)]
 fn main() {
     input! {}
 
@@ -200,5 +202,102 @@ fn main() {
         assert_eq!(uf.equiv(4, 5), true);
         assert_eq!(uf.equiv(1, 3), false);
         assert_eq!(uf.find(2), 1);
+    }
+
+    {
+        // DP
+        // https://algo-method.com/tasks/307
+        let source = AutoSource::from(
+            r#"
+            3
+            7 -6 9
+            "#,
+        );
+        input! {
+            from source,
+            N: usize,
+            A: [isize; N],
+        }
+
+        // dp[n] = n 個目までの品物から重さの総和の最大値
+        let mut dp = vec![0; N + 1];
+
+        for i in 0..N {
+            dp[i + 1] = dp[i].max(dp[i] + A[i]);
+        }
+
+        assert_eq!(dp.last().unwrap(), &16);
+    }
+
+    {
+        // DP
+        // https://algo-method.com/tasks/308
+        let source = AutoSource::from(
+            r#"
+            6 9
+            2 3
+            1 2
+            3 6
+            2 1
+            1 3
+            5 85
+            "#,
+        );
+        input! {
+            from source,
+            N: usize,
+            W: usize,
+            A: [(usize, usize); N],
+        }
+
+        // dp[n][w] = n 個目までの品物から重さの総和が w 以下となるように選んだときの価値の総和の最大値
+        let mut dp = vec![vec![0; W + 1]; N + 1];
+
+        for n in 0..N {
+            let (weight, value) = A[n];
+            for w in 0..=W {
+                if w < weight {
+                    dp[n + 1][w] = dp[n][w];
+                    continue;
+                }
+
+                dp[n + 1][w] = dp[n][w].max(dp[n][w - weight] + value);
+            }
+        }
+
+        assert_eq!(dp[N][W], 94);
+    }
+
+    {
+        // DP
+        // https://algo-method.com/tasks/309
+        let source = AutoSource::from(
+            r#"
+            3 10
+            7 5 3
+            "#,
+        );
+        input! {
+            from source,
+            N: usize,
+            M: usize,
+            A: [usize; N],
+        }
+
+        // dp[n][m] = n 個目までの整数からいくつか選んで総和を m にできるかどうか
+        let mut dp = vec![vec![false; 10009]; N + 1];
+        dp[0][0] = true;
+
+        for n in 0..N {
+            for m in 0..=10000 {
+                dp[n + 1][m] = dp[n + 1][m] || dp[n][m];
+
+                if m >= A[n] {
+                    dp[n + 1][m] = dp[n + 1][m] || dp[n][m - A[n]];
+                }
+            }
+        }
+
+        assert_eq!(dp[N][M], true);
     }
 }
