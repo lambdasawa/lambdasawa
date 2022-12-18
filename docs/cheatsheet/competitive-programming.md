@@ -14,5 +14,5 @@
   - [rust-lang-ja/atcoder-rust-resources Wiki / 2020 Update](https://github.com/rust-lang-ja/atcoder-rust-resources/wiki/2020-Update)
   - [lambdasawa/lambdasawa sandbox/rust-atcoder](https://github.com/lambdasawa/lambdasawa/blob/main/sandbox/rust-atcoder/src/main.rs)
 - 数学
-  - []()https://cognicull.com/ja/field
-  - []()https://manabitimes.jp/math
+  - [Cognicull](https://cognicull.com/ja/field)
+  - [高校数学の美しい物語](https://manabitimes.jp/math)
