@@ -12,7 +12,7 @@
 - [競プロ典型 90 問](https://atcoder.jp/contests/typical90)
 - Rust
   - [rust-lang-ja/atcoder-rust-resources Wiki / 2020 Update](https://github.com/rust-lang-ja/atcoder-rust-resources/wiki/2020-Update)
-  - [lambdasawa/lambdasawa sandbox/rust-atcoder](https://github.com/lambdasawa/lambdasawa/blob/main/sandbox/rust-atcoder/src/main.rs)
+  - [lambdasawa/rust-atcoder _sandbox/src/bin/a.rs](https://github.com/lambdasawa/atcoder-rust/blob/main/_sandbox/src/bin/a.rs)
 - 数学
   - [Cognicull](https://cognicull.com/ja/field)
   - [高校数学の美しい物語](https://manabitimes.jp/math)
