@@ -34,6 +34,21 @@ fn enumerate_divisors(n: usize) -> HashSet<usize> {
     set
 }
 
+// 約数列挙
+// O(√n)
+fn divisor_enumeration(n: usize) -> HashSet<usize> {
+    let mut set = HashSet::new();
+
+    for i in 1..=n.sqrt() {
+        if n % i == 0 {
+            set.insert(i);
+            set.insert(n / i);
+        }
+    }
+
+    set
+}
+
 // 素因数分解
 // O(√n)
 fn prime_factorization(n: usize) -> HashMap<usize, usize> {
@@ -136,6 +151,11 @@ fn main() {
     assert_eq!(
         enumerate_divisors(2022),
         HashSet::from([2, 3, 6, 337, 674, 1011])
+    );
+
+    assert_eq!(
+        divisor_enumeration(36),
+        HashSet::from([1, 2, 3, 4, 6, 9, 12, 18, 36])
     );
 
     assert_eq!(
