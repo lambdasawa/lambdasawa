@@ -18,3 +18,4 @@ highlight_code = true
 # Put all your custom variables here
 logo_text = "λ沢.dev"
 accent_color = "orange"
+default_language = "ja"
