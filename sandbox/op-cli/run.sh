@@ -2,6 +2,6 @@
 
 set -xeuo pipefail
 
-[ ! -e .env ] && cp .env.sample .env
+[ ! -e .env ] && cp .env.template .env
 
 op run --env-file=.env --no-masking -- printenv HOGE
