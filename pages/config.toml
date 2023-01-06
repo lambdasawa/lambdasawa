@@ -21,3 +21,10 @@ highlight_code = true
 logo_text = "λ沢.dev"
 accent_color = "orange"
 default_language = "ja"
+
+menu_items = [
+  { name = "GitHub", url = "https://github.com/lambdasawa", newtab = true },
+  { name = "Zenn", url = "https://zenn.dev/lambdasawa", newtab = true },
+  { name = "Twitter", url = "https://twitter.com/lambdasawa", newtab = true },
+  { name = "Wantedly", url = "https://www.wantedly.com/id/lambdasawa", newtab = true },
+]
