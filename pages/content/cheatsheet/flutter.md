@@ -14,7 +14,7 @@ title: Flutter
 - [Cookbook | Flutter](https://docs.flutter.dev/cookbook)
 - [pub.dev](https://pub.dev/packages?q=is%3Aflutter-favorite)
 - [Flutter実践入門](https://zenn.dev/kazutxt/books/flutter_practice_introduction/)
-- [/Solido/awesome-flutter](https://github.com/Solido/awesome-flutter
+- [/Solido/awesome-flutter](https://github.com/Solido/awesome-flutter)
 - [flutterawesome.com](https://flutterawesome.com)
 - [Tips](https://github.com/erluxman/awesomefluttertips)
 - [Roadmap](https://github.com/olexale/flutter_roadmap)
