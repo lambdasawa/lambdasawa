@@ -10,8 +10,8 @@ title: Flutter
 
 ## Flutter
 
-- [Flutter documentation](https://docs.flutter.dev/)
-- <https://docs.flutter.dev/cookbook>
+- [Flutter documentation | Flutter](https://docs.flutter.dev/)
+- [Cookbook | Flutter](https://docs.flutter.dev/cookbook)
 - [pub.dev](https://pub.dev/packages?q=is%3Aflutter-favorite)
 - [Flutter実践入門](https://zenn.dev/kazutxt/books/flutter_practice_introduction/)
 - <https://github.com/Solido/awesome-flutter>
