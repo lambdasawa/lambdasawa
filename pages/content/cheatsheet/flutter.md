@@ -11,10 +11,9 @@ title: Flutter
 ## Flutter
 
 - [Flutter documentation](https://docs.flutter.dev/)
+- <https://docs.flutter.dev/cookbook>
 - [pub.dev](https://pub.dev/packages?q=is%3Aflutter-favorite)
 - [Flutter実践入門](https://zenn.dev/kazutxt/books/flutter_practice_introduction/)
-- <https://docs.flutter.dev/get-started/codelab>
-- <https://docs.flutter.dev/cookbook>
 - <https://github.com/Solido/awesome-flutter>
 - <https://flutterawesome.com/>
 - <https://github.com/erluxman/awesomefluttertips>
