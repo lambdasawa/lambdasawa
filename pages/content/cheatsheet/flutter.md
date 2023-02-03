@@ -23,12 +23,11 @@ title: Flutter
 ## example 集
 
 - [flutter.github.io/samples](https://flutter.github.io/samples)
-  - [gallery.flutter.dev](https://gallery.flutter.dev)
-  - [flutter/gallery](https://github.com/flutter/gallery)
-  - [flutter/samples](https://github.com/flutter/samples)
-- <https://github.com/flutter/samples>
-- <https://itsallwidgets.com/>
-- <https://github.com/nisrulz/flutter-examples>
+- [gallery.flutter.dev](https://gallery.flutter.dev)
+- [flutter/gallery](https://github.com/flutter/gallery)
+- [flutter/samples](https://github.com/flutter/samples)
+- [itsallwidgets.com](https://itsallwidgets.com/)
+- [nisrulz/flutter-examples](https://github.com/nisrulz/flutter-examples)
 
 ## オープンソースのアプリケーション
 
