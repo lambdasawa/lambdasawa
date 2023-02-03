@@ -14,10 +14,10 @@ title: Flutter
 - [Cookbook | Flutter](https://docs.flutter.dev/cookbook)
 - [pub.dev](https://pub.dev/packages?q=is%3Aflutter-favorite)
 - [Flutter実践入門](https://zenn.dev/kazutxt/books/flutter_practice_introduction/)
-- <https://github.com/Solido/awesome-flutter>
-- <https://flutterawesome.com/>
-- <https://github.com/erluxman/awesomefluttertips>
-- <https://github.com/olexale/flutter_roadmap>
+- [/Solido/awesome-flutter](https://github.com/Solido/awesome-flutter
+- [flutterawesome.com](https://flutterawesome.com)
+- [Tips](https://github.com/erluxman/awesomefluttertips)
+- [Roadmap](https://github.com/olexale/flutter_roadmap)
 
 ## example 集
 
