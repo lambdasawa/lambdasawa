@@ -39,6 +39,7 @@ title: Flutter
 
 ## 状態管理
 
+- [【2021年版】Flutterの状態管理パターン総まとめ - Qiita](https://qiita.com/datake914/items/f91acf30a640447c57c8#inherited-widget-pattern)
 - [「Flutter状態管理フローチャートを書いた(　´･‿･｀) https://t.co/YS9wqexLtQ 周りを勉強する際に見通しが良くなるはず(　´･‿･｀) https://t.co/zCczrCEZJ6」 / Twitter](https://twitter.com/_mono/status/1170516947970097152)
 
 ## Inside Flutter
