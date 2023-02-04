@@ -14,6 +14,7 @@ title: Flutter
 - [Flutter documentation | Flutter](https://docs.flutter.dev/)
 - [Cookbook | Flutter](https://docs.flutter.dev/cookbook)
 - [pub.dev](https://pub.dev/packages?q=is%3Aflutter-favorite)
+- [Flutterの効率良い学び方. 数ヶ月間Flutterに関する大量のインプットを行い、単純なアプリならサクッと、… | by mono  | Flutter 🇯🇵 | Medium](https://medium.com/flutter-jp/flutter-learning-c5640c5f05b9)
 - [Flutter実践入門](https://zenn.dev/kazutxt/books/flutter_practice_introduction/)
 - [/Solido/awesome-flutter](https://github.com/Solido/awesome-flutter)
 - [flutterawesome.com](https://flutterawesome.com)
