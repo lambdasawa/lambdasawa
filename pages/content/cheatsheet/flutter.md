@@ -68,3 +68,7 @@ TODO
 ## Riverpod
 
 TODO
+
+## BLoC
+
+- [長めだけどたぶんわかりやすいBLoCパターンの解説 - Qiita](https://qiita.com/kabochapo/items/8738223894fb74f952d3)
