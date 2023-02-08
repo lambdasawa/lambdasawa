@@ -39,19 +39,21 @@ title: Flutter
 
 ## 状態管理
 
-- [【2021年版】Flutterの状態管理パターン総まとめ - Qiita](https://qiita.com/datake914/items/f91acf30a640447c57c8#inherited-widget-pattern)
-- [「Flutter状態管理フローチャートを書いた(　´･‿･｀) https://t.co/YS9wqexLtQ 周りを勉強する際に見通しが良くなるはず(　´･‿･｀) https://t.co/zCczrCEZJ6」 / Twitter](https://twitter.com/_mono/status/1170516947970097152)
+- [【2021年版】Flutterの状態管理パターン総まとめ](https://qiita.com/datake914/items/f91acf30a640447c57c8#inherited-widget-pattern)
+- [Flutterの状態管理手法の選定](https://medium.com/flutter-jp/state-1daa7fd66b94)
+- [Flutter状態管理フローチャートを書いた(　´･‿･｀)](https://twitter.com/_mono/status/1170516947970097152)
 
 ## Inside Flutter
 
 - [Inside Flutter | Flutter](https://docs.flutter.dev/resources/inside-flutter)
-- [Flutter の Widget ツリーの裏側で起こっていること. Widget・State・Element・RenderObject… | by mono  | Flutter 🇯🇵 | Medium](https://medium.com/flutter-jp/dive-into-flutter-4add38741d07)
+- [Flutter の Widget ツリーの裏側で起こっていること](https://medium.com/flutter-jp/dive-into-flutter-4add38741d07)
+- [Stateful Widget のパフォーマンスを考慮した正しい扱い方](https://medium.com/flutter-jp/state-performance-7a5f67d62edd)
 - [【Flutter】Navigator.of(context) から理解する 3つのツリー](https://zenn.dev/chooyan/articles/77a2ba6b02dd4f)
 
 ## InheritedWidget
 
 - [【Flutter】InheritedWidget とは何か](https://zenn.dev/chooyan/articles/bd8b5990eb210f)
-- [InheritedWidget を完全に理解する 🎯. Flutterフレームワーク・providerパッケージを支える重要なWidge… | by mono  | Flutter 🇯🇵 | Medium](https://medium.com/flutter-jp/inherited-widget-37495200d965)
+- [InheritedWidget を完全に理解する 🎯](https://medium.com/flutter-jp/inherited-widget-37495200d965)
 
 ## ChangeNotifier
 
