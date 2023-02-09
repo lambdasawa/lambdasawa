@@ -1,9 +1,49 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:http/http.dart' as http;
 
 void main() {
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
+
+final helloWorldProvider = StateProvider(
+  (_) => DateTime.now().toIso8601String(),
+);
+
+final summaryHelloWorldProvider = Provider((ref) {
+  return ref.watch(helloWorldProvider).split("T")[1];
+});
+
+final greetingProvider = Provider.family<String, String>((ref, id) {
+  return "Hello, $id";
+});
+
+final worldTimeProvider = FutureProvider((ref) async {
+  final res = await http
+      .get(Uri.parse("https://worldtimeapi.org/api/timezone/Asia/Tokyo"));
+  return res.body;
+});
+
+@immutable
+class Counter {
+  final int counter;
+
+  const Counter({
+    this.counter = 0,
+  });
+}
+
+class CounterNotifier extends StateNotifier<Counter> {
+  CounterNotifier(super.state);
+
+  void increment() {
+    state = Counter(counter: state.counter + 1);
+  }
+}
+
+final counterProvider = StateNotifierProvider<CounterNotifier, Counter>(
+  (ref) => CounterNotifier(const Counter()),
+);
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -15,73 +55,70 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: ProviderScope(child: MyHomePage()),
+      home: const MyHomePage(),
     );
   }
 }
 
-@immutable
-class CounterState {
-  final int counter;
+class MyHomePage extends ConsumerWidget {
+  const MyHomePage({super.key});
 
-  const CounterState({
-    this.counter = 0,
-  });
-}
-
-class CounterStateNotifier extends StateNotifier<CounterState> {
-  CounterStateNotifier(super.state);
-
-  void increment() {
-    state = CounterState(counter: state.counter + 1);
-  }
-}
-
-final counterProvider =
-    StateNotifierProvider<CounterStateNotifier, CounterState>((ref) {
-  return CounterStateNotifier(const CounterState());
-});
-
-class MyHomePage extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final helloWorld = ref.watch(helloWorldProvider);
+
+    final summaryHelloWorld = ref.watch(summaryHelloWorldProvider);
+
+    final worldTime = ref.watch(worldTimeProvider);
+
+    final greet = ref.watch(greetingProvider("lambdasawa"));
+
+    final counter = ref.watch(counterProvider);
+
     return Scaffold(
-      appBar: AppBar(title: const Text("Riverpod Pattern")),
-      body: Center(
-        child: Column(
-          children: const <Widget>[
-            MyText(),
-            MyButton(),
-          ],
-        ),
+      appBar: AppBar(
+        title: const Text("Riverpod Example"),
       ),
-    );
-  }
-}
-
-class MyText extends ConsumerWidget {
-  const MyText({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(counterProvider);
-
-    return Text("${state.counter}");
-  }
-}
-
-class MyButton extends ConsumerWidget {
-  const MyButton({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final notifier = ref.read(counterProvider.notifier);
-
-    return ElevatedButton(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Row(
+            children: [
+              Expanded(child: Text(helloWorld)),
+              ElevatedButton(
+                onPressed: () {
+                  final controller = ref.read(helloWorldProvider.notifier);
+                  controller.state = DateTime.now().toIso8601String();
+                },
+                child: const Text("Update"),
+              ),
+            ],
+          ),
+          Text(summaryHelloWorld),
+          Text(greet),
+          Row(
+            children: [
+              worldTime.when(
+                data: (data) => Expanded(child: Text(data)),
+                error: (err, stack) => Text("Error: $err"),
+                loading: () => const CircularProgressIndicator(),
+              ),
+              ElevatedButton(
+                onPressed: () => ref.refresh(worldTimeProvider),
+                child: const Text("Update"),
+              ),
+            ],
+          ),
+          Text(counter.counter.toString()),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add),
         onPressed: () {
-          notifier.increment();
+          ref.read(counterProvider.notifier).increment();
         },
-        child: const Text("increment"),
+      ),
     );
   }
 }
