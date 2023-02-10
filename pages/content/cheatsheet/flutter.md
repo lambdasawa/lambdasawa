@@ -234,7 +234,10 @@ class MyHomePage extends StatelessWidget {
 
 ## Riverpod
 
-- [Getting started | Riverpod](https://riverpod.dev/docs/getting_started)
+- [はじめに | Riverpod](https://riverpod.dev/ja/docs/getting_started)
+- [StateNotifierProvider | Riverpod](https://riverpod.dev/ja/docs/providers/state_notifier_provider)
+- [Provider | Riverpod](https://riverpod.dev/ja/docs/providers/provider)
+- [FutureProvider | Riverpod](https://riverpod.dev/ja/docs/providers/future_provider)
 
 ```dart
 import 'package:flutter_riverpod/flutter_riverpod.dart';
