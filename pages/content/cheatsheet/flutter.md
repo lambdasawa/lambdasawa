@@ -190,6 +190,13 @@ import 'package:provider/provider.dart';
 import 'package:state_notifier/state_notifier.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 
+void main() {
+  runApp(StateNotifierProvider<CounterNotifier, Counter>(
+    create: (_) => CounterNotifier(),
+    child: const MyApp(),
+  ));
+}
+
 @immutable
 class Counter {
   final int value;
@@ -210,22 +217,15 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StateNotifierProvider<CounterNotifier, Counter>(
-      create: (_) => CounterNotifier(),
-      child: Builder(
-        builder: (context) {
-          final counter = Provider.of<Counter>(context);
+    final counter = Provider.of<Counter>(context);
 
-          final counterNotifier = Provider.of<CounterNotifier>(context);
+    final counterNotifier = Provider.of<CounterNotifier>(context);
 
-          return Scaffold(
-            appBar: AppBar(),
-            body: Text("${counter.value}"),
-            floatingActionButton: FloatingActionButton(
-              onPressed: counterNotifier.increment,
-            ),
-          );
-        },
+    return Scaffold(
+      appBar: AppBar(),
+      body: Text("${counter.value}"),
+      floatingActionButton: FloatingActionButton(
+        onPressed: counterNotifier.increment,
       ),
     );
   }
