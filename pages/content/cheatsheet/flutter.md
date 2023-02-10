@@ -37,6 +37,21 @@ title: Flutter
 - <https://github.com/GeekyAnts/flutter-login-home-animation>
 - <https://github.com/yumemi-inc/flutter-training-template>
 
+## レイアウト
+
+- [Layouts in Flutter | Flutter](https://docs.flutter.dev/development/ui/layout)
+- [FlutterのBoxConstraintsを理解する](https://itome.team/blog/2019/12/flutter-advent-calendar-day9/)
+
+## ナビゲーション
+
+- [Navigation | Flutter](https://docs.flutter.dev/cookbook/navigation)
+- [Navigator class - widgets library - Dart API](https://api.flutter.dev/flutter/widgets/Navigator-class.html)
+- [FlutterのNavigationとRoutingを理解する](https://itome.team/blog/2019/12/flutter-advent-calendar-day10/)
+
+## i18n
+
+- [Internationalizing Flutter apps | Flutter](https://docs.flutter.dev/development/accessibility-and-localization/internationalization#localizing-for-ios-updating-the-ios-app-bundle)
+
 ## 状態管理
 
 - [【2021年版】Flutterの状態管理パターン総まとめ](https://qiita.com/datake914/items/f91acf30a640447c57c8#inherited-widget-pattern)
@@ -52,6 +67,7 @@ title: Flutter
 
 ## InheritedWidget
 
+- [InheritedWidget/InheritedModelとは何か - Qiita](https://qiita.com/ko2ic/items/d7b744f19f213ef1e647)
 - [【Flutter】InheritedWidget とは何か](https://zenn.dev/chooyan/articles/bd8b5990eb210f)
 - [InheritedWidget を完全に理解する 🎯](https://medium.com/flutter-jp/inherited-widget-37495200d965)
 
@@ -63,9 +79,14 @@ TODO
 
 TODO
 
-## Provider
+## StateNotifier
 
 TODO
+
+## Provider
+
+- [provider | Flutter Package](https://pub.dev/packages/provider)
+- [FlutterのProviderパッケージを使いこなす](https://itome.team/blog/2019/12/flutter-advent-calendar-day7/)
 
 ## Riverpod
 
