@@ -2,10 +2,60 @@
 title: aws-terraform
 ---
 
-## init
+## テンプレート
+
+`main.tf`
+
+```tf
+terraform {
+  # https://github.com/hashicorp/terraform/releases
+  required_version = ">= 1.2.8"
+
+  required_providers {
+    aws = {
+      # https://github.com/hashicorp/terraform-provider-aws/releases
+      source  = "hashicorp/aws"
+      version = "~> 4.29"
+    }
+  }
+
+  backend "s3" {}
+}
+
+locals {
+  common_tags = {
+    ProjectName = "CHANGEME"
+    Environment = "development"
+  }
+}
+
+provider "aws" {
+  default_tags {
+    tags = local.common_tags
+  }
+}
+
+provider "aws" {
+  region = "us-east-1"
+  alias  = "us_east_1"
+
+  default_tags {
+    tags = local.common_tags
+  }
+}
+
+data "aws_caller_identity" "current" {}
+
+data "aws_region" "current" {}
+```
+
+`script/create-tf-backend-bucket.sh`
 
 ```sh
-curl -o main.tf https://www.lambdasawa.dev/data/aws-terraform-template.tf
+#!/bin/bash
+
+set -xeou pipefail
+
 read TF_BACKEND_BUCKET_NAME
 aws s3 mb "s3://$TF_BACKEND_BUCKET_NAME" &&\
   aws s3api put-bucket-versioning \
@@ -14,6 +64,7 @@ aws s3 mb "s3://$TF_BACKEND_BUCKET_NAME" &&\
   aws s3api put-public-access-block \
     --bucket "$TF_BACKEND_BUCKET_NAME" \
     --public-access-block-configuration "BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true"
+
 terraform init \
   -backend-config="bucket=$TF_BACKEND_BUCKET_NAME" \
   -backend-config="key=terraform.tfstate"
