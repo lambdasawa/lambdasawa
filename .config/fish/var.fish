@@ -33,3 +33,8 @@ end
 if [ -e $ANDROID_HOME/platform-tools ]
     set -gx PATH "$PATH:$ANDROID_HOME/platform-tools"
 end
+
+set jetbrains_scripts_path "$HOME/Library/Application Support/JetBrains/Toolbox/scripts"
+if [ -e "$jetbrains_scripts_path" ]
+    set -gx PATH "$PATH:$jetbrains_scripts_path"
+end
