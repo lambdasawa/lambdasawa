@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set -euo pipefail
+
+curl -sSL https://raw.githubusercontent.com/github/gitignore/main/$(curl -sSL 'https://api.github.com/repos/github/gitignore/git/trees/main?recursive=1' | jq -r '.tree | map(.path) | .[]' | grep '.gitignore$' | filter)

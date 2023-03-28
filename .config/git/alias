@@ -45,7 +45,6 @@ default-branch = !bash -c 'basename $(git symbolic-ref refs/remotes/origin/HEAD)
 current-branch = rev-parse --abbrev-ref HEAD
 open-repo = !gh repo view -w
 open-pr = !gh pr view -w
-gitignore = !curl -sSL https://raw.githubusercontent.com/github/gitignore/main/$(curl -sSL 'https://api.github.com/repos/github/gitignore/git/trees/main?recursive=1' | jq -r '.tree | map(.path) | .[]' | grep '.gitignore$' | filter)
 
 # git --help | rg '^   (.+)\s+\w+' | sd '   (\w*)\s.*' '# = $1'
 # = clone
