@@ -59,3 +59,4 @@ alias reshim='asdf reshim'
 alias cc='pbcopy'
 alias cv='pbpaste'
 alias ac="cargo compete"
+alias cm="cargo make"
