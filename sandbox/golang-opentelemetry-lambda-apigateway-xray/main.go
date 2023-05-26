@@ -23,6 +23,8 @@ import (
 	"go.opentelemetry.io/otel/trace"
 )
 
+var projectName = "golang-opentelemetry-lambda-apigateway-xray"
+
 var tracer trace.Tracer
 
 func main() {
@@ -35,11 +37,9 @@ func main() {
 
 	defer cleanup(ctx)
 
-	initTracer()
+	server := createEchoServer(tracerProvider, propagator)
 
-	e := buildEcho(tracerProvider, propagator)
-
-	listen(e, tracerProvider)
+	startLambda(server, tracerProvider)
 }
 
 type cleanup = func(ctx context.Context)
@@ -79,58 +79,51 @@ func initTracerProvider(ctx context.Context) (*sdktrace.TracerProvider, propagat
 	otel.SetTracerProvider(tracerProvider)
 	otel.SetTextMapPropagator(propagator)
 
+	tracer = otel.Tracer(projectName)
+
 	return tracerProvider, propagator, cleanup, nil
 }
 
-func initTracer() {
-	tracer = otel.Tracer("sandbox-otel-go-lambda-xray")
-}
-
-func buildEcho(tracerProvider *sdktrace.TracerProvider, propagator propagation.TextMapPropagator) *echo.Echo {
+func createEchoServer(tracerProvider *sdktrace.TracerProvider, propagator propagation.TextMapPropagator) *echo.Echo {
 	e := echo.New()
 
-	e.Use(
-		otelecho.Middleware(
-			"my-server",
-		),
-	)
+	e.Use(otelecho.Middleware(projectName))
 
-	e.GET("/ping", pingHandler)
+	e.GET("/ping", func(c echo.Context) error {
+		ctx := c.Request().Context()
+
+		(func() {
+			ctx, span := tracer.Start(ctx, "op1", trace.WithAttributes(attribute.String("id", "foo")))
+			defer span.End()
+
+			(func() {
+				_, span := tracer.Start(ctx, "op11", trace.WithAttributes(attribute.String("id", "foo")))
+				defer span.End()
+
+				time.Sleep(time.Second)
+			}())
+
+			(func() {
+				_, span := tracer.Start(ctx, "op12")
+				defer span.End()
+
+				time.Sleep(time.Second * 2)
+			}())
+		}())
+
+		return c.JSON(http.StatusOK, map[string]any{"message": "pong"})
+	})
 
 	return e
 }
 
-func pingHandler(c echo.Context) error {
-	ctx := c.Request().Context()
-
-	log.Println("ping")
-
-	(func() {
-		_, span := tracer.Start(ctx, "op1", trace.WithAttributes(attribute.String("id", "foo")))
-		defer span.End()
-
-		time.Sleep(time.Second)
-	}())
-
-	(func() {
-		_, span := tracer.Start(ctx, "op2")
-		defer span.End()
-
-		time.Sleep(time.Second * 3)
-	}())
-
-	return c.JSON(http.StatusOK, map[string]interface{}{
-		"message": "pong",
-	})
-}
-
-func listen(e *echo.Echo, tracerProvider *sdktrace.TracerProvider) {
-	echoLambda := echoAdapter.New(e)
+func startLambda(server *echo.Echo, tracerProvider *sdktrace.TracerProvider) {
+	adapter := echoAdapter.New(server)
 
 	lambda.Start(
 		otellambda.InstrumentHandler(
 			func(ctx context.Context, req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-				return echoLambda.ProxyWithContext(ctx, req)
+				return adapter.ProxyWithContext(ctx, req)
 			},
 			xrayconfig.WithRecommendedOptions(tracerProvider)...,
 		),
