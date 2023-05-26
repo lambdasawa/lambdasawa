@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>λ沢.dev</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/style.css">
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/color/orange.css">
+
+        <link rel="stylesheet" href="https://www.lambdasawa.dev/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/font-hack-subset.css">
+
+    </head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://www.lambdasawa.dev" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            λ沢.dev
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://github.com/lambdasawa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            
+                <li><a href="https://zenn.dev/lambdasawa" target="_blank" rel="noopener noreferrer">Zenn</a></li>
+            
+                <li><a href="https://twitter.com/lambdasawa" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+            
+                <li><a href="https://www.wantedly.com/id/lambdasawa" target="_blank" rel="noopener noreferrer">Wantedly</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://www.lambdasawa.dev/cheatsheet/terminal/">ターミナル</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date"></span>
+
+    </div>
+
+    
+
+        
+        <div class="post-content">
+            <p>Mac 標準のターミナルを使っている。
+<a href="https://iterm2.com/">iTerm2</a>, <a href="https://alacritty.org/">Alacritty</a>, <a href="https://wezfurlong.org/wezterm/">WezTerm</a> などサードパーティのターミナルエミュレータは使っていない。
+VSCode 内のターミナルもほとんど使っていない。</p>
+<p>テーマは <a href="https://github.com/Monokai/monokai-pro-sublime-text/issues/45#issuecomment-341005595">Monokai Pro</a> を使っている。</p>
+<h2 id="tmux"><a href="https://github.com/tmux/tmux/wiki">tmux</a></h2>
+<p>いわゆるターミナルマルチプレクサ。</p>
+<ul>
+<li>設定をテキストファイルで管理できる</li>
+<li>全てキーボードで操作できる</li>
+<li>ターミナル内でタブ的な概念を扱ったり、画面分割したりできる</li>
+<li>ターミナルに表示されているテキストをクリップボードにコピーできる</li>
+<li>この辺りの操作を tmux でやることによって、ターミナルエミュレータに以前せず多くの環境で同じような操作感を維持できる</li>
+</ul>
+<h2 id="tmuxinator"><a href="https://github.com/tmuxinator/tmuxinator">tmuxinator</a></h2>
+<p>tmux のセッションの設定をテキストファイルで管理できる。</p>
+<p>以下、自分の使用方法。</p>
+<ul>
+<li>1リポジトリ = セッション</li>
+<li><code>go run</code>, <code>npm start</code>, <code>flutter run</code> などのアプリケーションを動かすペイン + 雑多なタスク用のペイン = 1 ウィンドウ</li>
+</ul>
+<h2 id="tmux-jump"><a href="https://github.com/schasse/tmux-jump">tmux-jump</a></h2>
+<p>tmux 内に表示されている任意の箇所に 3~5 キーくらいでカーソルを移動できる。</p>
+<p>エラーメッセージを他人にシェアしたりググったりするときにターミナルに表示されている文字列をコピーすることがあるので、主にそのようなシチュエーションで使っている。</p>
+
+        </div>
+
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2023
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>λ沢.dev</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/style.css">
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/color/orange.css">
+
+        <link rel="stylesheet" href="https://www.lambdasawa.dev/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/font-hack-subset.css">
+
+    </head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://www.lambdasawa.dev" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            λ沢.dev
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://github.com/lambdasawa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            
+                <li><a href="https://zenn.dev/lambdasawa" target="_blank" rel="noopener noreferrer">Zenn</a></li>
+            
+                <li><a href="https://twitter.com/lambdasawa" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+            
+                <li><a href="https://www.wantedly.com/id/lambdasawa" target="_blank" rel="noopener noreferrer">Wantedly</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://www.lambdasawa.dev/cheatsheet/docker/">Docker</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date"></span>
+
+    </div>
+
+    
+
+        
+        <div class="post-content">
+            <h2 id="dockerfile">Dockerfile</h2>
+<ul>
+<li><a href="https://docs.docker.com/engine/reference/builder/">ref</a></li>
+<li><a href="https://docs.docker.jp/engine/reference/builder.html">ref (ja)</a></li>
+<li><a href="https://docs.docker.com/develop/develop-images/dockerfile_best-practices/">best practice</a></li>
+</ul>
+<h2 id="docker-compose-yml">docker-compose.yml</h2>
+<ul>
+<li><a href="https://docs.docker.com/compose/compose-file/">ref</a></li>
+<li><a href="https://docs.docker.jp/compose/compose-file.html">ref (ja)</a></li>
+</ul>
+<h2 id="wait">wait</h2>
+<ul>
+<li><a href="https://github.com/ufoscout/docker-compose-wait">github</a></li>
+<li>主に docker-compose と一緒に使うコマンド。他のコンテナのポートが開くのを待つのに使える</li>
+<li><code>wait</code> などを使わずに <code>depends_on</code> で依存を指定したときに保証されることはポートが開いていることではなく、あくまでコンテナが起動していることまで</li>
+</ul>
+<h2 id="mysql">MySQL</h2>
+<ul>
+<li><a href="https://hub.docker.com/_/mysql">docker hub</a></li>
+</ul>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> cat schema.sql
+</span><span style="color:#bf616a;">USE</span><span> demo;
+</span><span style="color:#bf616a;">CREATE</span><span> TABLE users (
+</span><span>  </span><span style="color:#bf616a;">id</span><span> bigint PRIMARY KEY
+</span><span>);
+</span><span>
+</span><span style="color:#bf616a;">$</span><span> docker run \
+</span><span style="color:#bf616a;">    -itd </span><span>\
+</span><span style="color:#bf616a;">    -p</span><span> 3306:3306 \
+</span><span style="color:#bf616a;">    -v </span><span>$</span><span style="color:#bf616a;">PWD</span><span>:/docker-entrypoint-initdb.d/ \
+</span><span style="color:#bf616a;">    -e</span><span> MYSQL_ROOT_PASSWORD=root \
+</span><span style="color:#bf616a;">    -e</span><span> MYSQL_DATABASE=demo \
+</span><span>    mysql:8.0
+</span><span>
+</span><span style="color:#bf616a;">$</span><span> mysql</span><span style="color:#bf616a;"> -uroot -proot -h127</span><span>.0.0.1</span><span style="color:#bf616a;"> -P3306 -e </span><span>&#39;</span><span style="color:#a3be8c;">use demo; show tables;</span><span>&#39;
+</span></code></pre>
+<h2 id="postgresql">PostgreSQL</h2>
+<ul>
+<li><a href="https://hub.docker.com/_/postgres">docker hub</a></li>
+</ul>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> docker run \
+</span><span style="color:#bf616a;">    -itd </span><span>\
+</span><span style="color:#bf616a;">    -p</span><span> 5432:5432 \
+</span><span style="color:#bf616a;">    -e</span><span> POSTGRES_PASSWORD=postgres \
+</span><span style="color:#bf616a;">    -e</span><span> POSTGRES_DB=demo \
+</span><span>    postgres:15.0
+</span><span>
+</span><span style="color:#bf616a;">$</span><span> psql postgresql://postgres:postgres@127.0.0.1:5432/diesel_demo</span><span style="color:#bf616a;"> -c </span><span>&#39;</span><span style="color:#a3be8c;">CREATE TABLE posts (id SERIAL PRIMARY KEY)</span><span>&#39;
+</span></code></pre>
+<h2 id="redis">Redis</h2>
+<ul>
+<li><a href="https://hub.docker.com/_/redis">docker hub</a></li>
+</ul>
+<h2 id="localstack">LocalStack</h2>
+<ul>
+<li><a href="https://hub.docker.com/r/localstack/localstack">docker hub</a></li>
+<li>AWS の各種サービスをローカルでモックできる</li>
+</ul>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> cat init_bucket.sh
+</span><span style="color:#96b5b4;">set </span><span style="color:#bf616a;">-xeu
+</span><span>
+</span><span style="color:#b48ead;">export </span><span style="color:#bf616a;">AWS_ACCESS_KEY_ID</span><span>=</span><span style="color:#a3be8c;">test
+</span><span style="color:#b48ead;">export </span><span style="color:#bf616a;">AWS_SECRET_ACCESS_KEY</span><span>=</span><span style="color:#a3be8c;">test
+</span><span style="color:#bf616a;">aws --endpoint</span><span> http://127.0.0.1:4566 s3 mb s3://test
+</span><span>
+</span><span style="color:#bf616a;">$</span><span> docker run \
+</span><span style="color:#bf616a;">    -itd </span><span>\
+</span><span style="color:#bf616a;">    -p</span><span> 4566:4566 \
+</span><span style="color:#bf616a;">    -p</span><span> 4571:4571 \
+</span><span style="color:#bf616a;">    -v </span><span>$</span><span style="color:#bf616a;">PWD</span><span>:/docker-entrypoint-initaws.d/ \
+</span><span>    localstack/localstack
+</span><span>
+</span><span style="color:#bf616a;">$</span><span> env \
+</span><span>    AWS_ACCESS_KEY_ID=test \
+</span><span>    AWS_SECRET_ACCESS_KEY=test \
+</span><span>    aws</span><span style="color:#bf616a;"> --endpoint</span><span> http://127.0.0.1:4566 s3 ls
+</span></code></pre>
+<h2 id="minio">MinIO</h2>
+<ul>
+<li><a href="https://hub.docker.com/r/minio/minio/">docker hub</a></li>
+<li>S3 をモックできる</li>
+</ul>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> docker run \
+</span><span style="color:#bf616a;">    -itd </span><span>\
+</span><span style="color:#bf616a;">    -p</span><span> 9000:9000 \
+</span><span style="color:#bf616a;">    -p</span><span> 9001:9001 \
+</span><span style="color:#bf616a;">    -e</span><span> MINIO_ACCESS_KEY=miniokey \
+</span><span style="color:#bf616a;">    -e</span><span> MINIO_SECRET_KEY=miniokey \
+</span><span>    minio/minio server /data</span><span style="color:#bf616a;"> --console-address </span><span>&quot;</span><span style="color:#a3be8c;">:9001</span><span>&quot;
+</span><span>
+</span><span style="color:#bf616a;">$</span><span> export AWS_ACCESS_KEY_ID=miniokey
+</span><span style="color:#bf616a;">$</span><span> export AWS_SECRET_ACCESS_KEY=miniokey
+</span><span>
+</span><span style="color:#bf616a;">$</span><span> aws</span><span style="color:#bf616a;"> --endpoint</span><span> http://127.0.0.1:9000 s3 mb s3://test
+</span><span style="color:#bf616a;">$</span><span> aws</span><span style="color:#bf616a;"> --endpoint</span><span> http://127.0.0.1:9000 s3 ls
+</span><span style="color:#bf616a;">2022-03-19</span><span> 22:10:25 test
+</span></code></pre>
+<h2 id="elasticsearch">Elasticsearch</h2>
+<ul>
+<li><a href="https://www.docker.elastic.co/r/elasticsearch">https://www.docker.elastic.co/r/elasticsearch</a></li>
+</ul>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> docker run \
+</span><span style="color:#bf616a;">  -itd </span><span>\
+</span><span style="color:#bf616a;">  -p</span><span> 9200:9200 \
+</span><span style="color:#bf616a;">  -p</span><span> 9300:9300 \
+</span><span style="color:#bf616a;">  -e </span><span>&quot;</span><span style="color:#a3be8c;">discovery.type=single-node</span><span>&quot; \
+</span><span>  docker.elastic.co/elasticsearch/elasticsearch:7.17.1
+</span><span>
+</span><span style="color:#bf616a;">$</span><span> curl</span><span style="color:#bf616a;"> -X</span><span> PUT localhost:9200/foo
+</span></code></pre>
+<h2 id="mailhog">MailHog</h2>
+<ul>
+<li><a href="https://hub.docker.com/r/mailhog/mailhog">docker hub</a></li>
+<li>メールをモックできる</li>
+</ul>
+<h2 id="puratutohuomuwozhi-ding-site-docker-compose-yml-nishu-kareteiruimeziwoquan-tedaunrodo">プラットフォームを指定して docker-compose.yml に書かれているイメージを全てダウンロード</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#b48ead;">for</span><span> image </span><span style="color:#b48ead;">in</span><span> (cat docker-compose.yml | </span><span style="color:#bf616a;">jc --yaml </span><span>| </span><span style="color:#bf616a;">jq -r </span><span>&#39;</span><span style="color:#a3be8c;">.[0] | .services[] | .image</span><span>&#39; | </span><span style="color:#bf616a;">grep -v</span><span> null); </span><span style="color:#bf616a;">docker</span><span> pull</span><span style="color:#bf616a;"> --platform</span><span> linux/amd64 $</span><span style="color:#bf616a;">image</span><span>; </span><span style="color:#bf616a;">end
+</span></code></pre>
+<h2 id="other">Other</h2>
+<p><a href="https://github.com/abiosoft/colima">https://github.com/abiosoft/colima</a></p>
+
+        </div>
+
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2023
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

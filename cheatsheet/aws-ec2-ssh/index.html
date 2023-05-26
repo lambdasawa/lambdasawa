@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>λ沢.dev</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/style.css">
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/color/orange.css">
+
+        <link rel="stylesheet" href="https://www.lambdasawa.dev/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/font-hack-subset.css">
+
+    </head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://www.lambdasawa.dev" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            λ沢.dev
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://github.com/lambdasawa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            
+                <li><a href="https://zenn.dev/lambdasawa" target="_blank" rel="noopener noreferrer">Zenn</a></li>
+            
+                <li><a href="https://twitter.com/lambdasawa" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+            
+                <li><a href="https://www.wantedly.com/id/lambdasawa" target="_blank" rel="noopener noreferrer">Wantedly</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://www.lambdasawa.dev/cheatsheet/aws-ec2-ssh/">AWS EC2 SSH</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date"></span>
+
+    </div>
+
+    
+
+        
+        <div class="post-content">
+            <ul>
+<li><a href="https://dev.classmethod.jp/articles/choosing-the-right-shell-access-solution-to-aws-ec2">EC2インスタンスへのシェルアクセスサービスを雑にまとめてみた</a></li>
+</ul>
+<h2 id="session-manager">Session Manager</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">brew</span><span> install</span><span style="color:#bf616a;"> --cask</span><span> session-manager-plugin
+</span><span style="color:#bf616a;">aws</span><span> ssm start-session</span><span style="color:#bf616a;"> --target</span><span> i-xxxx
+</span></code></pre>
+<ul>
+<li><a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html">https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html</a></li>
+<li><a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-sessions-start.html">https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-sessions-start.html</a></li>
+<li><a href="https://github.com/aws/session-manager-plugin">https://github.com/aws/session-manager-plugin</a></li>
+</ul>
+<h2 id="session-manager-ssh">Session Manager (SSH)</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">brew</span><span> install</span><span style="color:#bf616a;"> --cask</span><span> session-manager-plugin
+</span><span style="color:#bf616a;">ssh -i ~</span><span>/.ssh/xxx.pem xxx@i-xxx
+</span></code></pre>
+<ul>
+<li><a href="https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/session-manager-getting-started-enable-ssh-connections.html">https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/session-manager-getting-started-enable-ssh-connections.html</a></li>
+</ul>
+<h2 id="instance-connect">Instance Connect</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">pip</span><span> install ec2instanceconnectcli
+</span><span style="color:#bf616a;">mssh -r</span><span> ap-northeast-1 ubuntu@i-xxxx
+</span></code></pre>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">aws</span><span> ec2-instance-connect send-ssh-public-key</span><span style="color:#bf616a;"> --instance-id</span><span> i-xxx</span><span style="color:#bf616a;"> --availability-zone</span><span> ap-northeast-1</span><span style="color:#bf616a;"> --instance-os-user</span><span> ubuntu</span><span style="color:#bf616a;"> --ssh-public-key</span><span> file://$</span><span style="color:#bf616a;">HOME</span><span>/.ssh/id_rsa.pub
+</span><span style="color:#bf616a;">ssh -i ~</span><span>/.ssh/id_rsa.pub ubuntu@xxx.amazonaws.com
+</span></code></pre>
+<ul>
+<li><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-connect-methods.html">https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-connect-methods.html</a></li>
+<li><a href="https://aws.amazon.com/jp/blogs/compute/new-using-amazon-ec2-instance-connect-for-ssh-access-to-your-ec2-instances/">https://aws.amazon.com/jp/blogs/compute/new-using-amazon-ec2-instance-connect-for-ssh-access-to-your-ec2-instances/</a></li>
+<li><a href="https://github.com/aws/aws-ec2-instance-connect-cli">https://github.com/aws/aws-ec2-instance-connect-cli</a></li>
+</ul>
+
+        </div>
+
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2023
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

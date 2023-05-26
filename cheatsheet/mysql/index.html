@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>λ沢.dev</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/style.css">
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/color/orange.css">
+
+        <link rel="stylesheet" href="https://www.lambdasawa.dev/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/font-hack-subset.css">
+
+    </head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://www.lambdasawa.dev" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            λ沢.dev
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://github.com/lambdasawa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            
+                <li><a href="https://zenn.dev/lambdasawa" target="_blank" rel="noopener noreferrer">Zenn</a></li>
+            
+                <li><a href="https://twitter.com/lambdasawa" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+            
+                <li><a href="https://www.wantedly.com/id/lambdasawa" target="_blank" rel="noopener noreferrer">Wantedly</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://www.lambdasawa.dev/cheatsheet/mysql/">MySQL</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date"></span>
+
+    </div>
+
+    
+
+        
+        <div class="post-content">
+            <ul>
+<li><a href="https://dev.mysql.com/doc/refman/5.6/ja/func-op-summary-ref.html">https://dev.mysql.com/doc/refman/5.6/ja/func-op-summary-ref.html</a></li>
+<li><a href="https://dev.mysql.com/doc/refman/8.0/ja/mysqlpump.html">https://dev.mysql.com/doc/refman/8.0/ja/mysqlpump.html</a></li>
+<li><a href="https://downloads.mysql.com/docs/sakila-db.tar.gz">https://downloads.mysql.com/docs/sakila-db.tar.gz</a></li>
+<li><a href="https://planetscale.com/">https://planetscale.com/</a></li>
+<li><a href="https://hub.docker.com/_/mysql">https://hub.docker.com/_/mysql</a></li>
+<li><a href="https://www.percona.com/doc/percona-toolkit/LATEST/pt-query-digest.html">https://www.percona.com/doc/percona-toolkit/LATEST/pt-query-digest.html</a></li>
+</ul>
+<h2 id="explain">explain</h2>
+<ul>
+<li><a href="http://nippondanji.blogspot.com/2009/03/mysqlexplain.html">実行計画の読み方</a></li>
+</ul>
+<h2 id="import">import</h2>
+<ul>
+<li><a href="http://nippondanji.blogspot.com/2010/03/innodb.html">大量データをインポートする際の高速化手法</a></li>
+</ul>
+<h2 id="general-log">general log</h2>
+<p>コンテナの <code>general_log</code> を <code>tail -f</code> する。</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> set u user
+</span><span style="color:#bf616a;">$</span><span> set p password
+</span><span style="color:#bf616a;">$</span><span> set n container_name
+</span><span style="color:#bf616a;">$</span><span> docker exec</span><span style="color:#bf616a;"> -it </span><span>$</span><span style="color:#bf616a;">n</span><span> bash</span><span style="color:#bf616a;"> -c </span><span>&quot;</span><span style="color:#a3be8c;">mysql -u</span><span>$</span><span style="color:#bf616a;">u</span><span style="color:#a3be8c;"> -p</span><span>$</span><span style="color:#bf616a;">p</span><span style="color:#a3be8c;"> -e </span><span style="color:#96b5b4;">\&quot;</span><span style="color:#a3be8c;">SET GLOBAL general_log = &#39;ON&#39;;</span><span style="color:#96b5b4;">\&quot;</span><span style="color:#a3be8c;"> 2&gt;/dev/null &amp;&amp; echo </span><span style="color:#96b5b4;">\&quot;</span><span style="color:#a3be8c;">SELECT @@GLOBAL.general_log_file;</span><span style="color:#96b5b4;">\&quot;</span><span style="color:#a3be8c;"> | mysql -u</span><span>$</span><span style="color:#bf616a;">u</span><span style="color:#a3be8c;"> -p</span><span>$</span><span style="color:#bf616a;">p</span><span style="color:#a3be8c;"> -N 2&gt;/dev/null</span><span>&quot;
+</span><span style="color:#bf616a;">/var/lib/mysql/xxxx.log
+</span><span style="color:#bf616a;">$</span><span> docker exec</span><span style="color:#bf616a;"> -it </span><span>$</span><span style="color:#bf616a;">n</span><span> tail</span><span style="color:#bf616a;"> -f</span><span> /var/lib/mysql/xxxx.log
+</span></code></pre>
+<h3 id="charset">charset</h3>
+<ul>
+<li>ref
+<ul>
+<li><a href="https://dev.mysql.com/doc/refman/5.6/ja/charset-unicode-utf8mb4.html">https://dev.mysql.com/doc/refman/5.6/ja/charset-unicode-utf8mb4.html</a></li>
+<li><a href="https://dev.mysql.com/doc/refman/8.0/ja/charset-unicode-sets.html">https://dev.mysql.com/doc/refman/8.0/ja/charset-unicode-sets.html</a></li>
+</ul>
+</li>
+<li><a href="https://techracho.bpsinc.jp/hachi8833/2020_11_26/25044">MySQLのencodingをutf8からutf8mb4に変更して寿司ビール問題に対応する</a></li>
+</ul>
+<h3 id="collation">collation</h3>
+<ul>
+<li><a href="https://dev.mysql.com/doc/refman/8.0/ja/charset-collation-names.html">ref</a></li>
+<li><a href="https://kazuhira-r.hatenablog.com/entry/2021/05/08/232717">MySQL 8.0のCharset utf8mb4での日本語環境で使うCollationで文字比較をしてみる</a></li>
+</ul>
+
+        </div>
+
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2023
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

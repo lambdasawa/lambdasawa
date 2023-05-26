@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>λ沢.dev</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/style.css">
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/color/orange.css">
+
+        <link rel="stylesheet" href="https://www.lambdasawa.dev/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/font-hack-subset.css">
+
+    </head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://www.lambdasawa.dev" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            λ沢.dev
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://github.com/lambdasawa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            
+                <li><a href="https://zenn.dev/lambdasawa" target="_blank" rel="noopener noreferrer">Zenn</a></li>
+            
+                <li><a href="https://twitter.com/lambdasawa" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+            
+                <li><a href="https://www.wantedly.com/id/lambdasawa" target="_blank" rel="noopener noreferrer">Wantedly</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://www.lambdasawa.dev/cheatsheet/aws-iam/">AWS IAM</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date"></span>
+
+    </div>
+
+    
+
+        
+        <div class="post-content">
+            <h2 id="iam-policy">IAM Policy</h2>
+<p>どういう条件下で何に対してどんな操作が許可/禁止されているかを表すもの。
+IAM Role, IAM Group, IAM User にアタッチして使用する。</p>
+<p>いくつか種類がある。</p>
+<ul>
+<li>管理ポリシー (managed policy)
+<ul>
+<li>カスタマー管理ポリシー
+<ul>
+<li>AWS のユーザが定義できるポリシー</li>
+<li>基本的にはこれを使うと良い</li>
+</ul>
+</li>
+<li>AWS 管理ポリシー (ReadOnlyAccess, AdministratorAccess, AmazonS3ReadOnlyAccess など)
+<ul>
+<li>AWS が事前に用意したポリシー</li>
+<li>変更不可</li>
+<li>細かい権限を設定したい場合はカスタマー管理ポリシーを作成する</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>インラインポリシー (inline policy)
+<ul>
+<li>二重管理になりやすいのでカスタマー管理ポリシーを使うべき</li>
+</ul>
+</li>
+</ul>
+<p>その他リファレンス:</p>
+<ul>
+<li><a href="https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/reference_policies_elements.html">各フィールドのリファレンス</a></li>
+<li><a href="https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/reference_policies_condition-keys.html">Condition で使える式のリファレンス</a></li>
+<li><a href="https://docs.aws.amazon.com/ja_jp/service-authorization/latest/reference/reference_policies_actions-resources-contextkeys.html">各 AWS サービス固有の情報</a></li>
+<li><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy">terraform iam_policy</a>
+<ul>
+<li><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment">terraform iam_role_policy_attachment</a></li>
+<li><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_group_policy_attachment">terraform iam_group_policy_attachment</a></li>
+<li><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user_policy_attachment">terraform iam_user_policy_attachment</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="risosubesuporisi">リソースベースポリシー</h2>
+<p>IAM User, IAM Group, IAM Role などにアタッチはせず、 S3 Bucket などのリソースに設定するポリシー。</p>
+<p>一般的には IAM Policy かリソースポリシーのどちらかで許可されていれば操作可能。
+ただしアカウントをまたいだ操作の場合は、どちらかではなく両方で許可されている必要がある。</p>
+<ul>
+<li><a href="https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/reference_aws-services-that-work-with-iam.html">https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/reference_aws-services-that-work-with-iam.html</a></li>
+</ul>
+<h2 id="iam-role">IAM Role</h2>
+<p>主に AWS リソースに対して割り当てるもの。</p>
+<p>IAM Policy をアタッチできる。</p>
+<p><code>sts:AssumeRole</code> の API を IAM Role に対して呼び出すことによって、 IAM Role にアタッチされたポリシーの権限を持った一時的なアクセスキーを取得できる。</p>
+<p>信頼ポリシー (assume role policy、信頼関係) に誰が (どの principal が) この IAM Role を使えるか指定することによって使えるようになる。
+principal として代表的なものは、 AWS リソース (<code>{&quot;Service&quot;: [&quot;lambda.amazonaws.com&quot;]}</code>) 、AWS アカウント (<code>{&quot;AWS&quot;: &quot;123456789012&quot;}</code>) など。</p>
+<ul>
+<li><a href="https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/reference_policies_elements_principal.html">principal の一覧</a></li>
+<li><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role">terraform iam_role</a></li>
+</ul>
+<h2 id="iam-group">IAM Group</h2>
+<p>グループ。部署や役割(開発者、運用担当、管理者など)ごとに1つ。</p>
+<p>IAM Policy をアタッチできる。</p>
+<ul>
+<li><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_group">terraform iam_group</a></li>
+<li><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user_group_membership">terraform iam_user_group_membership</a></li>
+</ul>
+<h2 id="iam-user">IAM User</h2>
+<p>個人。一人につき一つ。</p>
+<p>IAM Policy をアタッチできる。</p>
+<p>AWS のアクセスキーは IAM User に紐づく。
+ただし、アクセスキーを発行すること自体が推奨されていない。
+可能な限り IAM User のアクセスキーを使用するのではなく、 <a href="https://docs.aws.amazon.com/ja_jp/general/latest/gr/aws-access-keys-best-practices.html#use-roles">IAM Role を使うことが推奨されている</a>。</p>
+<p>IAM Policy を直接ユーザに紐付けることもできるが、二重管理になりやすいので IAM User より IAM Group に IAM Policy を紐付けるべき。</p>
+<ul>
+<li><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user">terraform iam_user</a></li>
+<li><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_access_key">terraform iam_access_key</a></li>
+</ul>
+<h2 id="aws-akaunto">AWS アカウント</h2>
+<p>数値12桁のアカウント ID で管理される。
+個人のものではない。
+1つの AWS アカウント内に複数の IAM User, IAM Group, IAM Role などがある。
+よくある使い方ではサービスやその環境ごとに1つのアカウントを作る (Hoge サービスの開発環境用アカウント、本番環境用アカウントなど…)。</p>
+<h2 id="aws-organizations">AWS Organizations</h2>
+<p>複数の AWS アカウントをまとめて管理するためのサービス。</p>
+<h2 id="scp-sabisukontororuporisi">SCP (サービスコントロールポリシー)</h2>
+<p>TODO</p>
+<h2 id="pamitusiyonbaundari">パーミッションバウンダリー</h2>
+<p>TODO</p>
+<h2 id="can-kao">参考</h2>
+<ul>
+<li>リファレンス
+<ul>
+<li><a href="https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/introduction.html">イントロダクション</a></li>
+<li><a href="https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/best-practices.html">ベストプラクティス</a></li>
+</ul>
+</li>
+<li>Black belt
+<ul>
+<li><a href="https://www.youtube.com/watch?v=K7F5yTThynw">【AWS Black Belt Online Seminar】AWS Identity and Access Management (AWS IAM) Part1</a>
+<ul>
+<li><a href="https://d1.awsstatic.com/webinars/jp/pdf/services/20190129_AWS-BlackBelt_IAM_Part1.pdf">PDF</a></li>
+</ul>
+</li>
+<li><a href="https://www.youtube.com/watch?v=qrZKKF6V6Dc">【AWS Black Belt Online Seminar】AWS Identity and Access Management (AWS IAM) Part2</a></li>
+</ul>
+</li>
+<li>関連書籍
+<ul>
+<li><a href="https://www.amazon.co.jp/dp/B085PZCMG2">AWSの薄い本　IAMのマニアックな話</a></li>
+<li><a href="https://www.amazon.co.jp/dp/B08F3BVSJQ">AWSの薄い本Ⅱ アカウントセキュリティのベーシックセオリー</a></li>
+<li><a href="https://www.amazon.co.jp/dp/B08DCLRHC7">要点整理から攻略する『AWS認定 セキュリティ-専門知識』 (Compass Booksシリーズ)</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2023
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

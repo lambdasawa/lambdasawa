@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>λ沢.dev</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/style.css">
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/color/orange.css">
+
+        <link rel="stylesheet" href="https://www.lambdasawa.dev/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/font-hack-subset.css">
+
+    </head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://www.lambdasawa.dev" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            λ沢.dev
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://github.com/lambdasawa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            
+                <li><a href="https://zenn.dev/lambdasawa" target="_blank" rel="noopener noreferrer">Zenn</a></li>
+            
+                <li><a href="https://twitter.com/lambdasawa" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+            
+                <li><a href="https://www.wantedly.com/id/lambdasawa" target="_blank" rel="noopener noreferrer">Wantedly</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://www.lambdasawa.dev/cheatsheet/openapi/">OpenAPI</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date"></span>
+
+    </div>
+
+    
+
+        
+        <div class="post-content">
+            <h2 id="spec">spec</h2>
+<p><a href="https://swagger.io/specification/">https://swagger.io/specification/</a></p>
+<h2 id="viewer">viewer</h2>
+<ul>
+<li><a href="https://swagger.io/tools/swagger-ui/">https://swagger.io/tools/swagger-ui/</a></li>
+<li><a href="https://redoc.ly/">https://redoc.ly/</a></li>
+<li><a href="https://mrin9.github.io/RapiDoc/">https://mrin9.github.io/RapiDoc/</a></li>
+</ul>
+<p>どれも Docker イメージがある。</p>
+<ul>
+<li><a href="https://hub.docker.com/r/swaggerapi/swagger-ui">https://hub.docker.com/r/swaggerapi/swagger-ui</a></li>
+<li><a href="https://hub.docker.com/r/mrin9/rapidoc">https://hub.docker.com/r/mrin9/rapidoc</a></li>
+<li><a href="https://hub.docker.com/r/redocly/redoc">https://hub.docker.com/r/redocly/redoc</a></li>
+</ul>
+<p>redocly は Node.js で動作する CLI を提供している。</p>
+<ul>
+<li><a href="https://github.com/Redocly/openapi-cli">https://github.com/Redocly/openapi-cli</a></li>
+</ul>
+<h2 id="management-spec-file">management spec file</h2>
+<p>ある程度の規模の API を書いてると人の手で書くのが辛いほど定義ファイルが大きくなってくる。</p>
+<p><a href="https://github.com/Redocly/openapi-cli">https://github.com/Redocly/openapi-cli</a> を使うと単一のファイルをパスやコンポーネントごとに分割したり、逆にそれを合体させることができる。</p>
+<p>一見、分割だけあれば良いように思える。
+しかし OpenAPI と連携する各種ツールが分割されたファイルを正しく解釈できるかは分からない。</p>
+<p>なのでリポジトリ上では分割して管理して、マージされたファイルは <code>.gitignore</code> に入れておき、必要なときだけ合体させるのが良いと思う。</p>
+<p>ここまではスキーマファーストな前提の話。
+主にハンドラーのシグネチャ、その他コメントとかアノテーションのようなもので情報を補足しつつ、ソースコードからスキーマファイルを出力するというコードファーストなアプローチもある。
+例: <a href="https://github.com/swaggo/swag">https://github.com/swaggo/swag</a></p>
+<p>その場合はスキーマファイルを人間が直接読み書きすることはないので特に分割したりする必要性は薄いと思われる。</p>
+<h2 id="gui-editor">GUI editor</h2>
+<p><a href="https://stoplight.io/">https://stoplight.io/</a></p>
+<h2 id="code-generation">code generation</h2>
+<h3 id="openapi-generator">openapi-generator</h3>
+<p><a href="https://github.com/OpenAPITools/openapi-generator">https://github.com/OpenAPITools/openapi-generator</a> を使うと OpenAPI の yaml or json から主に API クライアントを生成できる。
+サーバのスタブも生成できる。
+RESTful な API を静的型付け言語で扱う場合はサーバとクライアントでインターフェースを共有できるため便利。</p>
+<p><a href="https://openapi-generator.tech/docs/generators">https://openapi-generator.tech/docs/generators</a> に対応している言語一覧が書かれている。
+言語ごとに細かいオプションがあるが、その内容もここからわかる。</p>
+<p>基本的には openapi-generator は jar で配布されているが、 OpenAPI の YAML を投げると生成されたコードの zip が返されるような Web API も存在する。
+<a href="http://api.openapi-generator.tech/index.html">http://api.openapi-generator.tech/index.html</a></p>
+<h3 id="postman">Postman</h3>
+<p><a href="https://www.postman.com/">Postman</a> も実は OpenAPI を読み込める。
+そして API を呼び出すクライアントコードのスニペットを表示できる。
+openapi-generator を使うほどでも無い規模で Postman に慣れている場合は有効かもしれない。</p>
+<p>linter</p>
+<ul>
+<li><a href="https://github.com/stoplightio/spectral">https://github.com/stoplightio/spectral</a></li>
+<li><a href="https://github.com/Redocly/openapi-cli">https://github.com/Redocly/openapi-cli</a></li>
+</ul>
+<p>本当にドキュメント通りに API が実装されているか？
+ドキュメントと実装に剥離があることは多々あるけど、それを防止するツールがある。</p>
+<h2 id="validation-at-proxy">validation at proxy</h2>
+<p>こういう OpenAPI があるとする。</p>
+<pre data-lang="yaml" style="background-color:#2b303b;color:#c0c5ce;" class="language-yaml "><code class="language-yaml" data-lang="yaml"><span style="color:#65737e;"># openapi.yaml
+</span><span style="color:#bf616a;">openapi</span><span>: &quot;</span><span style="color:#a3be8c;">3.0.0</span><span>&quot;
+</span><span style="color:#bf616a;">info</span><span>:
+</span><span>  </span><span style="color:#bf616a;">title</span><span>: </span><span style="color:#a3be8c;">Test
+</span><span style="color:#bf616a;">paths</span><span>:
+</span><span>  </span><span style="color:#bf616a;">/</span><span>:
+</span><span>    </span><span style="color:#bf616a;">get</span><span>:
+</span><span>      </span><span style="color:#bf616a;">responses</span><span>:
+</span><span>        &quot;</span><span style="color:#a3be8c;">200</span><span>&quot;:
+</span><span>          </span><span style="color:#bf616a;">content</span><span>:
+</span><span>            </span><span style="color:#bf616a;">application/json</span><span>:
+</span><span>              </span><span style="color:#bf616a;">schema</span><span>:
+</span><span>                </span><span style="color:#bf616a;">type</span><span>: </span><span style="color:#a3be8c;">object
+</span><span>                </span><span style="color:#bf616a;">properties</span><span>:
+</span><span>                  </span><span style="color:#bf616a;">foo</span><span>:
+</span><span>                    </span><span style="color:#bf616a;">type</span><span>: </span><span style="color:#a3be8c;">string
+</span></code></pre>
+<p>そしてこういう実装があるとする。
+ドキュメントは <code>foo</code> が <code>string</code> と主張しているが、実装は <code>foo</code> を <code>integer</code> で返しているので、これを検出したい。</p>
+<pre data-lang="js" style="background-color:#2b303b;color:#c0c5ce;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#65737e;">// index.js
+</span><span style="color:#b48ead;">const </span><span style="color:#bf616a;">app </span><span>= </span><span style="color:#96b5b4;">require</span><span>(&quot;</span><span style="color:#a3be8c;">express</span><span>&quot;)();
+</span><span>
+</span><span style="color:#bf616a;">app</span><span>.</span><span style="color:#96b5b4;">get</span><span>(&quot;</span><span style="color:#a3be8c;">/</span><span>&quot;, (</span><span style="color:#bf616a;">_</span><span>, </span><span style="color:#bf616a;">res</span><span>) </span><span style="color:#b48ead;">=&gt; </span><span style="color:#bf616a;">res</span><span>.</span><span style="color:#8fa1b3;">json</span><span>({ foo: </span><span style="color:#d08770;">1 </span><span>}));
+</span><span>
+</span><span style="color:#bf616a;">app</span><span>.</span><span style="color:#8fa1b3;">listen</span><span>(</span><span style="color:#d08770;">8888</span><span>);
+</span></code></pre>
+<p>このサーバを <code>npm init -y &amp;&amp; npm i express &amp;&amp; node index.js</code> で起動する。</p>
+<p>以下のようなコマンドを叩くとバリデーション付きのプロキシサーバが建てられる。</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> prism proxy openapi.yaml http://localhost:8888</span><span style="color:#bf616a;"> --errors
+</span><span style="color:#bf616a;">[21:11:59]</span><span> › </span><span style="color:#b48ead;">[</span><span>CLI</span><span style="color:#b48ead;">]</span><span> …  awaiting  Starting Prism…
+</span><span style="color:#bf616a;">[21:11:59]</span><span> › </span><span style="color:#b48ead;">[</span><span>CLI</span><span style="color:#b48ead;">]</span><span> ℹ  info      GET        http://127.0.0.1:4010/
+</span><span style="color:#bf616a;">[21:11:59]</span><span> › </span><span style="color:#b48ead;">[</span><span>CLI</span><span style="color:#b48ead;">]</span><span> ▶  start     Prism is listening on http://127.0.0.1:4010
+</span></code></pre>
+<p>ここで <code>curl</code> でプロキシサーバにリクエストを発行するとエラーが返ってくることを確認できる。</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> curl</span><span style="color:#bf616a;"> -v</span><span> http://127.0.0.1:4010
+</span><span style="color:#bf616a;">*</span><span>   Trying 127.0.0.1:4010...
+</span><span style="color:#bf616a;">*</span><span> Connected to 127.0.0.1 (127.0.0.1) </span><span style="color:#bf616a;">port</span><span> 4010 (#0)
+</span><span>&gt; GET </span><span style="color:#bf616a;">/</span><span> HTTP/1.1
+</span><span>&gt; Host: </span><span style="color:#bf616a;">127.0.0.1:4010
+</span><span>&gt; User-Agent: </span><span style="color:#bf616a;">curl/7.77.0
+</span><span>&gt; Accept: </span><span style="color:#bf616a;">*/*
+</span><span>&gt;
+</span><span style="color:#bf616a;">*</span><span> Mark bundle as not supporting multiuse
+</span><span>&lt; HTTP/1.1 </span><span style="color:#bf616a;">500</span><span> Internal Server Error
+</span><span>&lt; Access-Control-Allow-Origin: </span><span style="color:#bf616a;">*
+</span><span>&lt; Access-Control-Allow-Headers: </span><span style="color:#bf616a;">*
+</span><span>&lt; Access-Control-Allow-Credentials: </span><span style="color:#bf616a;">true
+</span><span>&lt; Access-Control-Expose-Headers: </span><span style="color:#bf616a;">*
+</span><span>&lt; sl-violations: </span><span style="color:#bf616a;">[{</span><span>&quot;</span><span style="color:#a3be8c;">location</span><span>&quot;</span><span style="color:#bf616a;">:[</span><span>&quot;</span><span style="color:#a3be8c;">response</span><span>&quot;</span><span style="color:#bf616a;">,</span><span>&quot;</span><span style="color:#a3be8c;">body</span><span>&quot;</span><span style="color:#bf616a;">,</span><span>&quot;</span><span style="color:#a3be8c;">foo</span><span>&quot;</span><span style="color:#bf616a;">],</span><span>&quot;</span><span style="color:#a3be8c;">severity</span><span>&quot;</span><span style="color:#bf616a;">:</span><span>&quot;</span><span style="color:#a3be8c;">Error</span><span>&quot;</span><span style="color:#bf616a;">,</span><span>&quot;</span><span style="color:#a3be8c;">code</span><span>&quot;</span><span style="color:#bf616a;">:</span><span>&quot;</span><span style="color:#a3be8c;">type</span><span>&quot;</span><span style="color:#bf616a;">,</span><span>&quot;</span><span style="color:#a3be8c;">message</span><span>&quot;</span><span style="color:#bf616a;">:</span><span>&quot;</span><span style="color:#a3be8c;">must be string</span><span>&quot;}</span><span style="color:#bf616a;">]
+</span><span>&lt; content-type: </span><span style="color:#bf616a;">application/problem+json
+</span><span>&lt; Content-Length: </span><span style="color:#bf616a;">338
+</span><span>&lt; Date: </span><span style="color:#bf616a;">Tue,</span><span> 01 Mar 2022 12:15:30 GMT
+</span><span>&lt; Connection: </span><span style="color:#bf616a;">keep-alive
+</span><span>&lt; Keep-Alive: </span><span style="color:#bf616a;">timeout</span><span>=</span><span style="color:#a3be8c;">5
+</span><span>&lt;
+</span><span style="color:#bf616a;">*</span><span> Connection </span><span style="color:#65737e;">#0 to host 127.0.0.1 left intact
+</span><span style="color:#bf616a;">{</span><span>&quot;</span><span style="color:#a3be8c;">type</span><span>&quot;</span><span style="color:#bf616a;">:</span><span>&quot;</span><span style="color:#a3be8c;">https://stoplight.io/prism/errors#VIOLATIONS</span><span>&quot;</span><span style="color:#bf616a;">,</span><span>&quot;</span><span style="color:#a3be8c;">title</span><span>&quot;</span><span style="color:#bf616a;">:</span><span>&quot;</span><span style="color:#a3be8c;">Request/Response not valid</span><span>&quot;</span><span style="color:#bf616a;">,</span><span>&quot;</span><span style="color:#a3be8c;">status</span><span>&quot;</span><span style="color:#bf616a;">:500,</span><span>&quot;</span><span style="color:#a3be8c;">detail</span><span>&quot;</span><span style="color:#bf616a;">:</span><span>&quot;</span><span style="color:#a3be8c;">Your request/response is not valid and the --errors flag is set, so Prism is generating this error for you.</span><span>&quot;</span><span style="color:#bf616a;">,</span><span>&quot;</span><span style="color:#a3be8c;">validation</span><span>&quot;</span><span style="color:#bf616a;">:[{</span><span>&quot;</span><span style="color:#a3be8c;">location</span><span>&quot;</span><span style="color:#bf616a;">:[</span><span>&quot;</span><span style="color:#a3be8c;">response</span><span>&quot;</span><span style="color:#bf616a;">,</span><span>&quot;</span><span style="color:#a3be8c;">body</span><span>&quot;</span><span style="color:#bf616a;">,</span><span>&quot;</span><span style="color:#a3be8c;">foo</span><span>&quot;</span><span style="color:#bf616a;">],</span><span>&quot;</span><span style="color:#a3be8c;">severity</span><span>&quot;</span><span style="color:#bf616a;">:</span><span>&quot;</span><span style="color:#a3be8c;">Error</span><span>&quot;</span><span style="color:#bf616a;">,</span><span>&quot;</span><span style="color:#a3be8c;">code</span><span>&quot;</span><span style="color:#bf616a;">:</span><span>&quot;</span><span style="color:#a3be8c;">type</span><span>&quot;</span><span style="color:#bf616a;">,</span><span>&quot;</span><span style="color:#a3be8c;">message</span><span>&quot;</span><span style="color:#bf616a;">:</span><span>&quot;</span><span style="color:#a3be8c;">must be string</span><span>&quot;}</span><span style="color:#bf616a;">]</span><span>}
+</span></code></pre>
+<p>プロキシサーバを建てるのが面倒な場合はフレームワークに依存したバリデーションライブラリもいくつかあるのでそれらを使うという選択肢もある。</p>
+<ul>
+<li><a href="https://github.com/cdimascio/express-openapi-validator">https://github.com/cdimascio/express-openapi-validator</a></li>
+<li><a href="https://github.com/willnet/committee-rails">https://github.com/willnet/committee-rails</a></li>
+</ul>
+<h2 id="other-tools">other tools</h2>
+<p>OpenAPI と連携可能な色んなツールがまとまってるサイト</p>
+<p><a href="https://openapi.tools/">https://openapi.tools/</a></p>
+<h2 id="schema-driven-development">schema driven development</h2>
+<p>スキーマ駆動開発をしたいだけなら OpenAPI 以外にも選択肢はあると思う。</p>
+<ul>
+<li>GraphQL</li>
+<li>gRPC</li>
+<li>Protobuf</li>
+<li>JSONSchema</li>
+<li>その他、言語依存の仕組みなど…</li>
+</ul>
+<p>REST という前提であれば OpenAPI は無難な選択肢だと思う。</p>
+
+        </div>
+
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2023
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

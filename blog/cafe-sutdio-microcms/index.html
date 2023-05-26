@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>λ沢.dev</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/style.css">
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/color/orange.css">
+
+        <link rel="stylesheet" href="https://www.lambdasawa.dev/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/font-hack-subset.css">
+
+    </head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://www.lambdasawa.dev" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            λ沢.dev
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://github.com/lambdasawa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            
+                <li><a href="https://zenn.dev/lambdasawa" target="_blank" rel="noopener noreferrer">Zenn</a></li>
+            
+                <li><a href="https://twitter.com/lambdasawa" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+            
+                <li><a href="https://www.wantedly.com/id/lambdasawa" target="_blank" rel="noopener noreferrer">Wantedly</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://www.lambdasawa.dev/blog/cafe-sutdio-microcms/">親がカフェを始めたので STUDIO と microCMS でサイトを構築した</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date">
+            2022-12-31
+        </span>
+
+    </div>
+
+    
+
+        
+        <div class="post-content">
+            <p>親がカフェを始めるとのことでその Web サイト制作を依頼された。</p>
+<p>自分は Web エンジニアをやっているが得意なのはバックエンド領域であり、フロントエンドはそこまで得意なわけではなく、デザインに関しては完全に素人なので困ってしまった。</p>
+<p>フロントエンドの練習がてら Astro とかを使ってみるという選択肢もあったが、自分だけの問題ならともかく親にも関わる話だったので、あまりチャレンジングなことはせず無難にサクサク進めたかった。
+そこで <a href="https://studio.design/ja">STUDIO</a> を使うことにした。</p>
+<p>デザインに関しても STUDIO の <a href="https://studio.design/ja/template">テンプレート</a> を使うことにしてなんとかなった。
+必要なコンテンツは料理の写真、地図、営業時間などのオーソドックスなものだけだったので、テンプレートをベースにして困るようなことは特に無かった。</p>
+<p>ほぼ全てのコンテンツが滅多に変更され無さそうなので、主に STUDIO のデザインエディタを使って手動でテキストや画像を入力した。
+営業時間に関してはたまに変わるとのことで、毎回親から私に変更を依頼するのではなく、親が自分で変更できるようにしたいとのことだった。</p>
+<p>普通に考えれば STUDIO の CMS 機能を使うのが手っ取り早いが、STUDIO の管理画面は PC 版の Chrome でしか使えないという制約がある。
+STUDIO のような複雑な UI を制御するアプリケーションで、対象のブラウザを絞ってスマホをサポート外とするのは良い判断だと開発者としては思う。
+しかし、私の親は日常的に PC を利用するようなタイプではないため、スマホで管理できるようにしてあげたかった。</p>
+<p>microCMS の管理画面はスマホをサポートしているため、ここで <a href="https://microcms.io/">microCMS</a> を使うことにした。
+<a href="https://blog.studio.design/ja/posts/api-integration">STUDIO には API 連携機能</a>があり microCMS との連携がサポートされているため、簡単にこれが実現できた。</p>
+<p>ただし、STUDIO の microCMS 連携機能ではリスト形式 API にしか対応しておらず、 オブジェクト形式 API に対応していなかったためそこで少しだけ困惑した。
+しかし、リスト形式 API にコンテンツを1つだけ用意するということは可能であり、こうして運用でカバーできるので大した問題にはならなかった。</p>
+<p>ドメイン取得には Google Domains を使った。
+今までは個人的にドメインを取得して Web サイトを作るときに Route 53 を使っていたが、見聞を広めるためにあえて慣れていない Google Domains を使用した。
+フロントエンドの選定とは逆に自分にとっては多少のチャレンジではあるが、この判断で作業時間が2倍になるとかそこまで酷い悪影響は無さそうなので許容した。</p>
+<p>Google Domains では HTTP のリダイレクト設定ができるのが便利だった。
+具体的にはネイキッドドメインを www 付きのドメインにリダイレクトする設定をするために、この機能が役に立った。</p>
+<p>自分が知っている限り Route 53 だけではこれは実現できなくて、 AWS でこれをやろうとすると空の S3 バケットを作って Static Web Hosting のリダイレクト設定をするとか、 CloudFront Functions や Lambda@Edge を使うとか、そういう工夫が必要なはず。
+こういう工夫が不必要でシンプルにリダイレクト設定ができて助かった。</p>
+
+        </div>
+
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2023
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>λ沢.dev</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/style.css">
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/color/orange.css">
+
+        <link rel="stylesheet" href="https://www.lambdasawa.dev/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/font-hack-subset.css">
+
+    </head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://www.lambdasawa.dev" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            λ沢.dev
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://github.com/lambdasawa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            
+                <li><a href="https://zenn.dev/lambdasawa" target="_blank" rel="noopener noreferrer">Zenn</a></li>
+            
+                <li><a href="https://twitter.com/lambdasawa" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+            
+                <li><a href="https://www.wantedly.com/id/lambdasawa" target="_blank" rel="noopener noreferrer">Wantedly</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://www.lambdasawa.dev/blog/serverless-stack-live-lambda-developmet-internal/">Serverless Stack の Live Lambda Development の仕組み</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date">
+            2021-10-30
+        </span>
+
+    </div>
+
+    
+
+        
+        <div class="post-content">
+            <p><a href="https://docs.serverless-stack.com/">Serverless Stack</a> という AWS でサーバレスなアプリケーションを作るためのフレームワークが存在します。</p>
+<p>CloudFormation や AWS CDK を用いて Lambda をデプロイしようとすると数十秒〜数分かかることが多いと思います。</p>
+<p>Serverless Framework には Live Lambda Development という仕組みが存在しています。</p>
+<p>この仕組みを活用することによって、ローカルのユニットテストより本番に近い環境 &amp;&amp; AWS にデプロイするより早いサイクルで開発を行うことができます。</p>
+<h2 id="live-lambda-development-noaidea">Live Lambda Development のアイデア</h2>
+<p>そもそも何もデプロイしなくて良いならそれが一番早い、と考えることができます。</p>
+<p>Live Lambda Development では Lambda とローカルのコードを WebSocket で繋ぐ仕組みを作ることによって、ローカルのコードを変更したときに実際には何もデプロイしていないにも関わらず一瞬でローカルのコードがデプロイされたかのような振る舞いを実現しています。
+つまり Lambda 上で動かすためのコードを書いた後、 デバッグ用のコマンド (<code>sst start</code>) を実行すると Lambda にはそのコード自体ではなく WebSocket に <code>event</code> を流すだけのコードがデプロイされます。
+その <code>event</code> は WebSocket でローカルマシンに渡されて処理されます。
+もちろん本番デプロイ用のコマンド (<code>sst deploy</code>)を実行すると自分で書いたコードがそのままデプロイされます。</p>
+<h2 id="sst-start-wositatokiniqi-korukoto"><code>sst start</code> をしたときに起こること</h2>
+<p><code>sst start</code>は大きく分けて2つの処理を順に行います。</p>
+<ol>
+<li>各種 AWS リソースの作成</li>
+<li>ローカルマシンで WebSocket の通信を行う仕組みの起動</li>
+</ol>
+<h3 id="zuo-cheng-sareru-aws-risosunituite">作成される AWS リソースについて</h3>
+<p><img src="https://images.microcms-assets.io/assets/6d557c87790a4d889ca5641b57b7947f/25bfcc31a85145ceb9f27047dd45de13/serverless-stack.jpg" alt="" /></p>
+<p>左の API Gateway (HTTP) と Lambda はアプリケーションのコードが含まれるものです。</p>
+<p>その他の S3、 DynamoDB、 中央にある API Gateway (WebSocket) と Lambda はデバッグスタックと呼ばれるもので、本番デプロイのときは使用されません。</p>
+<p>まず中央の API Gateway (WebSocket) と Lambda はアプリケーション本体となる Lambda とローカル PC を繋ぐ中間サーバです。</p>
+<p>API Gateway (HTTP) 内にある Lambda が直接ローカルマシンと WebSocket で接続することはできません。</p>
+<p>API Gateway (HTTP) → ローカルマシンの通信では NAT が問題になり、 ローカルマシン → API Gateway (HTTP) で通信する際は API Gateway が WebSocket と HTTP の両方を listen するように定義できないという仕様が問題なります。</p>
+<p>この問題を解決するために API Gateway (WebSocket) が必要になります。</p>
+<p>S3 には <code>event</code> オブジェクトが入ります。
+基本的には <code>event</code> は WebSocket のデータとして送られるのですが、 <a href="https://docs.aws.amazon.com/ja_jp/apigateway/latest/developerguide/limits.html#apigateway-execution-service-websocket-limits-table">32kb を超えるサイズのデータは API Gateway では扱えない</a>ため、そのようなデータは S3 に保存されて WebSocket 上ではそのキーのみをやりとりします。
+<code>event</code> は <code>gzip</code> で圧縮されたバイナリに変換された後、 <code>base64</code> でテキストに変換されてやりとりされます。
+DynamoDB にはクライアントとのコネクション ID が保持されています。
+WebSocket 側の Lambda が HTTP 側の Lambda から <code>event</code> を WebSocket で受け取って起動した際、それをクライアント側の WebSocket コネクションに流す必要がありますが、その時点でその Lambda のプロセスがクライアントのコネクションを保持しているとは限らないのでこの情報を永続化する必要があります。
+これらのデプロイは AWS CDK (CloudFormation) を使用して行われるため数分待たされてしまうのですが、初回デプロイのみの問題です。</p>
+<h3 id="rokarumasinde-websocket-notong-xin-woxing-ushi-zu-mi">ローカルマシンで WebSocket の通信を行う仕組み</h3>
+<p>これは単純です。
+<a href="https://github.com/websockets/ws">Node.js の ws パッケージ</a>で API Gateway と WebSocket のコネクションを貼って <code>event</code> が飛んでくるのを待ちます。
+<code>event</code> が飛んできたらローカルのコードを別プロセスとして起動して、プロセス間通信で処理結果を受け取り、その処理結果を API Gateway に WebSocket で送り返します。</p>
+<p>--</p>
+<h2 id="httprikuesutogafa-xing-saretekarahttpresuponsugafan-sarerumadenoliu-re">HTTPリクエストが発行されてからHTTPレスポンスが返されるまでの流れ</h2>
+<p>各要素について説明を行いましたが、まとめると以下のような順で処理が行われるということになります。</p>
+<ul>
+<li>API Gateway がブラウザから HTTP リクエストを受け付ける</li>
+<li>HTTP の Lambda は<code>event</code> を WebSocket の Lambda に流す</li>
+<li>ただし <code>event</code> が大きすぎる場合は <code>s3:PutObject</code> を行い、以降 <code>event</code> を渡す場所では S3 のキーを使う</li>
+<li>WebSocket の Lambda は DynamoDB からコネクション ID を取得し、 <code>event</code> をローカルマシンに流す</li>
+<li>ローカルマシンはローカルのコードを子プロセスとして起動し <code>event</code> を渡し処理結果を IPC で受け取る</li>
+<li>ローカルマシンは IPC で受け取った処理結果を WebSocket の Lambda に送り返す</li>
+<li>WebSocket の Lambda はローカルマシンから受け取った処理結果を HTTP の Lambda から受け取る</li>
+<li>HTTP の Lambda はブラウザに処理結果を送る</li>
+</ul>
+<h2 id="can-kao-rinku">参考リンク</h2>
+<ul>
+<li><a href="https://github.com/serverless-stack/serverless-stack/blob/890a468a6fffafe9e39a53f97b7a30353720cdbc/packages/resources/assets/stub/index.js">HTTP の Lambda にデプロイされるコード</a></li>
+<li><a href="https://github.com/serverless-stack/serverless-stack/blob/890a468a6f/packages/cli/assets/debug-stack/lambda/wsDefault.js">WebSocket の Lambda にデプロイされるコード</a></li>
+<li><a href="https://github.com/serverless-stack/serverless-stack/blob/890a468a6f/packages/cli/scripts/start.js">ローカルマシンで起動するコード</a></li>
+</ul>
+<h2 id="zhong-warini">終わりに</h2>
+<p>サーバレスのシステムは運用は楽なものの開発は難しいという側面があると思います。
+そんな中で最近はこの Serverless Stack だったり AWS CDK の hotswap 機能がリリースされたりしました。
+自分も最近 <a href="https://github.com/lambdasawa/amplify-function-hotswap-plugin">Amplify 上で hotswap を行うプラグイン</a> を実装したりしました。
+これを読んだ誰かが開発を楽にする新しいアイデアを思いつたり、それを実装したりするきっかけになれば幸いです。</p>
+
+        </div>
+
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2023
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>λ沢.dev</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/style.css">
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/color/orange.css">
+
+        <link rel="stylesheet" href="https://www.lambdasawa.dev/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/font-hack-subset.css">
+
+    </head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://www.lambdasawa.dev" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            λ沢.dev
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://github.com/lambdasawa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            
+                <li><a href="https://zenn.dev/lambdasawa" target="_blank" rel="noopener noreferrer">Zenn</a></li>
+            
+                <li><a href="https://twitter.com/lambdasawa" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+            
+                <li><a href="https://www.wantedly.com/id/lambdasawa" target="_blank" rel="noopener noreferrer">Wantedly</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://www.lambdasawa.dev/cheatsheet/secret-management/">Secret Management</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date"></span>
+
+    </div>
+
+    
+
+        
+        <div class="post-content">
+            <h2 id="sops">sops</h2>
+<ul>
+<li><a href="https://github.com/mozilla/sops">github</a></li>
+</ul>
+<h2 id="doppler">Doppler</h2>
+<ul>
+<li><a href="https://docs.doppler.com/docs/cli">https://docs.doppler.com/docs/cli</a></li>
+</ul>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#96b5b4;">set</span><span> name (basename $</span><span style="color:#bf616a;">PWD</span><span>)
+</span><span style="color:#96b5b4;">echo </span><span style="color:#bf616a;">-n </span><span>&#39;</span><span style="color:#a3be8c;">setup:
+</span><span style="color:#a3be8c;">  project: ${PROJECT_NAME}
+</span><span style="color:#a3be8c;">  environment: dev
+</span><span style="color:#a3be8c;">  config: dev
+</span><span>&#39; | </span><span style="color:#bf616a;">env</span><span> PROJECT_NAME=$</span><span style="color:#bf616a;">name</span><span> envsubst &gt; doppler.yaml
+</span><span style="color:#bf616a;">doppler</span><span> projects create $</span><span style="color:#bf616a;">name
+</span><span style="color:#bf616a;">doppler</span><span> setup
+</span></code></pre>
+<h2 id="git-crypt">git-crypt</h2>
+<ul>
+<li><a href="https://github.com/AGWA/git-crypt">github</a></li>
+</ul>
+<h2 id="gitleaks">gitleaks</h2>
+<ul>
+<li><a href="https://github.com/zricethezav/gitleaks">https://github.com/zricethezav/gitleaks</a></li>
+</ul>
+<h2 id="secretlint">secretlint</h2>
+<ul>
+<li><a href="https://github.com/secretlint/secretlint">https://github.com/secretlint/secretlint</a></li>
+</ul>
+
+        </div>
+
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2023
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

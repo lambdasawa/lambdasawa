@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>λ沢.dev</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/style.css">
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/color/orange.css">
+
+        <link rel="stylesheet" href="https://www.lambdasawa.dev/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/font-hack-subset.css">
+
+    </head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://www.lambdasawa.dev" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            λ沢.dev
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://github.com/lambdasawa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            
+                <li><a href="https://zenn.dev/lambdasawa" target="_blank" rel="noopener noreferrer">Zenn</a></li>
+            
+                <li><a href="https://twitter.com/lambdasawa" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+            
+                <li><a href="https://www.wantedly.com/id/lambdasawa" target="_blank" rel="noopener noreferrer">Wantedly</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://www.lambdasawa.dev/cheatsheet/aws-terraform/">aws-terraform</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date"></span>
+
+    </div>
+
+    
+
+        
+        <div class="post-content">
+            <h2 id="tenpureto">テンプレート</h2>
+<p><code>main.tf</code></p>
+<pre data-lang="hcl" style="background-color:#2b303b;color:#c0c5ce;" class="language-hcl "><code class="language-hcl" data-lang="hcl"><span>terraform {
+</span><span>  # https://github.com/hashicorp/terraform/releases
+</span><span>  required_version = &quot;&gt;= 1.2.8&quot;
+</span><span>
+</span><span>  required_providers {
+</span><span>    aws = {
+</span><span>      # https://github.com/hashicorp/terraform-provider-aws/releases
+</span><span>      source  = &quot;hashicorp/aws&quot;
+</span><span>      version = &quot;~&gt; 4.29&quot;
+</span><span>    }
+</span><span>  }
+</span><span>
+</span><span>  backend &quot;s3&quot; {}
+</span><span>}
+</span><span>
+</span><span>locals {
+</span><span>  common_tags = {
+</span><span>    ProjectName = &quot;CHANGEME&quot;
+</span><span>    Environment = &quot;development&quot;
+</span><span>  }
+</span><span>}
+</span><span>
+</span><span>provider &quot;aws&quot; {
+</span><span>  default_tags {
+</span><span>    tags = local.common_tags
+</span><span>  }
+</span><span>}
+</span><span>
+</span><span>provider &quot;aws&quot; {
+</span><span>  region = &quot;us-east-1&quot;
+</span><span>  alias  = &quot;us_east_1&quot;
+</span><span>
+</span><span>  default_tags {
+</span><span>    tags = local.common_tags
+</span><span>  }
+</span><span>}
+</span><span>
+</span><span>data &quot;aws_caller_identity&quot; &quot;current&quot; {}
+</span><span>
+</span><span>data &quot;aws_region&quot; &quot;current&quot; {}
+</span></code></pre>
+<p><code>script/create-tf-backend-bucket.sh</code></p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#65737e;">#!/bin/bash
+</span><span>
+</span><span style="color:#96b5b4;">set</span><span> -xeou pipefail
+</span><span>
+</span><span style="color:#96b5b4;">read</span><span> TF_BACKEND_BUCKET_NAME
+</span><span style="color:#bf616a;">aws</span><span> s3 mb &quot;</span><span style="color:#a3be8c;">s3://</span><span>$</span><span style="color:#bf616a;">TF_BACKEND_BUCKET_NAME</span><span>&quot; &amp;&amp;\
+</span><span>  </span><span style="color:#bf616a;">aws</span><span> s3api put-bucket-versioning \
+</span><span style="color:#bf616a;">    --bucket </span><span>&quot;$</span><span style="color:#bf616a;">TF_BACKEND_BUCKET_NAME</span><span>&quot; \
+</span><span style="color:#bf616a;">    --versioning-configuration</span><span> Status=Enabled &amp;&amp;\
+</span><span>  </span><span style="color:#bf616a;">aws</span><span> s3api put-public-access-block \
+</span><span style="color:#bf616a;">    --bucket </span><span>&quot;$</span><span style="color:#bf616a;">TF_BACKEND_BUCKET_NAME</span><span>&quot; \
+</span><span style="color:#bf616a;">    --public-access-block-configuration </span><span>&quot;</span><span style="color:#a3be8c;">BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true</span><span>&quot;
+</span><span>
+</span><span style="color:#bf616a;">terraform</span><span> init \
+</span><span style="color:#bf616a;">  -backend-config</span><span>=&quot;</span><span style="color:#a3be8c;">bucket=</span><span>$</span><span style="color:#bf616a;">TF_BACKEND_BUCKET_NAME</span><span>&quot; \
+</span><span style="color:#bf616a;">  -backend-config</span><span>=&quot;</span><span style="color:#a3be8c;">key=terraform.tfstate</span><span>&quot;
+</span><span style="color:#bf616a;">terraform</span><span> plan
+</span></code></pre>
+<h2 id="reference">reference</h2>
+<ul>
+<li><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs">AWS provider</a>
+<ul>
+<li><a href="https://www.terraform.io/language/settings/backends/s3">backend</a></li>
+<li><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role">IAM Role</a></li>
+<li><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function">Lambda</a></li>
+<li><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket">S3</a></li>
+<li><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dynamodb_table">DynamoDB</a></li>
+<li><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/opensearch_domain">OpenSearch</a></li>
+<li><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/efs_file_system">EFS</a></li>
+<li><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_distribution">CloudFront</a></li>
+<li><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafv2_web_acl">WAF</a></li>
+<li><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_rest_api">API Gateway</a></li>
+<li><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity">Caller info (account id, user id, ...)</a></li>
+<li><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region">Region info</a></li>
+</ul>
+</li>
+<li><a href="https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource">null_resource provider</a></li>
+<li><a href="https://www.terraform.io/language/functions">Functions</a></li>
+<li>meta arguments
+<ul>
+<li><a href="https://www.terraform.io/language/meta-arguments/module-providers">providers</a></li>
+<li><a href="https://www.terraform.io/language/meta-arguments/depends_on">depends_on</a></li>
+<li><a href="https://www.terraform.io/language/meta-arguments/count">count</a></li>
+<li><a href="https://www.terraform.io/language/meta-arguments/for_each">for_each</a></li>
+<li><a href="https://www.terraform.io/language/meta-arguments/lifecycle">lifecycle</a></li>
+</ul>
+</li>
+<li><a href="https://www.terraform.io/language/resources/provisioners/local-exec">local-exec provisioner</a></li>
+</ul>
+<h2 id="tutorial">tutorial</h2>
+<ul>
+<li><a href="https://learn.hashicorp.com/tutorials/terraform/aws-build?in=terraform/aws-get-started">https://learn.hashicorp.com/tutorials/terraform/aws-build?in=terraform/aws-get-started</a></li>
+<li><a href="https://github.com/bregman-arie/devops-exercises/blob/master/exercises/terraform/README.md">https://github.com/bregman-arie/devops-exercises/blob/master/exercises/terraform/README.md</a></li>
+</ul>
+<h2 id="best-practice">best practice</h2>
+<ul>
+<li><a href="https://cloud.google.com/docs/terraform/best-practices-for-terraform?hl=ja">Terraform を使用するためのベスト プラクティス  |  Google Cloud</a></li>
+<li><a href="https://speakerdeck.com/harukasakihara/besutona-terraform-deirekutorigou-cheng-wokao-cha-sitemita">ベストな Terraform ディレクトリ構成を考察してみた</a></li>
+<li><a href="https://spacelift.io/blog/terraform-best-practices">12 Terraform Best Practices to Improve your TF workflow</a></li>
+<li><a href="https://www.terraform-best-practices.com/">Terraform Best Practices</a></li>
+<li><a href="https://github.com/shuaibiyy/awesome-terraform">https://github.com/shuaibiyy/awesome-terraform</a></li>
+<li><a href="https://github.com/ozbillwang/terraform-best-practices">https://github.com/ozbillwang/terraform-best-practices</a></li>
+<li><a href="https://github.com/nsriram/lambda-the-terraform-way">https://github.com/nsriram/lambda-the-terraform-way</a></li>
+<li><a href="https://spacelift.io/blog/terraform-aws-lambda">https://spacelift.io/blog/terraform-aws-lambda</a></li>
+</ul>
+<h2 id="lint">lint</h2>
+<ul>
+<li><a href="https://github.com/terraform-linters/tflint">https://github.com/terraform-linters/tflint</a></li>
+</ul>
+<h2 id="github-actions">GitHub Actions</h2>
+<ul>
+<li><a href="https://zenn.dev/honmarkhunt/articles/2f03cba1ffe966">Terraform開発時のDeveloper Experienceを爆上げする</a></li>
+<li><a href="https://github.com/marketplace/actions/hashicorp-setup-terraform">https://github.com/marketplace/actions/hashicorp-setup-terraform</a></li>
+<li><a href="https://github.com/runatlantis/atlantis">https://github.com/runatlantis/atlantis</a></li>
+</ul>
+<h2 id="import">import</h2>
+<ul>
+<li><a href="https://github.com/GoogleCloudPlatform/terraformer/blob/master/docs/aws.md">https://github.com/GoogleCloudPlatform/terraformer/blob/master/docs/aws.md</a></li>
+<li><a href="https://github.com/cycloidio/terracognita">https://github.com/cycloidio/terracognita</a></li>
+<li><a href="https://zenn.dev/gosarami/articles/dd938001eac988e44d11">IaC化されていないリソースをdriftctlで検知する</a></li>
+</ul>
+<h2 id="security">security</h2>
+<ul>
+<li><a href="https://github.com/aquasecurity/tfsec">https://github.com/aquasecurity/tfsec</a></li>
+<li><a href="https://github.com/tenable/terrascan">https://github.com/tenable/terrascan</a></li>
+<li><a href="https://engineering.mobalab.net/2021/03/25/handling-secrets-with-terraform/">Terraform で秘密情報を扱う</a></li>
+<li><a href="https://speakerdeck.com/harukasakihara/sekiyuanaterraformfalseshi-ifang-ji-mi-qing-bao-wokodonihan-mezuhuan-jing-gou-zhu-surunihadousitaraiifalse">セキュアなTerraformの使い方 ～ 機密情報をコードに含めず環境構築するにはどうしたらいいの？</a></li>
+</ul>
+<h2 id="test">test</h2>
+<ul>
+<li><a href="https://github.com/gruntwork-io/terratest">https://github.com/gruntwork-io/terratest</a></li>
+<li><a href="https://www.contino.io/insights/top-3-terraform-testing-strategies-for-ultra-reliable-infrastructure-as-code">Top 3 Terraform Testing Strategies for Ultra-Reliable Infrastructure-as-Code</a></li>
+</ul>
+
+        </div>
+
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2023
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

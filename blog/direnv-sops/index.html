@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>λ沢.dev</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/style.css">
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/color/orange.css">
+
+        <link rel="stylesheet" href="https://www.lambdasawa.dev/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/font-hack-subset.css">
+
+    </head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://www.lambdasawa.dev" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            λ沢.dev
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://github.com/lambdasawa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            
+                <li><a href="https://zenn.dev/lambdasawa" target="_blank" rel="noopener noreferrer">Zenn</a></li>
+            
+                <li><a href="https://twitter.com/lambdasawa" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+            
+                <li><a href="https://www.wantedly.com/id/lambdasawa" target="_blank" rel="noopener noreferrer">Wantedly</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://www.lambdasawa.dev/blog/direnv-sops/">direnv と sops で設定を管理する</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date">
+            2020-05-03
+        </span>
+
+    </div>
+
+    
+
+        
+        <div class="post-content">
+            <p>最近環境依存の値を <code>direnv</code> で管理していたのですが、環境ごとに <code>.env</code> を管理するのが辛くなってきたので、 <code>sops</code> と組み合わせて <code>.env</code> を安全にバージョン管理する方法についてまとめます。</p>
+<p><a href="https://github.com/direnv/direnv">direnv</a> は雑に説明すると <code>direnv allow .</code> で許可したディレクトリに <code>.env</code> というファイルがあると、そのディレクトリに <code>cd</code> したときに <code>.env</code> に書いてある値が環境変数に設定されるというものです。<code>brew</code> でインストールできます。</p>
+<p><a href="https://github.com/mozilla/sops">sops</a> は雑に説明すると JSON, YAML ファイルを AWS の KMS などで暗号/複合するためのユーティリティです。 <code>brew</code> でインストールできます。<br />
+AWS ではなく GCP, Azure でも使えるようですが、自分は使っていないためここでは省略します。<br />
+復号後の値を <code>.env</code> のフォーマットで出力できるため、 <code>direnv</code> と連携しやすいです。<br />
+<a href="https://railsguides.jp/5_2_release_notes.html#credential%E7%AE%A1%E7%90%86">Ruby on Rails の master.key</a> の仕組みを知っている方であれば、それと同じようなものと考えていただいて問題ないです。</p>
+<h2 id="apurikesiyon">アプリケーション</h2>
+<p>まずサンプルとして以下のような JavaScript のアプリケーションがあるとします。</p>
+<pre data-lang="javascript" style="background-color:#2b303b;color:#c0c5ce;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span style="color:#ebcb8b;">console</span><span>.</span><span style="color:#96b5b4;">log</span><span>([process.env.</span><span style="color:#bf616a;">KEY_1</span><span>, process.env.</span><span style="color:#bf616a;">KEY_2</span><span>].</span><span style="color:#96b5b4;">join</span><span>(&quot;</span><span style="color:#a3be8c;"> , </span><span>&quot;));
+</span></code></pre>
+<p><code>KEY_1</code>, <code>KEY_2</code> はそれぞれ DB のユーザ名、パスワード、接続先ドメイン、ポートなどであるという想定です。<br />
+例えばローカルと本番環境では接続先ドメインは異なりますし、何かポートの衝突が発生していてチームの他の開発者とは異なるポートを設定したい…というシチュエーションが考えられるものです。<br />
+また、パスワードなどが含まれることもあるため、ローカル環境のデフォルト値などを除いてコミットはしたくないものとします。</p>
+<h2 id="env-sample-nituite"><code>.env.sample</code> について</h2>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">KEY_1</span><span>=</span><span style="color:#a3be8c;">VALUE_1
+</span><span style="color:#bf616a;">KEY_2</span><span>=</span><span style="color:#a3be8c;">VALUE_2
+</span></code></pre>
+<p>アプリケーションで使う値のサンプルを記載します。<br />
+ローカルで使うデフォルトのパスワードなどは含まれますが、本番環境で使うパスワードなどは含めずにコミットします。</p>
+<h2 id="envrc-nituite"><code>.envrc</code> について</h2>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">dotenv</span><span> .env
+</span><span style="color:#bf616a;">dotenv</span><span> .env.local
+</span></code></pre>
+<p><code>.env</code> には <code>sops</code> で復号した値を書き込みます。
+それを <code>.env.local</code> で記載した値で上書きするというような設定になっています。</p>
+<p>これによって、例えば DB の接続先ドメインなど開発者ごとに共通するものは <code>.env</code> に書かれ、
+それを個別の開発者が上書きしたい場合は個々人が <code>.env.local</code> を編集する、という仕組みが作れます。</p>
+<h2 id="encrypted-env-yml-nituite"><code>encrypted-env.yml</code> について</h2>
+<pre data-lang="yaml" style="background-color:#2b303b;color:#c0c5ce;" class="language-yaml "><code class="language-yaml" data-lang="yaml"><span style="color:#bf616a;">KEY_1</span><span>: </span><span style="color:#a3be8c;">ENC[AES256_GCM,data:XXXX,tag:XXXX,type:str]
+</span><span style="color:#bf616a;">KEY_2</span><span>: </span><span style="color:#a3be8c;">ENC[AES256_GCM,data:XXXX,tag:XXXX,type:str]
+</span><span style="color:#bf616a;">sops</span><span>:
+</span><span>    </span><span style="color:#bf616a;">kms</span><span>:
+</span><span>    -   </span><span style="color:#bf616a;">arn</span><span>: </span><span style="color:#a3be8c;">arn:aws:kms:ap-northeast-1:XXXX:key/XXXX
+</span><span>        </span><span style="color:#bf616a;">created_at</span><span>: &#39;</span><span style="color:#a3be8c;">2020-05-03T04:12:33Z</span><span>&#39;
+</span><span>        </span><span style="color:#bf616a;">enc</span><span>: </span><span style="color:#a3be8c;">XXXX
+</span><span>        </span><span style="color:#bf616a;">aws_profile</span><span>: &quot;&quot;
+</span><span>    </span><span style="color:#bf616a;">gcp_kms</span><span>: []
+</span><span>    </span><span style="color:#bf616a;">azure_kv</span><span>: []
+</span><span>    </span><span style="color:#bf616a;">lastmodified</span><span>: &#39;</span><span style="color:#a3be8c;">2020-05-03T04:13:14Z</span><span>&#39;
+</span><span>    </span><span style="color:#bf616a;">mac</span><span>: </span><span style="color:#a3be8c;">ENC[AES256_GCM,data:XXXX,tag:XXXX,type:str]
+</span><span>    </span><span style="color:#bf616a;">pgp</span><span>: []
+</span><span>    </span><span style="color:#bf616a;">unencrypted_suffix</span><span>: </span><span style="color:#a3be8c;">_unencrypted
+</span><span>    </span><span style="color:#bf616a;">version</span><span>: </span><span style="color:#d08770;">3.5.0
+</span></code></pre>
+<p>これは <code>env EDITOR=&quot;code --wait&quot; sops encrypted-env.yml</code> のコマンドで作成、編集をします。
+<code>EDITOR</code> は <code>.bashrc</code> などで指定されていれば明示する必要はありません。<br />
+各値は KMS で暗号化されたものになっており、 この KMS にアクセスする AWS の権限がないと復号出来ないようになっています。<br />
+そのため、 AWS の権限は別で管理するとして上記のファイルはコミットしてバージョン管理が可能です。</p>
+<p>環境が複数ある場合は <code>encrypted-env-dev.yml</code>, <code>encrypted-env-production.yml</code> などを追加してコミットします。</p>
+<p>ファイル名はどれも任意のもので問題ありません。</p>
+<h2 id="env-nituite"><code>.env</code> について</h2>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">KEY_1</span><span>=</span><span style="color:#a3be8c;">SECRET_VALUE_1
+</span><span style="color:#bf616a;">KEY_2</span><span>=</span><span style="color:#a3be8c;">SECRET_VALUE_2
+</span></code></pre>
+<p>これは <code>sops</code> で作られた <code>encrypted-env.yml</code> を復号した結果です。<br />
+以下のようなコマンドで復号した値を適切なフォーマットで <code>.env</code> に保存できます。</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">env </span><span>\
+</span><span>  SOPS_KMS_ARN=arn:aws:kms:ap-northeast-1:XXXX:key/XXXX \
+</span><span>  sops \
+</span><span style="color:#bf616a;">    --decrypt </span><span>\
+</span><span style="color:#bf616a;">    --output-type</span><span> dotenv \
+</span><span>    encrypted-env.yml \
+</span><span>    &gt; .env
+</span></code></pre>
+<p>他の開発者が <code>encrypted-env.yml</code> を更新した場合は <code>git pull</code> した後に上記コマンドを実行することでローカルの環境更新が行なえます。</p>
+<h2 id="env-local-nituite"><code>.env.local</code> について</h2>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">KEY_2</span><span>=</span><span style="color:#a3be8c;">LAMBDASAWA_VALUE_2
+</span></code></pre>
+<p>これは開発者固有の事情で設定を上書きしたい場合に使うファイルです。<br />
+特に上書きしたい項目が無い場合でもファイルの存在自体は必要ですが、中身は空でも問題ありません。</p>
+<h2 id="gitignore-nituite"><code>.gitignore</code> について</h2>
+<pre data-lang="dotenv" style="background-color:#2b303b;color:#c0c5ce;" class="language-dotenv "><code class="language-dotenv" data-lang="dotenv"><span>.env
+</span><span>.env.local
+</span></code></pre>
+<p><code>.env</code> には平文のパスワードなどが、 <code>.env.local</code> には開発者固有の値が含まれるため、どちらもコミットしないようにします。</p>
+<h2 id="shi-xing-li">実行例</h2>
+<p>上記のような設定をすると最初に書いたアプリケーションの実行結果は以下のようになります。
+(<code>direnv allow .</code> は実行済みの想定。)</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> node app.js
+</span><span style="color:#bf616a;">SECRET_VALUE_1</span><span> , LAMBDASAWA_VALUE_2
+</span></code></pre>
+<h2 id="matome">まとめ</h2>
+<p>これによって以下が達成できました。</p>
+<ul>
+<li>アプリケーションは設定を環境変数から読むだけの単純な作りに出来る</li>
+<li>一度セットアップしたら <code>cd</code> するだけで設定を切り替えられる</li>
+<li>パスワードを含む設定ファイルをバージョン管理できる (AWS のクレデンシャルだけは別途管理する必要がある)</li>
+<li>共有したい設定と開発者ごとの設定を分けて管理できる</li>
+</ul>
+
+        </div>
+
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2023
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

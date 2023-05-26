@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>λ沢.dev</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/style.css">
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/color/orange.css">
+
+        <link rel="stylesheet" href="https://www.lambdasawa.dev/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/font-hack-subset.css">
+
+    </head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://www.lambdasawa.dev" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            λ沢.dev
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://github.com/lambdasawa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            
+                <li><a href="https://zenn.dev/lambdasawa" target="_blank" rel="noopener noreferrer">Zenn</a></li>
+            
+                <li><a href="https://twitter.com/lambdasawa" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+            
+                <li><a href="https://www.wantedly.com/id/lambdasawa" target="_blank" rel="noopener noreferrer">Wantedly</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://www.lambdasawa.dev/cheatsheet/aws-transcribe-youtube-channel-archives/">AWS Transcribe YouTube Channel Archives</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date"></span>
+
+    </div>
+
+    
+
+        
+        <div class="post-content">
+            <h2 id="tiyannerunodong-hua-yi-lan-pezino-devtools-karadong-hua-no-url-woqu-de-suru">チャンネルの動画一覧ページの DevTools から動画の URL を取得する</h2>
+<p><a href="https://www.youtube.com/channel/xxxx/videos">https://www.youtube.com/channel/xxxx/videos</a></p>
+<pre data-lang="js" style="background-color:#2b303b;color:#c0c5ce;" class="language-js "><code class="language-js" data-lang="js"><span>[...document.</span><span style="color:#96b5b4;">querySelectorAll</span><span>(&quot;</span><span style="color:#a3be8c;">.yt-simple-endpoint.style-scope.ytd-grid-video-renderer</span><span>&quot;)]
+</span><span>  .</span><span style="color:#8fa1b3;">map</span><span>(</span><span style="color:#bf616a;">e </span><span style="color:#b48ead;">=&gt;
+</span><span>    </span><span style="color:#bf616a;">e</span><span>.href.</span><span style="color:#8fa1b3;">includes</span><span>(&quot;</span><span style="color:#a3be8c;">watch</span><span>&quot;) ?
+</span><span>      new URLSearchParams(new URL(</span><span style="color:#bf616a;">e</span><span>.href).</span><span style="color:#bf616a;">search</span><span>).</span><span style="color:#96b5b4;">get</span><span>(&quot;</span><span style="color:#a3be8c;">v</span><span>&quot;) :
+</span><span>      </span><span style="color:#bf616a;">e</span><span>.href.</span><span style="color:#96b5b4;">match</span><span>(/</span><span style="color:#96b5b4;">\/shorts\/(</span><span style="color:#d08770;">[\w]</span><span>+</span><span style="color:#96b5b4;">)</span><span>/)[</span><span style="color:#d08770;">1</span><span>]
+</span><span>  )
+</span><span>  .</span><span style="color:#8fa1b3;">map</span><span>(</span><span style="color:#bf616a;">id </span><span style="color:#b48ead;">=&gt; </span><span>`</span><span style="color:#a3be8c;">https://www.youtube.com/watch?v=${</span><span style="color:#bf616a;">id</span><span style="color:#a3be8c;">}</span><span>`)
+</span><span>  .</span><span style="color:#96b5b4;">join</span><span>(&quot;</span><span style="color:#96b5b4;">\n</span><span>&quot;)
+</span></code></pre>
+<p><code>public-video-ids.txt</code></p>
+<pre data-lang="txt" style="background-color:#2b303b;color:#c0c5ce;" class="language-txt "><code class="language-txt" data-lang="txt"><span>https://www.youtube.com/watch?v=xxxx1
+</span><span>https://www.youtube.com/watch?v=xxxx2
+</span><span>https://www.youtube.com/watch?v=xxxx3
+</span></code></pre>
+<h2 id="pureirisutonei-nodong-hua-yi-lan-pezino-devtools-karadong-hua-no-url-woqu-de-suru">プレイリスト内の動画一覧ページの DevTools から動画の URL を取得する</h2>
+<p><a href="https://www.youtube.com/playlist?list=xxxx">https://www.youtube.com/playlist?list=xxxx</a></p>
+<pre data-lang="js" style="background-color:#2b303b;color:#c0c5ce;" class="language-js "><code class="language-js" data-lang="js"><span>[...document.</span><span style="color:#96b5b4;">querySelectorAll</span><span>(&quot;</span><span style="color:#a3be8c;">.yt-simple-endpoint.style-scope.ytd-playlist-video-renderer</span><span>&quot;)]
+</span><span>  .</span><span style="color:#8fa1b3;">map</span><span>(</span><span style="color:#bf616a;">e </span><span style="color:#b48ead;">=&gt;
+</span><span>    </span><span style="color:#bf616a;">e</span><span>.href.</span><span style="color:#8fa1b3;">includes</span><span>(&quot;</span><span style="color:#a3be8c;">watch</span><span>&quot;) ?
+</span><span>      new URLSearchParams(new URL(</span><span style="color:#bf616a;">e</span><span>.href).</span><span style="color:#bf616a;">search</span><span>).</span><span style="color:#96b5b4;">get</span><span>(&quot;</span><span style="color:#a3be8c;">v</span><span>&quot;) :
+</span><span>      </span><span style="color:#bf616a;">e</span><span>.href.</span><span style="color:#96b5b4;">match</span><span>(/</span><span style="color:#96b5b4;">\/shorts\/(</span><span style="color:#d08770;">[\w]</span><span>+</span><span style="color:#96b5b4;">)</span><span>/)[</span><span style="color:#d08770;">1</span><span>]
+</span><span>  )
+</span><span>  .</span><span style="color:#8fa1b3;">map</span><span>(</span><span style="color:#bf616a;">id </span><span style="color:#b48ead;">=&gt; </span><span>`</span><span style="color:#a3be8c;">https://www.youtube.com/watch?v=${</span><span style="color:#bf616a;">id</span><span style="color:#a3be8c;">}</span><span>`)
+</span><span>  .</span><span style="color:#96b5b4;">join</span><span>(&quot;</span><span style="color:#96b5b4;">\n</span><span>&quot;)
+</span></code></pre>
+<p><code>private-video-ids.txt</code></p>
+<pre data-lang="txt" style="background-color:#2b303b;color:#c0c5ce;" class="language-txt "><code class="language-txt" data-lang="txt"><span>https://www.youtube.com/watch?v=xxxx4
+</span><span>https://www.youtube.com/watch?v=xxxx5
+</span><span>https://www.youtube.com/watch?v=xxxx6
+</span></code></pre>
+<h2 id="daunrodositadong-hua-wo-s3-niatupurodo">ダウンロードした動画を S3 にアップロード</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">aws</span><span> s3 mb s3://$</span><span style="color:#bf616a;">MP4_BUCKET_NAME
+</span><span>
+</span><span style="color:#b48ead;">while </span><span style="color:#96b5b4;">read </span><span style="color:#bf616a;">-r</span><span> url; </span><span style="color:#b48ead;">do
+</span><span>  </span><span style="color:#bf616a;">youtube-dl --format</span><span> mp4 &quot;$</span><span style="color:#bf616a;">url</span><span>&quot;
+</span><span>  </span><span style="color:#bf616a;">aws</span><span> s3 cp ./*.mp4 &quot;</span><span style="color:#a3be8c;">s3://</span><span>$</span><span style="color:#bf616a;">MP4_BUCKET_NAME</span><span>&quot;
+</span><span>  </span><span style="color:#bf616a;">rm</span><span> ./*.mp4
+</span><span style="color:#b48ead;">done </span><span>&lt;public-video-ids.txt
+</span></code></pre>
+<h2 id="ec2-woqi-dong">EC2 を起動</h2>
+<pre data-lang="tf" style="background-color:#2b303b;color:#c0c5ce;" class="language-tf "><code class="language-tf" data-lang="tf"><span>terraform {
+</span><span>  required_providers {
+</span><span>    aws = {
+</span><span>      source  = &quot;hashicorp/aws&quot;
+</span><span>      version = &quot;~&gt; 4.16&quot;
+</span><span>    }
+</span><span>  }
+</span><span>
+</span><span>  required_version = &quot;&gt;= 1.2.0&quot;
+</span><span>}
+</span><span>
+</span><span>provider &quot;aws&quot; {
+</span><span>  region = &quot;ap-northeast-1&quot;
+</span><span>}
+</span><span>
+</span><span>resource &quot;aws_instance&quot; &quot;app_server&quot; {
+</span><span>  ami           = &quot;ami-0a054d6fbb2cc67ee&quot;
+</span><span>  instance_type = &quot;t2.micro&quot;
+</span><span>
+</span><span>  tags = {
+</span><span>    Name = &quot;youtube-backup&quot;
+</span><span>  }
+</span><span>}
+</span></code></pre>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">terraform</span><span> init
+</span><span style="color:#bf616a;">terraform</span><span> apply</span><span style="color:#bf616a;"> -auto-approve</span><span>`
+</span></code></pre>
+<h2 id="allow-ssh-from-my-ip">Allow SSH from my IP</h2>
+<p>TODO</p>
+<h2 id="ec2-ni-ssh-sitesukuriputoshi-xing">EC2 に SSH してスクリプト実行</h2>
+<p><a href="https://dev.classmethod.jp/articles/ec2-instance-connect/">https://dev.classmethod.jp/articles/ec2-instance-connect/</a></p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">sudo</span><span> apt update</span><span style="color:#bf616a;"> -y </span><span>&amp;&amp; </span><span style="color:#bf616a;">sudo</span><span> apt install</span><span style="color:#bf616a;"> -y</span><span> youtube-dl awscli
+</span><span>
+</span><span style="color:#bf616a;">curl -sSLO</span><span> https://raw.githubusercontent.com/lambdasawa/lambdasawa/bba6e3864d5b5721247a6d17da46326fe62ce632/docs/transcribe-channel-archives.md
+</span><span>
+</span><span style="color:#bf616a;">cp</span><span> transcribe-channel-archives.md public-video-ids.txt
+</span><span style="color:#bf616a;">vim</span><span> public-video-ids.txt
+</span><span>
+</span><span style="color:#bf616a;">cp</span><span> transcribe-channel-archives.md private-video-ids.txt
+</span><span style="color:#bf616a;">vim</span><span> private-video-ids.txt
+</span><span>
+</span><span style="color:#bf616a;">cp</span><span> transcribe-channel-archives.md backup.sh
+</span><span style="color:#bf616a;">vim</span><span> backup.sh
+</span><span style="color:#bf616a;">chmod</span><span> u+x backup.sh
+</span><span>
+</span><span style="color:#bf616a;">./backup.sh
+</span></code></pre>
+<h3 id="transcribe-woshi-xing">Transcribe を実行</h3>
+<pre data-lang="fish" style="background-color:#2b303b;color:#c0c5ce;" class="language-fish "><code class="language-fish" data-lang="fish"><span style="color:#b48ead;">for </span><span>key </span><span style="color:#b48ead;">in </span><span>(</span><span style="color:#bf616a;">aws </span><span>s3api list-objects-v2 </span><span style="color:#bf616a;">--bucket </span><span>$</span><span style="color:#bf616a;">MP4_BUCKET_NAME </span><span>| </span><span style="color:#bf616a;">jq -r </span><span>&quot;</span><span style="color:#a3be8c;">.Contents[] | .Key</span><span>&quot;)
+</span><span>    </span><span style="color:#bf616a;">set </span><span>video_id (</span><span style="color:#bf616a;">echo </span><span>$</span><span style="color:#bf616a;">key </span><span>| </span><span style="color:#bf616a;">sed -E </span><span>&#39;</span><span style="color:#a3be8c;">s/.*</span><span style="color:#96b5b4;">\\</span><span style="color:#a3be8c;">[(.*)</span><span style="color:#96b5b4;">\\</span><span style="color:#a3be8c;">].*/\1/</span><span>&#39;)
+</span><span>    </span><span style="color:#bf616a;">set </span><span>s3_uri &quot;</span><span style="color:#a3be8c;">s3://</span><span>$</span><span style="color:#bf616a;">MP4_BUCKET_NAME</span><span style="color:#a3be8c;">/</span><span>$</span><span style="color:#bf616a;">key</span><span>&quot;
+</span><span>    </span><span style="color:#bf616a;">set </span><span>media (</span><span style="color:#bf616a;">printf </span><span>&#39;</span><span style="color:#a3be8c;">{&quot;MediaFileUri&quot;:&quot;%s&quot;}</span><span>&#39; &quot;$</span><span style="color:#bf616a;">s3_uri</span><span>&quot;)
+</span><span>
+</span><span>    </span><span style="color:#bf616a;">echo </span><span>$</span><span style="color:#bf616a;">video_id </span><span>$</span><span style="color:#bf616a;">s3_uri </span><span>$</span><span style="color:#bf616a;">media
+</span><span>    </span><span style="color:#bf616a;">aws </span><span>transcribe start-transcription-job </span><span style="color:#96b5b4;">\
+</span><span>        </span><span style="color:#bf616a;">--transcription-job-name </span><span>&quot;$</span><span style="color:#bf616a;">video_id</span><span>&quot; </span><span style="color:#96b5b4;">\
+</span><span>        </span><span style="color:#bf616a;">--media-format </span><span>mp4 </span><span style="color:#96b5b4;">\
+</span><span>        </span><span style="color:#bf616a;">--language-code </span><span>ja-JP </span><span style="color:#96b5b4;">\
+</span><span>        </span><span style="color:#bf616a;">--media </span><span>&quot;$</span><span style="color:#bf616a;">media</span><span>&quot;
+</span><span style="color:#b48ead;">end
+</span></code></pre>
+<pre data-lang="fish" style="background-color:#2b303b;color:#c0c5ce;" class="language-fish "><code class="language-fish" data-lang="fish"><span style="color:#bf616a;">aws </span><span>s3 mb s3://$</span><span style="color:#bf616a;">TRANSCRIPT_BUCKET_NAME
+</span><span>
+</span><span style="color:#bf616a;">mkdir -p </span><span>transcript
+</span><span style="color:#bf616a;">pushd </span><span>$</span><span style="color:#bf616a;">PWD
+</span><span style="color:#bf616a;">cd </span><span>transcript
+</span><span>
+</span><span style="color:#b48ead;">for </span><span>key </span><span style="color:#b48ead;">in </span><span>(</span><span style="color:#bf616a;">aws </span><span>s3api list-objects-v2 </span><span style="color:#bf616a;">--bucket </span><span>$</span><span style="color:#bf616a;">MP4_BUCKET_NAME </span><span>| </span><span style="color:#bf616a;">jq -r </span><span>&quot;</span><span style="color:#a3be8c;">.Contents[] | .Key</span><span>&quot;)
+</span><span>    </span><span style="color:#bf616a;">set </span><span>video_id (</span><span style="color:#bf616a;">echo </span><span>$</span><span style="color:#bf616a;">key </span><span>| </span><span style="color:#bf616a;">sed -E </span><span>&#39;</span><span style="color:#a3be8c;">s/.*</span><span style="color:#96b5b4;">\\</span><span style="color:#a3be8c;">[(.*)</span><span style="color:#96b5b4;">\\</span><span style="color:#a3be8c;">].*/\1/</span><span>&#39;)
+</span><span>
+</span><span>  </span><span style="color:#bf616a;">curl -sSL -o </span><span>&quot;$</span><span style="color:#bf616a;">video_id</span><span style="color:#a3be8c;">.json</span><span>&quot; (</span><span style="color:#bf616a;">aws </span><span>transcribe get-transcription-job </span><span style="color:#bf616a;">--transcription-job-name </span><span>$</span><span style="color:#bf616a;">video_id </span><span>| </span><span style="color:#bf616a;">jq -r </span><span>.TranscriptionJob.Transcript.TranscriptFileUri)
+</span><span>  </span><span style="color:#bf616a;">aws </span><span>s3 cp &quot;$</span><span style="color:#bf616a;">video_id</span><span style="color:#a3be8c;">.json</span><span>&quot; s3://$</span><span style="color:#bf616a;">TRANSCRIPT_BUCKET_NAME</span><span>/
+</span><span>
+</span><span style="color:#b48ead;">end
+</span><span>
+</span><span style="color:#bf616a;">popd
+</span></code></pre>
+
+        </div>
+
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2023
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

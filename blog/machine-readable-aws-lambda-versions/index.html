@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>λ沢.dev</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/style.css">
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/color/orange.css">
+
+        <link rel="stylesheet" href="https://www.lambdasawa.dev/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/font-hack-subset.css">
+
+    </head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://www.lambdasawa.dev" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            λ沢.dev
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://github.com/lambdasawa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            
+                <li><a href="https://zenn.dev/lambdasawa" target="_blank" rel="noopener noreferrer">Zenn</a></li>
+            
+                <li><a href="https://twitter.com/lambdasawa" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+            
+                <li><a href="https://www.wantedly.com/id/lambdasawa" target="_blank" rel="noopener noreferrer">Wantedly</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://www.lambdasawa.dev/blog/machine-readable-aws-lambda-versions/">Lambda のパッチバージョンが見れるサイトを機械可読にした</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date">
+            2021-08-26
+        </span>
+
+    </div>
+
+    
+
+        
+        <div class="post-content">
+            <p>http://lambda-versions.com/</p>
+<p>https://www.lambdasawa.me/blogs/aws-lambda-runtime-patch-versions で投稿したものを更新しました。</p>
+<p>今までは HTML しか返していなかったのですが、 JSON 用のエンドポイント (<a href="http://lambda-versions.com/versions.json">http://lambda-versions.com/versions.json</a>) を追加しました。
+これによって機械的な処理 (ex: curl &amp; jq) が行いやすくなりました。</p>
+<p>ついでに今まで S3 の static website hosting で払い出されれたドメインを使っていましたが、分かりやすいドメイン (http://lambda-versions.com/
+) を割り当ててあげました。</p>
+<h2 id="shi-zhuang-lambda">実装: Lambda</h2>
+<p>もともとシンプルに S3 で静的なファイルをホスティングしているだけのサイトでした。
+コストを掛けずに運用したいという理由でそれは今後も変えたくなかったため、API Gateway や Web アプリケーションフレームワークは導入していないです。
+代わりにこのバケットへの PutObject をトリガーにして起動する Lambda を作成し、その Lambda 内で既存のバージョン情報をかき集めて JSON ファイルを作成してそれをさらに PutObject する仕組みを作りました。</p>
+<p>ここで一つ事故が起こりました。
+PutObject を実行する Lambda と PutObject をトリガーにして起動する Lambda が存在しているため、Lambda が無限に起動し続ける可能性がある状態になっており、実際に無限ループしていました。
+自分の場合は1時間くらいで気がつけたので問題ないですが、いわゆるクラウド破産的な高額請求が発生しうるケースでした。参考: <a href="https://blog.mmmcorp.co.jp/blog/2019/12/25/lambda-cloud-bankruptcy/">10日間 で AWS Lambda 関数を 28億回 実行した話</a>
+(とはいえ、請求金額に対するアラームは設定済みなので実際の損失は数千円で止められたと思います)</p>
+<p>もちろん現在は修正済みです。
+今回は一次対応としては手動で Lambda のトリガーを削除しました。
+その後に根本対応として、PutObject しようとするファイルに差分があるか事前にチェックし、差分があった場合のみ PutObject をするように Lambda のコードを修正しました。
+差分が無い場合は PutObject されないのでそこでループが止まります。</p>
+<p>今回は採用しなかったやり方ですが、 S3 バケットを分割することによっても対処できたと思います。</p>
+<h2 id="shi-zhuang-domein">実装: ドメイン</h2>
+<p>シンプルに static website hosting の設定を Route 53 でエイリアスレコードとして割り当てました。
+10日ほど前にカヤックさんが <a href="https://techblog.kayac.com/do-not-use-cloudfront-s3-origin-with-managed-all-viewer">CloudFrontのS3 Originにはhostヘッダーを転送してはいけない</a> という記事を公開していましたが、ちょうどこれと同じ問題に直面しました。
+タイムリーですね。</p>
+<h2 id="zui-hou-ni">最後に</h2>
+<p>面倒な問題が2つ発生しましたが、日頃からある程度キャッチアップをしておいたおかげで類似の問題をすぐ思い出すことができて、素早く対処できました。
+Feedly を眺めている時間が無駄になっていないようで良かったです。</p>
+
+        </div>
+
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2023
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

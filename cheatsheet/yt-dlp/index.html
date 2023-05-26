@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>λ沢.dev</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/style.css">
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/color/orange.css">
+
+        <link rel="stylesheet" href="https://www.lambdasawa.dev/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/font-hack-subset.css">
+
+    </head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://www.lambdasawa.dev" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            λ沢.dev
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://github.com/lambdasawa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            
+                <li><a href="https://zenn.dev/lambdasawa" target="_blank" rel="noopener noreferrer">Zenn</a></li>
+            
+                <li><a href="https://twitter.com/lambdasawa" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+            
+                <li><a href="https://www.wantedly.com/id/lambdasawa" target="_blank" rel="noopener noreferrer">Wantedly</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://www.lambdasawa.dev/cheatsheet/yt-dlp/">yt-dlp</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date"></span>
+
+    </div>
+
+    
+
+        
+        <div class="post-content">
+            <pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">brew</span><span> install yt-dlp/taps/yt-dlp
+</span></code></pre>
+<h2 id="mp4-dedaunrodo">mp4 でダウンロード</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">yt-dlp --remux-video</span><span> mp4 &#39;</span><span style="color:#a3be8c;">https://www.youtube.com/watch?v=xxxx</span><span>&#39;
+</span></code></pre>
+<h2 id="gao-su-nidaunrodo">高速にダウンロード</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">yt-dlp --concurrent-fragments</span><span> 8</span><span style="color:#bf616a;"> --downloader</span><span> aria2c &#39;</span><span style="color:#a3be8c;">https://www.youtube.com/watch?v=xxxx</span><span>&#39;
+</span></code></pre>
+<h2 id="firefox-nokutukiwoshi-tuteren-zheng-woxing-i-mp4-dedaunrodo">firefox のクッキーを使って認証を行い mp4 でダウンロード</h2>
+<p>メン限もダウンロードも可能。</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">yt-dlp --cookies-from-browser</span><span> firefox &#39;</span><span style="color:#a3be8c;">https://www.youtube.com/watch?v=xxxx</span><span>&#39;
+</span></code></pre>
+<h2 id="mp4-dedaunrodositetorimingu">mp4 でダウンロードしてトリミング</h2>
+<p>75秒目から75+3秒目までをトリミング。</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">yt-dlp --remux-video</span><span> mp4</span><span style="color:#bf616a;"> --exec </span><span>&#39;</span><span style="color:#a3be8c;">ffmpeg -ss 75 -i %(filepath)q -t 3 -c copy output.mp4</span><span>&#39; &#39;</span><span style="color:#a3be8c;">https://www.youtube.com/watch?v=xxxx</span><span>&#39;
+</span></code></pre>
+<h2 id="sukeziyurusaretapei-xin-wo10miao-okiniporingusite-pei-xin-gakai-shi-saretaradaunrodokai-shi">スケジュールされた配信を10秒おきにポーリングして、配信が開始されたらダウンロード開始</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">yt-dlp --wait-for-video</span><span> 10 &#39;</span><span style="color:#a3be8c;">https://www.youtube.com/watch?v=xxxx</span><span>&#39;
+</span></code></pre>
+<h2 id="mp3-dedaunrodo">mp3 でダウンロード</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">yt-dlp --extract-audio --audio-format</span><span> mp3 &#39;</span><span style="color:#a3be8c;">https://www.youtube.com/watch?v=xxxx</span><span>&#39;
+</span></code></pre>
+<h2 id="mp3-dedaunrodositetorimingu">mp3 でダウンロードしてトリミング</h2>
+<p>75秒目から75+3秒目までをトリミング。</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">yt-dlp --extract-audio --audio-format</span><span> mp3</span><span style="color:#bf616a;"> --exec </span><span>&#39;</span><span style="color:#a3be8c;">sox %(filepath)q output.mp3 trim 75 3</span><span>&#39; &#39;</span><span style="color:#a3be8c;">https://www.youtube.com/watch?v=xxxx</span><span>&#39;
+</span></code></pre>
+<h2 id="tiyatutodakequ-de">チャットだけ取得</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">yt-dlp --write-subs --no-download </span><span>&#39;</span><span style="color:#a3be8c;">https://www.youtube.com/watch?v=xxxx</span><span>&#39;
+</span><span style="color:#bf616a;">cat </span><span>*.json | </span><span style="color:#bf616a;">jq -s
+</span></code></pre>
+<h2 id="komentodakequ-de">コメントだけ取得</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">yt-dlp --write-comment --no-download </span><span>&#39;</span><span style="color:#a3be8c;">https://www.youtube.com/watch?v=xxxx</span><span>&#39;
+</span><span style="color:#bf616a;">cat </span><span>*.json | </span><span style="color:#bf616a;">jq -s
+</span></code></pre>
+<h2 id="liang-igan-zinidaunrodo">良い感じにダウンロード</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">yt-dlp --cookies-from-browser</span><span> firefox</span><span style="color:#bf616a;"> --wait-for-video</span><span> 10</span><span style="color:#bf616a;"> --remux-video</span><span> mp4</span><span style="color:#bf616a;"> --write-info-json --write-subs </span><span>&#39;</span><span style="color:#a3be8c;">https://www.youtube.com/watch?v=xxxx</span><span>&#39;
+</span></code></pre>
+<h2 id="pei-xin-notiyatutowodaunrodositesupatiyanohe-ji-e-jpynomi-woji-ji">配信のチャットをダウンロードしてスパチャの合計額 (JPYのみ) を集計</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">yt-dlp --write-subs --no-download </span><span>&#39;</span><span style="color:#a3be8c;">https://www.youtube.com/watch?v=xxxx</span><span>&#39;
+</span><span style="color:#bf616a;">cat </span><span>*live_chat.json | </span><span style="color:#bf616a;">jq -s </span><span>| </span><span style="color:#bf616a;">gron </span><span>| </span><span style="color:#bf616a;">grep </span><span>&#39;</span><span style="color:#a3be8c;">purchaseAmountText.simpleText</span><span>&#39; | </span><span style="color:#bf616a;">sed -E </span><span>&#39;</span><span style="color:#a3be8c;">s/.*= &quot;(.*)&quot;.*/\1/g</span><span>&#39; | </span><span style="color:#bf616a;">sed -E </span><span>&#39;</span><span style="color:#a3be8c;">s/[¥,]//g</span><span>&#39; | </span><span style="color:#bf616a;">jq -s </span><span>&#39;</span><span style="color:#a3be8c;">add</span><span>&#39;
+</span></code></pre>
+<h2 id="kuritupunometadetawoqu-de">クリップのメタデータを取得</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> yt-dlp</span><span style="color:#bf616a;"> -j</span><span> https://www.youtube.com/clip/xxxx | </span><span style="color:#bf616a;">jq </span><span>&#39;</span><span style="color:#a3be8c;">{start: .section_start, end: .section_end, url: .original_url}</span><span>&#39;
+</span><span>{
+</span><span>  &quot;</span><span style="color:#a3be8c;">start</span><span>&quot;</span><span style="color:#bf616a;">:</span><span> 20818.6,
+</span><span>  &quot;</span><span style="color:#a3be8c;">end</span><span>&quot;</span><span style="color:#bf616a;">:</span><span> 20833.6,
+</span><span>  &quot;</span><span style="color:#a3be8c;">url</span><span>&quot;</span><span style="color:#bf616a;">: </span><span>&quot;</span><span style="color:#a3be8c;">https://www.youtube.com/clip/xxxx</span><span>&quot;
+</span><span>}
+</span></code></pre>
+<h2 id="kuritupuno-url-yi-lan-woqu-de">クリップの URL 一覧を取得</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">open</span><span> https://www.youtube.com/feed/clips
+</span></code></pre>
+<pre data-lang="js" style="background-color:#2b303b;color:#c0c5ce;" class="language-js "><code class="language-js" data-lang="js"><span>[...document.</span><span style="color:#96b5b4;">querySelectorAll</span><span>(&#39;</span><span style="color:#a3be8c;">.yt-simple-endpoint.style-scope.ytd-grid-video-renderer</span><span>&#39;)].</span><span style="color:#8fa1b3;">map</span><span>(</span><span style="color:#bf616a;">e </span><span style="color:#b48ead;">=&gt; </span><span>({link: </span><span style="color:#bf616a;">e</span><span>.href, title: </span><span style="color:#bf616a;">e</span><span>.title}))
+</span></code></pre>
+
+        </div>
+
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2023
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

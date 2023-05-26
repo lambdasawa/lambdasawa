@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>λ沢.dev</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/style.css">
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/color/orange.css">
+
+        <link rel="stylesheet" href="https://www.lambdasawa.dev/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/font-hack-subset.css">
+
+    </head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://www.lambdasawa.dev" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            λ沢.dev
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://github.com/lambdasawa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            
+                <li><a href="https://zenn.dev/lambdasawa" target="_blank" rel="noopener noreferrer">Zenn</a></li>
+            
+                <li><a href="https://twitter.com/lambdasawa" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+            
+                <li><a href="https://www.wantedly.com/id/lambdasawa" target="_blank" rel="noopener noreferrer">Wantedly</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://www.lambdasawa.dev/cheatsheet/javascript-unicode/">JavaScript Unicode</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date"></span>
+
+    </div>
+
+    
+
+        
+        <div class="post-content">
+            <p>このページでは Unicode, UTF-16 に関連した直感と反する JavaScript のコード例と、そのコードでどのようなことが起きているのかを簡潔に説明します。
+末尾に参考リンクを載せてあるので、より詳しい説明はそちらを確認してください。</p>
+<h2 id="sarogetopea-surrogate-pair">サロゲートペア (surrogate pair)</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> node</span><span style="color:#bf616a;"> -v
+</span><span style="color:#bf616a;">v17.3.1
+</span><span style="color:#bf616a;">$</span><span> node
+</span><span>&gt; &quot;</span><span style="color:#a3be8c;">吉野家</span><span>&quot;.length
+</span><span style="color:#bf616a;">3
+</span><span>&gt; &quot;</span><span style="color:#a3be8c;">𠮷野家</span><span>&quot;.length
+</span><span style="color:#bf616a;">4
+</span></code></pre>
+<p>JavaScript は UTF-16 を内部のエンコーディングとして使っている。
+<code>吉</code> は <code>U+5409</code> 、 <code>𠮷(つちよし)</code> は <code>U+20BB7</code> というコードポイントが割り当てられている。
+前者は 16bit で収まるが、後者は 16bit で収まらないため、エンコーディングを工夫する必要がある。
+その工夫が今回の例で言うと <code>U+20BB7</code> というコードポイントを 2 つのコードユニットに分割してエンコーディングすること。
+これがサロゲートペアと呼ばれている。</p>
+<p><code>String.charCodeAt</code> でコードユニットが取得できる。
+以下のコードで 1 文字ごとに 1 つ目のコードユニットと 2 つ目のコードユニットを確認する。</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> node
+</span><span>&gt; Array.from(&quot;</span><span style="color:#a3be8c;">吉野家</span><span>&quot;).map(c =&gt; </span><span style="color:#b48ead;">[</span><span>c.charCodeAt(0).toString(16), c.charCodeAt(1).toString(16)</span><span style="color:#b48ead;">]</span><span>)
+</span><span style="color:#96b5b4;">[ </span><span style="color:#b48ead;">[ </span><span>&#39;</span><span style="color:#a3be8c;">5409</span><span>&#39;, &#39;</span><span style="color:#a3be8c;">NaN</span><span>&#39; </span><span style="color:#b48ead;">]</span><span>, </span><span style="color:#b48ead;">[ </span><span>&#39;</span><span style="color:#a3be8c;">91ce</span><span>&#39;, &#39;</span><span style="color:#a3be8c;">NaN</span><span>&#39; </span><span style="color:#b48ead;">]</span><span>, </span><span style="color:#b48ead;">[ </span><span>&#39;</span><span style="color:#a3be8c;">5bb6</span><span>&#39;, &#39;</span><span style="color:#a3be8c;">NaN</span><span>&#39; </span><span style="color:#b48ead;">] </span><span style="color:#96b5b4;">]
+</span><span>&gt; Array.from(&quot;</span><span style="color:#a3be8c;">𠮷野家</span><span>&quot;).map(c =&gt; </span><span style="color:#b48ead;">[</span><span>c.charCodeAt(0).toString(16), c.charCodeAt(1).toString(16)</span><span style="color:#b48ead;">]</span><span>)
+</span><span style="color:#96b5b4;">[ </span><span style="color:#b48ead;">[ </span><span>&#39;</span><span style="color:#a3be8c;">d842</span><span>&#39;, &#39;</span><span style="color:#a3be8c;">dfb7</span><span>&#39; </span><span style="color:#b48ead;">]</span><span>, </span><span style="color:#b48ead;">[ </span><span>&#39;</span><span style="color:#a3be8c;">91ce</span><span>&#39;, &#39;</span><span style="color:#a3be8c;">NaN</span><span>&#39; </span><span style="color:#b48ead;">]</span><span>, </span><span style="color:#b48ead;">[ </span><span>&#39;</span><span style="color:#a3be8c;">5bb6</span><span>&#39;, &#39;</span><span style="color:#a3be8c;">NaN</span><span>&#39; </span><span style="color:#b48ead;">] </span><span style="color:#96b5b4;">]
+</span></code></pre>
+<p><code>𠮷(つちよし)</code> のみ 2 つ目のコードユニットが存在していて、サロゲートペアが使われていることが分かる。</p>
+<p>ちなみに <code>String.codePintAt</code> で分割前のコードポイントが取得できる。</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> node
+</span><span>&gt; Array.from(&quot;</span><span style="color:#a3be8c;">吉野家</span><span>&quot;).map(c =&gt; c.codePointAt(0)</span><span style="color:#bf616a;">.toString</span><span>(16))
+</span><span style="color:#96b5b4;">[ </span><span>&#39;</span><span style="color:#a3be8c;">5409</span><span>&#39;, &#39;</span><span style="color:#a3be8c;">91ce</span><span>&#39;, &#39;</span><span style="color:#a3be8c;">5bb6</span><span>&#39; </span><span style="color:#96b5b4;">]
+</span><span>&gt; Array.from(&quot;</span><span style="color:#a3be8c;">𠮷野家</span><span>&quot;).map(c =&gt; c.codePointAt(0)</span><span style="color:#bf616a;">.toString</span><span>(16))
+</span><span style="color:#96b5b4;">[ </span><span>&#39;</span><span style="color:#a3be8c;">20bb7</span><span>&#39;, &#39;</span><span style="color:#a3be8c;">91ce</span><span>&#39;, &#39;</span><span style="color:#a3be8c;">5bb6</span><span>&#39; </span><span style="color:#96b5b4;">]
+</span></code></pre>
+<p>サロゲートペアで分割されたコードユニットは以下の範囲で表される。</p>
+<ul>
+<li>U+D800 ~ U+DBFF</li>
+<li>U+DC00 ~ U+DFFF</li>
+</ul>
+<p>JavaScript の <code>String.length</code> はコードユニット数を返すので、サロゲートペアが使われると見た目より多い数値が返される。</p>
+<h2 id="yi-ti-zi-variant-yi-ti-zi-serekuta-variation-selector">異体字 (variant)、 異体字セレクタ (variation selector)</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> node
+</span><span>&gt; &quot;</span><span style="color:#a3be8c;">葛飾区</span><span>&quot;.length
+</span><span style="color:#bf616a;">3
+</span><span>&gt; &quot;</span><span style="color:#a3be8c;">葛󠄀城市</span><span>&quot;.length
+</span><span style="color:#bf616a;">5
+</span></code></pre>
+<p>意味は同じだが見た目が違うような文字を 2 つのコードポイントで表すことがある。
+1 つ目のコードポイントがベースとなる文字で、2 つ目のコードポイントがそのバリエーションを指定するもの。
+この 2 つ目のコードポイントが異体字セレクタと呼ばれている。</p>
+<p><code>Array.from</code> を使うとコードポイントごとに文字列を分割できる。</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> node
+</span><span>&gt; Array.from(&quot;</span><span style="color:#a3be8c;">葛飾区</span><span>&quot;)
+</span><span style="color:#96b5b4;">[ </span><span>&#39;</span><span style="color:#a3be8c;">葛</span><span>&#39;, &#39;</span><span style="color:#a3be8c;">飾</span><span>&#39;, &#39;</span><span style="color:#a3be8c;">区</span><span>&#39; </span><span style="color:#96b5b4;">]
+</span><span>&gt; Array.from(&quot;</span><span style="color:#a3be8c;">葛󠄀城市</span><span>&quot;)
+</span><span style="color:#96b5b4;">[ </span><span>&#39;</span><span style="color:#a3be8c;">葛</span><span>&#39;, &#39;</span><span style="color:#a3be8c;">󠄀</span><span>&#39;, &#39;</span><span style="color:#a3be8c;">城</span><span>&#39;, &#39;</span><span style="color:#a3be8c;">市</span><span>&#39; </span><span style="color:#96b5b4;">]
+</span></code></pre>
+<p>葛城市の 葛 と 城の間にある文字が異体字セレクタとなっている。</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> node
+</span><span>&gt; Array.from(&quot;</span><span style="color:#a3be8c;">葛󠄀城市</span><span>&quot;).map(c =&gt; c.codePointAt(0)</span><span style="color:#bf616a;">.toString</span><span>(16))
+</span><span style="color:#96b5b4;">[ </span><span>&#39;</span><span style="color:#a3be8c;">845b</span><span>&#39;, &#39;</span><span style="color:#a3be8c;">e0100</span><span>&#39;, &#39;</span><span style="color:#a3be8c;">57ce</span><span>&#39;, &#39;</span><span style="color:#a3be8c;">5e02</span><span>&#39; </span><span style="color:#96b5b4;">]
+</span></code></pre>
+<p>この異体字セレクタは以下の範囲で表される。</p>
+<ul>
+<li>U+180B ~ U+180D</li>
+<li>U+FE00 ~ U+FE0F</li>
+<li>U+E0100 ~ U+E01EF</li>
+</ul>
+<p>今回使われている異体字セレクタのコードポイントは U+E0100 であり 16bit で表せないので、この異体字セレクタがサロゲートペアで表現される。</p>
+<p>よって <code>&quot;葛城市&quot;.length</code> 以下の合計で <code>5</code> となる。</p>
+<ul>
+<li>葛 (1)</li>
+<li>葛の異体字セレクタ (2)</li>
+<li>城 (1)</li>
+<li>市 (1)</li>
+<li>1 + 2 + 1 + 1 = 5</li>
+</ul>
+<h2 id="he-zi-rigatiya-ligature">合字、リガチャ (ligature)</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> node
+</span><span>&gt; const </span><span style="color:#bf616a;">chars</span><span> = </span><span style="color:#b48ead;">[</span><span>&quot;</span><span style="color:#a3be8c;">パ</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">\u30CF\u309A</span><span>&quot;</span><span style="color:#b48ead;">]
+</span><span>&gt; chars
+</span><span style="color:#96b5b4;">[ </span><span>&#39;</span><span style="color:#a3be8c;">パ</span><span>&#39;, &#39;</span><span style="color:#a3be8c;">パ</span><span>&#39; </span><span style="color:#96b5b4;">]
+</span><span>&gt; chars.map(</span><span style="color:#bf616a;">c</span><span> =&gt; c.length)
+</span><span style="color:#96b5b4;">[</span><span> 1, 2 </span><span style="color:#96b5b4;">]
+</span></code></pre>
+<p>異体字セレクタとはまた別の概念で、2 つのコードポイントを使って一つの文字を表す仕組みがある。</p>
+<h2 id="zheng-gui-hua-normalize">正規化 (normalize)</h2>
+<p>前述の合字を上手く扱うために正規化という処理が定められており、JavaScript では <code>String.normalize</code> として実装されている。</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> node
+</span><span>&gt; const </span><span style="color:#bf616a;">chars</span><span> = </span><span style="color:#b48ead;">[</span><span>&quot;</span><span style="color:#a3be8c;">パ</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">\u30CF\u309A</span><span>&quot;</span><span style="color:#b48ead;">]
+</span><span>&gt; chars
+</span><span style="color:#96b5b4;">[ </span><span>&#39;</span><span style="color:#a3be8c;">パ</span><span>&#39;, &#39;</span><span style="color:#a3be8c;">パ</span><span>&#39; </span><span style="color:#96b5b4;">]
+</span><span>&gt; chars.map(</span><span style="color:#bf616a;">c</span><span> =&gt; c.length)
+</span><span style="color:#96b5b4;">[</span><span> 1, 2 </span><span style="color:#96b5b4;">]
+</span><span>&gt; chars.map(</span><span style="color:#bf616a;">c</span><span> =&gt; c.normalize().length)
+</span><span style="color:#96b5b4;">[</span><span> 1, 1 </span><span style="color:#96b5b4;">]
+</span></code></pre>
+<p><a href="http://www.unicode.org/charts/normalization/">http://www.unicode.org/charts/normalization/</a></p>
+<h2 id="transformation-collisions">Transformation Collisions</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> node
+</span><span>&gt; const </span><span style="color:#bf616a;">gmailA</span><span> = &quot;</span><span style="color:#a3be8c;">gmaıl.com</span><span>&quot;
+</span><span>&gt; const </span><span style="color:#bf616a;">gmailB</span><span> = &quot;</span><span style="color:#a3be8c;">gmail.com</span><span>&quot;
+</span><span>&gt; gmailA.toUpperCase() == gmailB.toUpperCase()
+</span><span style="color:#bf616a;">true
+</span><span>&gt; gmailA.toLowerCase() == gmailB.toLowerCase()
+</span><span style="color:#bf616a;">false
+</span></code></pre>
+<p><code>a.toUpperCase() === b.toUpperCase()</code> が <code>true</code> なら <code>a.toLowerCase() === b.toLowerCase()</code> も <code>true</code> になりそうだが、そうとは限らない。
+必ずしも文字の upper と lower の関係は一対一にはなっていない。
+<code>ı</code> と <code>i</code> はどちらも別の文字だが、 <code>toUpperCase</code> をするとどちらも <code>I</code> になる。
+逆に <code>I</code> に <code>toLowerCase</code> をすると <code>i</code> になるが、 <code>ı</code> になることはない。</p>
+<p>これを区別できていないがゆえにセキュリティ問題に繋がったこともある。
+<a href="https://dev.to/jagracey/hacking-github-s-auth-with-unicode-s-turkish-dotless-i-460n">https://dev.to/jagracey/hacking-github-s-auth-with-unicode-s-turkish-dotless-i-460n</a></p>
+<p><a href="http://www.unicode.org/charts/case/">http://www.unicode.org/charts/case/</a></p>
+<h2 id="zwj-zero-width-joiner">ZWJ (Zero Width Joiner)</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> node
+</span><span>&gt; &quot;</span><span style="color:#a3be8c;">👨‍👩‍👧‍👧</span><span>&quot;.length
+</span><span style="color:#bf616a;">11
+</span></code></pre>
+<p>複数の文字を繋げて 1 つの文字を表すためのコードポイントも存在している。
+上記の家族の絵文字は 4 つの絵文字を Zero Width Joiner (<code>U+200D</code>) という文字を 3 回使って結合したものとなっている。</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> node
+</span><span>&gt; Array.from(&quot;</span><span style="color:#a3be8c;">👨‍👩‍👧‍👧</span><span>&quot;)
+</span><span style="color:#96b5b4;">[ </span><span>&#39;</span><span style="color:#a3be8c;">👨</span><span>&#39;, &#39;</span><span style="color:#a3be8c;">‍</span><span>&#39;, &#39;</span><span style="color:#a3be8c;">👩</span><span>&#39;, &#39;</span><span style="color:#a3be8c;">‍</span><span>&#39;, &#39;</span><span style="color:#a3be8c;">👧</span><span>&#39;, &#39;</span><span style="color:#a3be8c;">‍</span><span>&#39;, &#39;</span><span style="color:#a3be8c;">👧</span><span>&#39; </span><span style="color:#96b5b4;">]
+</span><span style="color:#bf616a;">Array.from</span><span>(&quot;</span><span style="color:#a3be8c;">👨‍👩‍👧‍👧</span><span>&quot;)</span><span style="color:#bf616a;">.map</span><span>(c =&gt; c.codePointAt(0)</span><span style="color:#bf616a;">.toString</span><span>(16))
+</span><span style="color:#96b5b4;">[ </span><span>&#39;</span><span style="color:#a3be8c;">1f468</span><span>&#39;, &#39;</span><span style="color:#a3be8c;">200d</span><span>&#39;, &#39;</span><span style="color:#a3be8c;">1f469</span><span>&#39;, &#39;</span><span style="color:#a3be8c;">200d</span><span>&#39;, &#39;</span><span style="color:#a3be8c;">1f467</span><span>&#39;, &#39;</span><span style="color:#a3be8c;">200d</span><span>&#39;, &#39;</span><span style="color:#a3be8c;">1f467</span><span>&#39; </span><span style="color:#96b5b4;">]
+</span></code></pre>
+<p>この <code>length</code> が 11 になるのは以下のような計算の結果。</p>
+<ul>
+<li>👨 サロゲートペアなので 2 とカウント</li>
+<li>Zero Width Joiner として 1 カウント</li>
+<li>👩 サロゲートペアなので 2 とカウント</li>
+<li>Zero Width Joiner として 1 とカウント</li>
+<li>👧 サロゲートペアなので 2 とカウント</li>
+<li>Zero Width Joiner として 1 とカウント</li>
+<li>👧 サロゲートペアなので 2 とカウント</li>
+<li>2 + 1 + 2 + 1 + 2 + 1 + 2 = 11</li>
+</ul>
+<p><a href="https://emojipedia.org/emoji-zwj-sequence/">https://emojipedia.org/emoji-zwj-sequence/</a></p>
+<h2 id="can-kao-rinku">参考リンク</h2>
+<ul>
+<li><a href="https://blog.jxck.io/entries/2017-03-02/unicode-in-javascript.html">https://blog.jxck.io/entries/2017-03-02/unicode-in-javascript.html</a></li>
+<li><a href="https://engineering.linecorp.com/ja/blog/the-7-ways-of-counting-characters/">https://engineering.linecorp.com/ja/blog/the-7-ways-of-counting-characters/</a></li>
+<li><a href="https://github.com/jagracey/Awesome-Unicode">https://github.com/jagracey/Awesome-Unicode</a></li>
+<li>検索系
+<ul>
+<li><a href="https://graphemica.com/">https://graphemica.com/</a></li>
+<li><a href="https://codepoints.net/">https://codepoints.net/</a></li>
+<li><a href="https://unicode-table.com/en/">https://unicode-table.com/en/</a></li>
+<li><a href="https://shapecatcher.com/">https://shapecatcher.com/</a></li>
+<li><a href="https://util.unicode.org/UnicodeJsps/character.jsp">https://util.unicode.org/UnicodeJsps/character.jsp</a></li>
+</ul>
+</li>
+<li>絵文字の検索系
+<ul>
+<li><a href="https://emojipedia.org/">https://emojipedia.org/</a></li>
+<li><a href="http://emojitracker.com/">http://emojitracker.com/</a></li>
+<li><a href="http://www.unicode.org/emoji/charts/full-emoji-list.html">http://www.unicode.org/emoji/charts/full-emoji-list.html</a></li>
+</ul>
+</li>
+<li><a href="https://github.com/jagracey/Awesome-Unicode#readme">https://github.com/jagracey/Awesome-Unicode#readme</a></li>
+<li><a href="https://github.com/Codepoints/awesome-codepoints#readme">https://github.com/Codepoints/awesome-codepoints#readme</a></li>
+</ul>
+
+        </div>
+
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2023
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

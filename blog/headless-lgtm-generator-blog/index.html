@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>λ沢.dev</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/style.css">
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/color/orange.css">
+
+        <link rel="stylesheet" href="https://www.lambdasawa.dev/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/font-hack-subset.css">
+
+    </head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://www.lambdasawa.dev" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            λ沢.dev
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://github.com/lambdasawa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            
+                <li><a href="https://zenn.dev/lambdasawa" target="_blank" rel="noopener noreferrer">Zenn</a></li>
+            
+                <li><a href="https://twitter.com/lambdasawa" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+            
+                <li><a href="https://www.wantedly.com/id/lambdasawa" target="_blank" rel="noopener noreferrer">Wantedly</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://www.lambdasawa.dev/blog/headless-lgtm-generator-blog/">ヘッドレスなLGTM画像ジェネレータを作りました</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date">
+            2021-07-26
+        </span>
+
+    </div>
+
+    
+
+        
+        <div class="post-content">
+            <p><a href="https://github.com/lambdasawa-sandbox/headless-lgtm-generator">https://github.com/lambdasawa-sandbox/headless-lgtm-generator</a> を作りました。</p>
+<p>以下のように <code>curl</code> でリクエストを投げると GitHub に貼り付けられる Markdown が返ってきます。</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> curl &#39;</span><span style="color:#a3be8c;">https://headless-lgtm-generator.herokuapp.com/markdown</span><span>&#39;
+</span><span>!</span><span style="color:#bf616a;">[LGTM]</span><span>(https://headless-lgtm-generator.herokuapp.com/?t=1627259720316)
+</span><span>&gt; https://www.pinterest.com.au/Pixabay/
+</span></code></pre>
+<p>実際に使用するときは <code>alias lgtm=&quot;curl 'https://headless-lgtm-generator.herokuapp.com/markdown' | pbcopy&quot;</code> みたいなエイリアスを貼っておくと、 <code>lgtm</code> とタイプするだけで適当な LGTM 画像のリンクがクリップボードに入ってきて便利です。</p>
+<p>なお、このエンドポイントはいくつかクエリストリングを受け付けるようになっており、飯テロをしたい場合は以下のようなコマンドが便利です。</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> curl &#39;</span><span style="color:#a3be8c;">https://headless-lgtm-generator.herokuapp.com/markdown?q=肉&amp;category=food&amp;colors=brown</span><span>&#39;
+</span><span>!</span><span style="color:#bf616a;">[LGTM]</span><span>(https://headless-lgtm-generator.herokuapp.com/?q=%</span><span style="color:#bf616a;">E8</span><span>%</span><span style="color:#d08770;">82</span><span>%</span><span style="color:#d08770;">89</span><span>&amp;</span><span style="color:#bf616a;">category</span><span>=</span><span style="color:#a3be8c;">food&amp;colors=brown&amp;t=1627260031691</span><span>)
+</span><span>&gt; https://www.pinterest.com.au/Pixabay/
+</span></code></pre>
+<p>LGTM画像を選ぶときにいつも迷ってしまい時間を浪費しがちだったので、ランダム性に頼ってそこを解決することを目的としています。</p>
+<h2 id="she-ji-tokashi-zhuang-toka">設計とか実装とか</h2>
+<p>Pixabay と Imgix に大きく依存しています。</p>
+<p>Pixabay はいわゆるフリー素材の配布サイトです。
+Pixabay を採用した理由は2つあります。
+1つは<a href="https://pixabay.com/ja/service/license/">ライセンス</a>で明示的に改変と再配布が許可されていることです。
+もう1つは<a href="https://pixabay.com/api/docs/">API</a>が提供されていることです。</p>
+<p>Imgix は画像に特化したCDNです。
+今回はCDNとしての用途は重視しておらず、<a href="https://docs.imgix.com/apis/rendering">クエリストリングでテキスト描画などが出来る機能</a>に着目しました。
+LGTMという文字列はこの機能を使って描画しています。</p>
+<p>運用を頑張りたくなかったので実行環境には Heroku を採用しています。
+素朴なアプリケーションなので頑張ってCloudFormationのテンプレートや<code>serverless.yml</code>などを書くのを避けました。</p>
+<p>使用した言語は Clojure です。
+今年の誕生日に欲しい物リストを貼ったら<a href="https://shop.ohmsha.co.jp/shopdetail/000000001949/">プログラミングClojure</a>を送ってくださった方がいたので、Clojurianとしての素振りという意味合いが強いです。</p>
+<p>その他、あまり採用事例を見たことがないのですが、シークレットの管理には Doppler を使用しました。
+個人で使うAPIキーは今まで1Passwordで管理することが多かったのですが、それをプログラムに反映させるのが手間という問題がありました。
+より具体的には<code>direnv</code>を使う想定で<code>.envrc</code>, <code>.env</code>にシークレットをコピペするのが面倒という話です。
+複数マシンを使っているとそのマシン間でシークレットを同期させるのが面倒という問題もあります。
+これらの問題を Doppler で出来そうでした。</p>
+<p>以下のように <code>direnv exec</code> の代わりに <code>doppler run</code> を使用することで <code>.envrc</code>, <code>.env</code> を書かずにシークレットを環境変数に設定した状態でコマンドを実行することが出来ます。</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> doppler login    </span><span style="color:#65737e;"># マシンごとに1回だけやる
+</span><span style="color:#bf616a;">$</span><span> doppler setup    </span><span style="color:#65737e;"># doppler.yml があればやらなくて良い
+</span><span style="color:#bf616a;">$</span><span> doppler run -- bash -c &#39;</span><span style="color:#a3be8c;">echo $PIXABAY_API_KEY</span><span>&#39;
+</span><span style="color:#bf616a;">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+</span></code></pre>
+<p>事前にシークレットを Dopper に登録しておく必要はあります。
+これはブラウザからも出来ますし、<code>doppler secrets set HOGE</code> のようにCLIから行うことも出来ます。</p>
+
+        </div>
+
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2023
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>λ沢.dev</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/style.css">
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/color/orange.css">
+
+        <link rel="stylesheet" href="https://www.lambdasawa.dev/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/font-hack-subset.css">
+
+    </head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://www.lambdasawa.dev" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            λ沢.dev
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://github.com/lambdasawa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            
+                <li><a href="https://zenn.dev/lambdasawa" target="_blank" rel="noopener noreferrer">Zenn</a></li>
+            
+                <li><a href="https://twitter.com/lambdasawa" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+            
+                <li><a href="https://www.wantedly.com/id/lambdasawa" target="_blank" rel="noopener noreferrer">Wantedly</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://www.lambdasawa.dev/cheatsheet/git/">Git</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date"></span>
+
+    </div>
+
+    
+
+        
+        <div class="post-content">
+            <ul>
+<li><a href="https://jonas.github.io/tig/">tig</a></li>
+<li><a href="https://github.com/x-motemen/ghq">ghq</a></li>
+<li><a href="https://github.com/evilmartians/lefthook">lefthook</a></li>
+</ul>
+<h2 id="tips">tips</h2>
+<ul>
+<li><a href="https://github.com/lambdasawa/lambdasawa/blob/main/.config/git/alias">.config/git/alias</a></li>
+</ul>
+<h3 id="git-setup">git setup</h3>
+<p>git init して git add して git commit する。</p>
+<h3 id="git-toplevel">git toplevel</h3>
+<p>TODO</p>
+<h3 id="gitignore-template">gitignore-template</h3>
+<p><code>.gitignore</code> をテンプレートから生成。</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">git</span><span> gitignore-template &gt;&gt; .gitignore
+</span></code></pre>
+<h3 id="git-ignore">git ignore</h3>
+<p>このリポジトリで foo を無視する。</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> git ignore</span><span style="color:#bf616a;"> -p</span><span> foo
+</span><span>
+</span><span style="color:#bf616a;">$</span><span> cat .gitignore
+</span><span style="color:#65737e;"># 変更なし
+</span><span>
+</span><span style="color:#bf616a;">$</span><span> .config/git/alias
+</span><span style="color:#bf616a;">foo
+</span></code></pre>
+<h3 id="git-diff">git diff</h3>
+<p>TODO</p>
+<h3 id="git-difft">git difft</h3>
+<p>TODO</p>
+<h3 id="git-log">git log</h3>
+<p>TODO</p>
+<h3 id="git-log-difft">git log-difft</h3>
+<p>TODO</p>
+<h3 id="git-wip">git wip</h3>
+<p>TODO</p>
+<h3 id="git-pick">git pick</h3>
+<p>TODO</p>
+<h3 id="git-sed">git sed</h3>
+<p>TODO</p>
+<h3 id="git-prune">git prune</h3>
+<p>TODO</p>
+<h3 id="git-prune-hard">git prune-hard</h3>
+<p>TODO</p>
+<h3 id="git-abort">git abort</h3>
+<p>rebase, merge, cherry-pick の中止。</p>
+<h3 id="git-undo">git undo</h3>
+<p>最新のコミットを削除。</p>
+<h3 id="git-current-branch">git current-branch</h3>
+<p>TODO</p>
+<h3 id="git-default-branch">git default-branch</h3>
+<p>TODO</p>
+<h3 id="git-switch-branch">git switch-branch</h3>
+<p>TODO</p>
+<h3 id="git-switch-pr">git switch-pr</h3>
+<p>TODO</p>
+<h3 id="git-create-branch">git create-branch</h3>
+<p>TODO</p>
+<h3 id="git-delete-branch">git delete-branch</h3>
+<p>TODO</p>
+<h3 id="git-rename-branch">git rename-branch</h3>
+<p>TODO</p>
+<h3 id="git-fresh-branch">git fresh-branch</h3>
+<p>TODO</p>
+<h3 id="git-show-merged-branches">git show-merged-branches</h3>
+<p>TODO</p>
+<h3 id="git-show-unmerged-branches">git show-unmerged-branches</h3>
+<p>TODO</p>
+<h3 id="git-delete-merged-branches">git delete-merged-branches</h3>
+<p>TODO</p>
+<h3 id="git-delete-squashed-branches">git delete-squashed-branches</h3>
+<p>TODO</p>
+<h3 id="git-create-tag">git create-tag</h3>
+<p>TODO</p>
+<h3 id="git-delete-tag">git delete-tag</h3>
+<p>TODO</p>
+<h3 id="git-rename-tag">git rename-tag</h3>
+<p>TODO</p>
+<h3 id="git-day">git day</h3>
+<p>TODO</p>
+<h3 id="git-week">git week</h3>
+<p>TODO</p>
+<h3 id="git-open-repo">git open-repo</h3>
+<p>TODO</p>
+<h3 id="git-open-pr">git open-pr</h3>
+<p>TODO</p>
+<h3 id="git-review">git review</h3>
+<p>TODO</p>
+<h3 id="gh-workflow">gh workflow</h3>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">gh</span><span> workflow list
+</span><span style="color:#bf616a;">gh</span><span> workflow disable foo.yml
+</span><span style="color:#bf616a;">gh</span><span> workflow enable foo.yml
+</span><span style="color:#bf616a;">gh</span><span> workflow run workflow-dispatch.yml</span><span style="color:#bf616a;"> -f</span><span> stringValue=foo</span><span style="color:#bf616a;"> -f</span><span> booleanValue=true</span><span style="color:#bf616a;"> -f</span><span> envValue=develop
+</span></code></pre>
+<h3 id="gh-run">gh run</h3>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">gh</span><span> run list</span><span style="color:#bf616a;"> -b</span><span> main</span><span style="color:#bf616a;"> -w</span><span> metrics.yml
+</span><span style="color:#bf616a;">gh</span><span> run rerun &quot;$</span><span style="color:#bf616a;">id</span><span>&quot;</span><span style="color:#bf616a;"> --failed
+</span><span style="color:#bf616a;">gh</span><span> run watch &quot;$</span><span style="color:#bf616a;">id</span><span>&quot;</span><span style="color:#bf616a;"> --exit-status
+</span></code></pre>
+<h3 id="gh-secret">gh secret</h3>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">gh</span><span> secret set</span><span style="color:#bf616a;"> -f</span><span> .env
+</span></code></pre>
+
+        </div>
+
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2023
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

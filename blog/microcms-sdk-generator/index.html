@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>λ沢.dev</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/style.css">
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/color/orange.css">
+
+        <link rel="stylesheet" href="https://www.lambdasawa.dev/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/font-hack-subset.css">
+
+    </head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://www.lambdasawa.dev" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            λ沢.dev
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://github.com/lambdasawa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            
+                <li><a href="https://zenn.dev/lambdasawa" target="_blank" rel="noopener noreferrer">Zenn</a></li>
+            
+                <li><a href="https://twitter.com/lambdasawa" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+            
+                <li><a href="https://www.wantedly.com/id/lambdasawa" target="_blank" rel="noopener noreferrer">Wantedly</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://www.lambdasawa.dev/blog/microcms-sdk-generator/">microCMS の API クライアントを生成するツールを作った</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date">
+            2021-05-03
+        </span>
+
+    </div>
+
+    
+
+        
+        <div class="post-content">
+            <h2 id="qian-ti">前提</h2>
+<p>そもそも <a href="https://microcms.io/">microCMS</a> が何かというと Headless CMS と呼ばれるものの一種です。
+<a href="https://www.contentful.com/">Contentful</a> や <a href="https://strapi.io/">strapi</a> を知っている方はそれと同じようなものと考えていただいて差し支えありません。
+これらを知らない方向けに簡単に説明すると、あるサービス上で GUI を使ってデータのスキーマを定義するとそれに対応した管理画面と REST API が生成されるものです。</p>
+<p>例えば <code>microCMS</code> 上で以下のようなスキーマを定義したとします。</p>
+<p><img src="https://images.microcms-assets.io/assets/6d557c87790a4d889ca5641b57b7947f/53835e4b369f4474b8f8aa32918bb2a7/microcms-sdk-generator-schema.png" alt="schema" /></p>
+<p>その後、以下のようにデータを入稿したとします。</p>
+<p><img src="https://images.microcms-assets.io/assets/6d557c87790a4d889ca5641b57b7947f/6e24eee4f11044cabf706f12b5201d30/micrcocms-sdk-generator-data.png" alt="testdata" /></p>
+<p>こうするとエンジニアがサーバを管理せずとも以下のように REST API にアクセスすることができます。</p>
+<pre data-lang="typescript" style="background-color:#2b303b;color:#c0c5ce;" class="language-typescript "><code class="language-typescript" data-lang="typescript"><span style="color:#8fa1b3;">fetch</span><span>(&#39;</span><span style="color:#a3be8c;">https://example.microcms.io/api/v1/users</span><span>&#39;, {
+</span><span>  headers: {
+</span><span>    &#39;</span><span style="color:#a3be8c;">x-api-key</span><span>&#39;: &#39;</span><span style="color:#a3be8c;">xxxx</span><span>&#39;
+</span><span>  },
+</span><span>})
+</span><span>  .</span><span style="color:#96b5b4;">then</span><span>(</span><span style="color:#bf616a;">res </span><span style="color:#b48ead;">=&gt; </span><span style="color:#bf616a;">res</span><span>.</span><span style="color:#8fa1b3;">json</span><span>())
+</span><span>  .</span><span style="color:#96b5b4;">then</span><span>(</span><span style="color:#bf616a;">res </span><span style="color:#b48ead;">=&gt; </span><span style="color:#ebcb8b;">console</span><span>.</span><span style="color:#96b5b4;">log</span><span>(</span><span style="color:#bf616a;">res</span><span>));
+</span></code></pre>
+<p>通信が完了すると以下のような値がログに出力されます。</p>
+<pre data-lang="json" style="background-color:#2b303b;color:#c0c5ce;" class="language-json "><code class="language-json" data-lang="json"><span>{
+</span><span>  &quot;</span><span style="color:#a3be8c;">contents</span><span>&quot;: [
+</span><span>    {
+</span><span>      &quot;</span><span style="color:#a3be8c;">id</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">kr8sq-sxwg</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">name</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">lambdasawa</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">createdAt</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">2021-05-03T07:53:47.448Z</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">updatedAt</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">2021-05-03T08:27:43.735Z</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">publishedAt</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">2021-05-03T07:53:47.448Z</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">revisedAt</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">2021-05-03T08:27:43.735Z</span><span>&quot;
+</span><span>    }
+</span><span>  ],
+</span><span>  &quot;</span><span style="color:#a3be8c;">limit</span><span>&quot;: </span><span style="color:#d08770;">10</span><span>,
+</span><span>  &quot;</span><span style="color:#a3be8c;">offset</span><span>&quot;: </span><span style="color:#d08770;">0</span><span>,
+</span><span>  &quot;</span><span style="color:#a3be8c;">totalCount</span><span>&quot;: </span><span style="color:#d08770;">1
+</span><span>}
+</span></code></pre>
+<p>同様に参照だけではなく CRUD 全ての操作が行えるようになります。
+例えば以下のようなコードを実行することで新規作成を行うことが出来ます。</p>
+<pre data-lang="typescript" style="background-color:#2b303b;color:#c0c5ce;" class="language-typescript "><code class="language-typescript" data-lang="typescript"><span style="color:#b48ead;">const </span><span style="color:#bf616a;">data </span><span>= {
+</span><span>  name: &#39;</span><span style="color:#a3be8c;">your name</span><span>&#39;,
+</span><span>};
+</span><span>
+</span><span style="color:#8fa1b3;">fetch</span><span>(&#39;</span><span style="color:#a3be8c;">https://example.microcms.io/api/v1/users</span><span>&#39;, {
+</span><span>  method: &#39;</span><span style="color:#a3be8c;">POST</span><span>&#39;,
+</span><span>  headers: {
+</span><span>    &#39;</span><span style="color:#a3be8c;">x-write-api-key</span><span>&#39;: &#39;</span><span style="color:#a3be8c;">xxxx</span><span>&#39;,
+</span><span>    &#39;</span><span style="color:#a3be8c;">content-type</span><span>&#39;: &#39;</span><span style="color:#a3be8c;">application/json</span><span>&#39;,
+</span><span>  },
+</span><span>  body: JSON.</span><span style="color:#96b5b4;">stringify</span><span>(</span><span style="color:#bf616a;">data</span><span>)
+</span><span>})
+</span><span>  .</span><span style="color:#96b5b4;">then</span><span>(</span><span style="color:#bf616a;">res </span><span style="color:#b48ead;">=&gt; </span><span style="color:#bf616a;">res</span><span>.</span><span style="color:#8fa1b3;">json</span><span>())
+</span><span>  .</span><span style="color:#96b5b4;">then</span><span>(</span><span style="color:#bf616a;">res </span><span style="color:#b48ead;">=&gt; </span><span style="color:#ebcb8b;">console</span><span>.</span><span style="color:#96b5b4;">log</span><span>(</span><span style="color:#bf616a;">res</span><span>));
+</span></code></pre>
+<p>とても便利ですね。
+しかしこのようなコードを静的型付け言語で扱うとしたら、以下のようにリクエスト/レスポンスの型を定義したいですよね。</p>
+<pre data-lang="typescript" style="background-color:#2b303b;color:#c0c5ce;" class="language-typescript "><code class="language-typescript" data-lang="typescript"><span style="color:#b48ead;">type </span><span>UserCreateRequest = {
+</span><span>  </span><span style="color:#bf616a;">name</span><span>: string;
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">type </span><span>UserCreateResponse = {
+</span><span>  </span><span style="color:#bf616a;">contents</span><span>: User[],
+</span><span>  </span><span style="color:#bf616a;">limit</span><span>: number,
+</span><span>  </span><span style="color:#bf616a;">offset</span><span>: number,
+</span><span>  </span><span style="color:#bf616a;">totalCount</span><span>: number,
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">type </span><span>User = {
+</span><span>  </span><span style="color:#bf616a;">id</span><span>: string,
+</span><span>  </span><span style="color:#bf616a;">name</span><span>: string,
+</span><span>  </span><span style="color:#bf616a;">createdAt</span><span>: Date,
+</span><span>  </span><span style="color:#bf616a;">updatedAt</span><span>: Date,
+</span><span>  </span><span style="color:#bf616a;">publishedAt</span><span>: Date,
+</span><span>  </span><span style="color:#bf616a;">revisedAt</span><span>: Date,
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">const </span><span style="color:#bf616a;">data</span><span>: UserCreateRequest = {
+</span><span>  name: &#39;</span><span style="color:#a3be8c;">your name</span><span>&#39;,
+</span><span>};
+</span><span>
+</span><span style="color:#8fa1b3;">fetch</span><span>(&#39;</span><span style="color:#a3be8c;">https://example.microcms.io/api/v1/users</span><span>&#39;, {
+</span><span>  method: &#39;</span><span style="color:#a3be8c;">POST</span><span>&#39;,
+</span><span>  headers: {
+</span><span>    &#39;</span><span style="color:#a3be8c;">x-write-api-key</span><span>&#39;: &#39;</span><span style="color:#a3be8c;">xxxx</span><span>&#39;,
+</span><span>    &#39;</span><span style="color:#a3be8c;">content-type</span><span>&#39;: &#39;</span><span style="color:#a3be8c;">application/json</span><span>&#39;,
+</span><span>  },
+</span><span>  body: JSON.</span><span style="color:#96b5b4;">stringify</span><span>(</span><span style="color:#bf616a;">data</span><span>)
+</span><span>})
+</span><span>  .</span><span style="color:#96b5b4;">then</span><span>(</span><span style="color:#bf616a;">res </span><span style="color:#b48ead;">=&gt; </span><span style="color:#bf616a;">res</span><span>.</span><span style="color:#8fa1b3;">json</span><span>())
+</span><span>  .</span><span style="color:#96b5b4;">then</span><span>(</span><span style="color:#bf616a;">res </span><span style="color:#b48ead;">=&gt; </span><span>{
+</span><span>    </span><span style="color:#b48ead;">return </span><span>{
+</span><span>      contents: </span><span style="color:#bf616a;">res</span><span>.</span><span style="color:#bf616a;">contents</span><span>.</span><span style="color:#8fa1b3;">map</span><span>(</span><span style="color:#bf616a;">user </span><span style="color:#b48ead;">=&gt; </span><span>{
+</span><span>        </span><span style="color:#b48ead;">return </span><span>{
+</span><span>          id: </span><span style="color:#bf616a;">user</span><span>.id,
+</span><span>          name: </span><span style="color:#bf616a;">user</span><span>.name,
+</span><span>          createdAt: new Date(</span><span style="color:#bf616a;">user</span><span>.</span><span style="color:#bf616a;">createdAt</span><span>),
+</span><span>          updatedAt: new Date(</span><span style="color:#bf616a;">user</span><span>.</span><span style="color:#bf616a;">updatedAt</span><span>),
+</span><span>          publishedAt: new Date(</span><span style="color:#bf616a;">user</span><span>.</span><span style="color:#bf616a;">publishedAt</span><span>),
+</span><span>          revisedAt: new Date(</span><span style="color:#bf616a;">user</span><span>.</span><span style="color:#bf616a;">revisedAt</span><span>),
+</span><span>        };
+</span><span>      }),
+</span><span>      limit: </span><span style="color:#bf616a;">res</span><span>.</span><span style="color:#bf616a;">limit</span><span>,
+</span><span>      offset: </span><span style="color:#bf616a;">res</span><span>.</span><span style="color:#bf616a;">offset</span><span>,
+</span><span>      totalCount: </span><span style="color:#bf616a;">res</span><span>.</span><span style="color:#bf616a;">totalCount</span><span>,
+</span><span>    } </span><span style="color:#b48ead;">as </span><span>UserCreateResponse;
+</span><span>  })
+</span><span>  .</span><span style="color:#96b5b4;">then</span><span>(</span><span style="color:#bf616a;">res </span><span style="color:#b48ead;">=&gt; </span><span style="color:#ebcb8b;">console</span><span>.</span><span style="color:#96b5b4;">log</span><span>(</span><span style="color:#bf616a;">res</span><span>));
+</span></code></pre>
+<p>途端に退屈なコードが沢山必要になりました。
+しかし、これを行わないとこのデータを <code>any</code> などの型で扱う必要性があり、それを参照したときにエラーが発生する可能性が大きくなります。
+このようなコードを書くのは退屈ですし、 typo などによってこれまた面白くないエラーに遭遇することになります。</p>
+<p>静的型付けによるメリットは享受したいですが、このような作業は行いたくないです。</p>
+<p>この問題を解決するために <a href="https://github.com/lambdasawa/microcms-sdk-generator"><code>microcms-sdk-generator</code></a> というこのようなボイラープレートのコードを生成するツールを実装しました。</p>
+<h2 id="shi-zu-mi">仕組み</h2>
+<p><code>microCMS</code> には GUI で定義したスキーマを JSON ファイルとして<a href="https://blog.microcms.io/api-fields-export-and-import">エクスポート</a>する機能があります。</p>
+<p>また、 <a href="https://openapi-generator.tech/">OpenAPI Generator</a> というツールを使うと OpenAPI 形式の YAML (<a href="https://github.com/OAI/OpenAPI-Specification/blob/main/examples/v2.0/yaml/petstore.yaml">公式の例</a>)
+から API クライアントを生成することができます。</p>
+<p>今回はこの2つのグルーコードを用意することによってこの問題を解決しました。</p>
+<p>つまり、 <code>microCMS</code> からエクスポートされた JSON 形式のスキーマを OpenAPI の仕様に則った YAML 形式のファイルに変換した後、 OpenAPI Generator を実行することで API クライアントを生成します。</p>
+<p>実際はもう少しだけ複雑です。</p>
+<p><code>microCMS</code> からエクスポートされたスキーマにはあるフィールドが他のスキーマに依存していることは定義されているものの具体的にどのスキーマに依存しているか分からなかったり、 その API の設定 (リスト形式かオブジェクト形式か) の情報が含まれていなかったり、この実装を行うには情報が不十分です。
+そのため事前にプログラマが <code>metadata.yml</code> という設定ファイルを生成するときに作成し、実行時に <code>microcms-sdk-generator</code> がこれらの情報を読み取ることでこのギャップを補っています。</p>
+<p>このような仕組みにすることで多少のクライアントコードの使い勝手を犠牲にすることによって、少ないメンテコストで様々な言語/ライブラリのクライアントを生成することができます。
+様々というのは具体的にいうと OpenAPI Generator が対応しているジェネレータの数と等しいため、 50 以上の言語/ライブラリに対応していることになります。</p>
+<p>今回実装に使った言語は Go であり、OpenAPI Generator は Java で実装されているため、利用者がその両方の実行環境を用意しなくて済むように Docker Hub でイメージを公開してあります。</p>
+<p>利用方法に関しては <a href="https://github.com/lambdasawa/microcms-sdk-generator/blob/main/README.ja.md">README</a> を参照してください。
+要はスキーマをエクスポートして、設定ファイルを書いて、 <code>docker run</code> を実行するだけです。
+将来的に <code>microCMS</code> からエクスポートされたスキーマに情報が追加されれば設定ファイルを書く必要は無くなるかもしれません。</p>
+<h2 id="donnamonogasheng-cheng-sareruka">どんなものが生成されるか</h2>
+<p>生成されるものを紹介する前に、その入力となるものを紹介します。</p>
+<p>まず今回扱う例はブログサービスを想定します。
+ブログ記事を表す <code>articles</code> オブジェクト、 その記事を書く人を表す <code>users</code> オブジェクト、 その他の雑多な設定値などを表す <code>setting</code> オブジェクトが <code>microCMS</code> 上で定義されているとします。
+これらをエクスポートした結果が https://github.com/lambdasawa/microcms-sdk-generator/tree/main/examples/typescript-fetch/microcms/schemas となります。</p>
+<p>これらに対する設定ファイルが https://github.com/lambdasawa/microcms-sdk-generator/blob/main/examples/typescript-fetch/microcms/metadata.yml となります。</p>
+<p>これらのファイルがローカルにある状態で以下のようなコマンドを実行すると <code>${PWD}/microcms</code> ディレクトリ以下に OpenAPI の YAML と TypeScript + <code>fetch</code> で書かれたソースコードが生成されます。
+<code>fetch</code> ではなく <code>Axios</code> を使いたい場合はそのようなジェネレータもあるため、 <code>generator-name</code> オプションを変更してください。</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">docker</span><span> run \
+</span><span style="color:#bf616a;">  --rm </span><span>\
+</span><span style="color:#bf616a;">  --pull</span><span> always \
+</span><span style="color:#bf616a;">  --volume </span><span>${</span><span style="color:#bf616a;">PWD</span><span>}/microcms/:/app/microcms/ \
+</span><span style="color:#bf616a;">  --env</span><span> METADATA_PATH=/app/microcms/metadata.yml \
+</span><span style="color:#bf616a;">  --env</span><span> OPENAPI_PATH=/app/microcms/openapi.yml \
+</span><span style="color:#bf616a;">  --env</span><span> OUTPUT_PATH=/app/microcms/ \
+</span><span>  lambdasawa/microcms-sdk-generator:latest \
+</span><span style="color:#bf616a;">  --generator-name</span><span> typescript-fetch \
+</span><span style="color:#bf616a;">  --additional-properties</span><span>=typescriptThreePlus=true,allowUnicodeIdentifiers=true
+</span></code></pre>
+<p>このコマンドで生成されたソースコードを利用する側のコードは以下のようになります。</p>
+<pre data-lang="typescript" style="background-color:#2b303b;color:#c0c5ce;" class="language-typescript "><code class="language-typescript" data-lang="typescript"><span style="color:#b48ead;">const </span><span style="color:#bf616a;">api </span><span>= new UsersApi({
+</span><span>  apiKey: &#39;</span><span style="color:#a3be8c;">xxxx</span><span>&#39;,
+</span><span>});
+</span><span>
+</span><span style="color:#bf616a;">api
+</span><span>  .</span><span style="color:#8fa1b3;">searchUsers</span><span>({ q: &#39;</span><span style="color:#a3be8c;">lambdasawa</span><span>&#39; })
+</span><span>  .</span><span style="color:#96b5b4;">then</span><span>(</span><span style="color:#bf616a;">res </span><span style="color:#b48ead;">=&gt; </span><span style="color:#ebcb8b;">console</span><span>.</span><span style="color:#96b5b4;">log</span><span>(</span><span style="color:#bf616a;">res</span><span>));
+</span></code></pre>
+<p>データ新規作成時は以下のようになります。</p>
+<pre data-lang="typescript" style="background-color:#2b303b;color:#c0c5ce;" class="language-typescript "><code class="language-typescript" data-lang="typescript"><span style="color:#b48ead;">const </span><span style="color:#bf616a;">api </span><span>= new UsersApi({
+</span><span>  </span><span style="color:#8fa1b3;">apiKey</span><span>: (</span><span style="color:#bf616a;">name</span><span>) </span><span style="color:#b48ead;">=&gt; </span><span style="color:#bf616a;">name </span><span>=== &#39;</span><span style="color:#a3be8c;">X-Write-API-Key</span><span>&#39; ? &#39;</span><span style="color:#a3be8c;">xxxx-write-key-xxxx</span><span>&#39; : &#39;</span><span style="color:#a3be8c;">xxxx-read-key-xxxx</span><span>&#39;
+</span><span>});
+</span><span>
+</span><span style="color:#bf616a;">api
+</span><span>  .</span><span style="color:#8fa1b3;">createUsers</span><span>({
+</span><span>    usersCreateRequest: {
+</span><span>      name: &#39;</span><span style="color:#a3be8c;">hoge</span><span>&#39;,
+</span><span>    },
+</span><span>  })
+</span><span>  .</span><span style="color:#96b5b4;">then</span><span>(</span><span style="color:#bf616a;">res </span><span style="color:#b48ead;">=&gt; </span><span style="color:#ebcb8b;">console</span><span>.</span><span style="color:#96b5b4;">log</span><span>(</span><span style="color:#bf616a;">res</span><span>));
+</span></code></pre>
+<p><code>searchUsers</code>, <code>createUsers</code> メソッドの引数は静的に型付けされています。
+フィールド名の typo があった場合はコンパイル時に検出されますし、 IDE の補完機能を頼ってコードを書くことが出来ます。</p>
+<p>これはフィールド名に限らず、例えば <code>microCMS</code> 上でセレクトフィールドとして定義されたフィールドは各プログラミング言語上で enum として出力されるため、セレクトフィールドに存在しないフィールドを送信してしまうようなミスも防ぐことが出来ます。</p>
+<h2 id="jin-hou">今後</h2>
+<p>スキーマやフィールドが少ないうちはこういうサードパーティの仕組みを使うより、公式のリファレンスに書いてある素朴な方法に従うほうがお得だと思います。
+しかしデータが複雑になればなるほどこのようなツールを利用してつまらないミスを減らすことによって生産性を上げることができると思います。
+まだプロダクションコードでは利用していないので、機会があればいずれ導入してみたいと思っています。</p>
+<p>まだフリープランで使える範囲の機能しか実装していないため、自分が困るか donation 的なものがあれば有償の機能に対するサポートも追加していこうかなと思っています。</p>
+<p>将来的には <code>microCMS</code> のオフィシャルでこのような機能が実装され、このツールの必要性が無くなることを願っています。</p>
+
+        </div>
+
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2023
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>λ沢.dev</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/style.css">
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/color/orange.css">
+
+        <link rel="stylesheet" href="https://www.lambdasawa.dev/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/font-hack-subset.css">
+
+    </head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://www.lambdasawa.dev" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            λ沢.dev
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://github.com/lambdasawa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            
+                <li><a href="https://zenn.dev/lambdasawa" target="_blank" rel="noopener noreferrer">Zenn</a></li>
+            
+                <li><a href="https://twitter.com/lambdasawa" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+            
+                <li><a href="https://www.wantedly.com/id/lambdasawa" target="_blank" rel="noopener noreferrer">Wantedly</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://www.lambdasawa.dev/cheatsheet/dsq/">dsq</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date"></span>
+
+    </div>
+
+    
+
+        
+        <div class="post-content">
+            <p><a href="https://github.com/multiprocessio/dsq#usage">usage</a></p>
+<p>CSV, Excel, JSON などに対して SQLite ライクな構文でクエリを発行できる。</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> http &#39;</span><span style="color:#a3be8c;">https://api.github.com/repos/github/gitignore/git/trees/main?recursive=1</span><span>&#39; |\
+</span><span>    </span><span style="color:#bf616a;">dsq -s</span><span> json</span><span style="color:#bf616a;"> --pretty </span><span>&#39;</span><span style="color:#a3be8c;">select path, url from {&quot;tree&quot;} where path regexp &quot;^(Go|Terraform).gitignore&quot;</span><span>&#39;
+</span><span style="color:#bf616a;">+---------------------+--------------------------------------------------------------------------------------------------+
+</span><span>|        </span><span style="color:#bf616a;">path         </span><span>|                                               </span><span style="color:#bf616a;">url                                                </span><span>|
+</span><span style="color:#bf616a;">+---------------------+--------------------------------------------------------------------------------------------------+
+</span><span>| </span><span style="color:#bf616a;">Go.gitignore        </span><span>| </span><span style="color:#bf616a;">https://api.github.com/repos/github/gitignore/git/blobs/3b735ec4a8ca017a057cfbc9abc77fe058c12f25 </span><span>|
+</span><span>| </span><span style="color:#bf616a;">Terraform.gitignore </span><span>| </span><span style="color:#bf616a;">https://api.github.com/repos/github/gitignore/git/blobs/9b8a46e692b4c85209a91563b4743c52c72b9ca3 </span><span>|
+</span><span style="color:#bf616a;">+---------------------+--------------------------------------------------------------------------------------------------+
+</span><span>(</span><span style="color:#bf616a;">2</span><span> rows)
+</span><span>
+</span><span style="color:#bf616a;">$</span><span> http https://api.github.com/repos/github/gitignore/git/blobs/3b735ec4a8ca017a057cfbc9abc77fe058c12f25 |\
+</span><span>    </span><span style="color:#bf616a;">jq -r </span><span>&#39;</span><span style="color:#a3be8c;">.content</span><span>&#39; |\
+</span><span>    </span><span style="color:#bf616a;">base64 -d
+</span><span style="color:#bf616a;">...
+</span><span>
+</span><span style="color:#65737e;"># Go workspace file
+</span><span style="color:#bf616a;">go.work
+</span><span>
+</span><span style="color:#bf616a;">...
+</span></code></pre>
+
+        </div>
+
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2023
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

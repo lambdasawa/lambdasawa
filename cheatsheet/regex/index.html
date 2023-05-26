@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>λ沢.dev</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/style.css">
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/color/orange.css">
+
+        <link rel="stylesheet" href="https://www.lambdasawa.dev/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/font-hack-subset.css">
+
+    </head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://www.lambdasawa.dev" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            λ沢.dev
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://github.com/lambdasawa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            
+                <li><a href="https://zenn.dev/lambdasawa" target="_blank" rel="noopener noreferrer">Zenn</a></li>
+            
+                <li><a href="https://twitter.com/lambdasawa" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+            
+                <li><a href="https://www.wantedly.com/id/lambdasawa" target="_blank" rel="noopener noreferrer">Wantedly</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://www.lambdasawa.dev/cheatsheet/regex/">正規表現</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date"></span>
+
+    </div>
+
+    
+
+        
+        <div class="post-content">
+            <ul>
+<li><a href="https://github.com/aloisdg/awesome-regex">https://github.com/aloisdg/awesome-regex</a></li>
+<li><a href="https://www.regexplanet.com/cookbook/index.html">https://www.regexplanet.com/cookbook/index.html</a></li>
+<li><a href="https://www.regexplanet.com/support/index.html">https://www.regexplanet.com/support/index.html</a></li>
+</ul>
+<h2 id="visualization">visualization</h2>
+<ul>
+<li><a href="https://docs.kaizenplatform.net/ja/regexp/">正規表現チェックツール - Kaizen Platform</a>
+<ul>
+<li>マッチさせたい文字列、マッチさせたくない文字列、正規表現を入力するとそれらがマッチしたか表示してくれる</li>
+<li>全部期待通りなら全部緑に表示される</li>
+<li>マッチさせたいのにマッチしなかったか、逆にマッチさせたくないのにマッチしたなら赤く表示される</li>
+<li>日本語</li>
+</ul>
+</li>
+<li><a href="https://regex101.com/">regex101</a>
+<ul>
+<li>正規表現とテキストを入力すると、どの部分にマッチしたか表示してくれる</li>
+<li>書いた正規表現の解説が表示される</li>
+</ul>
+</li>
+<li><a href="https://regexr.com/">RegExr</a>
+<ul>
+<li>正規表現とテキストを入力すると、どの部分にマッチしたか表示してくれる</li>
+<li>正規表現の説明がグラフィカルで見やすい</li>
+</ul>
+</li>
+<li><a href="https://www.debuggex.com">Debuggex</a>
+<ul>
+<li>正規表現を入力すると syntax diagram を表示してくれる</li>
+<li>テキスト上のカーソルに合わせてその文字が syntax diagram のどこに位置するか表示してくれる</li>
+</ul>
+</li>
+<li><a href="https://jex.im/regulex">Regulex</a>
+<ul>
+<li>正規表現を入力すると syntax diagram を表示してくれる</li>
+<li>カラフルで分かりやすい</li>
+</ul>
+</li>
+<li><a href="https://www.wimpyprogrammer.com/regex-to-strings">RegEx to Strings</a>
+<ul>
+<li>正規表現を入力するとそれにマッチする文字列を生成してくれる</li>
+</ul>
+</li>
+</ul>
+<h2 id="generators">generators</h2>
+<h3 id="grex">grex</h3>
+<ul>
+<li><a href="https://github.com/pemistahl/grex">github</a></li>
+<li>コマンドライン引数で受け取った文字列にマッチする正規表現を生成してくれるコマンド。</li>
+</ul>
+<p>使用例</p>
+<pre data-lang="txt" style="background-color:#2b303b;color:#c0c5ce;" class="language-txt "><code class="language-txt" data-lang="txt"><span>$ grex microCMS MicroCMS microcms Microcms
+</span><span>^[Mm]icro(?:CMS|cms)$
+</span></code></pre>
+<h2 id="autoregex-xyz">autoregex.xyz</h2>
+<ul>
+<li><a href="https://www.autoregex.xyz/">https://www.autoregex.xyz/</a></li>
+<li>英語で正規表現の説明を書くと正規表現を生成してくれるサイト</li>
+<li>GPT-3</li>
+</ul>
+<h2 id="crossword">crossword</h2>
+<ul>
+<li><a href="https://regexcrossword.com/">https://regexcrossword.com/</a></li>
+<li><a href="https://jimbly.github.io/regex-crossword/">https://jimbly.github.io/regex-crossword/</a></li>
+</ul>
+<h2 id="javascript">JavaScript</h2>
+<ul>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Regular_Expressions">https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Regular_Expressions</a></li>
+<li><a href="https://www.npmjs.com/package/re2">https://www.npmjs.com/package/re2</a></li>
+</ul>
+<h2 id="go">Go</h2>
+<ul>
+<li><a href="https://pkg.go.dev/regexp">https://pkg.go.dev/regexp</a></li>
+</ul>
+<h2 id="ruby">Ruby</h2>
+<ul>
+<li><a href="https://docs.ruby-lang.org/ja/latest/doc/spec=2fregexp.html">https://docs.ruby-lang.org/ja/latest/doc/spec=2fregexp.html</a></li>
+<li><a href="https://docs.ruby-lang.org/ja/latest/class/Regexp.html">https://docs.ruby-lang.org/ja/latest/class/Regexp.html</a></li>
+</ul>
+<h2 id="omake">omake</h2>
+<ul>
+<li><a href="https://qiita.com/prograti/items/9b54cf82a08302a5d2c7">正規表現の落とし穴（ReDoS - Regular Expressions DoS）</a></li>
+<li><a href="https://johannesvollmer.com/regex-nodes/">Regex Nodes</a></li>
+<li><a href="https://www.nodexr.net/">Nodeexpr</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=chrmarti.regex">Regex Previewer</a></li>
+<li><a href="https://regex-vis.com/">Regex Viz</a></li>
+<li><a href="https://regexper.com">Regexper</a></li>
+</ul>
+
+        </div>
+
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2023
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

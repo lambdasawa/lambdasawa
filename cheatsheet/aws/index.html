@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>λ沢.dev</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/style.css">
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/color/orange.css">
+
+        <link rel="stylesheet" href="https://www.lambdasawa.dev/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/font-hack-subset.css">
+
+    </head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://www.lambdasawa.dev" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            λ沢.dev
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://github.com/lambdasawa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            
+                <li><a href="https://zenn.dev/lambdasawa" target="_blank" rel="noopener noreferrer">Zenn</a></li>
+            
+                <li><a href="https://twitter.com/lambdasawa" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+            
+                <li><a href="https://www.wantedly.com/id/lambdasawa" target="_blank" rel="noopener noreferrer">Wantedly</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://www.lambdasawa.dev/cheatsheet/aws/">AWS</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date"></span>
+
+    </div>
+
+    
+
+        
+        <div class="post-content">
+            <h2 id="reference">reference</h2>
+<ul>
+<li><a href="https://docs.aws.amazon.com/ja_jp/">ドキュメント</a></li>
+<li><a href="https://github.com/aws-samples">https://github.com/aws-samples</a></li>
+<li><a href="https://aws-rough.cc/">AWS ざっくり料金計算</a></li>
+<li><a href="https://docs.aws.amazon.com/ja_jp/service-authorization/latest/reference/reference_policies_actions-resources-contextkeys.html">IAM Policy</a></li>
+</ul>
+<h2 id="iac">IaC</h2>
+<h3 id="cloudformation">CloudFormation</h3>
+<ul>
+<li><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html">リソースのリファレンス</a></li>
+<li><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference.html">組み込み関数のリファレンス</a></li>
+</ul>
+<h3 id="terraform"><a href="https://learn.hashicorp.com/tutorials/terraform/aws-build?in=terraform/aws-get-started">Terraform</a></h3>
+<ul>
+<li><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs">リファレンス</a></li>
+</ul>
+<h3 id="aws-cdk"><a href="https://docs.aws.amazon.com/cdk/v2/guide/hello_world.html">AWS CDK</a></h3>
+<ul>
+<li><a href="https://docs.aws.amazon.com/cdk/v2/guide/home.html">ガイド</a></li>
+<li><a href="https://docs.aws.amazon.com/cdk/api/v1/docs/aws-construct-library.html">リファレンス</a></li>
+<li><a href="https://github.com/aws-samples/aws-cdk-examples/tree/master/typescript">examples</a></li>
+</ul>
+<h3 id="serverless-framework"><a href="https://www.serverless.com/framework/docs/getting-started">Serverless Framework</a></h3>
+<ul>
+<li><a href="https://www.serverless.com/framework/docs/providers/aws/guide/serverless.yml">リファレンス</a></li>
+<li><a href="https://www.serverless.com/examples/">examples</a></li>
+</ul>
+<h2 id="cli">CLI</h2>
+<h3 id="aws-cli">aws-cli</h3>
+<ul>
+<li><a href="https://docs.aws.amazon.com/cli/latest/reference">ref</a></li>
+</ul>
+<h3 id="aws-vault">aws-vault</h3>
+<ul>
+<li><a href="https://github.com/99designs/aws-vault">github</a></li>
+<li><a href="https://github.com/99designs/aws-vault/blob/master/USAGE.md">usage</a></li>
+<li><a href="https://blog.microcms.io/aws-vault-introduction">blog</a></li>
+<li><a href="https://github.com/99designs/aws-vault/issues/378#issuecomment-501114949">Pass environment variables into docker</a></li>
+</ul>
+<h3 id="starship">starship</h3>
+<ul>
+<li><a href="https://starship.rs/ja-JP/config/#aws">github</a></li>
+<li>プロンプトに現在アクティブな AWS のプロファイル名を出せる。</li>
+<li>間違ったプロファイルで作業を防止するのに役立つ。</li>
+</ul>
+<h3 id="awscurl">awscurl</h3>
+<ul>
+<li><a href="https://github.com/okigan/awscurl">github</a></li>
+<li>SigV4 の署名付きで直接 API を叩きたいときに使える。</li>
+<li>例えば <a href="https://opensearch.org/docs/latest/opensearch/rest-api/index/">OpenSearch</a> の <code>_search</code> を直接叩いてデバッグしたいときなど…。</li>
+</ul>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">awscurl --service</span><span> es</span><span style="color:#bf616a;"> --profile</span><span> lambdasawa</span><span style="color:#bf616a;"> --region</span><span> ap-northeast-1 &quot;</span><span style="color:#a3be8c;">https://opensearch.example.com/_cat</span><span>&quot;
+</span></code></pre>
+<h3 id="former2">former2</h3>
+<ul>
+<li><a href="https://github.com/iann0036/former2">github</a></li>
+<li>既存のAWSリソースを読み込んで CFn,Terraform,AWS CDKのコードを生成してくれるツール。</li>
+</ul>
+<h3 id="iamlive">iamlive</h3>
+<ul>
+<li><a href="https://github.com/iann0036/iamlive">github</a></li>
+<li>ローカルマシンのAPI呼び出しを監視してIAMポリシーを生成してくれるツール。</li>
+</ul>
+<h2 id="browser-extension">browser extension</h2>
+<ul>
+<li><a href="https://addons.mozilla.org/ja/firefox/addon/aws-extend-switch-roles3/">AWS Extend Switch Roles</a></li>
+</ul>
+<h2 id="other">other</h2>
+<ul>
+<li><a href="https://github.com/donnemartin/awesome-aws">https://github.com/donnemartin/awesome-aws</a></li>
+<li><a href="https://github.com/lambdasawa/amplify-function-hotswap-plugin">amplify-function-hotswap-plugin</a>
+<ul>
+<li>CDK の <code>--watch</code> のように Amplify の <code>functions</code> を シームレスに更新するコマンド。</li>
+</ul>
+</li>
+<li><a href="http://lambda-versions.com/">lambda-versions.com</a>
+<ul>
+<li>Lambda ランタイムのパッチバージョンを確認できるサイト。</li>
+<li><code>asdf</code> とかでパッチバージョンを決めるときに使っている。</li>
+</ul>
+</li>
+<li><a href="https://convert-datetime-to-cloudwatch-cron-expression-git-master.lambdasawa.vercel.app/">convert-datetime-to-cloudwatch-cron-expression-git-master.lambdasawa.vercel.app</a>
+<ul>
+<li>CloudWatch Events (EventBridge) で使える <code>cron</code> 式の生成をするサイト。</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2023
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

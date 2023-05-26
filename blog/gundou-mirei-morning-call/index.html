@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>λ沢.dev</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/style.css">
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/color/orange.css">
+
+        <link rel="stylesheet" href="https://www.lambdasawa.dev/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/font-hack-subset.css">
+
+    </head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://www.lambdasawa.dev" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            λ沢.dev
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://github.com/lambdasawa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            
+                <li><a href="https://zenn.dev/lambdasawa" target="_blank" rel="noopener noreferrer">Zenn</a></li>
+            
+                <li><a href="https://twitter.com/lambdasawa" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+            
+                <li><a href="https://www.wantedly.com/id/lambdasawa" target="_blank" rel="noopener noreferrer">Wantedly</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://www.lambdasawa.dev/blog/gundou-mirei-morning-call/">郡道美玲にモーニングコールをしてもらう</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date">
+            2020-05-28
+        </span>
+
+    </div>
+
+    
+
+        
+        <div class="post-content">
+            <p>推しにモーニングコール、されたくないですか？
+僕はされたいのでそのシステムを作りました。</p>
+<h2 id="shi-zhuang">実装</h2>
+<p>モーニングコールと言えば普通時間を指定するものですが、今回は個人的な要件によりツイキャスの配信が始まったタイミングをフックとして電話がかかってくるシステムを作りました。</p>
+<p>https://github.com/lambdasawa/gundou-mirei-morning-call がそのリポジトリです。</p>
+<p>以下のような仕組みです。</p>
+<ul>
+<li>5 分毎にツイキャスの API を叩いて配信中かどうかを取得する
+<ul>
+<li>CloudWatch Events でスケジュールする</li>
+<li>Lambda で起動する</li>
+</ul>
+</li>
+<li>配信開始を検知したら Twilio の API を叩いて自分の携帯電話に電話をかける</li>
+<li>Twilio 側の電話番号を携帯電話の電話帳に事前に登録しておき、その電話番号に推しの名前とアイコンを紐付ける</li>
+<li>推しから電話が来る！</li>
+</ul>
+<p><img src="https://images.microcms-assets.io/assets/6d557c87790a4d889ca5641b57b7947f/e4172735601143f58bebe48aba6284ab/gundou-mirei-morning-call.jpeg" alt="screen shot" /></p>
+<p>言語は TypeScript です。<br />
+本当は一番慣れている Go を使いたかったのですが、 Twilio のオフィシャルの SDK に Go が無かったので TypeScript を使っています。</p>
+<p>インフラは慣れに従って Serverless Framework を使っています。<br />
+稼働時間が短いアプリは EC2 で立てるより Lambda を使ったほうが金銭的に有利という判断でサーバレスにしています。</p>
+<h2 id="twilio">Twilio</h2>
+<p>Twilio からかける電話の音声の内容は XML で記述することが出来ます。<br />
+その XML を HTTP で公開して、それを Twilio の API に渡すことで制御することが出来ます。</p>
+<p>https://jp.twilio.com/docs/voice/twiml からサンプルを引用します。</p>
+<pre data-lang="xml" style="background-color:#2b303b;color:#c0c5ce;" class="language-xml "><code class="language-xml" data-lang="xml"><span>&lt;?</span><span style="color:#bf616a;">xml </span><span style="color:#d08770;">version</span><span>=&quot;</span><span style="color:#a3be8c;">1.0</span><span>&quot; </span><span style="color:#d08770;">encoding</span><span>=&quot;</span><span style="color:#a3be8c;">UTF-8</span><span>&quot;?&gt;
+</span><span>&lt;</span><span style="color:#bf616a;">Response</span><span>&gt;
+</span><span>    &lt;</span><span style="color:#bf616a;">Say</span><span>&gt;Hello, World!&lt;/</span><span style="color:#bf616a;">Say</span><span>&gt;
+</span><span>    &lt;</span><span style="color:#bf616a;">Play</span><span>&gt;https://api.twilio.com/Cowbell.mp3&lt;/</span><span style="color:#bf616a;">Play</span><span>&gt;
+</span><span>&lt;/</span><span style="color:#bf616a;">Response</span><span>&gt;
+</span></code></pre>
+<p>このように文字列をそのまま読み上げさせること (<code>Say</code> タグ) に加えて、音声ファイルの URL を指定すること (<code>Play</code> タグ) が出来ます。</p>
+<p>偶然、私は以前に<a href="/posts/mirei-tts/">推しの声を使った棒読みちゃん的なシステムを作って</a> HTTP でそれを呼び出せるようにしていたため、
+<code>Play</code> 部分にこれを連携させることによってモーニングコールで任意の内容を喋っていただくこと可能となっていました。 (まだ大分カタコトですが…。)</p>
+<p>自分は XML を返すエンドポイントを Serverless Framework で 1 つ生やしましたが、 nginx を立てたり S3 に上げたりとにかく HTTP でアクセスできればなんでも良いです。<br />
+これは今の構成では一番手っ取り早い &amp; 将来的にプログラマブルにすることも可能という理由です。</p>
+<p>棒読みちゃん的なサービスが特に存在しない人にモーニングコールして欲しい場合でも、単純に動画を切り抜いて音声にして S3 などで公開する…という感じで対応可能です。</p>
+<h2 id="matome">まとめ</h2>
+<p>最近、推しと生活リズムがあまり一致せず配信をリアタイ出来なくて寂しいなあという思いからこれを実装しました。<br />
+まだ稼働させてから 2 日ですが、これで 03:00 ~ 05:00 くらいの早朝のキャスをリアタイ出来ているので目的は達成できました。<br />
+これを機に今後はもっと流暢な音声を生成できるように尽力したいです (n 度目)</p>
+
+        </div>
+
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2023
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>λ沢.dev</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/style.css">
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/color/orange.css">
+
+        <link rel="stylesheet" href="https://www.lambdasawa.dev/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/font-hack-subset.css">
+
+    </head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://www.lambdasawa.dev" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            λ沢.dev
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://github.com/lambdasawa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            
+                <li><a href="https://zenn.dev/lambdasawa" target="_blank" rel="noopener noreferrer">Zenn</a></li>
+            
+                <li><a href="https://twitter.com/lambdasawa" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+            
+                <li><a href="https://www.wantedly.com/id/lambdasawa" target="_blank" rel="noopener noreferrer">Wantedly</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://www.lambdasawa.dev/cheatsheet/struct-generator/">struct generator</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date"></span>
+
+    </div>
+
+    
+
+        
+        <div class="post-content">
+            <ul>
+<li><a href="https://transform.tools/json-to-go">transform.tools</a></li>
+<li><a href="https://app.quicktype.io/">quicktype</a></li>
+<li><a href="https://github.com/OpenAPITools/openapi-generator">openapi-generator</a></li>
+<li><a href="https://developers.google.com/protocol-buffers/docs/gotutorial">protoc</a></li>
+<li><a href="https://github.com/99designs/gqlgen">gqlgen</a></li>
+<li><a href="https://github.com/volatiletech/sqlboiler">sqlboiler</a></li>
+</ul>
+<h2 id="quicktype">quicktype</h2>
+<p>JSON から Go の構造体、 TypeScript の interface などを生成するコマンド。</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> curl</span><span style="color:#bf616a;"> -sSL</span><span> https://httpbin.org/json | </span><span style="color:#bf616a;">npx</span><span> quicktype</span><span style="color:#bf616a;"> --lang</span><span> go</span><span style="color:#bf616a;"> --just-types
+</span><span style="color:#96b5b4;">type</span><span> TopLevel struct {
+</span><span>        Slideshow Slideshow `</span><span style="color:#bf616a;">json:</span><span>&quot;</span><span style="color:#a3be8c;">slideshow</span><span>&quot;`
+</span><span>}
+</span><span>
+</span><span style="color:#96b5b4;">type</span><span> Slideshow struct {
+</span><span>        Author string  `</span><span style="color:#bf616a;">json:</span><span>&quot;</span><span style="color:#a3be8c;">author</span><span>&quot;`
+</span><span>        Date   string  `</span><span style="color:#bf616a;">json:</span><span>&quot;</span><span style="color:#a3be8c;">date</span><span>&quot;`
+</span><span>        Slides </span><span style="color:#b48ead;">[]</span><span>Slide `</span><span style="color:#bf616a;">json:</span><span>&quot;</span><span style="color:#a3be8c;">slides</span><span>&quot;`
+</span><span>        Title  string  `</span><span style="color:#bf616a;">json:</span><span>&quot;</span><span style="color:#a3be8c;">title</span><span>&quot;`
+</span><span>}
+</span><span>
+</span><span style="color:#96b5b4;">type</span><span> Slide struct {
+</span><span>        Title string   `</span><span style="color:#bf616a;">json:</span><span>&quot;</span><span style="color:#a3be8c;">title</span><span>&quot;`
+</span><span>        Type  string   `</span><span style="color:#bf616a;">json:</span><span>&quot;</span><span style="color:#a3be8c;">type</span><span>&quot;`
+</span><span>        Items </span><span style="color:#b48ead;">[]</span><span>string `</span><span style="color:#bf616a;">json:</span><span>&quot;</span><span style="color:#a3be8c;">items,omitempty</span><span>&quot;`
+</span><span>}
+</span></code></pre>
+
+        </div>
+
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2023
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

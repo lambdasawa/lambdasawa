@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>λ沢.dev</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/style.css">
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/color/orange.css">
+
+        <link rel="stylesheet" href="https://www.lambdasawa.dev/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/font-hack-subset.css">
+
+    </head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://www.lambdasawa.dev" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            λ沢.dev
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://github.com/lambdasawa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            
+                <li><a href="https://zenn.dev/lambdasawa" target="_blank" rel="noopener noreferrer">Zenn</a></li>
+            
+                <li><a href="https://twitter.com/lambdasawa" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+            
+                <li><a href="https://www.wantedly.com/id/lambdasawa" target="_blank" rel="noopener noreferrer">Wantedly</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://www.lambdasawa.dev/blog/aws-lambda-runtime-patch-versions/">AWS Lambda のパッチバージョンを確認できるサイトを作りました</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date">
+            2021-02-24
+        </span>
+
+    </div>
+
+    
+
+        
+        <div class="post-content">
+            <p>以下のような感じで Lambda が実行される環境のバージョンの詳細を確認できるサイトを作りました。</p>
+<p><img src="https://images.microcms-assets.io/assets/6d557c87790a4d889ca5641b57b7947f/bbf4744e4a6c460daa46b291f94a4692/aws-lambda-versions.png" alt="screenshot" /></p>
+<p>ホスティングは雑に S3 で行っていて、 http://aws-lambda-versions.s3-website-ap-northeast-1.amazonaws.com/ から閲覧できます。</p>
+<p>リポジトリは https://github.com/lambdasawa/aws-lambda-versions で管理されています。</p>
+<h2 id="motibesiyon">モチベーション</h2>
+<p>Lambda で動くアプリを作ろうと思った時に細かいバージョン違いによる不具合を防ぐ目的で Lambda とローカルの環境を出来るだけ同じ状態にしたかった。<br />
+しかしドキュメントを確認しても Ruby, Python に関してはマイナーバージョンまでしか記載されていないし、 Node.js に関してはメジャーバージョンまでしか記載されていない。</p>
+<p>パッチバージョンの違いで問題が起こるとは考えにくいが、無用な心配をしなくて済むならしたくないので一応パッチバージョンまで合わせておきたい。</p>
+<p>これを解決するために現在 Lambda で使われている環境のバージョン詳細を手軽に確認できる手段が欲しかった。</p>
+<h2 id="she-ji-shi-zhuang">設計/実装</h2>
+<p>まず Lambda を各種ランタイム (Ruby, Python, NodeJS, Java, C#) ごとに作った。<br />
+この Lambda は CloudWatch Events で１時間毎に発火する。<br />
+各 Lambda 内では自身のランタイムのバージョン詳細を取得して、それをテキストファイルとして S3 に <code>PutObject</code> する。<br />
+Lambda 内ではそれ以外には何もしない。色んな言語で同じ実装をするのは面倒なのでここは死ぬほどシンプルになるようにした。</p>
+<p>バージョンの保存先を S3 にした理由は static website hosting を有効にすれば簡単にデータを公開できるため。<br />
+例えば DynamoDB に保存すると手前に API サーバを置きたくなるが、それを用意するのは面倒なので避けたかった。</p>
+<p>ここまでで HTTP でバージョン詳細を取れるようになったため、雑に XHR する JS を含めたペライチの HTML を用意して、それを同様の S3 バケットに配置して終わり。<br />
+同じバケットにおけば同じドメインになるので CORS の心配をしなくてもよい。</p>
+<p>このサイトは 10 個以上の Lambda を作る必要があるため、 CDK を使った。<br />
+同じことを例えば SAM でやろうとすると YAML を生成するような仕組みを作りたくなると思うが、 CDK であれば単に <code>forEach</code> するだけで済むのでこの選択は適切だったと思う。</p>
+<h2 id="jin-hou">今後</h2>
+<p>バージョンが更新された時に何か通知される仕組みを作りたい。<br />
+何か楽な実装方法が思いついたら対応すると思います。</p>
+
+        </div>
+
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2023
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

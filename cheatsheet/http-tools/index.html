@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>λ沢.dev</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/style.css">
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/color/orange.css">
+
+        <link rel="stylesheet" href="https://www.lambdasawa.dev/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/font-hack-subset.css">
+
+    </head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://www.lambdasawa.dev" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            λ沢.dev
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://github.com/lambdasawa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            
+                <li><a href="https://zenn.dev/lambdasawa" target="_blank" rel="noopener noreferrer">Zenn</a></li>
+            
+                <li><a href="https://twitter.com/lambdasawa" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+            
+                <li><a href="https://www.wantedly.com/id/lambdasawa" target="_blank" rel="noopener noreferrer">Wantedly</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://www.lambdasawa.dev/cheatsheet/http-tools/">HTTP tools</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date"></span>
+
+    </div>
+
+    
+
+        
+        <div class="post-content">
+            <h2 id="httpie">httpie</h2>
+<ul>
+<li><a href="https://httpie.io/docs/cli">doc</a></li>
+<li><a href="https://httpie.io/docs/cli/examples">example</a></li>
+<li>リッチなcurl</li>
+</ul>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#65737e;"># こんな感じで JSON を POST できる
+</span><span style="color:#bf616a;">$</span><span> http</span><span style="color:#bf616a;"> -v </span><span>&quot;</span><span style="color:#a3be8c;">https://httpbin.org/anything</span><span>&quot; &quot;</span><span style="color:#a3be8c;">x-my-header: xxxx</span><span>&quot; foo</span><span style="color:#b48ead;">[</span><span>bar</span><span style="color:#b48ead;">]</span><span>=fizz
+</span><span>
+</span><span style="color:#65737e;"># 同等の処理を curl でやるとこんな感じ
+</span><span style="color:#bf616a;">$</span><span> curl</span><span style="color:#bf616a;"> -v </span><span>&quot;</span><span style="color:#a3be8c;">https://httpbin.org/anything</span><span>&quot;</span><span style="color:#bf616a;"> -X</span><span> POST</span><span style="color:#bf616a;"> -H </span><span>&quot;</span><span style="color:#a3be8c;">x-my-header: xxxx</span><span>&quot;</span><span style="color:#bf616a;"> --data </span><span>&#39;</span><span style="color:#a3be8c;">{&quot;foo&quot;: {&quot;bar&quot;: &quot;fizz&quot;}}</span><span>&#39;
+</span></code></pre>
+<p>レスポンスは自動的にインデントとシンタックスハイライトがされる。</p>
+<h2 id="curlie">curlie</h2>
+<ul>
+<li><a href="https://github.com/rs/curlie">github</a></li>
+<li>リッチなcurl</li>
+</ul>
+<h2 id="insomnia">Insomnia</h2>
+<ul>
+<li><a href="https://insomnia.rest">https://insomnia.rest</a></li>
+<li>GUIのHTTPクライアント</li>
+<li>GraphQL にも対応してる</li>
+</ul>
+<h2 id="postman">Postman</h2>
+<ul>
+<li><a href="https://www.postman.com">https://www.postman.com</a></li>
+<li>GUIのHTTPクライアント</li>
+</ul>
+<h2 id="hoppscotch">Hoppscotch</h2>
+<ul>
+<li><a href="https://hoppscotch.io/ja/">https://hoppscotch.io/ja/</a></li>
+<li>ブラウザで動作するGUIのHTTPクライアント</li>
+</ul>
+<h2 id="httpbin">httpbin</h2>
+<ul>
+<li><a href="https://httpbin.org/">https://httpbin.org/</a></li>
+<li>色んな種類のレスポンスを返すWebサーバ。HTTPクライアントの検証として使える。</li>
+</ul>
+<h2 id="ngrok">ngrok</h2>
+<ul>
+<li>tunneling tool</li>
+<li><a href="https://github.com/anderspitman/awesome-tunneling">awesome-tunneling</a></li>
+<li><a href="https://ngrok.com/docs">doc</a></li>
+<li><a href="https://www.lambdasawa.dev/ngrok">ngrok | λ沢.dev</a></li>
+</ul>
+<h2 id="caddy">Caddy</h2>
+<ul>
+<li>ACME を実装した Web サーバ (certbot + nginx 的なイメージ)</li>
+<li><a href="https://caddyserver.com/docs/getting-started">https://caddyserver.com/docs/getting-started</a></li>
+</ul>
+<h2 id="webhook-site">webhook.site</h2>
+<ul>
+<li><a href="https://webhook.site/">https://webhook.site/</a></li>
+<li>Webhookの受け側を生成するサイト</li>
+<li>Webhookの受け側を作るときにリクエストを観察するために使う</li>
+</ul>
+<h2 id="mitmproxy">mitmproxy</h2>
+<ul>
+<li><a href="https://mitmproxy.org/">https://mitmproxy.org/</a></li>
+<li>ローカルで使うプロキシ</li>
+<li>ブラウザを介さないWebサーバを作るときにreq/resを観察するために使う</li>
+</ul>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">python -m</span><span> http.server 8000
+</span><span style="color:#bf616a;">mitmweb --mode</span><span> reverse:http://localhost:8000</span><span style="color:#bf616a;"> --listen-port</span><span> 8001</span><span style="color:#bf616a;"> --web-port</span><span> 8002
+</span><span style="color:#bf616a;">curl</span><span> localhost:8001
+</span><span style="color:#bf616a;">open</span><span> http://locahost:8002
+</span></code></pre>
+<h2 id="burpsuite">BurpSuite</h2>
+<ul>
+<li><a href="https://portswigger.net/burp">https://portswigger.net/burp</a></li>
+<li>proxy</li>
+</ul>
+<h2 id="cyberchef"><a href="https://gchq.github.io/CyberChef/">CyberChef</a></h2>
+<p>雑多な変換処理を行えるウェブサイト。</p>
+<ul>
+<li>base64</li>
+<li>URL エンコード/デコード</li>
+<li>gunzip</li>
+<li>zlib deflate</li>
+<li>JWT デコード</li>
+<li>などなど</li>
+</ul>
+<p>使用例:</p>
+<ul>
+<li><a href="https://gchq.github.io/CyberChef/#recipe=From_UNIX_Timestamp(&#x27;Milliseconds%20(ms)&#x27;)Translate_DateTime_Format(&#x27;Standard%20date%20and%20time&#x27;,&#x27;ddd%20DD%20MMM%20YYYY%20HH:mm:ss&#x27;,&#x27;UTC&#x27;,&#x27;YYYY-MM-DDTHH:mm:ss&#x27;,&#x27;Asia/Tokyo&#x27;)&amp;input=MTY1NjI4NzU2NDE5Ng">Unix timestamp to RFC3339(JST)</a></li>
+<li><a href="https://gchq.github.io/CyberChef/#recipe=JWT_Decode()&amp;input=ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnpkV0lpT2lJeE1qTTBOVFkzT0Rrd0lpd2libUZ0WlNJNklrcHZhRzRnUkc5bElpd2lhV0YwSWpveE5URTJNak01TURJeWZRLlNmbEt4d1JKU01lS0tGMlFUNGZ3cE1lSmYzNlBPazZ5SlZfYWRRc3N3NWM">JWT decode</a></li>
+</ul>
+
+        </div>
+
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2023
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

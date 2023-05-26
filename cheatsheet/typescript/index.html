@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>λ沢.dev</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/style.css">
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/color/orange.css">
+
+        <link rel="stylesheet" href="https://www.lambdasawa.dev/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/font-hack-subset.css">
+
+    </head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://www.lambdasawa.dev" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            λ沢.dev
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://github.com/lambdasawa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            
+                <li><a href="https://zenn.dev/lambdasawa" target="_blank" rel="noopener noreferrer">Zenn</a></li>
+            
+                <li><a href="https://twitter.com/lambdasawa" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+            
+                <li><a href="https://www.wantedly.com/id/lambdasawa" target="_blank" rel="noopener noreferrer">Wantedly</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://www.lambdasawa.dev/cheatsheet/typescript/">TypeScript</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date"></span>
+
+    </div>
+
+    
+
+        
+        <div class="post-content">
+            <h2 id="shi-shi-desugunishi-erutypescript"><a href="https://future-architect.github.io/typescript-guide/">仕事ですぐに使えるTypeScript</a></h2>
+<h2 id="sabaibarutypescrip"><a href="https://typescriptbook.jp/">サバイバルTypeScrip</a></h2>
+<h2 id="javascript-primer"><a href="https://jsprimer.net/">JavaScript Primer</a></h2>
+<h2 id="raiburariwotan-suyatu"><a href="https://www.typescriptlang.org/dt/search?search=">ライブラリを探すやつ</a></h2>
+<h2 id="utility-type"><a href="https://www.typescriptlang.org/docs/handbook/utility-types.html">Utility Type</a></h2>
+<h2 id="typechallenge"><a href="https://github.com/type-challenges/type-challenges#challenges">TypeChallenge</a></h2>
+<h2 id="typesync-ncu"><a href="https://www.npmjs.com/package/typesync">typesync</a> &amp;&amp; <a href="https://www.npmjs.com/package/npm-check-updates">ncu</a></h2>
+<ul>
+<li><code>typesync</code> ... <code>dependencies</code> にあるパッケージの <code>@types</code> を探して <code>devDependencies</code> に入れてくるやつ</li>
+<li><code>ncu</code> ... 依存ライブラリの新しいバージョンを探して <code>package.json</code> を更新してくれるやつ</li>
+</ul>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">npx</span><span> typesync &amp;&amp; </span><span style="color:#bf616a;">npx</span><span> npm-check-updates</span><span style="color:#bf616a;"> -u </span><span>&amp;&amp; </span><span style="color:#bf616a;">yarn
+</span><span style="color:#bf616a;">npx</span><span> typesync &amp;&amp; </span><span style="color:#bf616a;">npx</span><span> npm-check-updates</span><span style="color:#bf616a;"> -u </span><span>&amp;&amp; </span><span style="color:#bf616a;">npm</span><span> i
+</span></code></pre>
+<p><a href="https://github.com/millsp/ts-toolbelt">https://github.com/millsp/ts-toolbelt</a></p>
+<h2 id="yi-cun-norisutohua">依存のリスト化</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">cat</span><span> (fd package.json) | </span><span style="color:#bf616a;">jq -rs </span><span>&#39;</span><span style="color:#a3be8c;">map((.dependencies // {}) * (.devDependencies // {}) | to_entries | .[] | .key) | unique | sort | .[]</span><span>&#39;
+</span></code></pre>
+<h2 id="bundle">bundle</h2>
+<h3 id="https-github-com-microsoft-typescript"><a href="https://github.com/microsoft/TypeScript">https://github.com/microsoft/TypeScript</a></h3>
+<h3 id="https-github-com-evanw-esbuild"><a href="https://github.com/evanw/esbuild">https://github.com/evanw/esbuild</a></h3>
+<p>ファイル変更検知してビルド + <code>node</code> コマンドで実行。
+型チェックはされない。</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">esbuild</span><span> src/index.ts</span><span style="color:#bf616a;"> --bundle --watch --platform</span><span>=node</span><span style="color:#bf616a;"> --outfile</span><span>=dist/index.js
+</span><span style="color:#bf616a;">node</span><span> dist/index.js
+</span></code></pre>
+<h3 id="https-github-com-swc-project-swc"><a href="https://github.com/swc-project/swc">https://github.com/swc-project/swc</a></h3>
+<p>ファイル変更検知してビルド + <code>node</code> コマンドで実行。
+型チェックはされない。
+<code>-w</code> は <code>chokidar</code> に依存する。</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">swc</span><span> src/index.ts</span><span style="color:#bf616a;"> -o</span><span> dist/index.js</span><span style="color:#bf616a;"> -w
+</span><span style="color:#bf616a;">node</span><span> dist/index.js
+</span></code></pre>
+<h3 id="https-github-com-vercel-ncc"><a href="https://github.com/vercel/ncc">https://github.com/vercel/ncc</a></h3>
+<p><code>ncc</code> で直接実行 (型チェックをスキップして高速化)</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">ncc</span><span> run src/index.ts</span><span style="color:#bf616a;"> --transpile-only
+</span></code></pre>
+<p>ファイル変更があったらビルド (型チェックをスキップして高速化) + <code>node</code> コマンドで実行</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">ncc</span><span> build src/index.ts</span><span style="color:#bf616a;"> --transpile-only --watch
+</span><span style="color:#bf616a;">node</span><span> dist/index.js
+</span></code></pre>
+<p>型チェックしてビルド</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">ncc</span><span> build src/index.ts</span><span style="color:#bf616a;"> --minify
+</span></code></pre>
+<h3 id="https-github-com-egoist-tsup"><a href="https://github.com/egoist/tsup">https://github.com/egoist/tsup</a></h3>
+<p>利用例</p>
+<ul>
+<li><a href="https://github.com/vercel/turborepo">https://github.com/vercel/turborepo</a></li>
+<li><a href="https://github.com/jondot/hygen">https://github.com/jondot/hygen</a></li>
+<li><a href="https://github.com/NotionX/react-notion-x">https://github.com/NotionX/react-notion-x</a></li>
+<li><a href="https://github.com/marmelab/react-admin">https://github.com/marmelab/react-admin</a></li>
+<li><a href="https://github.com/zpao/qrcode.react">https://github.com/zpao/qrcode.react</a></li>
+</ul>
+<p><code>--watch</code> でファイルの変更を検知してコンパイルを実行し、 <code>--onSuccess</code> でコンパイル成功後に任意のコマンドを実行できるのが特徴的。</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">tsup</span><span> src/index.ts</span><span style="color:#bf616a;"> --watch</span><span> src/</span><span style="color:#bf616a;"> --onSuccess </span><span>&#39;</span><span style="color:#a3be8c;">node dist/index.js</span><span>&#39;
+</span></code></pre>
+<p>こんな感じのコマンドを <code>npm run dev</code> で実行できるようにしておくと便利。</p>
+<p><code>--env.API_KEY abcd1234</code> みたいなオプションを付けるとビルド時に環境変数を注入できる。</p>
+<p>ライブラリも含めてバンドルして単一ファイルにすることは出来なさそう。
+<code>tsup</code> でバンドルしたファイルをライブラリとして配布するのは有効だが、アプリケーションとして配布する場合は <code>node_modules</code> もあわせて配布する必要がある。</p>
+<p><code>--dts</code> オプションをつけると型チェックが行われる。</p>
+<h3 id="https-github-com-babel-babel"><a href="https://github.com/babel/babel">https://github.com/babel/babel</a></h3>
+<h3 id="https-github-com-webpack-webpack"><a href="https://github.com/webpack/webpack">https://github.com/webpack/webpack</a></h3>
+<h3 id="https-github-com-typestrong-ts-node"><a href="https://github.com/TypeStrong/ts-node">https://github.com/TypeStrong/ts-node</a></h3>
+<h3 id="https-github-com-wclr-ts-node-dev"><a href="https://github.com/wclr/ts-node-dev">https://github.com/wclr/ts-node-dev</a></h3>
+<h3 id="https-github-com-rollup-rollup"><a href="https://github.com/rollup/rollup">https://github.com/rollup/rollup</a></h3>
+
+        </div>
+
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2023
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

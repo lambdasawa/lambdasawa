@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>λ沢.dev</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/style.css">
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/color/orange.css">
+
+        <link rel="stylesheet" href="https://www.lambdasawa.dev/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/font-hack-subset.css">
+
+    </head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://www.lambdasawa.dev" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            λ沢.dev
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://github.com/lambdasawa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            
+                <li><a href="https://zenn.dev/lambdasawa" target="_blank" rel="noopener noreferrer">Zenn</a></li>
+            
+                <li><a href="https://twitter.com/lambdasawa" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+            
+                <li><a href="https://www.wantedly.com/id/lambdasawa" target="_blank" rel="noopener noreferrer">Wantedly</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://www.lambdasawa.dev/cheatsheet/ssl-tls-certificate/">SSL&#x2F;TLS 証明書</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date"></span>
+
+    </div>
+
+    
+
+        
+        <div class="post-content">
+            <ul>
+<li><a href="https://www.lambdanote.com/products/tls">プロフェッショナルSSL/TLS – 技術書出版と販売のラムダノート</a></li>
+<li><a href="https://qiita.com/TakahikoKawasaki/items/4c35ac38c52978805c69">図解 X.509 証明書</a></li>
+<li><a href="https://qiita.com/kunichiko/items/12cbccaadcbf41c72735">RSA鍵、証明書のファイルフォーマットについて</a></li>
+<li><a href="https://www.digicert.com/easy-csr/openssl.htm">OpenSSL CSR Tool - Create Your CSR Faster | DigiCert.com</a></li>
+</ul>
+<h2 id="csrtomi-mi-jian-wozuo-cheng-suru">CSRと秘密鍵を作成する</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">openssl</span><span> req</span><span style="color:#bf616a;"> -new -newkey</span><span> rsa:2048</span><span style="color:#bf616a;"> -nodes -out</span><span> foo_example_com.csr</span><span style="color:#bf616a;"> -keyout</span><span> foo_example_com.key</span><span style="color:#bf616a;"> -subj </span><span>&quot;</span><span style="color:#a3be8c;">/C=JP/ST=hoge/L=buzz/O=foo/OU=fizz/CN=foo.example.com</span><span>&quot;
+</span></code></pre>
+<h2 id="csrnozhong-shen-wotekisutodebiao-shi-suru">CSRの中身をテキストで表示する</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> openssl req</span><span style="color:#bf616a;"> -text -noout -in</span><span> ./foo_example_com.csr
+</span><span style="color:#bf616a;">Certificate</span><span> Request:
+</span><span>    </span><span style="color:#bf616a;">Data:
+</span><span>        </span><span style="color:#bf616a;">Version:</span><span> 0 (0x0)
+</span><span>        </span><span style="color:#bf616a;">Subject:</span><span> C=JP, ST=hoge, L=buzz, O=foo, OU=fizz, CN=foo.example.com
+</span><span>        </span><span style="color:#bf616a;">Subject</span><span> Public Key Info:
+</span><span>            </span><span style="color:#bf616a;">Public</span><span> Key Algorithm: rsaEncryption
+</span><span>                </span><span style="color:#bf616a;">RSA</span><span> Public-Key: (2048 bit)
+</span><span>                </span><span style="color:#bf616a;">Modulus:
+</span><span>                    </span><span style="color:#bf616a;">00:d1:26:db:93:20:65:42:f4:0f:7e:3b:1f:be:95:
+</span><span>                    </span><span style="color:#bf616a;">92:12:d5:65:10:4f:4a:1c:d4:c9:cd:5a:f1:96:e9:
+</span><span>                    </span><span style="color:#bf616a;">//</span><span> ...
+</span><span>                    </span><span style="color:#bf616a;">ec:99:cb:85:9f:70:ee:33:6a:9b:e3:a4:b9:ff:db:
+</span><span>                    </span><span style="color:#bf616a;">bc:87
+</span><span>                </span><span style="color:#bf616a;">Exponent:</span><span> 65537 (0x10001)
+</span><span>        </span><span style="color:#bf616a;">Attributes:
+</span><span>            </span><span style="color:#bf616a;">a0:00
+</span><span>    </span><span style="color:#bf616a;">Signature</span><span> Algorithm: sha256WithRSAEncryption
+</span><span>         </span><span style="color:#bf616a;">77:e2:34:6c:01:41:84:19:44:57:8a:6e:06:11:c9:ce:20:75:
+</span><span>         </span><span style="color:#bf616a;">f0:5a:17:58:64:78:30:e7:4c:83:9b:4e:6d:aa:63:e3:c2:ca:
+</span><span>         </span><span style="color:#bf616a;">//</span><span> ...
+</span><span>         </span><span style="color:#bf616a;">d6:72:72:50:ef:c0:e9:cb:2f:bb:43:3c:38:d3:9a:18:d4:69:
+</span><span>         </span><span style="color:#bf616a;">13:c1:72:29
+</span></code></pre>
+<h2 id="mi-mi-jian-nozhong-shen-wotekisutodebiao-shi-suru">秘密鍵の中身をテキストで表示する</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> openssl rsa</span><span style="color:#bf616a;"> -text -noout -in</span><span> ./foo_example_com.key
+</span><span style="color:#bf616a;">RSA</span><span> Private-Key: (2048 bit)
+</span><span style="color:#bf616a;">modulus:
+</span><span>    </span><span style="color:#bf616a;">00:d1:26:db:93:20:65:42:f4:0f:7e:3b:1f:be:95:
+</span><span>    </span><span style="color:#bf616a;">92:12:d5:65:10:4f:4a:1c:d4:c9:cd:5a:f1:96:e9:
+</span><span>    </span><span style="color:#bf616a;">//</span><span> ...
+</span><span>    </span><span style="color:#bf616a;">da:44:e9:d8:46:e9:68:a6:4a:b2:29:04:e1:03:a5:
+</span><span>    </span><span style="color:#bf616a;">ec:99:cb:85:9f:70:ee:33:6a:9b:e3:a4:b9:ff:db:
+</span><span>    </span><span style="color:#bf616a;">bc:87
+</span><span style="color:#bf616a;">publicExponent:</span><span> 65537 (0x10001)
+</span><span style="color:#bf616a;">privateExponent:
+</span><span>    </span><span style="color:#bf616a;">00:87:83:b4:db:64:2f:18:2d:88:68:52:a8:a3:d4:
+</span><span>    </span><span style="color:#bf616a;">c7:9b:9a:56:6c:35:e3:a0:40:a3:2c:82:53:6c:63:
+</span><span>    </span><span style="color:#bf616a;">//</span><span> ...
+</span><span>    </span><span style="color:#bf616a;">2b:00:a1:be:bf:4c:61:02:d3:a7:7d:80:aa:42:58:
+</span><span>    </span><span style="color:#bf616a;">68:19
+</span><span style="color:#bf616a;">prime1:
+</span><span>    </span><span style="color:#bf616a;">00:ee:60:fb:a1:7c:df:b4:03:a4:f6:a3:44:1d:b6:
+</span><span>    </span><span style="color:#bf616a;">fc:91:3e:78:79:70:07:a8:06:1f:a1:0f:0d:3a:77:
+</span><span>    </span><span style="color:#bf616a;">//</span><span> ...
+</span><span>    </span><span style="color:#bf616a;">a7:4c:49:7d:40:fb:af:d4:54:85:d7:4e:01:ff:bb:
+</span><span>    </span><span style="color:#bf616a;">49:6d:a2:e6:51:ea:27:66:c5
+</span><span style="color:#bf616a;">prime2:
+</span><span>    </span><span style="color:#bf616a;">00:e0:9c:ca:37:cd:7a:b9:f9:b3:04:c3:fa:47:72:
+</span><span>    </span><span style="color:#bf616a;">8f:24:d6:86:52:46:30:8d:7e:e0:08:21:94:40:19:
+</span><span>    </span><span style="color:#bf616a;">//</span><span> ...
+</span><span>    </span><span style="color:#bf616a;">03:6c:ee:9c:a5:5a:4b:ba:f8:6e:50:07:1a:90:1c:
+</span><span>    </span><span style="color:#bf616a;">92:94:80:02:43:0c:c8:aa:db
+</span><span style="color:#bf616a;">exponent1:
+</span><span>    </span><span style="color:#bf616a;">50:87:ba:fa:67:31:3b:a3:2f:8b:92:c4:64:35:79:
+</span><span>    </span><span style="color:#bf616a;">45:a8:11:13:15:61:c0:c5:b0:d1:bc:3f:ff:cc:53:
+</span><span>    </span><span style="color:#bf616a;">//</span><span> ...
+</span><span>    </span><span style="color:#bf616a;">11:a2:f4:bc:f1:b7:7f:d1:a0:66:1a:9a:77:c6:34:
+</span><span>    </span><span style="color:#bf616a;">92:75:11:37:6e:cf:8b:af:b2:37:76:46:fe:99:ca:
+</span><span>    </span><span style="color:#bf616a;">c8:9b:0b:ac:08:aa:9e:f1
+</span><span style="color:#bf616a;">exponent2:
+</span><span>    </span><span style="color:#bf616a;">5d:1d:82:d3:a9:72:a4:60:b8:ef:53:d3:91:05:14:
+</span><span>    </span><span style="color:#bf616a;">04:a0:8e:a4:d3:06:53:d2:72:4b:cc:a7:e9:fe:c9:
+</span><span>    </span><span style="color:#bf616a;">//</span><span> ...
+</span><span>    </span><span style="color:#bf616a;">af:65:28:39:80:7a:7e:b3:78:ff:e2:42:07:d6:60:
+</span><span>    </span><span style="color:#bf616a;">8a:01:9b:6e:72:81:4a:1b
+</span><span style="color:#bf616a;">coefficient:
+</span><span>    </span><span style="color:#bf616a;">00:ec:d0:cc:38:e5:cb:ae:4a:74:b1:a0:a6:81:2e:
+</span><span>    </span><span style="color:#bf616a;">24:02:a7:cb:95:2b:c0:00:6d:12:94:60:48:ea:3a:
+</span><span>    </span><span style="color:#bf616a;">//</span><span> ...
+</span><span>    </span><span style="color:#bf616a;">f7:e8:1d:76:c8:b0:fe:9f:a3:ff:70:78:2a:ae:70:
+</span><span>    </span><span style="color:#bf616a;">19:3e:45:75:e6:8d:a1:f4:40
+</span></code></pre>
+<h2 id="netutowakujing-you-dezheng-ming-shu-woqu-de-suru">ネットワーク経由で証明書を取得する</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> echo | </span><span style="color:#bf616a;">openssl</span><span> s_client</span><span style="color:#bf616a;"> -connect</span><span> example.com:443 |  </span><span style="color:#bf616a;">openssl</span><span> x509</span><span style="color:#bf616a;"> -text -noout -inform</span><span> pem</span><span style="color:#bf616a;"> -in</span><span> /dev/stdin
+</span><span style="color:#bf616a;">depth</span><span>=</span><span style="color:#a3be8c;">2 </span><span style="color:#bf616a;">C</span><span> = US, O = DigiCert Inc, OU = www.digicert.com, CN = DigiCert Global Root CA
+</span><span style="color:#bf616a;">verify</span><span> return:1
+</span><span style="color:#bf616a;">depth</span><span>=</span><span style="color:#a3be8c;">1 </span><span style="color:#bf616a;">C</span><span> = US, O = DigiCert Inc, CN = DigiCert TLS RSA SHA256 2020 CA1
+</span><span style="color:#bf616a;">verify</span><span> return:1
+</span><span style="color:#bf616a;">depth</span><span>=</span><span style="color:#a3be8c;">0 </span><span style="color:#bf616a;">C</span><span> = US, ST = California, L = Los Angeles, O = Internet</span><span style="color:#96b5b4;">\C</span><span>2</span><span style="color:#96b5b4;">\A</span><span>0Corporation</span><span style="color:#96b5b4;">\C</span><span>2</span><span style="color:#96b5b4;">\A</span><span>0for</span><span style="color:#96b5b4;">\C</span><span>2</span><span style="color:#96b5b4;">\A</span><span>0Assigned</span><span style="color:#96b5b4;">\C</span><span>2</span><span style="color:#96b5b4;">\A</span><span>0Names</span><span style="color:#96b5b4;">\C</span><span>2</span><span style="color:#96b5b4;">\A</span><span>0and</span><span style="color:#96b5b4;">\C</span><span>2</span><span style="color:#96b5b4;">\A</span><span>0Numbers, CN = www.example.org
+</span><span style="color:#bf616a;">verify</span><span> return:1
+</span><span style="color:#bf616a;">DONE
+</span><span style="color:#bf616a;">Certificate:
+</span><span>    </span><span style="color:#bf616a;">Data:
+</span><span>        </span><span style="color:#bf616a;">Version:</span><span> 3 (0x2)
+</span><span>        </span><span style="color:#bf616a;">Serial</span><span> Number:
+</span><span>            </span><span style="color:#bf616a;">0f:aa:63:10:93:07:bc:3d:41:48:92:64:0c:cd:4d:9a
+</span><span>    </span><span style="color:#bf616a;">Signature</span><span> Algorithm: sha256WithRSAEncryption
+</span><span>        </span><span style="color:#bf616a;">Issuer:</span><span> C=US, O=DigiCert Inc, CN=DigiCert TLS RSA SHA256 2020 CA1
+</span><span>        </span><span style="color:#bf616a;">Validity
+</span><span>            </span><span style="color:#bf616a;">Not</span><span> Before: Mar 14 00:00:00 2022 GMT
+</span><span>            </span><span style="color:#bf616a;">Not</span><span> After : Mar 14 23:59:59 2023 GMT
+</span><span>        </span><span style="color:#bf616a;">Subject:</span><span> C=US, ST=California, L=Los Angeles, O=Internet</span><span style="color:#96b5b4;">\x</span><span>C2</span><span style="color:#96b5b4;">\x</span><span>A0Corporation</span><span style="color:#96b5b4;">\x</span><span>C2</span><span style="color:#96b5b4;">\x</span><span>A0for</span><span style="color:#96b5b4;">\x</span><span>C2</span><span style="color:#96b5b4;">\x</span><span>A0Assigned</span><span style="color:#96b5b4;">\x</span><span>C2</span><span style="color:#96b5b4;">\x</span><span>A0Names</span><span style="color:#96b5b4;">\x</span><span>C2</span><span style="color:#96b5b4;">\x</span><span>A0and</span><span style="color:#96b5b4;">\x</span><span>C2</span><span style="color:#96b5b4;">\x</span><span>A0Numbers, CN=www.example.org
+</span><span>        </span><span style="color:#bf616a;">Subject</span><span> Public Key Info:
+</span><span>            </span><span style="color:#bf616a;">Public</span><span> Key Algorithm: rsaEncryption
+</span><span>                </span><span style="color:#bf616a;">RSA</span><span> Public-Key: (2048 bit)
+</span><span>                </span><span style="color:#bf616a;">Modulus:
+</span><span>                    </span><span style="color:#bf616a;">00:95:5d:96:63:9a:e5:1a:7d:5f:a7:0b:ee:06:18:
+</span><span>                    </span><span style="color:#bf616a;">f4:9d:50:5c:37:10:b1:90:75:06:fe:92:46:e0:7b:
+</span><span>                    </span><span style="color:#bf616a;">//</span><span> ...
+</span><span>                    </span><span style="color:#bf616a;">55:b6:76:40:ca:ae:85:a5:9f:30:14:ae:a3:e0:e3:
+</span><span>                    </span><span style="color:#bf616a;">30:33
+</span><span>                </span><span style="color:#bf616a;">Exponent:</span><span> 65537 (0x10001)
+</span><span>        </span><span style="color:#bf616a;">X509v3</span><span> extensions:
+</span><span>            </span><span style="color:#bf616a;">X509v3</span><span> Authority Key Identifier:
+</span><span>                </span><span style="color:#bf616a;">keyid:B7:6B:A2:EA:A8:AA:84:8C:79:EA:B4:DA:0F:98:B2:C5:95:76:B9:F4
+</span><span>
+</span><span>            </span><span style="color:#bf616a;">X509v3</span><span> Subject Key Identifier:
+</span><span>                </span><span style="color:#bf616a;">F7:2A:09:D0:24:5B:11:71:EE:BA:BE:F4:3E:1C:3D:56:12:88:16:BB
+</span><span>            </span><span style="color:#bf616a;">X509v3</span><span> Subject Alternative Name:
+</span><span>                </span><span style="color:#bf616a;">DNS:www.example.org,</span><span> DNS:example.net, DNS:example.edu, DNS:example.com, DNS:example.org, DNS:www.example.com, DNS:www.example.edu, DNS:www.example.net
+</span><span>            </span><span style="color:#bf616a;">X509v3</span><span> Key Usage: critical
+</span><span>                </span><span style="color:#bf616a;">Digital</span><span> Signature, Key Encipherment
+</span><span>            </span><span style="color:#bf616a;">X509v3</span><span> Extended Key Usage:
+</span><span>                </span><span style="color:#bf616a;">TLS</span><span> Web Server Authentication, TLS Web Client Authentication
+</span><span>            </span><span style="color:#bf616a;">X509v3</span><span> CRL Distribution Points:
+</span><span>
+</span><span>                </span><span style="color:#bf616a;">Full</span><span> Name:
+</span><span>                  </span><span style="color:#bf616a;">URI:http://crl3.digicert.com/DigiCertTLSRSASHA2562020CA1-4.crl
+</span><span>
+</span><span>                </span><span style="color:#bf616a;">Full</span><span> Name:
+</span><span>                  </span><span style="color:#bf616a;">URI:http://crl4.digicert.com/DigiCertTLSRSASHA2562020CA1-4.crl
+</span><span>
+</span><span>            </span><span style="color:#bf616a;">X509v3</span><span> Certificate Policies:
+</span><span>                </span><span style="color:#bf616a;">Policy:</span><span> 2.23.140.1.2.2
+</span><span>                  </span><span style="color:#bf616a;">CPS:</span><span> http://www.digicert.com/CPS
+</span><span>
+</span><span>            </span><span style="color:#bf616a;">Authority</span><span> Information Access:
+</span><span>                </span><span style="color:#bf616a;">OCSP</span><span> - URI:http://ocsp.digicert.com
+</span><span>                </span><span style="color:#bf616a;">CA</span><span> Issuers - URI:http://cacerts.digicert.com/DigiCertTLSRSASHA2562020CA1-1.crt
+</span><span>
+</span><span>            </span><span style="color:#bf616a;">X509v3</span><span> Basic Constraints:
+</span><span>                </span><span style="color:#bf616a;">CA:FALSE
+</span><span>            </span><span style="color:#bf616a;">1.3.6.1.4.1.11129.2.4.2:
+</span><span>                </span><span style="color:#bf616a;">...h.f.u..</span><span>&gt;..&gt;..52.W(..k......k..i.w}</span><span style="color:#bf616a;">m..n.......u.....F0D.</span><span> 1x.S.F..2S=Z..l...B4.*........... Gt0...!`</span><span style="color:#bf616a;">.~..</span><span>%</span><span style="color:#bf616a;">..2j.....a</span><span>&lt;.6..E.s..u.5.....lW...LmB...&#39;</span><span style="color:#a3be8c;"> &amp;Q.?.*....;.L.......|.....F0D. ;)O.$P.D..&gt;&quot;.Mc....1..&lt;......$.\. ..5.........6...\.....O..:.....X.v..sw...P.c.......Jy-.g.......y6...............G0E. ).....o...........e.U_.&lt;.@m.[ZN..!..v..D..........rv.RB.Xd.).......
+</span><span style="color:#a3be8c;">    Signature Algorithm: sha256WithRSAEncryption
+</span><span style="color:#a3be8c;">         aa:9f:be:5d:91:1b:ad:e4:4e:4e:cc:8f:07:64:44:35:b4:ad:
+</span><span style="color:#a3be8c;">         3b:13:3f:c1:29:d8:b4:ab:f3:42:51:49:46:3b:d6:cf:1e:41:
+</span><span style="color:#a3be8c;">         // ...
+</span><span style="color:#a3be8c;">         23:a7:63:f3:b5:43:fa:56:8c:50:17:7b:1c:1b:4e:10:6b:22:
+</span><span style="color:#a3be8c;">         0e:84:52:94
+</span></code></pre>
+
+        </div>
+
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2023
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

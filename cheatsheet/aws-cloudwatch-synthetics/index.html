@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>λ沢.dev</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/style.css">
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/color/orange.css">
+
+        <link rel="stylesheet" href="https://www.lambdasawa.dev/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/font-hack-subset.css">
+
+    </head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://www.lambdasawa.dev" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            λ沢.dev
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://github.com/lambdasawa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            
+                <li><a href="https://zenn.dev/lambdasawa" target="_blank" rel="noopener noreferrer">Zenn</a></li>
+            
+                <li><a href="https://twitter.com/lambdasawa" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+            
+                <li><a href="https://www.wantedly.com/id/lambdasawa" target="_blank" rel="noopener noreferrer">Wantedly</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://www.lambdasawa.dev/cheatsheet/aws-cloudwatch-synthetics/">CloudWatch Synthetics</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date"></span>
+
+    </div>
+
+    
+
+        
+        <div class="post-content">
+            <p><a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries.html">https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries.html</a></p>
+<p>いわゆる外形監視を行うことができるサービス。
+Puppeteer を使ってアクセスのシナリオを書き、ステータスコードが期待どおりであるか、期待した DOM があるか、スクリーンショットに差分がないかを数分おきにチェックできる。</p>
+<p>Synthetics 自体に Slack 通知などの仕組みはない。
+代わりに Synthetics の設定をすると CloudWatch Alarm が作成されるので、そのアラームをトリガーにしてメール通知、 Amaozn SNS 通知、 AWS Chatbot (Slack) 連携ができる。</p>
+<p>Puppeteer の API とある程度の互換性があるようで、 Puppeteer 上で動くシナリオを少し修正するだけ Synthetics 上でもそのシナリオを動かせる。</p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/mo%E2%80%A6.html#CloudWatch_Synthetics_Canaries_modify_puppeteer_script">https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/mo….html#CloudWatch_Synthetics_Canaries_modify_puppeteer_script</a></p>
+<p>Synthetics 上で使えるクラス、関数のリファレンスは以下にある。
+<a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library_Nodejs.html">https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library_Nodejs.html</a></p>
+<h2 id="check-response-image">check response image</h2>
+<p>画像の見た目を検証するサンプルコード.</p>
+<p>一般的なユースケースは HTML を返すページにアクセスしてスクショが想定通りか検証…というものだと思われるが、動的なサイトだと毎回微妙に結果が違ったりするため少し考慮事項が多い。
+そのためまずはシンプルに特定の画像 URL にアクセスして、その見た目が変わってないことを検証するコードを考える。</p>
+<pre data-lang="js" style="background-color:#2b303b;color:#c0c5ce;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#b48ead;">const </span><span style="color:#bf616a;">synthetics </span><span>= </span><span style="color:#96b5b4;">require</span><span>(&quot;</span><span style="color:#a3be8c;">Synthetics</span><span>&quot;);
+</span><span>
+</span><span style="color:#b48ead;">const </span><span style="color:#8fa1b3;">pageLoad </span><span>= </span><span style="color:#b48ead;">async function </span><span>() {
+</span><span>  </span><span style="color:#b48ead;">const </span><span style="color:#bf616a;">config </span><span>= </span><span style="color:#bf616a;">synthetics</span><span>.</span><span style="color:#8fa1b3;">getConfiguration</span><span>();
+</span><span>  </span><span style="color:#bf616a;">config</span><span>.</span><span style="color:#8fa1b3;">withVisualCompareWithBaseRun</span><span>(</span><span style="color:#d08770;">true</span><span>);
+</span><span>  </span><span style="color:#bf616a;">config</span><span>.</span><span style="color:#8fa1b3;">withVisualVarianceHighlightHexColor</span><span>(&quot;</span><span style="color:#a3be8c;">#ff0000</span><span>&quot;);
+</span><span>  </span><span style="color:#bf616a;">config</span><span>.</span><span style="color:#8fa1b3;">withVisualVarianceThresholdPercentage</span><span>(</span><span style="color:#d08770;">10</span><span>); </span><span style="color:#65737e;">// 画像の見た目が多少(10%)変わってもエラーにはしない
+</span><span>
+</span><span>  </span><span style="color:#b48ead;">const </span><span style="color:#bf616a;">page </span><span>= </span><span style="color:#b48ead;">await </span><span style="color:#bf616a;">synthetics</span><span>.</span><span style="color:#8fa1b3;">getPage</span><span>();
+</span><span>
+</span><span>  </span><span style="color:#b48ead;">const </span><span style="color:#bf616a;">response </span><span>= </span><span style="color:#b48ead;">await </span><span style="color:#bf616a;">page</span><span>.</span><span style="color:#8fa1b3;">goto</span><span>(&quot;</span><span style="color:#a3be8c;">https://secure.gravatar.com/avatar/667b2dd89c0c98eb5e8768d7ec1572c9</span><span>&quot;);
+</span><span>  </span><span style="color:#b48ead;">if </span><span>(</span><span style="color:#bf616a;">response</span><span>.</span><span style="color:#8fa1b3;">status</span><span>() !== </span><span style="color:#d08770;">200</span><span>) {
+</span><span>    </span><span style="color:#b48ead;">throw </span><span>new Error(&quot;</span><span style="color:#a3be8c;">Failed to load page!</span><span>&quot;);
+</span><span>  }
+</span><span>
+</span><span>  </span><span style="color:#b48ead;">await </span><span style="color:#bf616a;">synthetics</span><span>.</span><span style="color:#8fa1b3;">takeScreenshot</span><span>(&quot;</span><span style="color:#a3be8c;">me</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">loaded</span><span>&quot;);
+</span><span>};
+</span><span>
+</span><span>exports.</span><span style="color:#8fa1b3;">handler </span><span>= </span><span style="color:#b48ead;">async </span><span>() </span><span style="color:#b48ead;">=&gt; </span><span>{
+</span><span>  </span><span style="color:#b48ead;">return await </span><span style="color:#8fa1b3;">pageLoad</span><span>();
+</span><span>};
+</span></code></pre>
+<h2 id="check-response-json">check response json</h2>
+<p>API のレスポンスが期待通りであるか検証するサンプルコード。</p>
+<p>画像の次にシンプルなのが DOM が絡まず単純に API をテストするケース。
+自社サービスのバックエンドに <code>GET /healthcheck</code> などのエンドポイントが実装されており、そこを監視したい場合などに便利。</p>
+<p>今回はテストとして <a href="https://httpbin.org/#/Anything/post_anything"><code>POST https://httpbin.org/anything</code></a> を叩いてそのレスポンスボディを検証することを考える。</p>
+<p>これは <a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/mo%E2%80%A6ry_Nodejs.html#CloudWatch_Synthetics_Library_executeHttpStep"><code>synthetics.executeHttpStep</code></a> が使える。</p>
+<p>基本的には Node の <a href="https://nodejs.org/api/http.html#http_http_request_options_callback"><code>http パッケージの request</code></a> と互換性があるインターフェースになっている。
+なので <code>fetch</code> みたいに丸ごとレスポンスボディを得ることはできなくて、 <code>res.on(&quot;data&quot;, (data) =&gt; {})</code> と <code>res.on(&quot;end&quot;, () =&gt; {})</code> でレスポンスボディを得る必要がある。
+完全に互換性があるわけではないようで、 <code>http</code> パッケージであれば  <code>req.write(data)</code> としてリクエストボディを書き込むところだが、第2引数のオプションに <code>body</code> を渡すことができる。</p>
+<pre data-lang="js" style="background-color:#2b303b;color:#c0c5ce;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#b48ead;">const </span><span style="color:#bf616a;">synthetics </span><span>= </span><span style="color:#96b5b4;">require</span><span>(&quot;</span><span style="color:#a3be8c;">Synthetics</span><span>&quot;);
+</span><span>
+</span><span style="color:#b48ead;">const </span><span style="color:#8fa1b3;">pageLoad </span><span>= </span><span style="color:#b48ead;">async function </span><span>() {
+</span><span>  </span><span style="color:#b48ead;">return </span><span style="color:#bf616a;">synthetics</span><span>.</span><span style="color:#8fa1b3;">executeHttpStep</span><span>(
+</span><span>    &quot;</span><span style="color:#a3be8c;">Test httpbin.org/anything</span><span>&quot;,
+</span><span>    {
+</span><span>      method: &quot;</span><span style="color:#a3be8c;">POST</span><span>&quot;,
+</span><span>      protocol: &quot;</span><span style="color:#a3be8c;">https:</span><span>&quot;,
+</span><span>      port: &quot;</span><span style="color:#a3be8c;">443</span><span>&quot;,
+</span><span>      hostname: &quot;</span><span style="color:#a3be8c;">httpbin.org</span><span>&quot;,
+</span><span>      path: &quot;</span><span style="color:#a3be8c;">/anything</span><span>&quot;,
+</span><span>      headers: {
+</span><span>        &quot;</span><span style="color:#a3be8c;">content-type</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">application/json</span><span>&quot;,
+</span><span>        </span><span style="color:#65737e;">// 任意のヘッダーが書き込めるので認証が必要な場合はここに authorization: &quot;Bearer foo&quot;, などと書く
+</span><span>      },
+</span><span>      body: JSON.</span><span style="color:#96b5b4;">stringify</span><span>({ foo: &quot;</span><span style="color:#a3be8c;">bar</span><span>&quot; }),
+</span><span>    },
+</span><span>    (</span><span style="color:#bf616a;">res</span><span>) </span><span style="color:#b48ead;">=&gt; </span><span>{
+</span><span>      </span><span style="color:#b48ead;">return </span><span>new Promise((</span><span style="color:#bf616a;">resolve</span><span>, </span><span style="color:#bf616a;">reject</span><span>) </span><span style="color:#b48ead;">=&gt; </span><span>{
+</span><span>        </span><span style="color:#b48ead;">if </span><span>(</span><span style="color:#bf616a;">res</span><span>.</span><span style="color:#bf616a;">statusCode </span><span>&gt;= </span><span style="color:#d08770;">400</span><span>) {
+</span><span>          </span><span style="color:#b48ead;">return </span><span style="color:#8fa1b3;">reject</span><span>(new Error(`</span><span style="color:#a3be8c;">HTTP Status Error: ${</span><span style="color:#bf616a;">res</span><span style="color:#a3be8c;">.</span><span style="color:#bf616a;">statusCode</span><span style="color:#a3be8c;">}</span><span>`));
+</span><span>        }
+</span><span>
+</span><span>        </span><span style="color:#b48ead;">let </span><span style="color:#bf616a;">responseBody </span><span>= &quot;&quot;;
+</span><span>
+</span><span>        </span><span style="color:#bf616a;">res</span><span>.</span><span style="color:#8fa1b3;">on</span><span>(&quot;</span><span style="color:#a3be8c;">data</span><span>&quot;, (</span><span style="color:#bf616a;">data</span><span>) </span><span style="color:#b48ead;">=&gt; </span><span>{
+</span><span>          </span><span style="color:#bf616a;">responseBody </span><span>+= </span><span style="color:#bf616a;">data</span><span>;
+</span><span>        });
+</span><span>
+</span><span>        </span><span style="color:#bf616a;">res</span><span>.</span><span style="color:#8fa1b3;">on</span><span>(&quot;</span><span style="color:#a3be8c;">end</span><span>&quot;, () </span><span style="color:#b48ead;">=&gt; </span><span>{
+</span><span>          </span><span style="color:#b48ead;">const </span><span style="color:#bf616a;">body </span><span>= JSON.</span><span style="color:#96b5b4;">parse</span><span>(</span><span style="color:#bf616a;">responseBody</span><span>);
+</span><span>          </span><span style="color:#b48ead;">if </span><span>(</span><span style="color:#bf616a;">body</span><span>.</span><span style="color:#bf616a;">json</span><span>.</span><span style="color:#bf616a;">foo </span><span>!== &quot;</span><span style="color:#a3be8c;">bar</span><span>&quot;) {
+</span><span>            </span><span style="color:#b48ead;">return </span><span style="color:#8fa1b3;">reject</span><span>(new Error(`</span><span style="color:#a3be8c;">HTTP Response Body Error: ${</span><span style="color:#bf616a;">responseBody</span><span style="color:#a3be8c;">}</span><span>`));
+</span><span>          }
+</span><span>
+</span><span>          </span><span style="color:#8fa1b3;">resolve</span><span>();
+</span><span>        });
+</span><span>      });
+</span><span>    },
+</span><span>    {
+</span><span>      </span><span style="color:#65737e;">// AWS のコンソールでリクエストヘッダーを見れるようにする
+</span><span>      includeRequestHeaders: </span><span style="color:#d08770;">true</span><span>,
+</span><span>      </span><span style="color:#65737e;">// AWS のコンソールでレスポンスヘッダーを見れるようにする
+</span><span>      includeResponseHeaders: </span><span style="color:#d08770;">true</span><span>,
+</span><span>      </span><span style="color:#65737e;">// AWS のコンソールでリクエストボディーを見れるようにする
+</span><span>      includeRequestBody: </span><span style="color:#d08770;">true</span><span>,
+</span><span>      </span><span style="color:#65737e;">// AWS のコンソールでレスポンスボディを見れるようにする
+</span><span>      includeResponseBody: </span><span style="color:#d08770;">true</span><span>,
+</span><span>      </span><span style="color:#65737e;">// この API 呼び出しが失敗したときに次のステップに進むかどうか。
+</span><span>      </span><span style="color:#65737e;">// 複数の API をテストする場合は true にしておくと、どの API が落ちてるか一覧でわかる。
+</span><span>      continueOnHttpStepFailure: </span><span style="color:#d08770;">true</span><span>,
+</span><span>    }
+</span><span>  );
+</span><span>}
+</span><span>
+</span><span>exports.</span><span style="color:#8fa1b3;">handler </span><span>= </span><span style="color:#b48ead;">async </span><span>() </span><span style="color:#b48ead;">=&gt; </span><span>{
+</span><span>  </span><span style="color:#b48ead;">return await </span><span style="color:#8fa1b3;">pageLoad</span><span>();
+</span><span>};
+</span><span>
+</span></code></pre>
+<h2 id="burauzashang-dete-ding-nocao-zuo-wositahou-nojian-tamu-wotesuto">ブラウザ上で特定の操作をした後の見た目をテスト</h2>
+<p>どんな Web サービスにもありそうな機能として、ログインを例に考える。
+ログインするには ID の入力、パスワードの入力、ログインボタンの押下の3つの操作が必要になる。
+これを Puppeteer 上で行うようなコードが以下。</p>
+<p>バグなどでログインしたあとのページの見た目が変わっていたらアラートが発火して問題に気づける
+もしそれが意図した変更であれば、 Synthetics のページから Canary を編集して「次の実行を新しいベースラインとして設定」をチェックすると次回実行時にアラートが下がる。</p>
+<pre data-lang="js" style="background-color:#2b303b;color:#c0c5ce;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#b48ead;">const </span><span style="color:#bf616a;">synthetics </span><span>= </span><span style="color:#96b5b4;">require</span><span>(&quot;</span><span style="color:#a3be8c;">Synthetics</span><span>&quot;);
+</span><span>
+</span><span style="color:#b48ead;">const </span><span style="color:#8fa1b3;">pageLoad </span><span>= </span><span style="color:#b48ead;">async function </span><span>() {
+</span><span>  </span><span style="color:#b48ead;">const </span><span style="color:#bf616a;">config </span><span>= </span><span style="color:#bf616a;">synthetics</span><span>.</span><span style="color:#8fa1b3;">getConfiguration</span><span>();
+</span><span>
+</span><span>  </span><span style="color:#65737e;">// ページの見た目をテストする機能を ON にする
+</span><span>  </span><span style="color:#bf616a;">config</span><span>.</span><span style="color:#8fa1b3;">withVisualCompareWithBaseRun</span><span>(</span><span style="color:#d08770;">true</span><span>);
+</span><span>
+</span><span>  </span><span style="color:#65737e;">// ページの見た目が変わっていたら AWS コンソール上でその差分を #ff0000 色でハイライトする
+</span><span>  </span><span style="color:#bf616a;">config</span><span>.</span><span style="color:#8fa1b3;">withVisualVarianceHighlightHexColor</span><span>(&quot;</span><span style="color:#a3be8c;">#ff0000</span><span>&quot;);
+</span><span>
+</span><span>  </span><span style="color:#65737e;">// ページの見た目が多少(10%)変わってもエラーにはしない
+</span><span>  </span><span style="color:#bf616a;">config</span><span>.</span><span style="color:#8fa1b3;">withVisualVarianceThresholdPercentage</span><span>(</span><span style="color:#d08770;">10</span><span>);
+</span><span>
+</span><span>  </span><span style="color:#b48ead;">const </span><span style="color:#bf616a;">page </span><span>= </span><span style="color:#b48ead;">await </span><span style="color:#bf616a;">synthetics</span><span>.</span><span style="color:#8fa1b3;">getPage</span><span>();
+</span><span>
+</span><span>  </span><span style="color:#b48ead;">await </span><span style="color:#bf616a;">page</span><span>.</span><span style="color:#8fa1b3;">goto</span><span>(&quot;</span><span style="color:#a3be8c;">https://app.example.com/signin</span><span>&quot;, { waitUntil: &quot;</span><span style="color:#a3be8c;">networkidle0</span><span>&quot; });
+</span><span>  </span><span style="color:#b48ead;">await </span><span style="color:#bf616a;">page</span><span>.</span><span style="color:#8fa1b3;">setViewport</span><span>({ width: </span><span style="color:#d08770;">1200</span><span>, height: </span><span style="color:#d08770;">720 </span><span>}); </span><span style="color:#65737e;">// ウィンドウサイズを調整
+</span><span>  </span><span style="color:#b48ead;">await </span><span style="color:#bf616a;">synthetics</span><span>.</span><span style="color:#8fa1b3;">takeScreenshot</span><span>(&quot;</span><span style="color:#a3be8c;">login</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">before</span><span>&quot;); </span><span style="color:#65737e;">// ログイン前のスクショ
+</span><span>
+</span><span>  {
+</span><span>    </span><span style="color:#b48ead;">const </span><span style="color:#bf616a;">username </span><span>= process.env.</span><span style="color:#bf616a;">USERNAME </span><span>|| &quot;</span><span style="color:#a3be8c;">username</span><span>&quot;;
+</span><span>    </span><span style="color:#b48ead;">await </span><span style="color:#bf616a;">page</span><span>.</span><span style="color:#8fa1b3;">waitForSelector</span><span>(&#39;</span><span style="color:#a3be8c;">input[type=&quot;text&quot;]</span><span>&#39;); </span><span style="color:#65737e;">// 期待した Element が描画されるまで待つ
+</span><span>    </span><span style="color:#b48ead;">await </span><span style="color:#bf616a;">page</span><span>.</span><span style="color:#8fa1b3;">type</span><span>(&#39;</span><span style="color:#a3be8c;">input[type=&quot;text&quot;]</span><span>&#39;, </span><span style="color:#bf616a;">username</span><span>); </span><span style="color:#65737e;">// ID を入力
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">const </span><span style="color:#bf616a;">password </span><span>= process.env.</span><span style="color:#bf616a;">PASSWORD </span><span>|| &quot;</span><span style="color:#a3be8c;">password</span><span>&quot;;
+</span><span>    </span><span style="color:#b48ead;">await </span><span style="color:#bf616a;">page</span><span>.</span><span style="color:#8fa1b3;">waitForSelector</span><span>(&#39;</span><span style="color:#a3be8c;">input[type=&quot;password&quot;]</span><span>&#39;); </span><span style="color:#65737e;">// 期待した Element が描画されるまで待つ
+</span><span>    </span><span style="color:#b48ead;">await </span><span style="color:#bf616a;">page</span><span>.</span><span style="color:#8fa1b3;">type</span><span>(&#39;</span><span style="color:#a3be8c;">input[type=&quot;password&quot;]</span><span>&#39;, </span><span style="color:#bf616a;">password</span><span>); </span><span style="color:#65737e;">// パスワード を入力
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">await </span><span style="color:#bf616a;">synthetics</span><span>.</span><span style="color:#8fa1b3;">takeScreenshot</span><span>(&quot;</span><span style="color:#a3be8c;">login</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">after-type</span><span>&quot;); </span><span style="color:#65737e;">// ID,パスワードを入力した後のスクショ
+</span><span>  }
+</span><span>
+</span><span>  </span><span style="color:#b48ead;">await </span><span style="color:#bf616a;">page</span><span>.</span><span style="color:#96b5b4;">click</span><span>(&quot;</span><span style="color:#a3be8c;">button</span><span>&quot;); </span><span style="color:#65737e;">// ログインをボタンを押す
+</span><span>  </span><span style="color:#b48ead;">await </span><span style="color:#bf616a;">page</span><span>.</span><span style="color:#8fa1b3;">waitFor</span><span>(</span><span style="color:#d08770;">15 </span><span>* </span><span style="color:#d08770;">1000</span><span>); </span><span style="color:#65737e;">// 15 秒待つ
+</span><span>  </span><span style="color:#b48ead;">await </span><span style="color:#bf616a;">synthetics</span><span>.</span><span style="color:#8fa1b3;">takeScreenshot</span><span>(&quot;</span><span style="color:#a3be8c;">login</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">after-click</span><span>&quot;); </span><span style="color:#65737e;">// ログインボタンを押した後のスクショ
+</span><span>};
+</span><span>
+</span><span>exports.</span><span style="color:#8fa1b3;">handler </span><span>= </span><span style="color:#b48ead;">async </span><span>() </span><span style="color:#b48ead;">=&gt; </span><span>{
+</span><span>  </span><span style="color:#b48ead;">return await </span><span style="color:#8fa1b3;">pageLoad</span><span>();
+</span><span>};
+</span></code></pre>
+
+        </div>
+
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2023
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>λ沢.dev</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/style.css">
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/color/orange.css">
+
+        <link rel="stylesheet" href="https://www.lambdasawa.dev/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/font-hack-subset.css">
+
+    </head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://www.lambdasawa.dev" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            λ沢.dev
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://github.com/lambdasawa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            
+                <li><a href="https://zenn.dev/lambdasawa" target="_blank" rel="noopener noreferrer">Zenn</a></li>
+            
+                <li><a href="https://twitter.com/lambdasawa" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+            
+                <li><a href="https://www.wantedly.com/id/lambdasawa" target="_blank" rel="noopener noreferrer">Wantedly</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://www.lambdasawa.dev/cheatsheet/aws-cloudwatch-logs/">CloudWatch Logs</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date"></span>
+
+    </div>
+
+    
+
+        
+        <div class="post-content">
+            <h2 id="insights-query">Insights query</h2>
+<ul>
+<li><a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html">CloudWatch Logs Insight クエリ構文</a></li>
+</ul>
+<h2 id="cloudwatch-logs-query">cloudwatch-logs-query</h2>
+<ul>
+<li><a href="https://github.com/lambdasawa/lambdasawa/blob/main/bin/cloudwatch-logs-query">ref</a></li>
+</ul>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">cloudwatch-logs-query</span><span> 2022-01-02T03:04:05Z 2023-01-02T03:04:05Z /aws/lambda/foo &#39;</span><span style="color:#a3be8c;">fields @message | limit 5</span><span>&#39;
+</span></code></pre>
+<h2 id="utern">utern</h2>
+<ul>
+<li><a href="https://github.com/knqyf263/utern">github</a></li>
+</ul>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">utern --no-log-stream --filter </span><span>&#39;</span><span style="color:#a3be8c;">-&quot;START RequestId&quot; -&quot;END RequestId&quot; -&quot;REPORT RequestId&quot;</span><span>&#39; /aws/lambda/foo
+</span></code></pre>
+<h2 id="cw">cw</h2>
+<p><a href="https://github.com/lucagrulla/cw">github</a></p>
+<h2 id="rogugurupuwomatometexue-chu">ロググループをまとめて削除</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">aws</span><span> logs describe-log-groups</span><span style="color:#bf616a;"> --max-items</span><span> 1000 |\
+</span><span>  </span><span style="color:#bf616a;">jq -r </span><span>&#39;</span><span style="color:#a3be8c;">.logGroups[] | .logGroupName | select(test(&quot;irisawa&quot;))</span><span>&#39; |\
+</span><span>  </span><span style="color:#bf616a;">xargs -n</span><span> 1 aws logs delete-log-group</span><span style="color:#bf616a;"> --log-group-name
+</span></code></pre>
+
+        </div>
+
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2023
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

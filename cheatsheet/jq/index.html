@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>λ沢.dev</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/style.css">
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/color/orange.css">
+
+        <link rel="stylesheet" href="https://www.lambdasawa.dev/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/font-hack-subset.css">
+
+    </head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://www.lambdasawa.dev" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            λ沢.dev
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://github.com/lambdasawa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            
+                <li><a href="https://zenn.dev/lambdasawa" target="_blank" rel="noopener noreferrer">Zenn</a></li>
+            
+                <li><a href="https://twitter.com/lambdasawa" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+            
+                <li><a href="https://www.wantedly.com/id/lambdasawa" target="_blank" rel="noopener noreferrer">Wantedly</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://www.lambdasawa.dev/cheatsheet/jq/">jq</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date"></span>
+
+    </div>
+
+    
+
+        
+        <div class="post-content">
+            <ul>
+<li><a href="https://qiita.com/takeshinoda@github/items/2dec7a72930ec1f658af">jq コマンドを使う日常のご紹介</a></li>
+<li><a href="https://stedolan.github.io/jq/manual/#Basicfilters">ref</a></li>
+<li><a href="https://github.com/stedolan/jq/wiki/jq-Language-Description">language description</a></li>
+</ul>
+<h2 id="filter">filter</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> echo &#39;</span><span style="color:#a3be8c;">[{ &quot;n&quot;: 1 }, { &quot;n&quot;: 2 }, { &quot;n&quot;: 3 }]</span><span>&#39; | </span><span style="color:#bf616a;">jq </span><span>&#39;</span><span style="color:#a3be8c;">.[] | select(.n % 2 == 0)</span><span>&#39;
+</span><span>{
+</span><span>  &quot;</span><span style="color:#a3be8c;">n</span><span>&quot;</span><span style="color:#bf616a;">:</span><span> 2
+</span><span>}
+</span></code></pre>
+<h2 id="map">map</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> echo &#39;</span><span style="color:#a3be8c;">[{ &quot;n&quot;: 1 }, { &quot;n&quot;: 2 }, { &quot;n&quot;: 3 }]</span><span>&#39; | </span><span style="color:#bf616a;">jq </span><span>&#39;</span><span style="color:#a3be8c;">map(.n * 10)</span><span>&#39;
+</span><span style="color:#96b5b4;">[
+</span><span>  </span><span style="color:#bf616a;">10,
+</span><span>  </span><span style="color:#bf616a;">20,
+</span><span>  </span><span style="color:#bf616a;">30
+</span><span style="color:#bf616a;">]
+</span></code></pre>
+<h2 id="filter-no-flatten-sinaiyatu">filter の flatten しないやつ</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> echo &#39;</span><span style="color:#a3be8c;">[{ &quot;n&quot;: 1 }, { &quot;n&quot;: 2 }, { &quot;n&quot;: 3 }]</span><span>&#39; | </span><span style="color:#bf616a;">jq </span><span>&#39;</span><span style="color:#a3be8c;">map(select(.n % 2 == 0))</span><span>&#39;
+</span><span style="color:#96b5b4;">[
+</span><span>  </span><span style="color:#bf616a;">{</span><span>&quot;</span><span style="color:#a3be8c;">n</span><span>&quot;</span><span style="color:#bf616a;">:</span><span> 2}
+</span><span style="color:#bf616a;">]
+</span></code></pre>
+<h2 id="json-lines-wopei-lie-tositedu-miqu-ru">JSON lines を配列として読み取る</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> printf &#39;</span><span style="color:#a3be8c;">{&quot;foo&quot;: 1}\n{&quot;foo&quot;: 2}</span><span>&#39; | </span><span style="color:#bf616a;">jq -s </span><span>&#39;</span><span style="color:#a3be8c;">.</span><span>&#39;
+</span><span style="color:#96b5b4;">[
+</span><span>  </span><span style="color:#bf616a;">{</span><span>&quot;</span><span style="color:#a3be8c;">foo</span><span>&quot;</span><span style="color:#bf616a;">:</span><span> 1}</span><span style="color:#bf616a;">,
+</span><span>  </span><span style="color:#bf616a;">{</span><span>&quot;</span><span style="color:#a3be8c;">foo</span><span>&quot;</span><span style="color:#bf616a;">:</span><span> 2}
+</span><span style="color:#bf616a;">]
+</span></code></pre>
+<h2 id="printf-string-format-string-template">printf, string format, string template</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> echo &#39;</span><span style="color:#a3be8c;">[{ &quot;n&quot;: 1 }, { &quot;n&quot;: 2 }, { &quot;n&quot;: 3 }]</span><span>&#39; | </span><span style="color:#bf616a;">jq </span><span>&#39;</span><span style="color:#a3be8c;">map(&quot;n =&gt; \(.n + 1)&quot;)</span><span>&#39;
+</span><span style="color:#96b5b4;">[
+</span><span>  &quot;</span><span style="color:#a3be8c;">n =&gt; 2</span><span>&quot;</span><span style="color:#bf616a;">,
+</span><span>  &quot;</span><span style="color:#a3be8c;">n =&gt; 3</span><span>&quot;</span><span style="color:#bf616a;">,
+</span><span>  &quot;</span><span style="color:#a3be8c;">n =&gt; 4</span><span>&quot;
+</span><span style="color:#bf616a;">]
+</span></code></pre>
+<h2 id="string-join">string join</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> echo &#39;</span><span style="color:#a3be8c;">[{ &quot;n&quot;: 1 }, { &quot;n&quot;: 2 }, { &quot;n&quot;: 3 }]</span><span>&#39; | </span><span style="color:#bf616a;">jq -r </span><span>&#39;</span><span style="color:#a3be8c;">map(.n) | join(&quot;,&quot;)</span><span>&#39;
+</span><span style="color:#bf616a;">1,2,3
+</span></code></pre>
+<h3 id="string-split">string split</h3>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> echo</span><span style="color:#bf616a;"> -n</span><span> foo,bar,baz | </span><span style="color:#bf616a;">jq -R </span><span>&#39;</span><span style="color:#a3be8c;">split(&quot;,&quot;)</span><span>&#39;
+</span><span style="color:#96b5b4;">[
+</span><span>  &quot;</span><span style="color:#a3be8c;">foo</span><span>&quot;</span><span style="color:#bf616a;">,
+</span><span>  &quot;</span><span style="color:#a3be8c;">bar</span><span>&quot;</span><span style="color:#bf616a;">,
+</span><span>  &quot;</span><span style="color:#a3be8c;">baz</span><span>&quot;
+</span><span style="color:#bf616a;">]
+</span></code></pre>
+<h2 id="regexp">regexp</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> curl</span><span style="color:#bf616a;"> -sSL</span><span> https://api.github.com/users/lambdasawa/repos | </span><span style="color:#bf616a;">jq </span><span>&#39;</span><span style="color:#a3be8c;">map(select(.name | test(&quot;lambda(?!sawa)&quot;)) | .name)</span><span>&#39;
+</span><span style="color:#96b5b4;">[
+</span><span>  &quot;</span><span style="color:#a3be8c;">aws-lambda-versions</span><span>&quot;
+</span><span style="color:#bf616a;">]
+</span></code></pre>
+<h2 id="he-ji-pei-lie">合計 (配列)</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> echo &#39;</span><span style="color:#a3be8c;">[{ &quot;n&quot;: 1 }, { &quot;n&quot;: 2 }, { &quot;n&quot;: 3 }]</span><span>&#39; | </span><span style="color:#bf616a;">jq </span><span>&#39;</span><span style="color:#a3be8c;">map(.n) | add</span><span>&#39;
+</span><span style="color:#bf616a;">6
+</span></code></pre>
+<h2 id="he-ji-line-separated-string">合計 (line separated string)</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> seq 10 | </span><span style="color:#bf616a;">jq -s</span><span> add
+</span><span style="color:#bf616a;">55
+</span></code></pre>
+<h2 id="pei-lie-nochang-sa">配列の長さ</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> echo &#39;</span><span style="color:#a3be8c;">[{ &quot;n&quot;: 1 }, { &quot;n&quot;: 2 }, { &quot;n&quot;: 3 }]</span><span>&#39; | </span><span style="color:#bf616a;">jq </span><span>&#39;</span><span style="color:#a3be8c;">length</span><span>&#39;
+</span><span style="color:#bf616a;">3
+</span></code></pre>
+<h2 id="ping-jun">平均</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> echo &#39;</span><span style="color:#a3be8c;">[{ &quot;n&quot;: 1 }, { &quot;n&quot;: 2 }, { &quot;n&quot;: 3 }]</span><span>&#39; | </span><span style="color:#bf616a;">jq </span><span>&#39;</span><span style="color:#a3be8c;">map(.n) as $ns | ($ns | add) / ($ns | length)</span><span>&#39;
+</span><span style="color:#bf616a;">2
+</span></code></pre>
+<h2 id="xian-tou-3ge">先頭3個</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> echo &#39;</span><span style="color:#a3be8c;">[1,2,3,4,5,6,7,8,9,10]</span><span>&#39; | </span><span style="color:#bf616a;">jq </span><span>&#39;</span><span style="color:#a3be8c;">limit(3; .[])</span><span>&#39;
+</span><span style="color:#bf616a;">1
+</span><span style="color:#bf616a;">2
+</span><span style="color:#bf616a;">3
+</span></code></pre>
+<h2 id="mo-wei-3ge">末尾3個</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> echo &#39;</span><span style="color:#a3be8c;">[1,2,3,4,5,6,7,8,9,10]</span><span>&#39; | </span><span style="color:#bf616a;">jq </span><span>&#39;</span><span style="color:#a3be8c;">limit(3; reverse | .[])</span><span>&#39;
+</span><span style="color:#bf616a;">10
+</span><span style="color:#bf616a;">9
+</span><span style="color:#bf616a;">8
+</span></code></pre>
+<h2 id="yao-su-nozhui-jia-toxue-chu">要素の追加と削除</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> echo &#39;</span><span style="color:#a3be8c;">{&quot;a&quot;: 1, &quot;b&quot;: 2}</span><span>&#39; | </span><span style="color:#bf616a;">jq </span><span>&#39;</span><span style="color:#a3be8c;">.foo = &quot;bar&quot; | del(.b)</span><span>&#39;
+</span><span>{
+</span><span>  &quot;</span><span style="color:#a3be8c;">a</span><span>&quot;</span><span style="color:#bf616a;">:</span><span> 1,
+</span><span>  &quot;</span><span style="color:#a3be8c;">foo</span><span>&quot;</span><span style="color:#bf616a;">: </span><span>&quot;</span><span style="color:#a3be8c;">bar</span><span>&quot;
+</span><span>}
+</span></code></pre>
+<h2 id="huan-jing-bian-shu-niakusesu">環境変数にアクセス</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> jq</span><span style="color:#bf616a;"> -nr </span><span>&#39;</span><span style="color:#a3be8c;">env.USER</span><span>&#39;
+</span><span style="color:#bf616a;">lambdasawa
+</span></code></pre>
+<h2 id="komandoraindebian-shu-wodu-su">コマンドラインで変数を渡す</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> jq</span><span style="color:#bf616a;"> -n --arg</span><span> FOO bar &#39;</span><span style="color:#a3be8c;">{ foo: $FOO }</span><span>&#39;
+</span><span>{
+</span><span>  &quot;</span><span style="color:#a3be8c;">foo</span><span>&quot;</span><span style="color:#bf616a;">: </span><span>&quot;</span><span style="color:#a3be8c;">bar</span><span>&quot;
+</span><span>}
+</span></code></pre>
+<h2 id="jsondekodo">JSONデコード</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> echo &#39;</span><span style="color:#a3be8c;">{&quot;data&quot;: &quot;{\\&quot;data\\&quot;: 1}&quot;}</span><span>&#39; | </span><span style="color:#bf616a;">jq </span><span>&#39;</span><span style="color:#a3be8c;">.data | fromjson</span><span>&#39;
+</span><span>{
+</span><span>  &quot;</span><span style="color:#a3be8c;">data</span><span>&quot;</span><span style="color:#bf616a;">:</span><span> 1
+</span><span>}
+</span></code></pre>
+<h2 id="urienkodo">URIエンコード</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> echo</span><span style="color:#bf616a;"> -n</span><span> aiuえお | </span><span style="color:#bf616a;">jq -Rr</span><span> @uri
+</span><span style="color:#bf616a;">aiu</span><span>%</span><span style="color:#bf616a;">E3</span><span>%</span><span style="color:#d08770;">81</span><span>%</span><span style="color:#d08770;">88</span><span>%</span><span style="color:#bf616a;">E3</span><span>%</span><span style="color:#d08770;">81</span><span>%</span><span style="color:#d08770;">8</span><span style="color:#bf616a;">A
+</span></code></pre>
+<h2 id="uridekodo">URIデコード</h2>
+<p>jq には URI デコードをするコマンドはない。 Node.js でやるとしたら以下。</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> echo</span><span style="color:#bf616a;"> -n</span><span> aiu%</span><span style="color:#bf616a;">E3</span><span>%</span><span style="color:#d08770;">81</span><span>%</span><span style="color:#d08770;">88</span><span>%</span><span style="color:#bf616a;">E3</span><span>%</span><span style="color:#d08770;">81</span><span>%</span><span style="color:#d08770;">8</span><span>A | </span><span style="color:#bf616a;">node -e </span><span>&#39;</span><span style="color:#a3be8c;">console.log(decodeURIComponent(require(&quot;fs&quot;).readFileSync(&quot;/dev/stdin&quot;, &quot;utf-8&quot;)))</span><span>&#39;
+</span><span style="color:#bf616a;">aiuえお
+</span></code></pre>
+<h2 id="json-zu-mili-te">JSON 組み立て</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> jq</span><span style="color:#bf616a;"> -n --arg</span><span> FOO hoge</span><span style="color:#bf616a;"> --argjson</span><span> BAR 1 &#39;</span><span style="color:#a3be8c;">$ARGS.named</span><span>&#39;
+</span><span>{
+</span><span>  &quot;</span><span style="color:#a3be8c;">FOO</span><span>&quot;</span><span style="color:#bf616a;">: </span><span>&quot;</span><span style="color:#a3be8c;">hoge</span><span>&quot;,
+</span><span>  &quot;</span><span style="color:#a3be8c;">BAR</span><span>&quot;</span><span style="color:#bf616a;">:</span><span> 1
+</span><span>}
+</span></code></pre>
+<h2 id="fizzbuzz">fizzbuzz</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">jq -rn </span><span>&#39;</span><span style="color:#a3be8c;">range(1;100+1) | if . % 15 == 0 then &quot;fizzbuzz&quot; elif . % 3 == 0 then &quot;fizz&quot; elif . % 5 == 0 then &quot;buzz&quot; else . end</span><span>&#39;
+</span></code></pre>
+<h2 id="cookbook">Cookbook</h2>
+<h3 id="komandorainyin-shu-de-json-wozu-mili-te">コマンドライン引数で JSON を組み立て</h3>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">jq -n </span><span>\
+</span><span style="color:#bf616a;">  --arg</span><span> HOGE_API_KEY foo \
+</span><span style="color:#bf616a;">  --arg</span><span> FUGA_API_KEY bar \
+</span><span>  &#39;</span><span style="color:#a3be8c;">$ARGS.named</span><span>&#39;
+</span></code></pre>
+<h3 id="huan-jing-bian-shu-wo-json-nisuru">環境変数を JSON にする</h3>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">jq -n </span><span>&#39;</span><span style="color:#a3be8c;">env | {HOME, PWD}</span><span>&#39;
+</span></code></pre>
+<h3 id="env-huairuwo-json-nisuru">.env ファイルを JSON にする</h3>
+<p>jc にも依存する。</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">cat</span><span> .env | </span><span style="color:#bf616a;">jc --env </span><span>| </span><span style="color:#bf616a;">jq </span><span>&#39;</span><span style="color:#a3be8c;">from_entries</span><span>&#39;
+</span></code></pre>
+<p>一部の値だけ。</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">cat</span><span> .env | </span><span style="color:#bf616a;">jc --env </span><span>| </span><span style="color:#bf616a;">jq </span><span>&#39;</span><span style="color:#a3be8c;">from_entries | {FOO_API_KEY}</span><span>&#39;
+</span></code></pre>
+<h3 id="ec2-woinsutansuming-dejiao-tutebiao-shi">EC2 をインスタンス名で絞って表示</h3>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">aws</span><span> ec2 describe-instances |\
+</span><span>  </span><span style="color:#bf616a;">jq -r </span><span>&#39;</span><span style="color:#a3be8c;">.Reservations[] | .Instances[] | select(.Tags[] | .Key == &quot;Name&quot; and .Value == &quot;test&quot;) | .InstanceId</span><span>&#39;
+</span></code></pre>
+<h3 id="ec2-yi-lan-wo-tsv-debiao-shi-suru">EC2 一覧を TSV で表示する</h3>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">aws</span><span> ec2 describe-instances |\
+</span><span>  </span><span style="color:#bf616a;">jq -r </span><span>&#39;</span><span style="color:#a3be8c;">.Reservations[] | .Instances[] | [.InstanceId, (.Tags[] | select(.Key == &quot;Name&quot;) | .Value)] | @tsv</span><span>&#39;
+</span></code></pre>
+
+        </div>
+
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2023
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

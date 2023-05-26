@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>λ沢.dev</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/style.css">
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/color/orange.css">
+
+        <link rel="stylesheet" href="https://www.lambdasawa.dev/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/font-hack-subset.css">
+
+    </head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://www.lambdasawa.dev" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            λ沢.dev
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://github.com/lambdasawa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            
+                <li><a href="https://zenn.dev/lambdasawa" target="_blank" rel="noopener noreferrer">Zenn</a></li>
+            
+                <li><a href="https://twitter.com/lambdasawa" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+            
+                <li><a href="https://www.wantedly.com/id/lambdasawa" target="_blank" rel="noopener noreferrer">Wantedly</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://www.lambdasawa.dev/cheatsheet/json-tools/">JSON tools</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date"></span>
+
+    </div>
+
+    
+
+        
+        <div class="post-content">
+            <h2 id="tools">tools</h2>
+<h3 id="jq">jq</h3>
+<p><a href="https://stedolan.github.io/jq/manual/">https://stedolan.github.io/jq/manual/</a></p>
+<p>pretty print したり独自のクエリ言語で一部の要素を抜き出したりできる。</p>
+<p>詳しくは<a href="./jq.md">こちら</a>。</p>
+<h3 id="jless">jless</h3>
+<p><a href="https://jless.io/user-guide.html">https://jless.io/user-guide.html</a></p>
+<p>vim っぽいキーバインドで JSON を閲覧できるコマンド。
+シンタックスハイライトがあったり人間にとっては無益なクオートが表示されなかったり、とても人間にとって読みやすいフォーマットで表示される。</p>
+<p><code>j</code>, <code>k</code> でフィールドを移動して <code>h</code>, <code>l</code> で畳み込みと展開ができる。</p>
+<p><code>/</code> で検索ができる。</p>
+<p><code>*</code> で現在選択中のオブジェクトの兄弟に当たるオブジェクトの同名のフィールドの位置に移動する。</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span>{
+</span><span>  &quot;</span><span style="color:#a3be8c;">items</span><span>&quot;</span><span style="color:#bf616a;">:</span><span> [
+</span><span>    {
+</span><span>      &quot;</span><span style="color:#a3be8c;">id</span><span>&quot;</span><span style="color:#bf616a;">:</span><span> 123,
+</span><span>      &quot;</span><span style="color:#a3be8c;">foo</span><span>&quot;</span><span style="color:#bf616a;">:</span><span> 1    // 要はここから
+</span><span>    },
+</span><span>    {
+</span><span>      &quot;</span><span style="color:#a3be8c;">id</span><span>&quot;</span><span style="color:#bf616a;">:</span><span> 456,
+</span><span>      &quot;</span><span style="color:#a3be8c;">foo</span><span>&quot;</span><span style="color:#bf616a;">:</span><span> 2    // ここに移動できるという意味
+</span><span>    }
+</span><span>  </span><span style="color:#bf616a;">]
+</span><span>}
+</span></code></pre>
+<p><code>*</code> と同じ要領で逆向きに移動するには <code>#</code> を押す。</p>
+<p><code>yy</code> で選択中のノードをクリップボードにコピーできる。</p>
+<h3 id="gron">gron</h3>
+<p><a href="https://github.com/tomnomnom/gron">https://github.com/tomnomnom/gron</a></p>
+<p>JSON を grep しやすいテキストに変換する</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> curl</span><span style="color:#bf616a;"> -sSL </span><span>&quot;</span><span style="color:#a3be8c;">https://api.github.com/repos/lambdasawa/lambdasawa</span><span>&quot; | </span><span style="color:#bf616a;">gron </span><span>| </span><span style="color:#bf616a;">grep</span><span> owner
+</span><span style="color:#bf616a;">json.owner</span><span> = {};
+</span><span style="color:#bf616a;">json.owner.avatar_url</span><span> = &quot;</span><span style="color:#a3be8c;">https://avatars.githubusercontent.com/u/9388092?v=4</span><span>&quot;;
+</span><span style="color:#bf616a;">json.owner.events_url</span><span> = &quot;</span><span style="color:#a3be8c;">https://api.github.com/users/lambdasawa/events{/privacy}</span><span>&quot;;
+</span><span style="color:#bf616a;">json.owner.followers_url</span><span> = &quot;</span><span style="color:#a3be8c;">https://api.github.com/users/lambdasawa/followers</span><span>&quot;;
+</span><span style="color:#bf616a;">json.owner.following_url</span><span> = &quot;</span><span style="color:#a3be8c;">https://api.github.com/users/lambdasawa/following{/other_user}</span><span>&quot;;
+</span><span style="color:#bf616a;">json.owner.gists_url</span><span> = &quot;</span><span style="color:#a3be8c;">https://api.github.com/users/lambdasawa/gists{/gist_id}</span><span>&quot;;
+</span><span style="color:#bf616a;">json.owner.gravatar_id</span><span> = &quot;&quot;;
+</span><span style="color:#bf616a;">json.owner.html_url</span><span> = &quot;</span><span style="color:#a3be8c;">https://github.com/lambdasawa</span><span>&quot;;
+</span><span style="color:#bf616a;">json.owner.id</span><span> = 9388092;
+</span><span style="color:#bf616a;">json.owner.login</span><span> = &quot;</span><span style="color:#a3be8c;">lambdasawa</span><span>&quot;;
+</span><span style="color:#bf616a;">json.owner.node_id</span><span> = &quot;</span><span style="color:#a3be8c;">MDQ6VXNlcjkzODgwOTI=</span><span>&quot;;
+</span><span style="color:#bf616a;">json.owner.organizations_url</span><span> = &quot;</span><span style="color:#a3be8c;">https://api.github.com/users/lambdasawa/orgs</span><span>&quot;;
+</span><span style="color:#bf616a;">json.owner.received_events_url</span><span> = &quot;</span><span style="color:#a3be8c;">https://api.github.com/users/lambdasawa/received_events</span><span>&quot;;
+</span><span style="color:#bf616a;">json.owner.repos_url</span><span> = &quot;</span><span style="color:#a3be8c;">https://api.github.com/users/lambdasawa/repos</span><span>&quot;;
+</span><span style="color:#bf616a;">json.owner.site_admin</span><span> = false;
+</span><span style="color:#bf616a;">json.owner.starred_url</span><span> = &quot;</span><span style="color:#a3be8c;">https://api.github.com/users/lambdasawa/starred{/owner}{/repo}</span><span>&quot;;
+</span><span style="color:#bf616a;">json.owner.subscriptions_url</span><span> = &quot;</span><span style="color:#a3be8c;">https://api.github.com/users/lambdasawa/subscriptions</span><span>&quot;;
+</span><span style="color:#bf616a;">json.owner.type</span><span> = &quot;</span><span style="color:#a3be8c;">User</span><span>&quot;;
+</span><span style="color:#bf616a;">json.owner.url</span><span> = &quot;</span><span style="color:#a3be8c;">https://api.github.com/users/lambdasawa</span><span>&quot;;
+</span></code></pre>
+<p><code>gron</code> して <code>grep</code> で絞ったテキストを <code>gron -u</code> で再度 JSON に戻すこともできる。</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> curl</span><span style="color:#bf616a;"> -sSL </span><span>&quot;</span><span style="color:#a3be8c;">https://api.github.com/repos/lambdasawa/lambdasawa</span><span>&quot; | </span><span style="color:#bf616a;">gron </span><span>| </span><span style="color:#bf616a;">grep</span><span> owner | </span><span style="color:#bf616a;">gron -u
+</span><span>{
+</span><span>  &quot;</span><span style="color:#a3be8c;">owner</span><span>&quot;</span><span style="color:#bf616a;">: </span><span>{
+</span><span>    &quot;</span><span style="color:#a3be8c;">avatar_url</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">https://avatars.githubusercontent.com/u/9388092?v=4</span><span>&quot;,
+</span><span>    &quot;</span><span style="color:#a3be8c;">events_url</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">https://api.github.com/users/lambdasawa/events{/privacy}</span><span>&quot;,
+</span><span>    &quot;</span><span style="color:#a3be8c;">followers_url</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">https://api.github.com/users/lambdasawa/followers</span><span>&quot;,
+</span><span>    &quot;</span><span style="color:#a3be8c;">following_url</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">https://api.github.com/users/lambdasawa/following{/other_user}</span><span>&quot;,
+</span><span>    &quot;</span><span style="color:#a3be8c;">gists_url</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">https://api.github.com/users/lambdasawa/gists{/gist_id}</span><span>&quot;,
+</span><span>    &quot;</span><span style="color:#a3be8c;">gravatar_id</span><span>&quot;: &quot;&quot;,
+</span><span>    &quot;</span><span style="color:#a3be8c;">html_url</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">https://github.com/lambdasawa</span><span>&quot;,
+</span><span>    &quot;</span><span style="color:#a3be8c;">id</span><span>&quot;: 9388092,
+</span><span>    &quot;</span><span style="color:#a3be8c;">login</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">lambdasawa</span><span>&quot;,
+</span><span>    &quot;</span><span style="color:#a3be8c;">node_id</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">MDQ6VXNlcjkzODgwOTI=</span><span>&quot;,
+</span><span>    &quot;</span><span style="color:#a3be8c;">organizations_url</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">https://api.github.com/users/lambdasawa/orgs</span><span>&quot;,
+</span><span>    &quot;</span><span style="color:#a3be8c;">received_events_url</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">https://api.github.com/users/lambdasawa/received_events</span><span>&quot;,
+</span><span>    &quot;</span><span style="color:#a3be8c;">repos_url</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">https://api.github.com/users/lambdasawa/repos</span><span>&quot;,
+</span><span>    &quot;</span><span style="color:#a3be8c;">site_admin</span><span>&quot;: false,
+</span><span>    &quot;</span><span style="color:#a3be8c;">starred_url</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">https://api.github.com/users/lambdasawa/starred{/owner}{/repo}</span><span>&quot;,
+</span><span>    &quot;</span><span style="color:#a3be8c;">subscriptions_url</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">https://api.github.com/users/lambdasawa/subscriptions</span><span>&quot;,
+</span><span>    &quot;</span><span style="color:#a3be8c;">type</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">User</span><span>&quot;,
+</span><span>    &quot;</span><span style="color:#a3be8c;">url</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">https://api.github.com/users/lambdasawa</span><span>&quot;
+</span><span>  }
+</span><span>}
+</span></code></pre>
+<h3 id="difft">difft</h3>
+<p><a href="https://github.com/Wilfred/difftastic">https://github.com/Wilfred/difftastic</a></p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> cat foo.json
+</span><span>{
+</span><span>  &quot;</span><span style="color:#a3be8c;">text</span><span>&quot;</span><span style="color:#bf616a;">: </span><span>&quot;</span><span style="color:#a3be8c;">Left value</span><span>&quot;
+</span><span>}
+</span><span>
+</span><span style="color:#bf616a;">$</span><span> cat bar.json
+</span><span>{
+</span><span>  &quot;</span><span style="color:#a3be8c;">text</span><span>&quot;</span><span style="color:#bf616a;">: </span><span>&quot;</span><span style="color:#a3be8c;">Right value</span><span>&quot;
+</span><span>}
+</span><span>
+</span><span style="color:#bf616a;">$</span><span> difft</span><span style="color:#bf616a;"> --display</span><span> inline foo.json bar.json
+</span><span style="color:#bf616a;">foo.json</span><span> --- JSON
+</span><span style="color:#bf616a;">1    </span><span>{
+</span><span>2      &quot;</span><span style="color:#a3be8c;">text</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">Left value</span><span>&quot;
+</span><span>   2   &quot;</span><span style="color:#a3be8c;">text</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">Right value</span><span>&quot;
+</span><span>   3 }
+</span></code></pre>
+<h3 id="jc">jc</h3>
+<p><a href="https://github.com/kellyjonbrazil/jc">https://github.com/kellyjonbrazil/jc</a></p>
+<p><code>jc ls</code> とするとカレントディレクトリが JSON で出力される。
+<code>jc ps</code> とするとプロセス一覧が JSON で出力される。
+サポートされているコマンドは他にも多数ある。</p>
+<p><code>/etc/hosts</code>, <code>/etc/fstab</code> などをパイプで JSON にすることもできる。</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> cat /etc/hosts | </span><span style="color:#bf616a;">jc --hosts </span><span>| </span><span style="color:#bf616a;">jq
+</span><span style="color:#96b5b4;">[
+</span><span>  {
+</span><span>    &quot;</span><span style="color:#a3be8c;">ip</span><span>&quot;</span><span style="color:#bf616a;">: </span><span>&quot;</span><span style="color:#a3be8c;">127.0.0.1</span><span>&quot;,
+</span><span>    &quot;</span><span style="color:#a3be8c;">hostname</span><span>&quot;</span><span style="color:#bf616a;">:</span><span> [
+</span><span>      &quot;</span><span style="color:#a3be8c;">localhost</span><span>&quot;
+</span><span>    </span><span style="color:#bf616a;">]
+</span><span>  },
+</span><span>  </span><span style="color:#bf616a;">//</span><span> ... 省略 ...
+</span><span style="color:#bf616a;">]
+</span><span>
+</span><span style="color:#65737e;"># docker compose のサービス一覧を確認
+</span><span style="color:#bf616a;">$</span><span> cat docker-compose.yml | </span><span style="color:#bf616a;">jc --yaml </span><span>| </span><span style="color:#bf616a;">jq -r </span><span>&#39;</span><span style="color:#a3be8c;">.[0].services | to_entries[] | .key</span><span>&#39;
+</span><span style="color:#bf616a;">mysql
+</span><span style="color:#bf616a;">redis
+</span><span style="color:#bf616a;">app
+</span><span>
+</span><span style="color:#65737e;"># GitHub の RSS を XML としてパース最新バージョンを確認
+</span><span style="color:#bf616a;">$</span><span> curl</span><span style="color:#bf616a;"> -sSL</span><span> https://github.com/docker/docker/releases.atom | </span><span style="color:#bf616a;">jc --xml </span><span>| </span><span style="color:#bf616a;">jq -r </span><span>&#39;</span><span style="color:#a3be8c;">.feed.entry[0].title</span><span>&#39;
+</span><span style="color:#bf616a;">v20.10.17
+</span><span>
+</span><span style="color:#65737e;"># ifconfig の結果を JSON に変換して jq でフィルタリングしてローカル IP アドレスを確認
+</span><span style="color:#bf616a;">$</span><span> jc ifconfig | </span><span style="color:#bf616a;">jq -r </span><span>&#39;</span><span style="color:#a3be8c;">.[] | .ipv4_addr | select(. != null) | select(. != &quot;127.0.0.1&quot;)</span><span>&#39;
+</span><span style="color:#bf616a;">xxx.xxx.xxx.xxx
+</span></code></pre>
+<p>xml, yaml, csv, ini, .env もパイプで JSON にできる。</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> curl</span><span style="color:#bf616a;"> -sSL</span><span> https://github.com/cli/cli/releases.atom | </span><span style="color:#bf616a;">jc --xml </span><span>| </span><span style="color:#bf616a;">jq -r </span><span>&#39;</span><span style="color:#a3be8c;">.feed.entry[] | .link[&quot;@href&quot;]</span><span>&#39;
+</span><span style="color:#bf616a;">https://github.com/cli/cli/releases/tag/v2.5.2
+</span><span style="color:#bf616a;">https://github.com/cli/cli/releases/tag/v2.5.2-pre0
+</span><span style="color:#bf616a;">https://github.com/cli/cli/releases/tag/v2.5.1
+</span><span style="color:#bf616a;">https://github.com/cli/cli/releases/tag/v2.5.0
+</span><span style="color:#bf616a;">https://github.com/cli/cli/releases/tag/v9.9.9-test
+</span><span style="color:#bf616a;">https://github.com/cli/cli/releases/tag/v2.4.0
+</span><span style="color:#bf616a;">https://github.com/cli/cli/releases/tag/v2.3.0
+</span><span style="color:#bf616a;">https://github.com/cli/cli/releases/tag/v2.2.0
+</span><span style="color:#bf616a;">https://github.com/cli/cli/releases/tag/v2.1.0
+</span><span style="color:#bf616a;">https://github.com/cli/cli/releases/tag/v2.0.0
+</span></code></pre>
+<h3 id="pup">pup</h3>
+<p><a href="https://github.com/ericchiang/pup">https://github.com/ericchiang/pup</a></p>
+<p>HTML を CSS セレクターで絞り込める。
+絞り込んだあとは HTML を JSON に変換できる。</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> http example.com | </span><span style="color:#bf616a;">pup </span><span>&#39;</span><span style="color:#a3be8c;">h1 json{}</span><span>&#39;
+</span><span style="color:#96b5b4;">[
+</span><span>  {
+</span><span>    &quot;</span><span style="color:#a3be8c;">tag</span><span>&quot;</span><span style="color:#bf616a;">: </span><span>&quot;</span><span style="color:#a3be8c;">h1</span><span>&quot;,
+</span><span>    &quot;</span><span style="color:#a3be8c;">text</span><span>&quot;</span><span style="color:#bf616a;">: </span><span>&quot;</span><span style="color:#a3be8c;">Example Domain</span><span>&quot;
+</span><span>  }
+</span><span style="color:#bf616a;">]
+</span></code></pre>
+<h3 id="fx">fx</h3>
+<p><a href="https://github.com/antonmedv/fx">https://github.com/antonmedv/fx</a></p>
+<p>JS と互換性のあるクエリで jq のようにクエリを絞り込める。
+また <a href="https://lodash.com/docs/">lodash</a> で定義されている関数がデフォルトで使えるし、 <code>~/.fxrc</code> に設定を書くことで関数を自分で定義することもできる。
+さらにクエリ無しでコマンドを呼び出すと vim ライクなキーバインドでインタラクティブに JSON を閲覧できる。</p>
+<p>かなり多機能だが、クエリを書くという点では他の多くの人が使っている <code>jq</code> に合わせるほうが無難なシーンも多いし、インタラクティブに見る機能については <code>jless</code> の方が優れていると思う。
+無人島に一つしか JSON を操るコマンドを持っていけないなら <code>fx</code> を持っていくが、そういう状況になったことはないのであまり使っていない。</p>
+<h3 id="jql">jql</h3>
+<p><a href="https://github.com/yamafaktory/jql">https://github.com/yamafaktory/jql</a></p>
+<p><code>jq</code> ライクな Rust 製のコマンド。
+<code>jq</code> ほどサポートしている操作は多くない。</p>
+<p>代わりに <code>jq</code> を使っている。</p>
+<h3 id="jiq">jiq</h3>
+<p><a href="https://github.com/fiatjaf/jiq">https://github.com/fiatjaf/jiq</a></p>
+<p><code>jq</code> と互換性のあるクエリを書きながら JSON をインタラクティブに絞れる。</p>
+<p>絞り込んだ後にエンターを押すとデフォルトでは絞り込んだ結果の JSON が標準出力に出る(パイプに流せる)。
+<code>-q</code> オプションを付けた状態で、絞り込んだ後にエンターを押すとクエリ自体が出力される。</p>
+<p>1回だけ手動でデータを取得したいだけなら後述の <code>jless</code> を使うほうが恐らく楽。
+シェルスクリプトなどで何かしら自動化する余地があるなら <code>jq</code> のクエリが必要になるので <code>jiq -q</code> が便利。</p>
+<p>代わりに <code>curry jq</code> を使っている。</p>
+<h3 id="jid">jid</h3>
+<p><a href="https://github.com/simeji/jid">https://github.com/simeji/jid</a></p>
+<p><code>jiq</code> と似ている。クエリを書きながら絞り込んで行くタイプ。
+しかし別に <code>jq</code> と互換性があるわけではない。
+例えば <code>[{&quot;id&quot;: 1}, {&quot;id&quot;: 2}]</code> を <code>.[]</code> というクエリで処理した結果は <code>jiq</code> では <code>null</code> になる。</p>
+<p>代わりに <code>curry jq</code> を使っている。</p>
+<h2 id="cookbook">cookbook</h2>
+<h3 id="yaml2json-yml2json">yaml2json, yml2json</h3>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">jc --yaml
+</span></code></pre>
+<h3 id="xml2json">xml2json</h3>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">jc --xml
+</span></code></pre>
+<h3 id="html2json">html2json</h3>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">pup </span><span>&#39;</span><span style="color:#a3be8c;">body json{}</span><span>&#39;
+</span></code></pre>
+<h2 id="sonota">その他</h2>
+<ul>
+<li><a href="https://github.com/burningtree/awesome-json#readme">https://github.com/burningtree/awesome-json#readme</a></li>
+</ul>
+
+        </div>
+
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2023
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

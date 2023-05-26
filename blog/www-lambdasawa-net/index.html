@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>λ沢.dev</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/style.css">
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/color/orange.css">
+
+        <link rel="stylesheet" href="https://www.lambdasawa.dev/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/font-hack-subset.css">
+
+    </head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://www.lambdasawa.dev" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            λ沢.dev
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://github.com/lambdasawa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            
+                <li><a href="https://zenn.dev/lambdasawa" target="_blank" rel="noopener noreferrer">Zenn</a></li>
+            
+                <li><a href="https://twitter.com/lambdasawa" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+            
+                <li><a href="https://www.wantedly.com/id/lambdasawa" target="_blank" rel="noopener noreferrer">Wantedly</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://www.lambdasawa.dev/blog/www-lambdasawa-net/">自分のブログ &amp; ポートフォリオ的なサイトを作りました</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date">
+            2020-03-29
+        </span>
+
+    </div>
+
+    
+
+        
+        <div class="post-content">
+            <p>常々、色んな技術を試せる砂場が欲しいという考えがあります。<br />
+自分の仕事/経験的に HTTP で JSON を返す API サーバはよく書くのですが、ウェブサイトを運用することがあまり無いです。<br />
+なので実験場的な意味合いでこのサイトを用意しました。</p>
+<p>ただテキストを公開したいだけだったらはてなブログとか Gist とかで良いですが、わざわざ独自ドメインでやったりしてる理由がこれです。</p>
+<p>静的サイトジェネレータは <a href="https://gohugo.io/">Hugo</a> 以外にも色々あると思いますが、 Hugo 自体にそんなにこだわりは無いです。<br />
+強いて言えば最近自分の周りの人がよく使っている &amp; 個人的に Go に慣れているので Go で書かれたソフトウェアは最悪コードを読んでどうにか出来るので安心、というくらいの理由です。<br />
+コンテンツの形式が独自のものとかではなく markdown とかなら後でいくらでも移行できるだろと思って軽い気持ちで選びました。</p>
+<p>テーマは <a href="https://github.com/panr/hugo-theme-terminal">Terminal</a> でやっています。</p>
+<p>デプロイ先は S3 + CloudFront に AWS CDK でやっています。<br />
+ほぼ https://github.com/aws-samples/aws-cdk-examples/tree/master/typescript/static-site と同じような実装です。<br />
+CDK は IDE で補完が効くので CloudFormation の YAML を普段ゴリゴリ書いてない自分的には助かってます。</p>
+<p>デプロイは GitHub Actions でやってます。<br />
+別に個人のプロジェクトなので CI いらないという考えもあるのですが、私の記憶力ではデプロイ方法など忘れてしまうので…。<br />
+結果 push したら Hugo でビルド &amp;&amp; S3 に成果物送信 &amp;&amp; CloudFront の Invalidation が走るようになりました。<br />
+多分これで諸々忘れても更新できるようになったので満足です。</p>
+
+        </div>
+
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2023
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>λ沢.dev</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/style.css">
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/color/orange.css">
+
+        <link rel="stylesheet" href="https://www.lambdasawa.dev/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/font-hack-subset.css">
+
+    </head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://www.lambdasawa.dev" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            λ沢.dev
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://github.com/lambdasawa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            
+                <li><a href="https://zenn.dev/lambdasawa" target="_blank" rel="noopener noreferrer">Zenn</a></li>
+            
+                <li><a href="https://twitter.com/lambdasawa" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+            
+                <li><a href="https://www.wantedly.com/id/lambdasawa" target="_blank" rel="noopener noreferrer">Wantedly</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://www.lambdasawa.dev/cheatsheet/github-actions/">GitHub Actions</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date"></span>
+
+    </div>
+
+    
+
+        
+        <div class="post-content">
+            <h2 id="hello-world">Hello, world</h2>
+<pre data-lang="yml" style="background-color:#2b303b;color:#c0c5ce;" class="language-yml "><code class="language-yml" data-lang="yml"><span style="color:#bf616a;">name</span><span>: </span><span style="color:#a3be8c;">Hello, world!
+</span><span>
+</span><span style="color:#d08770;">on</span><span>:
+</span><span>  </span><span style="color:#bf616a;">push</span><span>:
+</span><span>
+</span><span style="color:#bf616a;">jobs</span><span>:
+</span><span>  </span><span style="color:#bf616a;">hello-world</span><span>:
+</span><span>    </span><span style="color:#bf616a;">runs-on</span><span>: </span><span style="color:#a3be8c;">ubuntu-22.04
+</span><span>    </span><span style="color:#bf616a;">steps</span><span>:
+</span><span>      - </span><span style="color:#bf616a;">uses</span><span>: </span><span style="color:#a3be8c;">actions/checkout@v3
+</span><span>
+</span><span>      - </span><span style="color:#bf616a;">run</span><span>: </span><span style="color:#a3be8c;">echo &#39;Hello, world!&#39;
+</span></code></pre>
+<h2 id="runs-on-nizhi-ding-dekiruzhi">runs-on に指定できる値</h2>
+<p><a href="https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on">Workflow syntax for GitHub Actions - GitHub Docs</a></p>
+<h2 id="hosted-runner-niru-tuteiruturu">hosted runner に入っているツール</h2>
+<p><a href="https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners#preinstalled-software">About GitHub-hosted runners - GitHub Docs</a></p>
+<h2 id="outputs">outputs</h2>
+<p><a href="https://docs.github.com/en/actions/using-jobs/defining-outputs-for-jobs">Defining outputs for jobs - GitHub Docs</a></p>
+<pre data-lang="yml" style="background-color:#2b303b;color:#c0c5ce;" class="language-yml "><code class="language-yml" data-lang="yml"><span style="color:#bf616a;">name</span><span>: </span><span style="color:#a3be8c;">output
+</span><span>
+</span><span style="color:#d08770;">on</span><span>:
+</span><span>  </span><span style="color:#bf616a;">workflow_dispatch</span><span>:
+</span><span>
+</span><span style="color:#bf616a;">jobs</span><span>:
+</span><span>  </span><span style="color:#bf616a;">output</span><span>:
+</span><span>    </span><span style="color:#bf616a;">runs-on</span><span>: </span><span style="color:#a3be8c;">ubuntu-22.04
+</span><span>    </span><span style="color:#bf616a;">steps</span><span>:
+</span><span>      - </span><span style="color:#bf616a;">id</span><span>: </span><span style="color:#a3be8c;">build-foo
+</span><span>        </span><span style="color:#bf616a;">run</span><span>: </span><span style="color:#a3be8c;">echo foo=bar &gt;&gt; $GITHUB_OUTPUT
+</span><span>
+</span><span>      - </span><span style="color:#bf616a;">run</span><span>: </span><span style="color:#a3be8c;">echo $VALUE
+</span><span>        </span><span style="color:#bf616a;">env</span><span>:
+</span><span>          </span><span style="color:#bf616a;">VALUE</span><span>: </span><span style="color:#a3be8c;">${{ steps.build-foo.outputs.foo }}
+</span></code></pre>
+<h2 id="run-name">run name</h2>
+<pre data-lang="yml" style="background-color:#2b303b;color:#c0c5ce;" class="language-yml "><code class="language-yml" data-lang="yml"><span style="color:#bf616a;">name</span><span>: </span><span style="color:#a3be8c;">Change run-name
+</span><span>
+</span><span style="color:#bf616a;">run-name</span><span>: </span><span style="color:#a3be8c;">Custom run-name (actor=${{ github.actor }}, inputs.foo=${{ inputs.foo }})
+</span><span>
+</span><span style="color:#d08770;">on</span><span>:
+</span><span>  </span><span style="color:#bf616a;">workflow_dispatch</span><span>:
+</span><span>    </span><span style="color:#bf616a;">inputs</span><span>:
+</span><span>      </span><span style="color:#bf616a;">foo</span><span>:
+</span><span>        </span><span style="color:#bf616a;">type</span><span>: </span><span style="color:#a3be8c;">string
+</span><span>        </span><span style="color:#bf616a;">description</span><span>: </span><span style="color:#a3be8c;">foo is my input
+</span><span>        </span><span style="color:#bf616a;">required</span><span>: </span><span style="color:#d08770;">false
+</span><span>
+</span><span style="color:#bf616a;">jobs</span><span>:
+</span><span>  </span><span style="color:#bf616a;">foo</span><span>:
+</span><span>    </span><span style="color:#bf616a;">runs-on</span><span>: </span><span style="color:#a3be8c;">ubuntu-22.04
+</span><span>    </span><span style="color:#bf616a;">steps</span><span>:
+</span><span>      - </span><span style="color:#bf616a;">run</span><span>: </span><span style="color:#a3be8c;">echo Hello, world!
+</span></code></pre>
+<p><a href="https://github.com/lambdasawa/github-actions-sandbox/actions/runs/4247601960/attempts/1">https://github.com/lambdasawa/github-actions-sandbox/actions/runs/4247601960/attempts/1</a></p>
+<h2 id="job-summary">job summary</h2>
+<pre data-lang="yml" style="background-color:#2b303b;color:#c0c5ce;" class="language-yml "><code class="language-yml" data-lang="yml"><span style="color:#bf616a;">name</span><span>: </span><span style="color:#a3be8c;">Job Summary
+</span><span>
+</span><span style="color:#d08770;">on</span><span>:
+</span><span>  </span><span style="color:#bf616a;">workflow_dispatch</span><span>:
+</span><span>
+</span><span style="color:#bf616a;">jobs</span><span>:
+</span><span>  </span><span style="color:#bf616a;">job-foo</span><span>:
+</span><span>    </span><span style="color:#bf616a;">runs-on</span><span>: </span><span style="color:#a3be8c;">ubuntu-22.04
+</span><span>    </span><span style="color:#bf616a;">steps</span><span>:
+</span><span>      - </span><span style="color:#bf616a;">run</span><span>: </span><span style="color:#a3be8c;">echo &#39;# foo&#39; &gt;&gt; $GITHUB_STEP_SUMMARY
+</span><span>
+</span><span>      - </span><span style="color:#bf616a;">run</span><span>: </span><span style="color:#a3be8c;">echo &#39;# bar&#39; &gt;&gt; $GITHUB_STEP_SUMMARY
+</span><span>
+</span><span>  </span><span style="color:#bf616a;">job-bar</span><span>:
+</span><span>    </span><span style="color:#bf616a;">runs-on</span><span>: </span><span style="color:#a3be8c;">ubuntu-22.04
+</span><span>    </span><span style="color:#bf616a;">steps</span><span>:
+</span><span>      - </span><span style="color:#bf616a;">run</span><span>: </span><span style="color:#a3be8c;">echo &#39;# hoge&#39; &gt;&gt; $GITHUB_STEP_SUMMARY
+</span><span>
+</span><span>      - </span><span style="color:#bf616a;">run</span><span>: </span><span style="color:#a3be8c;">echo &#39;# fuga&#39; &gt;&gt; $GITHUB_STEP_SUMMARY
+</span></code></pre>
+<p><a href="https://github.com/lambdasawa/github-actions-sandbox/actions/runs/4247552065">https://github.com/lambdasawa/github-actions-sandbox/actions/runs/4247552065</a></p>
+<h2 id="zhu-ri-naraziyobuwokiyanserusuru">祝日ならジョブをキャンセルする</h2>
+<pre data-lang="yml" style="background-color:#2b303b;color:#c0c5ce;" class="language-yml "><code class="language-yml" data-lang="yml"><span style="color:#bf616a;">name</span><span>: </span><span style="color:#a3be8c;">Hello, world!
+</span><span>
+</span><span style="color:#d08770;">on</span><span>:
+</span><span>  </span><span style="color:#bf616a;">push</span><span>:
+</span><span>
+</span><span style="color:#bf616a;">jobs</span><span>:
+</span><span>  </span><span style="color:#bf616a;">hello-world</span><span>:
+</span><span>    </span><span style="color:#bf616a;">runs-on</span><span>: </span><span style="color:#a3be8c;">ubuntu-22.04
+</span><span>    </span><span style="color:#bf616a;">steps</span><span>:
+</span><span>      - </span><span style="color:#bf616a;">name</span><span>: </span><span style="color:#a3be8c;">Check holiday
+</span><span>        </span><span style="color:#bf616a;">run</span><span>: </span><span style="color:#a3be8c;">curl -fsSL https://holidays-jp.github.io/api/v1/date.json | jq -e --arg date $(TZ=Asia/Tokyo date &#39;+%Y-%m-%d&#39;) &#39;.[$ARGS.named.date] == null&#39;
+</span><span>
+</span><span>      - </span><span style="color:#bf616a;">run</span><span>: </span><span style="color:#a3be8c;">echo &#39;Hello, world!&#39;
+</span></code></pre>
+<h2 id="slack-tong-zhi">Slack 通知</h2>
+<p>ref: <a href="https://github.com/integrations/slack/blob/main/README.md#actions-workflow-notifications">slack/README.md at main · integrations/slack</a></p>
+<pre data-lang="txt" style="background-color:#2b303b;color:#c0c5ce;" class="language-txt "><code class="language-txt" data-lang="txt"><span>/github subscribe owner/repo workflows
+</span></code></pre>
+<h2 id="workflow-dispatch">workflow_dispatch</h2>
+<p>ブラウザ (or <code>gh workflow run</code> コマンド) から手動で実行するためのトリガー。</p>
+<p><a href="https://docs.github.com/ja/actions/using-workflows/events-that-trigger-workflows#workflow_dispatch">ワークフローをトリガーするイベント - GitHub Docs</a></p>
+<h2 id="repository-dispatch">repository_dispatch</h2>
+<p>GitHub API 経由でワークフローを実行するためのトリガー。</p>
+<p><a href="https://docs.github.com/ja/actions/using-workflows/events-that-trigger-workflows#repository_dispatch">ワークフローをトリガーするイベント - GitHub Docs</a></p>
+<h2 id="workflow-run">workflow_run</h2>
+<p>あるワークフローの完了をトリガーにして、別のワークフローを実行するためのトリガー。</p>
+<p><a href="https://docs.github.com/ja/actions/using-workflows/events-that-trigger-workflows#workflow_run">ワークフローをトリガーするイベント - GitHub Docs</a></p>
+<h2 id="workflow-call">workflow_call</h2>
+<p>あるワークフローから別のワークフローを呼び出すためのトリガー。</p>
+<p><a href="https://docs.github.com/en/actions/using-workflows/reusing-workflows">Reusing workflows - GitHub Docs</a></p>
+<h2 id="custom-action-composite-action">custom action (composite action)</h2>
+<p>複数の steps をまとめて再利用可能な step として定義できる。</p>
+<p><a href="https://docs.github.com/en/actions/creating-actions/creating-a-composite-action">Creating a composite action - GitHub Docs</a></p>
+<h2 id="sonota">その他</h2>
+<ul>
+<li><a href="https://docs.github.com/en/actions/using-workflows/about-workflows">About workflows - GitHub Docs</a></li>
+<li><a href="https://docs.github.com/en/actions/creating-actions/about-custom-actions">About custom actions - GitHub Docs</a></li>
+<li><a href="https://github.com/actions/github-script">actions/github-script: Write workflows scripting the GitHub API in JavaScript</a></li>
+<li><a href="https://github.com/actions/toolkit">actions/toolkit: The GitHub ToolKit for developing GitHub Actions.</a></li>
+<li><a href="https://github.com/rhysd/actionlint">rhysd/actionlint: Static checker for GitHub Actions workflow files</a></li>
+<li><a href="https://github.com/nektos/act">nektos/act: Run your GitHub Actions locally 🚀</a></li>
+<li><a href="https://github.com/mxschmitt/action-tmate">mxschmitt/action-tmate: Debug your GitHub Actions via SSH by using tmate to get access to the runner system itself.</a></li>
+<li><a href="https://stackoverflow.com/questions/67550727/push-event-doesnt-trigger-workflow-on-push-paths-github-actions">Push event doesn't trigger workflow on push paths (github actions) - Stack Overflow</a></li>
+</ul>
+
+        </div>
+
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2023
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

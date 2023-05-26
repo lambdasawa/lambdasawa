@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>λ沢.dev</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/style.css">
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/color/orange.css">
+
+        <link rel="stylesheet" href="https://www.lambdasawa.dev/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/font-hack-subset.css">
+
+    </head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://www.lambdasawa.dev" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            λ沢.dev
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://github.com/lambdasawa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            
+                <li><a href="https://zenn.dev/lambdasawa" target="_blank" rel="noopener noreferrer">Zenn</a></li>
+            
+                <li><a href="https://twitter.com/lambdasawa" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+            
+                <li><a href="https://www.wantedly.com/id/lambdasawa" target="_blank" rel="noopener noreferrer">Wantedly</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://www.lambdasawa.dev/blog/mirei-tts-infra/">おしゃべり郡道のインフラ</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date">
+            2020-04-16
+        </span>
+
+    </div>
+
+    
+
+        
+        <div class="post-content">
+            <p>http://speech.gundou-mirei.love/ の話です。</p>
+<p>Elastic Beanstalk を使っていたが ECS にした。</p>
+<p><code>eb</code> で概ね上手くいってはいたが、金銭面で問題があった。<br />
+起動時にデカい辞書を読む都合で 2 GB のメモリでは足りず、 4 GB のメモリがある <code>t3.medium</code> を使っていた。<br />
+これは月 4200 円程度となって、趣味でマネタイズ無しで運用するのは無理じゃないけどちょっと気になる金額だった。</p>
+<p>このアプリはアクセス数はさほど大きくならないはずなので、アクセスが無い間は課金されないようにされたい。<br />
+そういう課金体系 + 個人で気楽に管理できる範囲だと Lambda か ECS になると思う。<br />
+Lambda のメモリ使用量の制限は 3 GB までしかなく、ギリギリになる可能性があるため ECS を使うことにした。</p>
+<p>まだ対応したばかりで本当に安くなるかどうかは分からないのでしばらくは様子見という状態。</p>
+<p>デプロイは AWS CDK で行っている。
+ほぼ <code>cdk init</code> して https://docs.aws.amazon.com/cdk/api/latest/docs/@aws-cdk_aws-ecs-patterns.ApplicationLoadBalancedFargateService.html のインスタンスを作るだけで終わりなので非常に簡単だった。</p>
+<p>音声素材などの静的なデータの管理も考慮する必要がある。<br />
+これは事前にローカルで生成、 S3 にアップロードしておき、 CI 上では S3 からダウンロード、 Docker イメージにそれを含めるようにしている。</p>
+<p>環境変数の類が多くて GitHub Actions の Secrets に一個ずつ登録するのが面倒だなあと思っていたが、 これは <code>.env</code> のファイルを丸ごと登録することにした。<br />
+ただし、そのままコピペしても上手くいかなくて、どうやら改行を含めてもスペースなどに置換されていそうだった。<br />
+これは改行込みのテキストを Base64 エンコードして登録し、 GitHub Actions 側でデコードすることによって対応した。</p>
+<p>https://developer.github.com/v3/actions/secrets/ に Secrets を管理するための API があるので他の自動化もできると思う。
+<code>.env</code> をバラして登録するようなツールが有るかと思ったがこれは見つけられなかった。割と単純なので自分で作るのも良いかもしれない。</p>
+<p>デプロイがダルくて開発が停滞気味だったが、そこは乗り越えたので頑張って流暢に喋らせます。</p>
+
+        </div>
+
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2023
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>λ沢.dev</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/style.css">
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/color/orange.css">
+
+        <link rel="stylesheet" href="https://www.lambdasawa.dev/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/font-hack-subset.css">
+
+    </head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://www.lambdasawa.dev" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            λ沢.dev
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://github.com/lambdasawa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            
+                <li><a href="https://zenn.dev/lambdasawa" target="_blank" rel="noopener noreferrer">Zenn</a></li>
+            
+                <li><a href="https://twitter.com/lambdasawa" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+            
+                <li><a href="https://www.wantedly.com/id/lambdasawa" target="_blank" rel="noopener noreferrer">Wantedly</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://www.lambdasawa.dev/blog/google-authentiator-golang/">Google Authenticator的なやつをGoで実装した</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date">
+            2021-06-21
+        </span>
+
+    </div>
+
+    
+
+        
+        <div class="post-content">
+            <p>ふとMFAの仕組みがどうなっているのか気になったので暇な時間に調べてみたところ、割とシンプルな仕組みだったので標準ライブラリだけで実装してみた。<br />
+ひと口にMFAといってもさまざまな方式があるが、6桁の数字が30秒ごとに切り替わるアレのことを扱う。</p>
+<p>コードは<a href="https://gist.github.com/lambdasawa/5ecf05b00b55abc26d65e5b836184ee5">Gist</a>にアップロードした。<br />
+この実装はCLIのアプリケーションとして実際に使用可能で、これを使ってたとえばTwitterにログインできる。</p>
+<p>この記事ではその仕組みについて簡単にまとめる。</p>
+<h2 id="shi-zu-minogai-yao">仕組みの概要</h2>
+<ul>
+<li>事前に鍵を共有する
+<ul>
+<li>よくあるのはQRコードの読み取り</li>
+<li><a href="https://gist.github.com/lambdasawa/5ecf05b00b55abc26d65e5b836184ee5#file-main-go-L17">あるいはBase32エンコードされた文字列として取り扱う</a>
+<ul>
+<li>これはサイトによるが、2段階認証のセットアップ時にQRコードが表示される画面で「QRコードが読み取れない場合はこちら」みたいなリンクを踏むと表示される</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="https://gist.github.com/lambdasawa/5ecf05b00b55abc26d65e5b836184ee5#file-main-go-L46">定期的に切り替わる値として、 <code>unix timestamp % 30</code> を扱う</a></li>
+<li><a href="https://gist.github.com/lambdasawa/5ecf05b00b55abc26d65e5b836184ee5#file-main-go-L64">前述の鍵と定期的に切り替わる値を入力としてHMAC-SHA1を使用し160bitのバイト列を取得する</a></li>
+<li>このバイト列からいい感じに6桁の10進数を取得する
+<ul>
+<li><a href="https://gist.github.com/lambdasawa/5ecf05b00b55abc26d65e5b836184ee5#file-main-go-L66">まず末尾4bitを10進数として読み取る</a> (0~15)</li>
+<li><a href="https://gist.github.com/lambdasawa/5ecf05b00b55abc26d65e5b836184ee5#file-main-go-L68">160bitのバイト列からいい感じに32bit読み取って数値として解釈する</a>
+<ul>
+<li>開始位置は前述の末尾4bitの10進数を読み取った値（0~15バイトから読み取り）</li>
+<li>終了位置は開始位置+32bit（4~19バイトまで読み取る）</li>
+<li>上位1bitは無視する</li>
+<li>この32bitをビッグエンディアンの符号無し整数として解釈する</li>
+</ul>
+</li>
+<li><a href="https://gist.github.com/lambdasawa/5ecf05b00b55abc26d65e5b836184ee5#file-main-go-L70">この数値の下6桁を読む</a></li>
+</ul>
+</li>
+</ul>
+<p>これで30秒ごとに切り替わる6桁の数値が取れる。<br />
+クライアントはこれを表示し、サーバはクライアントから受け取った値と自分で計算した値を比較して認証を行う。</p>
+<h2 id="shi-yang">仕様</h2>
+<ul>
+<li><a href="https://datatracker.ietf.org/doc/html/rfc6238">TOTP: Time-Based One-Time Password Algorithm</a></li>
+<li><a href="https://datatracker.ietf.org/doc/html/rfc4226">HOTP: An HMAC-Based One-Time Password Algorithm</a></li>
+</ul>
+<p>スペックではないが、 QRコードで表されるカスタムURLスキームのフォーマットに関しては<a href="https://github.com/google/google-authenticator/wiki/Key-Uri-Format">Google AuthenticatorのGitHub Wiki</a> がデファクトスタンダードとして参照されているようである。</p>
+
+        </div>
+
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2023
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

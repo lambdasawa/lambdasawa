@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>λ沢.dev</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/style.css">
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/color/orange.css">
+
+        <link rel="stylesheet" href="https://www.lambdasawa.dev/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/font-hack-subset.css">
+
+    </head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://www.lambdasawa.dev" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            λ沢.dev
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://github.com/lambdasawa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            
+                <li><a href="https://zenn.dev/lambdasawa" target="_blank" rel="noopener noreferrer">Zenn</a></li>
+            
+                <li><a href="https://twitter.com/lambdasawa" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+            
+                <li><a href="https://www.wantedly.com/id/lambdasawa" target="_blank" rel="noopener noreferrer">Wantedly</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://www.lambdasawa.dev/cheatsheet/tesseract/">tesseract</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date"></span>
+
+    </div>
+
+    
+
+        
+        <div class="post-content">
+            <p><a href="https://tesseract-ocr.github.io/tessdoc/Installation.html#homebrew">https://tesseract-ocr.github.io/tessdoc/Installation.html#homebrew</a></p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> tesseract</span><span style="color:#bf616a;"> --list-langs
+</span><span style="color:#bf616a;">List</span><span> of available languages in &quot;</span><span style="color:#a3be8c;">/opt/homebrew/share/tessdata/</span><span>&quot; (3)</span><span style="color:#96b5b4;">:
+</span><span style="color:#bf616a;">eng
+</span><span style="color:#bf616a;">osd
+</span><span style="color:#bf616a;">snum
+</span><span>
+</span><span>
+</span><span style="color:#bf616a;">$</span><span> brew list tesseract
+</span><span style="color:#bf616a;">/opt/homebrew/Cellar/tesseract/5.2.0/bin/tesseract
+</span><span style="color:#bf616a;">/opt/homebrew/Cellar/tesseract/5.2.0/include/tesseract/</span><span> (12 files)
+</span><span style="color:#bf616a;">/opt/homebrew/Cellar/tesseract/5.2.0/lib/libtesseract.5.dylib
+</span><span style="color:#bf616a;">/opt/homebrew/Cellar/tesseract/5.2.0/lib/pkgconfig/tesseract.pc
+</span><span style="color:#bf616a;">/opt/homebrew/Cellar/tesseract/5.2.0/lib/</span><span> (2 other files)
+</span><span style="color:#bf616a;">/opt/homebrew/Cellar/tesseract/5.2.0/share/tessdata/</span><span> (35 files)
+</span><span>
+</span><span>
+</span><span style="color:#bf616a;">$</span><span> ls</span><span style="color:#bf616a;"> -alh</span><span> /opt/homebrew/Cellar/tesseract/5.2.0/share/tessdata/
+</span><span style="color:#bf616a;">total</span><span> 45224
+</span><span style="color:#bf616a;">drwxr-xr-x</span><span>   8 lambdasawa  admin   256B  7  7 05:15 ./
+</span><span style="color:#bf616a;">drwxr-xr-x</span><span>   3 lambdasawa  admin    96B  7  7 05:15 ../
+</span><span style="color:#bf616a;">drwxr-xr-x</span><span>  27 lambdasawa  admin   864B  7  7 05:15 configs/
+</span><span style="color:#bf616a;">-rw-r--r--</span><span>   1 lambdasawa  admin   3.9M  7  7 05:15 eng.traineddata
+</span><span style="color:#bf616a;">-rw-r--r--</span><span>   1 lambdasawa  admin    10M  7  7 05:15 osd.traineddata
+</span><span style="color:#bf616a;">-rw-r--r--</span><span>   1 lambdasawa  admin   572B  7  7 05:15 pdf.ttf
+</span><span style="color:#bf616a;">-rw-r--r--</span><span>   1 lambdasawa  admin   8.1M  7  7 05:15 snum.traineddata
+</span><span style="color:#bf616a;">drwxr-xr-x</span><span>   8 lambdasawa  admin   256B  7  7 05:15 tessconfigs/
+</span><span>
+</span><span>
+</span><span style="color:#bf616a;">$</span><span> curl</span><span style="color:#bf616a;"> -sSLO</span><span> http://archive.ubuntu.com/ubuntu/pool/universe/t/tesseract-lang/tesseract-lang_4.00</span><span style="color:#bf616a;">~</span><span>git30-7274cfa.orig.tar.xz
+</span><span style="color:#bf616a;">$</span><span> tar Jxfv tesseract-lang_4.00</span><span style="color:#96b5b4;">\~</span><span>git30-7274cfa.orig.tar.xz
+</span><span style="color:#bf616a;">$</span><span> cp tesseract-lang-4.00</span><span style="color:#96b5b4;">\~</span><span>git30-7274cfa/jpn.traineddata /opt/homebrew/Cellar/tesseract/5.2.0/share/tessdata/
+</span><span style="color:#bf616a;">$</span><span> tesseract</span><span style="color:#bf616a;"> --list-langs
+</span><span style="color:#bf616a;">List</span><span> of available languages in &quot;</span><span style="color:#a3be8c;">/opt/homebrew/share/tessdata/</span><span>&quot; (4)</span><span style="color:#96b5b4;">:
+</span><span style="color:#bf616a;">eng
+</span><span style="color:#bf616a;">jpn
+</span><span style="color:#bf616a;">osd
+</span><span style="color:#bf616a;">snum
+</span><span>
+</span><span style="color:#bf616a;">$</span><span> tesseract input-file-name.png -</span><span style="color:#bf616a;"> -l</span><span> jpn
+</span></code></pre>
+
+        </div>
+
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2023
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

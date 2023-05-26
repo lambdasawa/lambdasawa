@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>λ沢.dev</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/style.css">
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/color/orange.css">
+
+        <link rel="stylesheet" href="https://www.lambdasawa.dev/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/font-hack-subset.css">
+
+    </head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://www.lambdasawa.dev" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            λ沢.dev
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://github.com/lambdasawa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            
+                <li><a href="https://zenn.dev/lambdasawa" target="_blank" rel="noopener noreferrer">Zenn</a></li>
+            
+                <li><a href="https://twitter.com/lambdasawa" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+            
+                <li><a href="https://www.wantedly.com/id/lambdasawa" target="_blank" rel="noopener noreferrer">Wantedly</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://www.lambdasawa.dev/cheatsheet/golang/">golang</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date"></span>
+
+    </div>
+
+    
+
+        
+        <div class="post-content">
+            <h2 id="link">link</h2>
+<ul>
+<li><a href="https://go.dev/play/">Playground</a></li>
+<li><a href="https://pkg.go.dev/std">Standard Library</a></li>
+<li><a href="https://go.dev/ref/spec">spec</a></li>
+<li><a href="https://www.jetbrains.com/ja-jp/go/">GoLand</a></li>
+<li><a href="https://github.com/avelino/awesome-go">awesome go</a></li>
+<li><a href="https://golangci-lint.run/">golangci-lint</a></li>
+</ul>
+<h2 id="best-practice">best practice</h2>
+<ul>
+<li><a href="https://gist.github.com/knsh14/0507b98c6b62959011ba9e4c310cd15d">Go Code Review Comments</a></li>
+<li><a href="https://github.com/knsh14/uber-style-guide-ja/blob/master/guide.md#%E5%B0%8E%E5%85%A5">uber-style-guide-ja</a></li>
+<li><a href="https://go.dev/doc/effective_go">Effective Go</a></li>
+<li><a href="https://github.com/golang/go/wiki/SliceTricks">SliceTricks</a></li>
+<li><a href="https://future-architect.github.io/articles/20200601/">Goのテストに入門してみよう！</a></li>
+<li><a href="https://zenn.dev/uji/articles/f6ab9a06320294146733">Goにおけるポインタの使いどころ</a></li>
+<li><a href="https://github.com/a8m/golang-cheat-sheet">Go Cheat Sheet</a></li>
+</ul>
+<h2 id="init">init</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">mkdir</span><span> foo
+</span><span style="color:#96b5b4;">cd</span><span> foo
+</span><span>
+</span><span style="color:#bf616a;">go</span><span> mod init $(</span><span style="color:#bf616a;">basename </span><span>$</span><span style="color:#bf616a;">PWD</span><span>)
+</span><span>
+</span><span style="color:#bf616a;">cat </span><span>&lt;&lt;</span><span style="color:#b48ead;">EOF </span><span>&gt; main.go
+</span><span style="color:#a3be8c;">package main
+</span><span style="color:#a3be8c;">
+</span><span style="color:#a3be8c;">func main() { println(&quot;Hello, world!&quot;) }
+</span><span style="color:#b48ead;">EOF
+</span><span>
+</span><span style="color:#bf616a;">go</span><span> run main.go
+</span></code></pre>
+<h2 id="total-coverage">total coverage</h2>
+<p>パッケージ全体のカバレッジを計測するコマンド。
+普通にやると個別のパッケージごとのカバレッジしか表示されない。</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">go</span><span> test ./...</span><span style="color:#bf616a;"> -cover -coverpkg</span><span>=./... | </span><span style="color:#bf616a;">grep -v </span><span>&#39;</span><span style="color:#a3be8c;">no test files</span><span>&#39; | </span><span style="color:#bf616a;">sed -E </span><span>&#39;</span><span style="color:#a3be8c;">s/.*coverage: (.+)%.*/\\1/</span><span>&#39; | </span><span style="color:#bf616a;">jq -s </span><span>&#39;</span><span style="color:#a3be8c;">add</span><span>&#39;
+</span></code></pre>
+<h2 id="render-dependency-graph">render dependency graph</h2>
+<p>パッケージ間の依存関係を有向グラフの画像にするコマンド。</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">godepgraph -p </span><span>$(</span><span style="color:#bf616a;">cat</span><span> go.sum | </span><span style="color:#bf616a;">awk </span><span>&#39;</span><span style="color:#a3be8c;">{print $1}</span><span>&#39; | </span><span style="color:#bf616a;">sort -u </span><span>| </span><span style="color:#bf616a;">paste -s -d</span><span>, -)</span><span style="color:#bf616a;"> -novendor -s </span><span>$(</span><span style="color:#bf616a;">go</span><span> list) | </span><span style="color:#bf616a;">dot -Tpng -o</span><span> godepgraph.png
+</span></code></pre>
+<h2 id="lib">lib</h2>
+<ul>
+<li><a href="https://github.com/cockroachdb/errors">https://github.com/cockroachdb/errors</a></li>
+<li><a href="https://github.com/golang-migrate/migrate/tree/master/cmd/migrate">https://github.com/golang-migrate/migrate/tree/master/cmd/migrate</a></li>
+<li><a href="https://docs.sqlc.dev/en/latest/tutorials/getting-started-mysql.html">https://docs.sqlc.dev/en/latest/tutorials/getting-started-mysql.html</a></li>
+</ul>
+
+        </div>
+
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2023
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

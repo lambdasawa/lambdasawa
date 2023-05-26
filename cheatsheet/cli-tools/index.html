@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>λ沢.dev</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/style.css">
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/color/orange.css">
+
+        <link rel="stylesheet" href="https://www.lambdasawa.dev/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/font-hack-subset.css">
+
+    </head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://www.lambdasawa.dev" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            λ沢.dev
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://github.com/lambdasawa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            
+                <li><a href="https://zenn.dev/lambdasawa" target="_blank" rel="noopener noreferrer">Zenn</a></li>
+            
+                <li><a href="https://twitter.com/lambdasawa" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+            
+                <li><a href="https://www.wantedly.com/id/lambdasawa" target="_blank" rel="noopener noreferrer">Wantedly</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://www.lambdasawa.dev/cheatsheet/cli-tools/">CLI tools</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date"></span>
+
+    </div>
+
+    
+
+        
+        <div class="post-content">
+            <h2 id="common">common</h2>
+<h3 id="fish"><a href="https://fishshell.com/">fish</a></h3>
+<p>複雑な設定無しで高度な補完を使えるので fish shell を使っている。
+bash をカスタマイズして使っていたこともあるが、結局は fish に帰ってくることになった。</p>
+<p><code>cd</code> したあとは自動で <code>ls</code> が叩かれるように <code>cd</code> コマンドを再定義している。
+また、 <code>cd</code> の引数が無い場合はカレントディレクトリ以下を fuzzy filter で一覧表示 &amp; あいまい検索 &amp; 選択できるようにしている。</p>
+<pre data-lang="fish" style="background-color:#2b303b;color:#c0c5ce;" class="language-fish "><code class="language-fish" data-lang="fish"><span style="color:#b48ead;">function </span><span style="color:#8fa1b3;">cd
+</span><span>    </span><span style="color:#bf616a;">set </span><span>d &quot;$</span><span style="color:#bf616a;">argv</span><span>&quot;
+</span><span>    </span><span style="color:#b48ead;">if </span><span style="color:#96b5b4;">[ </span><span style="color:#bf616a;">-z </span><span>&quot;$</span><span style="color:#bf616a;">argv</span><span>&quot; </span><span style="color:#96b5b4;">]
+</span><span>        </span><span style="color:#65737e;"># filter は sk, fzf, peco などのエイリアス。
+</span><span>        </span><span style="color:#bf616a;">set </span><span>d (</span><span style="color:#bf616a;">fd --type </span><span>d | </span><span style="color:#bf616a;">filter</span><span>)
+</span><span>    </span><span style="color:#b48ead;">end
+</span><span>
+</span><span>    </span><span style="color:#96b5b4;">builtin </span><span style="color:#bf616a;">cd </span><span>&quot;$</span><span style="color:#bf616a;">d</span><span>&quot;
+</span><span>
+</span><span>    </span><span style="color:#65737e;"># list は exa などの better ls 的なツールのエイリアス。未インストールなら素の ls にフォールバック。
+</span><span>    </span><span style="color:#bf616a;">list </span><span>|| </span><span style="color:#bf616a;">ls
+</span><span style="color:#b48ead;">end
+</span></code></pre>
+<p>fish はコマンドの実行前後を簡単にフックできる。</p>
+<p>コマンド実行直前に適当なディレクトリにタイムスタンプを書き込み、コマンド完了直後にそのタイムスタンプと現在時刻を比較して、コマンドの実行時間を計算している。
+コマンドの実行時間がしきい値を超えている場合にはデスクトップ通知と音声での通知を出している。</p>
+<p>これによって長いビルドやデプロイが走り出したとき、別のウィンドウで作業を始めてもコマンドが終了した瞬間に素早く気付ける。
+コマンドが終わったかどうか定期的に確認したりする必要は無くなるし、コマンドがとっくに終わってるのに別のウィンドウでの暇つぶしが無駄に長引くことがなくなる。</p>
+<p>(似たようなことは <a href="https://starship.rs/config/#command-duration"><code>starship</code> の <code>duration</code> モジュール</a>でもできる)</p>
+<pre data-lang="fish" style="background-color:#2b303b;color:#c0c5ce;" class="language-fish "><code class="language-fish" data-lang="fish"><span style="color:#b48ead;">function </span><span style="color:#8fa1b3;">fish-prehook-long-command-notifier </span><span style="color:#bf616a;">--on-event </span><span>fish_preexec
+</span><span>    </span><span style="color:#bf616a;">mkdir -p </span><span>~/tmp/fish/process/start_at/
+</span><span>    </span><span style="color:#bf616a;">date </span><span>+%s &gt;~/tmp/fish/process/start_at/$</span><span style="color:#bf616a;">fish_pid
+</span><span style="color:#b48ead;">end
+</span><span>
+</span><span style="color:#b48ead;">function </span><span style="color:#8fa1b3;">fish-posthook-long-command-notifier </span><span style="color:#bf616a;">--on-event </span><span>fish_postexec
+</span><span>    </span><span style="color:#bf616a;">set -l </span><span>s $</span><span style="color:#bf616a;">status
+</span><span>    </span><span style="color:#bf616a;">set </span><span>message Success
+</span><span>    </span><span style="color:#b48ead;">if </span><span style="color:#96b5b4;">[ </span><span>$</span><span style="color:#bf616a;">s -ne </span><span style="color:#d08770;">0 </span><span style="color:#96b5b4;">]
+</span><span>        </span><span style="color:#bf616a;">set </span><span>message Failure
+</span><span>    </span><span style="color:#b48ead;">end
+</span><span>
+</span><span>    </span><span style="color:#bf616a;">set -l </span><span>duration_sec (</span><span style="color:#bf616a;">math </span><span>(</span><span style="color:#bf616a;">date </span><span>+%s) - (</span><span style="color:#bf616a;">cat </span><span>~/tmp/fish/process/start_at/$</span><span style="color:#bf616a;">fish_pid</span><span>))
+</span><span>    </span><span style="color:#bf616a;">set -l </span><span>threshold_sec </span><span style="color:#d08770;">3
+</span><span>    </span><span style="color:#b48ead;">if </span><span style="color:#96b5b4;">[ </span><span>$</span><span style="color:#bf616a;">duration_sec -ge </span><span>$</span><span style="color:#bf616a;">threshold_sec </span><span style="color:#96b5b4;">]
+</span><span>        </span><span style="color:#bf616a;">set -l </span><span>a (</span><span style="color:#bf616a;">echo </span><span>$</span><span style="color:#bf616a;">argv</span><span>)
+</span><span>        </span><span style="color:#bf616a;">echo </span><span>&quot;$</span><span style="color:#bf616a;">message</span><span style="color:#a3be8c;">: </span><span>$</span><span style="color:#bf616a;">a</span><span>&quot;
+</span><span>
+</span><span>        </span><span style="color:#65737e;"># noti は osascript や notify-send でのデスクトップ通知を処理する。
+</span><span>        </span><span style="color:#bf616a;">which </span><span>noti </span><span style="color:#d08770;">2</span><span>&gt;&amp;</span><span style="color:#d08770;">1 </span><span>&gt;/dev/null &amp;&amp; </span><span style="color:#bf616a;">noti </span><span>&quot;$</span><span style="color:#bf616a;">message</span><span style="color:#a3be8c;">: </span><span>$</span><span style="color:#bf616a;">a</span><span>&quot;
+</span><span>
+</span><span>        </span><span style="color:#65737e;"># voice コマンドは say コマンドのエイリアス。スピーカーやイヤホンから Success (または Failure) と発音される。
+</span><span>        </span><span style="color:#bf616a;">which </span><span>voice </span><span style="color:#d08770;">2</span><span>&gt;&amp;</span><span style="color:#d08770;">1 </span><span>&gt;/dev/null &amp;&amp; </span><span style="color:#bf616a;">voice </span><span>$</span><span style="color:#bf616a;">message </span><span>&amp;
+</span><span>    </span><span style="color:#b48ead;">end
+</span><span style="color:#b48ead;">end
+</span></code></pre>
+<p>指をいたわるために <a href="https://github.com/lambdasawa/lambdasawa/blob/main/.config/fish/alias.fish">alias</a> を活用していている。</p>
+<h3 id="asdf"><a href="https://asdf-vm.com/">asdf</a></h3>
+<p>コマンドラインツールのバージョンを管理してくれるツール。 <code>anyenv</code> 的なもの。<code>nodenv</code>, <code>rbenv</code> と同等のことを言語をまたいで行ってくれる。</p>
+<p>各ツールはプラグインという概念で管理される。</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#65737e;"># asdf で nodejs を管理できるように設定
+</span><span style="color:#bf616a;">asdf</span><span> plugin add nodejs
+</span><span>
+</span><span style="color:#65737e;"># 18.4.0 をインストールして ~/.tool-versions にバージョンを記載
+</span><span style="color:#bf616a;">asdf</span><span> global install nodejs 18.4.0
+</span><span>
+</span><span style="color:#65737e;"># 18.4.0 をインストールして ./.tool-versions にバージョンを記載
+</span><span style="color:#bf616a;">asdf</span><span> local install nodejs 18.4.0
+</span><span>
+</span><span style="color:#65737e;"># .tool-versions が含まれるリポジトリをクローンしてそのディレクトリで asdf install を実行すると、
+</span><span style="color:#65737e;"># そのバージョンがインストールされる
+</span><span style="color:#bf616a;">asdf</span><span> install
+</span></code></pre>
+<p>プラグインによるが、 <code>~/.default-hoge-packages</code> というファイルにパッケージ名を書いておくと、 <code>asdf install</code> (or <code>asdf global install</code> or <code>asdf local install</code>) でそのパッケージをインストールできるようになる。</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#96b5b4;">echo</span><span> eslint &gt;&gt; </span><span style="color:#bf616a;">~</span><span>/.default-npm-packages
+</span><span style="color:#96b5b4;">echo</span><span> prettier &gt;&gt; </span><span style="color:#bf616a;">~</span><span>/.default-npm-packages
+</span><span>
+</span><span style="color:#65737e;"># nodejs の最新版がインストールされると同時に、 eslint, prettier がインストールされる
+</span><span style="color:#bf616a;">asdf</span><span> global install nodejs latest
+</span></code></pre>
+<h3 id="direnv"><a href="https://direnv.net/">direnv</a></h3>
+<p>特定ディレクトリに移動した時に、任意のコマンドを実行するツール。
+<code>.env</code> ファイルを読み込んでシェルに環境変数を設定する目的で使うことが多い。</p>
+<p>シェルに環境変数を設定しなくてもフレームワークやライブラリの機能を使って <code>.env</code> を読めるケースもあるが、ちょっとしたオペレーションの際にそのフレームワークの外で環境変数が欲しくなるようなケースもあるので、フレームワーク依存の機能で <code>.env</code> を読み込むことをあまり好まない。
+言語非依存の <code>direnv</code> を使うのが好み。</p>
+<h3 id="zoxide"><a href="https://github.com/ajeetdsouza/zoxide">zoxide</a></h3>
+<p>過去に移動したディレクトリのパスの一部を引数で渡すとそのディレクトリに移動できるツール。</p>
+<p>例えば <code>/Users/lambdasawa/src/github.com/lambdasawa/zenn</code> に <code>cd</code> したことがあるなら、カレントディレクトリがどこだったとしても <code>z zenn</code> だけで <code>/Users/lambdasawa/src/github.com/lambdasawa/zenn</code> に移動できる。</p>
+<h3 id="starship"><a href="https://starship.rs/ja-jp/">starship</a></h3>
+<p>シェルのプロンプトをカスタマイズするフレームワーク。 TOML で簡単に管理できる。</p>
+<p>現在のシェルで使われている言語のバージョン、 git のステータス、直前のコマンドに実行にかかった時間と exit code、 AWS/GCP のプロファイル名などを表示している。</p>
+<h3 id="sk"><a href="https://github.com/lotabout/skim">sk</a></h3>
+<p><code>peco</code> や <code>fzf</code> のような fuzzy finder などと呼ばれるツール。 Rust 製。</p>
+<h3 id="watchexec"><a href="https://github.com/watchexec/watchexec">watchexec</a></h3>
+<p>カレントディレクトリ以下のファイルの変更を監視し、ファイルの変更をトリガーにして任意のコマンドを実行するツール。</p>
+<p><code>watchexec -e go -- go test ./...</code> などとすると、 <code>.go</code> の変更があったときに <code>go test ./...</code> を実行することができる。</p>
+<h2 id="better-ls-cat-grep-find-and-more">better ls, cat, grep find and more</h2>
+<h3 id="exa"><a href="https://github.com/ogham/exa">exa</a></h3>
+<p>better ls.</p>
+<h3 id="bat"><a href="https://github.com/sharkdp/bat/blob/master/doc/README-ja.md">bat</a></h3>
+<p>better cat/less.</p>
+<h3 id="rg"><a href="https://github.com/BurntSushi/ripgrep">rg</a></h3>
+<p>better grep.</p>
+<ul>
+<li><a href="https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md#basics">guide</a></li>
+<li><a href="https://inzkyk.xyz/misc/ripgrep/#%e5%bc%be%e4%b8%b8%e3%83%84%e3%82%a2%e3%83%bc">ripgrep は {grep, ag, git grep, ucg, pt, sift} より速い (翻訳)</a></li>
+</ul>
+<h3 id="hgrep"><a href="https://github.com/rhysd/hgrep">hgrep</a></h3>
+<p>better grep.</p>
+<ul>
+<li><a href="https://rhysd.hatenablog.com/entry/2021/11/23/211530">えっちな grep をつくった</a></li>
+</ul>
+<h3 id="fd"><a href="https://github.com/sharkdp/fd">fd</a></h3>
+<p>better find.</p>
+<h3 id="difft"><a href="https://github.com/Wilfred/difftastic">difft</a></h3>
+<p>better diff.</p>
+<h3 id="delta"><a href="https://github.com/dandavison/delta">delta</a></h3>
+<p>better diff for git.</p>
+<h3 id="rip"><a href="https://github.com/nivekuil/rip">rip</a></h3>
+<p>ファイル削除ではなく、「ファイルをゴミ箱に移動する」的な機能をターミナルで行うツール。</p>
+<p><code>rip foo</code> で <code>./foo</code> をゴミ箱に移動、 <code>rip -s</code> でゴミ箱の中身一覧を表示、 <code>rip -u</code> でゴミ箱から元のディレクトリにファイルを復元。</p>
+<p>README では <code>rm</code> のエイリアスに設定することは推奨していないが、自分の場合はエイリアスにしている。</p>
+<h3 id="sd"><a href="https://github.com/chmln/sd">sd</a></h3>
+<p>better sed.</p>
+
+        </div>
+
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2023
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

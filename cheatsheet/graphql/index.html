@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>λ沢.dev</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/style.css">
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/color/orange.css">
+
+        <link rel="stylesheet" href="https://www.lambdasawa.dev/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/font-hack-subset.css">
+
+    </head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://www.lambdasawa.dev" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            λ沢.dev
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://github.com/lambdasawa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            
+                <li><a href="https://zenn.dev/lambdasawa" target="_blank" rel="noopener noreferrer">Zenn</a></li>
+            
+                <li><a href="https://twitter.com/lambdasawa" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+            
+                <li><a href="https://www.wantedly.com/id/lambdasawa" target="_blank" rel="noopener noreferrer">Wantedly</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://www.lambdasawa.dev/cheatsheet/graphql/">GraphQL</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date"></span>
+
+    </div>
+
+    
+
+        
+        <div class="post-content">
+            <ul>
+<li><a href="https://graphql.org/learn/queries/">Syntax</a></li>
+</ul>
+<p>TODO</p>
+<h2 id="hasura"><a href="https://hasura.io/">Hasura</a></h2>
+<p>TODO</p>
+<h2 id="aws-appsync"><a href="https://docs.aws.amazon.com/ja_jp/appsync/latest/devguide/what-is-appsync.html">AWS AppSync</a></h2>
+<p>TODO</p>
+<h2 id="stepzen"><a href="https://stepzen.com/">StepZen</a></h2>
+<p>TODO</p>
+<h2 id="graphqurl"><a href="https://github.com/hasura/graphqurl">graphqurl</a></h2>
+<p>GraphQL を扱う CLI クライアント。</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">gq --introspect</span><span> https://api.spacex.land/graphql</span><span style="color:#bf616a;"> -H </span><span>&#39;</span><span style="color:#a3be8c;">Content-Type: application/json</span><span>&#39;
+</span></code></pre>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">gq -i</span><span> https://api.spacex.land/graphql
+</span></code></pre>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">gq</span><span> https://api.spacex.land/graphql/</span><span style="color:#bf616a;"> -H </span><span>&#39;</span><span style="color:#a3be8c;">Content-Type: application/json</span><span>&#39; \
+</span><span style="color:#bf616a;">  -q </span><span>&#39;</span><span style="color:#a3be8c;">query Foo { dragons { id } }</span><span>&#39;
+</span></code></pre>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">gq</span><span> https://api.spacex.land/graphql/</span><span style="color:#bf616a;"> -H </span><span>&#39;</span><span style="color:#a3be8c;">Content-Type: application/json</span><span>&#39; \
+</span><span style="color:#bf616a;">  -q </span><span>&#39;</span><span style="color:#a3be8c;">query Foo($dragonId: ID!) { dragon(id: $dragonId) { id name } }</span><span>&#39; \
+</span><span style="color:#bf616a;">  -v </span><span>&#39;</span><span style="color:#a3be8c;">dragonId=dragon2</span><span>&#39;
+</span></code></pre>
+<h2 id="insomnia"><a href="https://insomnia.rest/">Insomnia</a></h2>
+<p>GUIのHTTPクライアント。</p>
+<hr />
+<ul>
+<li><a href="https://github.com/chentsulin/awesome-graphql">awesome-graphql</a></li>
+</ul>
+
+        </div>
+
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2023
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

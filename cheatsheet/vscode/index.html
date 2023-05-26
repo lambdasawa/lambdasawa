@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>λ沢.dev</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/style.css">
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/color/orange.css">
+
+        <link rel="stylesheet" href="https://www.lambdasawa.dev/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/font-hack-subset.css">
+
+    </head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://www.lambdasawa.dev" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            λ沢.dev
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://github.com/lambdasawa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            
+                <li><a href="https://zenn.dev/lambdasawa" target="_blank" rel="noopener noreferrer">Zenn</a></li>
+            
+                <li><a href="https://twitter.com/lambdasawa" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+            
+                <li><a href="https://www.wantedly.com/id/lambdasawa" target="_blank" rel="noopener noreferrer">Wantedly</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://www.lambdasawa.dev/cheatsheet/vscode/">VSCode</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date"></span>
+
+    </div>
+
+    
+
+        
+        <div class="post-content">
+            <h2 id="extension">Extension</h2>
+<h3 id="github-copilot"><a href="https://marketplace.visualstudio.com/items?itemName=GitHub.copilot">GitHub Copilot</a></h3>
+<p>TODO</p>
+<h3 id="gistpad"><a href="https://marketplace.visualstudio.com/items?itemName=vsls-contrib.gistfs">GistPad</a></h3>
+<p>VSCode のサイドバーに自分の Gist 一覧が表示され、そのファイルを選択するとローカルのファイルを編集するように Gist を編集できる。</p>
+<p><code>Cmd + s</code> で Gist 上のファイルが更新される。</p>
+<h3 id="code-ace-jumper"><a href="https://marketplace.visualstudio.com/items?itemName=lucax88x.codeacejumper">Code Ace Jumper</a></h3>
+<p>エディタに表示されている任意の識別子に 3~5 キーのみでジャンプできるようになる。</p>
+<p>カーソルキーを連打しなくて済むので指に優しい。</p>
+<h3 id="expand-region"><a href="https://marketplace.visualstudio.com/items?itemName=letrieu.expand-region">expand-region</a></h3>
+<p>ショートカットキーを連打すると現在のカーソル位置を中心に選択範囲をが広がっていく。</p>
+<p>イメージとしては1回目で <code>&quot;foo&quot;</code> が選択され、2回目で <code>myFunction(&quot;foo&quot;)</code> が選択され、 3回目で <code>func main() { myFunction(&quot;foo&quot;, &quot;bar&quot;) }</code> が選択される感じ。</p>
+<p>カーソルキーを連打するより少ないキー入力で目的の範囲を選択できるので指に優しい。</p>
+<h3 id="change-case"><a href="https://marketplace.visualstudio.com/items?itemName=wmaurer.change-case">change-case</a></h3>
+<p><code>PascalCase</code>, <code>snake_case</code>, <code>kebab-case</code>, <code>camelCase</code> を相互に変換できる。</p>
+<h3 id="unique-lines"><a href="https://marketplace.visualstudio.com/items?itemName=bibhasdn.unique-lines">Unique Lines</a></h3>
+<p><code>uniq</code> コマンドと同等の処理を VSCode 上で行える。</p>
+<h3 id="code-spell-checker"><a href="https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker">Code Spell Checker</a></h3>
+<p>スペルミスしている部分が VSCode 上で青い波線で強調される。</p>
+<p>固有名詞が誤検知されることもあるが、ホワイトリストを指定できる。</p>
+<h3 id="better-comments"><a href="https://marketplace.visualstudio.com/items?itemName=aaron-bond.better-comments">Better Comments</a></h3>
+<p><code>TODO:</code>, <code>FIXME:</code> などのコメントがハイライトされる。</p>
+<h3 id="todo-tree"><a href="https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.todo-tree">Todo Tree</a></h3>
+<p><code>TODO:</code> コメントが書かれた場所が VSCode のサイドバーで確認できる。</p>
+<h3 id="bracket-lens"><a href="https://marketplace.visualstudio.com/items?itemName=wraith13.bracket-lens">Bracket Lens</a></h3>
+<p>閉じカッコのところに開きカッコ周辺のコードがどんな感じだったかを表示してくれる。</p>
+<h3 id="indent-rainbow"><a href="https://marketplace.visualstudio.com/items?itemName=oderwat.indent-rainbow">indent-rainbow</a></h3>
+<p>インデントの深さごとにインデントに色がつく。</p>
+<h3 id="rainbow-csv"><a href="https://marketplace.visualstudio.com/items?itemName=mechatroner.rainbow-csv">Rainbow CSV</a></h3>
+<p>CSV の列ごとに色がつく。</p>
+<h3 id="error-gutters"><a href="https://marketplace.visualstudio.com/items?itemName=IgorSbitnev.error-gutters">Error Gutters</a></h3>
+<p>各種 Linter などで問題が検出されたときに VSCode の行番号を表示するところにアイコンが表示されて、どの行に問題があるか分かりやすくなる。</p>
+<h3 id="shellcheck"><a href="https://marketplace.visualstudio.com/items?itemName=timonwong.shellcheck">ShellCheck</a></h3>
+<p>ShellCheck というシェルスクリプトの Linter を VSCode 上で実行できる。問題のある箇所は赤い波線でハイライトされる。</p>
+<h3 id="monokai-pro"><a href="https://marketplace.visualstudio.com/items?itemName=monokai.theme-monokai-pro-vscode">Monokai Pro</a></h3>
+<p>TODO</p>
+
+        </div>
+
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2023
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

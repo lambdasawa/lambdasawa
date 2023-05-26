@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>λ沢.dev</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/style.css">
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/color/orange.css">
+
+        <link rel="stylesheet" href="https://www.lambdasawa.dev/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/font-hack-subset.css">
+
+    </head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://www.lambdasawa.dev" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            λ沢.dev
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://github.com/lambdasawa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            
+                <li><a href="https://zenn.dev/lambdasawa" target="_blank" rel="noopener noreferrer">Zenn</a></li>
+            
+                <li><a href="https://twitter.com/lambdasawa" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+            
+                <li><a href="https://www.wantedly.com/id/lambdasawa" target="_blank" rel="noopener noreferrer">Wantedly</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://www.lambdasawa.dev/cheatsheet/op-cli/">op-cli</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date"></span>
+
+    </div>
+
+    
+
+        
+        <div class="post-content">
+            <ul>
+<li><a href="https://developer.1password.com/docs/cli/">1Password CLI</a></li>
+</ul>
+<h2 id="signin">signin</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">op</span><span> signin
+</span></code></pre>
+<h2 id="vault-create">vault create</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">op</span><span> vault create foo
+</span></code></pre>
+<h2 id="vault-list">vault list</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> op vault list</span><span style="color:#bf616a;"> --format</span><span> json
+</span><span style="color:#96b5b4;">[
+</span><span>  {
+</span><span>    &quot;</span><span style="color:#a3be8c;">id</span><span>&quot;</span><span style="color:#bf616a;">: </span><span>&quot;</span><span style="color:#a3be8c;">xxxx</span><span>&quot;,
+</span><span>    &quot;</span><span style="color:#a3be8c;">name</span><span>&quot;</span><span style="color:#bf616a;">: </span><span>&quot;</span><span style="color:#a3be8c;">Personal</span><span>&quot;,
+</span><span>    &quot;</span><span style="color:#a3be8c;">content_version</span><span>&quot;</span><span style="color:#bf616a;">:</span><span> 1
+</span><span>  },
+</span><span>  {
+</span><span>    &quot;</span><span style="color:#a3be8c;">id</span><span>&quot;</span><span style="color:#bf616a;">: </span><span>&quot;</span><span style="color:#a3be8c;">yyyy</span><span>&quot;,
+</span><span>    &quot;</span><span style="color:#a3be8c;">name</span><span>&quot;</span><span style="color:#bf616a;">: </span><span>&quot;</span><span style="color:#a3be8c;">foo</span><span>&quot;,
+</span><span>    &quot;</span><span style="color:#a3be8c;">content_version</span><span>&quot;</span><span style="color:#bf616a;">:</span><span> 2
+</span><span>  }
+</span><span style="color:#bf616a;">]
+</span></code></pre>
+<h2 id="item-create">item create</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">op</span><span> item create</span><span style="color:#bf616a;"> --vault</span><span> foo</span><span style="color:#bf616a;"> --title</span><span> bar</span><span style="color:#bf616a;"> --category</span><span> SecureNote &#39;</span><span style="color:#a3be8c;">default.hoge=fuga</span><span>&#39;
+</span></code></pre>
+<h2 id="item-edit-put-field">item edit (put field)</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">op</span><span> item edit</span><span style="color:#bf616a;"> --vault</span><span> foo bar &#39;</span><span style="color:#a3be8c;">default.hoge=FUGA</span><span>&#39;
+</span></code></pre>
+<h2 id="item-edit-remove-field">item edit (remove field)</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">op</span><span> item edit</span><span style="color:#bf616a;"> --vault</span><span> foo bar &#39;</span><span style="color:#a3be8c;">default.hoge[delete]</span><span>&#39;
+</span></code></pre>
+<h2 id="item-get">item get</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> op item get</span><span style="color:#bf616a;"> --format</span><span> json</span><span style="color:#bf616a;"> --vault</span><span> foo bar
+</span><span>{
+</span><span>  &quot;</span><span style="color:#a3be8c;">id</span><span>&quot;</span><span style="color:#bf616a;">: </span><span>&quot;</span><span style="color:#a3be8c;">xxxx</span><span>&quot;,
+</span><span>  &quot;</span><span style="color:#a3be8c;">title</span><span>&quot;</span><span style="color:#bf616a;">: </span><span>&quot;</span><span style="color:#a3be8c;">bar</span><span>&quot;,
+</span><span>  &quot;</span><span style="color:#a3be8c;">version</span><span>&quot;</span><span style="color:#bf616a;">:</span><span> 4,
+</span><span>  &quot;</span><span style="color:#a3be8c;">vault</span><span>&quot;</span><span style="color:#bf616a;">: </span><span>{
+</span><span>    &quot;</span><span style="color:#a3be8c;">id</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">xxxx</span><span>&quot;,
+</span><span>    &quot;</span><span style="color:#a3be8c;">name</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">foo</span><span>&quot;
+</span><span>  },
+</span><span>  &quot;</span><span style="color:#a3be8c;">category</span><span>&quot;</span><span style="color:#bf616a;">: </span><span>&quot;</span><span style="color:#a3be8c;">SECURE_NOTE</span><span>&quot;,
+</span><span>  &quot;</span><span style="color:#a3be8c;">last_edited_by</span><span>&quot;</span><span style="color:#bf616a;">: </span><span>&quot;</span><span style="color:#a3be8c;">xxxx</span><span>&quot;,
+</span><span>  &quot;</span><span style="color:#a3be8c;">created_at</span><span>&quot;</span><span style="color:#bf616a;">: </span><span>&quot;</span><span style="color:#a3be8c;">2022-07-14T00:07:28Z</span><span>&quot;,
+</span><span>  &quot;</span><span style="color:#a3be8c;">updated_at</span><span>&quot;</span><span style="color:#bf616a;">: </span><span>&quot;</span><span style="color:#a3be8c;">2022-07-14T00:08:52Z</span><span>&quot;,
+</span><span>  &quot;</span><span style="color:#a3be8c;">sections</span><span>&quot;</span><span style="color:#bf616a;">:</span><span> [
+</span><span>    {
+</span><span>      &quot;</span><span style="color:#a3be8c;">id</span><span>&quot;</span><span style="color:#bf616a;">: </span><span>&quot;</span><span style="color:#a3be8c;">Section_xxxx</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">label</span><span>&quot;</span><span style="color:#bf616a;">: </span><span>&quot;</span><span style="color:#a3be8c;">default</span><span>&quot;
+</span><span>    }
+</span><span>  </span><span style="color:#bf616a;">],
+</span><span>  &quot;</span><span style="color:#a3be8c;">fields</span><span>&quot;</span><span style="color:#bf616a;">:</span><span> [
+</span><span>    {
+</span><span>      &quot;</span><span style="color:#a3be8c;">id</span><span>&quot;</span><span style="color:#bf616a;">: </span><span>&quot;</span><span style="color:#a3be8c;">notesPlain</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">type</span><span>&quot;</span><span style="color:#bf616a;">: </span><span>&quot;</span><span style="color:#a3be8c;">STRING</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">purpose</span><span>&quot;</span><span style="color:#bf616a;">: </span><span>&quot;</span><span style="color:#a3be8c;">NOTES</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">label</span><span>&quot;</span><span style="color:#bf616a;">: </span><span>&quot;</span><span style="color:#a3be8c;">notesPlain</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">reference</span><span>&quot;</span><span style="color:#bf616a;">: </span><span>&quot;</span><span style="color:#a3be8c;">op://foo/bar/notesPlain</span><span>&quot;
+</span><span>    },
+</span><span>    {
+</span><span>      &quot;</span><span style="color:#a3be8c;">id</span><span>&quot;</span><span style="color:#bf616a;">: </span><span>&quot;</span><span style="color:#a3be8c;">xxxx</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">section</span><span>&quot;</span><span style="color:#bf616a;">: </span><span>{
+</span><span>        &quot;</span><span style="color:#a3be8c;">id</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">Section_xxxx</span><span>&quot;,
+</span><span>        &quot;</span><span style="color:#a3be8c;">label</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">default</span><span>&quot;
+</span><span>      },
+</span><span>      &quot;</span><span style="color:#a3be8c;">type</span><span>&quot;</span><span style="color:#bf616a;">: </span><span>&quot;</span><span style="color:#a3be8c;">CONCEALED</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">label</span><span>&quot;</span><span style="color:#bf616a;">: </span><span>&quot;</span><span style="color:#a3be8c;">hoge</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">value</span><span>&quot;</span><span style="color:#bf616a;">: </span><span>&quot;</span><span style="color:#a3be8c;">FUGA</span><span>&quot;,
+</span><span>      &quot;</span><span style="color:#a3be8c;">reference</span><span>&quot;</span><span style="color:#bf616a;">: </span><span>&quot;</span><span style="color:#a3be8c;">op://foo/bar/default/hoge</span><span>&quot;
+</span><span>    }
+</span><span>  </span><span style="color:#bf616a;">]
+</span><span>}
+</span></code></pre>
+<h2 id="item-get-json-format">item get (JSON format)</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> op item get</span><span style="color:#bf616a;"> --format</span><span> json</span><span style="color:#bf616a;"> --vault</span><span> foo bar | </span><span style="color:#bf616a;">jq </span><span>&#39;</span><span style="color:#a3be8c;">.fields[] | select(.label != null and .value != null) | {key: .label, value: .value}</span><span>&#39; | </span><span style="color:#bf616a;">jq -s </span><span>&#39;</span><span style="color:#a3be8c;">from_entries</span><span>&#39;
+</span><span>{
+</span><span>  &quot;</span><span style="color:#a3be8c;">fizz</span><span>&quot;</span><span style="color:#bf616a;">: </span><span>&quot;</span><span style="color:#a3be8c;">buzz</span><span>&quot;
+</span><span>}
+</span></code></pre>
+<h2 id="item-get-env-format">item get (.env format)</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">op</span><span> item get</span><span style="color:#bf616a;"> --format</span><span> json</span><span style="color:#bf616a;"> --vault</span><span> foo bar | </span><span style="color:#bf616a;">jq -r </span><span>&#39;</span><span style="color:#a3be8c;">.fields[] | select(.label != null and .value != null) | {key: .label, value: .value} | &quot;\\(.key)=\\&quot;\\(.value)\\&quot;&quot;</span><span>&#39;
+</span></code></pre>
+<h2 id="run-with-values-as-environment-variables">run with values as environment variables</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> cat .env
+</span><span style="color:#bf616a;">HOGE</span><span>=</span><span style="color:#a3be8c;">op://foo/bar/default/hoge
+</span><span>
+</span><span style="color:#bf616a;">$</span><span> op run</span><span style="color:#bf616a;"> --env-file</span><span>=.env</span><span style="color:#bf616a;"> --no-masking</span><span> -- printenv HOGE
+</span><span style="color:#bf616a;">FUGA
+</span></code></pre>
+<h2 id="inject-values-to-file">inject values to file</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> cat config.tmpl.yml
+</span><span style="color:#bf616a;">HOGE:</span><span> op://foo/bar/default/hoge
+</span><span>
+</span><span style="color:#bf616a;">$</span><span> op inject</span><span style="color:#bf616a;"> -i</span><span> config.tmpl.yml</span><span style="color:#bf616a;"> -o</span><span> config.yml
+</span><span style="color:#bf616a;">/Users/lambdasawa/src/github.com/lambdasawa/lambdasawa/sandbox/op-cli/config.yml
+</span><span>
+</span><span style="color:#bf616a;">$</span><span> cat config.yml
+</span><span style="color:#bf616a;">HOGE:</span><span> FUGA
+</span></code></pre>
+<h2 id="set-values-to-github-actions-secret">set values to GitHub Actions Secret</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> cat .env
+</span><span style="color:#bf616a;">HOGE</span><span>=</span><span style="color:#a3be8c;">op://foo/bar/default/hoge
+</span><span>
+</span><span style="color:#bf616a;">$</span><span> op inject</span><span style="color:#bf616a;"> -i</span><span> .env</span><span style="color:#bf616a;"> -o</span><span> .env.injected
+</span><span>
+</span><span style="color:#bf616a;">$</span><span> gh secret set</span><span style="color:#bf616a;"> -f</span><span> .env.injected
+</span></code></pre>
+
+        </div>
+
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2023
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

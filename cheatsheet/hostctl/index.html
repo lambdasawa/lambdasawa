@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>λ沢.dev</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/style.css">
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/color/orange.css">
+
+        <link rel="stylesheet" href="https://www.lambdasawa.dev/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/font-hack-subset.css">
+
+    </head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://www.lambdasawa.dev" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            λ沢.dev
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://github.com/lambdasawa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            
+                <li><a href="https://zenn.dev/lambdasawa" target="_blank" rel="noopener noreferrer">Zenn</a></li>
+            
+                <li><a href="https://twitter.com/lambdasawa" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+            
+                <li><a href="https://www.wantedly.com/id/lambdasawa" target="_blank" rel="noopener noreferrer">Wantedly</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://www.lambdasawa.dev/cheatsheet/hostctl/">hostctl</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date"></span>
+
+    </div>
+
+    
+
+        
+        <div class="post-content">
+            <p><a href="https://guumaster.github.io/hostctl/">https://guumaster.github.io/hostctl/</a></p>
+<p>Go 製のコマンドラインツール。
+/etc/hosts に行を足したり行を削除したり、グルーピングしてON/OFF を切り替えたりできる。
+たまに編集するだけであればテキストエディタで編集すれば良いと思うが、頻繁に編集するフローがあるのであれば hostctl が便利。</p>
+<h2 id="insutorufang-fa">インストール方法</h2>
+<p><a href="https://guumaster.github.io/hostctl/docs/installation/">https://guumaster.github.io/hostctl/docs/installation/</a></p>
+<h2 id="hello-hostctl">Hello, hostctl</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> sudo hostctl list
+</span><span style="color:#bf616a;">+----------+--------+-----------------+----------------------------+
+</span><span>| </span><span style="color:#bf616a;">PROFILE  </span><span>| </span><span style="color:#bf616a;">STATUS </span><span>|       </span><span style="color:#bf616a;">IP        </span><span>|           </span><span style="color:#bf616a;">DOMAIN           </span><span>|
+</span><span style="color:#bf616a;">+----------+--------+-----------------+----------------------------+
+</span><span>| </span><span style="color:#bf616a;">default  </span><span>| </span><span style="color:#bf616a;">on     </span><span>| </span><span style="color:#bf616a;">127.0.0.1       </span><span>| </span><span style="color:#bf616a;">localhost                  </span><span>|
+</span><span>| </span><span style="color:#bf616a;">default  </span><span>| </span><span style="color:#bf616a;">on     </span><span>| </span><span style="color:#bf616a;">255.255.255.255 </span><span>| </span><span style="color:#bf616a;">broadcasthost              </span><span>|
+</span><span>| </span><span style="color:#bf616a;">default  </span><span>| </span><span style="color:#bf616a;">on     </span><span>| </span><span style="color:#bf616a;">::1             </span><span>| </span><span style="color:#bf616a;">localhost                  </span><span>|
+</span><span>| </span><span style="color:#bf616a;">default  </span><span>| </span><span style="color:#bf616a;">on     </span><span>| </span><span style="color:#bf616a;">127.0.0.1       </span><span>| </span><span style="color:#bf616a;">kubernetes.docker.internal </span><span>|
+</span><span style="color:#bf616a;">+----------+--------+-----------------+----------------------------+
+</span></code></pre>
+<h2 id="batukuatupu">バックアップ</h2>
+<p>hostctl コマンドで色々編集する前に、現時点の /etc/hosts をバックアップとしてどこかに置いといた方が良い。</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> hostctl backup
+</span><span style="color:#bf616a;">[✔]</span><span> Backup &#39;</span><span style="color:#a3be8c;">hosts.20220307</span><span>&#39; created.
+</span><span>
+</span><span style="color:#bf616a;">+---------+--------+-----------------+----------------------------+
+</span><span>| </span><span style="color:#bf616a;">PROFILE </span><span>| </span><span style="color:#bf616a;">STATUS </span><span>|       </span><span style="color:#bf616a;">IP        </span><span>|           </span><span style="color:#bf616a;">DOMAIN           </span><span>|
+</span><span style="color:#bf616a;">+---------+--------+-----------------+----------------------------+
+</span><span>| </span><span style="color:#bf616a;">default </span><span>| </span><span style="color:#bf616a;">on     </span><span>| </span><span style="color:#bf616a;">127.0.0.1       </span><span>| </span><span style="color:#bf616a;">localhost                  </span><span>|
+</span><span>| </span><span style="color:#bf616a;">default </span><span>| </span><span style="color:#bf616a;">on     </span><span>| </span><span style="color:#bf616a;">255.255.255.255 </span><span>| </span><span style="color:#bf616a;">broadcasthost              </span><span>|
+</span><span>| </span><span style="color:#bf616a;">default </span><span>| </span><span style="color:#bf616a;">on     </span><span>| </span><span style="color:#bf616a;">::1             </span><span>| </span><span style="color:#bf616a;">localhost                  </span><span>|
+</span><span>| </span><span style="color:#bf616a;">default </span><span>| </span><span style="color:#bf616a;">on     </span><span>| </span><span style="color:#bf616a;">127.0.0.1       </span><span>| </span><span style="color:#bf616a;">kubernetes.docker.internal </span><span>|
+</span><span style="color:#bf616a;">+---------+--------+-----------------+----------------------------+
+</span></code></pre>
+<p>これでカレントディレクトリに /etc/hosts のコピーが作成される。</p>
+<p>リストアを行うコマンドもある。</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">sudo</span><span> hostctl restore</span><span style="color:#bf616a;"> --from</span><span> ./hosts.20220307
+</span></code></pre>
+<h2 id="xing-nozhui-jia">行の追加</h2>
+<p>構文</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">sudo</span><span> hostctl add domains プロファイル名 ドメイン名(スペース区切りで1個以上)
+</span></code></pre>
+<p>例</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> sudo hostctl add domains my-app my-server-1 my-server-2
+</span><span style="color:#bf616a;">[✔]</span><span> Domains &#39;</span><span style="color:#a3be8c;">my-server-1, my-server-2</span><span>&#39; added.
+</span><span>
+</span><span style="color:#bf616a;">+---------+--------+-----------+-------------+
+</span><span>| </span><span style="color:#bf616a;">PROFILE </span><span>| </span><span style="color:#bf616a;">STATUS </span><span>|    </span><span style="color:#bf616a;">IP     </span><span>|   </span><span style="color:#bf616a;">DOMAIN    </span><span>|
+</span><span style="color:#bf616a;">+---------+--------+-----------+-------------+
+</span><span>| </span><span style="color:#bf616a;">my-app  </span><span>| </span><span style="color:#bf616a;">on     </span><span>| </span><span style="color:#bf616a;">127.0.0.1 </span><span>| </span><span style="color:#bf616a;">my-server-1 </span><span>|
+</span><span>| </span><span style="color:#bf616a;">my-app  </span><span>| </span><span style="color:#bf616a;">on     </span><span>| </span><span style="color:#bf616a;">127.0.0.1 </span><span>| </span><span style="color:#bf616a;">my-server-2 </span><span>|
+</span><span style="color:#bf616a;">+---------+--------+-----------+-------------+
+</span><span>
+</span><span style="color:#bf616a;">$</span><span> cat /etc/hosts
+</span><span style="color:#65737e;">## ... 省略 ...
+</span><span style="color:#65737e;">## profile.on my-app
+</span><span style="color:#bf616a;">127.0.0.1</span><span> my-server-1
+</span><span style="color:#bf616a;">127.0.0.1</span><span> my-server-2
+</span><span style="color:#65737e;">## end
+</span></code></pre>
+<p>ファイルからまとめて入力することができる。</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> cat .etchosts
+</span><span style="color:#bf616a;">127.0.0.1</span><span>       my-server-42
+</span><span style="color:#bf616a;">127.0.0.1</span><span>       my-server-43
+</span><span>
+</span><span style="color:#bf616a;">$</span><span> sudo hostctl add my-app &lt; .etchosts
+</span><span style="color:#bf616a;">+---------+--------+-----------+--------------+
+</span><span>| </span><span style="color:#bf616a;">PROFILE </span><span>| </span><span style="color:#bf616a;">STATUS </span><span>|    </span><span style="color:#bf616a;">IP     </span><span>|    </span><span style="color:#bf616a;">DOMAIN    </span><span>|
+</span><span style="color:#bf616a;">+---------+--------+-----------+--------------+
+</span><span>| </span><span style="color:#bf616a;">my-app  </span><span>| </span><span style="color:#bf616a;">on     </span><span>| </span><span style="color:#bf616a;">127.0.0.1 </span><span>| </span><span style="color:#bf616a;">my-server-42 </span><span>|
+</span><span>| </span><span style="color:#bf616a;">my-app  </span><span>| </span><span style="color:#bf616a;">on     </span><span>| </span><span style="color:#bf616a;">127.0.0.1 </span><span>| </span><span style="color:#bf616a;">my-server-43 </span><span>|
+</span><span style="color:#bf616a;">+---------+--------+-----------+--------------+
+</span><span>
+</span><span style="color:#bf616a;">$</span><span> cat /etc/hosts
+</span><span style="color:#65737e;">## ... 省略 ...
+</span><span style="color:#65737e;">## profile.on my-app
+</span><span style="color:#bf616a;">127.0.0.1</span><span> my-server-42
+</span><span style="color:#bf616a;">127.0.0.1</span><span> my-server-43
+</span><span style="color:#65737e;">## end
+</span></code></pre>
+<p>プロジェクトごとに使う設定が決まっているなら <code>.etchosts</code> を git 管理して、  npm の <code>preinstall</code> にこのコマンドを入れたりしても良いと思う。</p>
+<h2 id="xing-noxue-chu">行の削除</h2>
+<p>構文</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">sudo</span><span> hostctl remove domains プロファイル名 ドメイン名(スペース区切りで1個以上)
+</span></code></pre>
+<p>例</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> sudo hostctl remove domains my-app my-server-1
+</span><span style="color:#bf616a;">[✔]</span><span> Domains &#39;</span><span style="color:#a3be8c;">my-server-1</span><span>&#39; removed.
+</span><span>
+</span><span style="color:#bf616a;">+---------+--------+-----------+-------------+
+</span><span>| </span><span style="color:#bf616a;">PROFILE </span><span>| </span><span style="color:#bf616a;">STATUS </span><span>|    </span><span style="color:#bf616a;">IP     </span><span>|   </span><span style="color:#bf616a;">DOMAIN    </span><span>|
+</span><span style="color:#bf616a;">+---------+--------+-----------+-------------+
+</span><span>| </span><span style="color:#bf616a;">my-app  </span><span>| </span><span style="color:#bf616a;">on     </span><span>| </span><span style="color:#bf616a;">127.0.0.1 </span><span>| </span><span style="color:#bf616a;">my-server-2 </span><span>|
+</span><span style="color:#bf616a;">+---------+--------+-----------+-------------+
+</span><span>
+</span><span style="color:#65737e;">## cat /etc/hosts
+</span><span style="color:#65737e;">## ... 省略 ...
+</span><span style="color:#65737e;">## profile.on my-app
+</span><span style="color:#bf616a;">127.0.0.1</span><span> my-server-2
+</span><span style="color:#65737e;">## end
+</span></code></pre>
+<p>プロファイルをまるごと削除することもできる。</p>
+<p>構文</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">sudo</span><span> hostctl remove プロファイル名
+</span></code></pre>
+<p>例</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> sudo hostctl remove my-app
+</span><span style="color:#bf616a;">[✔]</span><span> Profile(s) &#39;</span><span style="color:#a3be8c;">my-app</span><span>&#39; removed.
+</span></code></pre>
+<p>プロファイルを一つしか扱わないなら、こういうエイリアスを設定しておくのも便利。</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#96b5b4;">alias </span><span style="color:#8fa1b3;">domainadd</span><span>=&#39;</span><span style="color:#a3be8c;">sudo hostctl add domain my-app</span><span>&#39;
+</span><span style="color:#bf616a;">domainadd</span><span> foo
+</span></code></pre>
+<h2 id="purohuairunoyou-xiao-hua-towu-xiao-hua">プロファイルの有効化と無効化</h2>
+<p>プロファイルごとに設定を一時的に無効化することができる。</p>
+<p>操作前</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> sudo hostctl list
+</span><span style="color:#bf616a;">+----------+--------+-----------------+----------------------------+
+</span><span>| </span><span style="color:#bf616a;">PROFILE  </span><span>| </span><span style="color:#bf616a;">STATUS </span><span>|       </span><span style="color:#bf616a;">IP        </span><span>|           </span><span style="color:#bf616a;">DOMAIN           </span><span>|
+</span><span style="color:#bf616a;">+----------+--------+-----------------+----------------------------+
+</span><span>| </span><span style="color:#bf616a;">default  </span><span>| </span><span style="color:#bf616a;">on     </span><span>| </span><span style="color:#bf616a;">127.0.0.1       </span><span>| </span><span style="color:#bf616a;">localhost                  </span><span>|
+</span><span>| </span><span style="color:#bf616a;">default  </span><span>| </span><span style="color:#bf616a;">on     </span><span>| </span><span style="color:#bf616a;">255.255.255.255 </span><span>| </span><span style="color:#bf616a;">broadcasthost              </span><span>|
+</span><span>| </span><span style="color:#bf616a;">default  </span><span>| </span><span style="color:#bf616a;">on     </span><span>| </span><span style="color:#bf616a;">::1             </span><span>| </span><span style="color:#bf616a;">localhost                  </span><span>|
+</span><span>| </span><span style="color:#bf616a;">default  </span><span>| </span><span style="color:#bf616a;">on     </span><span>| </span><span style="color:#bf616a;">127.0.0.1       </span><span>| </span><span style="color:#bf616a;">kubernetes.docker.internal </span><span>|
+</span><span style="color:#bf616a;">+----------+--------+-----------------+----------------------------+
+</span><span>| </span><span style="color:#bf616a;">my-app-1 </span><span>| </span><span style="color:#bf616a;">on     </span><span>| </span><span style="color:#bf616a;">127.0.0.1       </span><span>| </span><span style="color:#bf616a;">my-server-1                </span><span>|
+</span><span style="color:#bf616a;">+----------+--------+-----------------+----------------------------+
+</span><span>| </span><span style="color:#bf616a;">my-app-2 </span><span>| </span><span style="color:#bf616a;">on     </span><span>| </span><span style="color:#bf616a;">127.0.0.1       </span><span>| </span><span style="color:#bf616a;">my-server-1                </span><span>|
+</span><span style="color:#bf616a;">+----------+--------+-----------------+----------------------------+
+</span></code></pre>
+<p>無効化</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> sudo hostctl disable my-app-1
+</span><span style="color:#bf616a;">+----------+--------+-----------+-------------+
+</span><span>| </span><span style="color:#bf616a;">PROFILE  </span><span>| </span><span style="color:#bf616a;">STATUS </span><span>|    </span><span style="color:#bf616a;">IP     </span><span>|   </span><span style="color:#bf616a;">DOMAIN    </span><span>|
+</span><span style="color:#bf616a;">+----------+--------+-----------+-------------+
+</span><span>| </span><span style="color:#bf616a;">my-app-1 </span><span>| </span><span style="color:#bf616a;">off    </span><span>| </span><span style="color:#bf616a;">127.0.0.1 </span><span>| </span><span style="color:#bf616a;">my-server-1 </span><span>|
+</span><span style="color:#bf616a;">+----------+--------+-----------+-------------+
+</span><span>
+</span><span style="color:#bf616a;">$</span><span> cat /etc/hosts
+</span><span style="color:#65737e;">## ... 省略 ...
+</span><span style="color:#65737e;">## profile.off my-app-1
+</span><span style="color:#65737e;">## 127.0.0.1 my-server-1    ## ここがコメントアウトされてる
+</span><span style="color:#65737e;">## end
+</span><span>
+</span><span style="color:#65737e;">## profile.on my-app-2
+</span><span style="color:#bf616a;">127.0.0.1</span><span> my-server-1
+</span><span style="color:#65737e;">## end
+</span></code></pre>
+<p>有効化</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> sudo hostctl enable my-app-1
+</span><span style="color:#bf616a;">+----------+--------+-----------+-------------+
+</span><span>| </span><span style="color:#bf616a;">PROFILE  </span><span>| </span><span style="color:#bf616a;">STATUS </span><span>|    </span><span style="color:#bf616a;">IP     </span><span>|   </span><span style="color:#bf616a;">DOMAIN    </span><span>|
+</span><span style="color:#bf616a;">+----------+--------+-----------+-------------+
+</span><span>| </span><span style="color:#bf616a;">my-app-1 </span><span>| </span><span style="color:#bf616a;">on     </span><span>| </span><span style="color:#bf616a;">127.0.0.1 </span><span>| </span><span style="color:#bf616a;">my-server-1 </span><span>|
+</span><span style="color:#bf616a;">+----------+--------+-----------+-------------+
+</span><span>
+</span><span>
+</span><span style="color:#bf616a;">$</span><span> cat /etc/hosts
+</span><span style="color:#65737e;">## ... 省略 ...
+</span><span style="color:#65737e;">## profile.off my-app-1
+</span><span style="color:#bf616a;">127.0.0.1</span><span> my-server-1
+</span><span style="color:#65737e;">## end
+</span><span>
+</span><span style="color:#65737e;">## profile.on my-app-2
+</span><span style="color:#bf616a;">127.0.0.1</span><span> my-server-1
+</span><span style="color:#65737e;">## end
+</span></code></pre>
+<h2 id="yi-shi-de-napurohuairuwozuo-ru">一時的なプロファイルを作る</h2>
+<p>プロファイルとドメインを作成 → 他の作業 → プロファイルを削除というフローがあるなら、<code>add</code> コマンドに <code>--wait 0</code> オプションを使うのが良い。
+これを使うと <code>/etc/hosts</code> を更新した後にキー入力を受け付ける状態になって、 Ctrl+c を押すと <code>/etc/hosts</code> がコマンド実行前の状態に戻る。</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> sudo hostctl add domains my-tmp my-server-1</span><span style="color:#bf616a;"> --wait</span><span> 0
+</span><span style="color:#bf616a;">[✔]</span><span> Domains &#39;</span><span style="color:#a3be8c;">my-server-1</span><span>&#39; added.
+</span><span>
+</span><span style="color:#bf616a;">+---------+--------+-----------+-------------+
+</span><span>| </span><span style="color:#bf616a;">PROFILE </span><span>| </span><span style="color:#bf616a;">STATUS </span><span>|    </span><span style="color:#bf616a;">IP     </span><span>|   </span><span style="color:#bf616a;">DOMAIN    </span><span>|
+</span><span style="color:#bf616a;">+---------+--------+-----------+-------------+
+</span><span>| </span><span style="color:#bf616a;">my-tmp  </span><span>| </span><span style="color:#bf616a;">on     </span><span>| </span><span style="color:#bf616a;">127.0.0.1 </span><span>| </span><span style="color:#bf616a;">my-server-1 </span><span>|
+</span><span style="color:#bf616a;">+---------+--------+-----------+-------------+
+</span><span>
+</span><span style="color:#bf616a;">[ℹ]</span><span> Waiting until ctrl+c to remove domains from profile &#39;</span><span style="color:#a3be8c;">my-tmp, my-server-1</span><span>&#39;
+</span><span>
+</span><span>
+</span><span style="color:#bf616a;">^C
+</span><span style="color:#bf616a;">[✔]</span><span> Profile &#39;</span><span style="color:#a3be8c;">my-tmp</span><span>&#39; removed.
+</span></code></pre>
+<p>キー入力をせずに一定時間後に削除して良いなら <code>--wait</code> に <code>0</code> 以外の値を渡せば良い。
+<code>sudo hostctl add domain my-tmp my-server-1 --wait 60</code> を実行すると60秒間だけ <code>my-server-1</code> というホスト名が使える状態になり、60秒後にそれが使えなくなる。</p>
+
+        </div>
+
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2023
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

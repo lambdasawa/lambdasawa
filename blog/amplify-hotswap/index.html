@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>λ沢.dev</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/style.css">
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/color/orange.css">
+
+        <link rel="stylesheet" href="https://www.lambdasawa.dev/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/font-hack-subset.css">
+
+    </head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://www.lambdasawa.dev" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            λ沢.dev
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://github.com/lambdasawa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            
+                <li><a href="https://zenn.dev/lambdasawa" target="_blank" rel="noopener noreferrer">Zenn</a></li>
+            
+                <li><a href="https://twitter.com/lambdasawa" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+            
+                <li><a href="https://www.wantedly.com/id/lambdasawa" target="_blank" rel="noopener noreferrer">Wantedly</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://www.lambdasawa.dev/blog/amplify-hotswap/">Amplify で function の hotswap を実現する方法について</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date"></span>
+
+    </div>
+
+    
+
+        
+        <div class="post-content">
+            <p>この記事は「<a href="https://qiita.com/advent-calendar/2021/amplify">AWS Amplify Advent Calendar 2021</a>」の9日目の記事です。</p>
+<p>CloudFormation 経由でのデプロイは一貫性を保ちやすい一方で時間がかかります。</p>
+<p>最近は Lambda をデプロイするツールに CloudFormation を経由せずに高速にデプロイをする機能が実装されることが増えてきたように思えます。
+自分が把握しているだけで以下のツールがそれを実装しています。</p>
+<ul>
+<li><a href="https://dev.classmethod.jp/articles/serverless-stack/">Serverless Stack</a></li>
+<li><a href="https://aws.amazon.com/jp/about-aws/whats-new/2021/10/aws-cdk-releases-hotswap-rollback-control/">CDK</a></li>
+<li><a href="https://aws.amazon.com/jp/blogs/news/aws-sam-accelerate/">SAM</a></li>
+</ul>
+<p>Amplify の function にも同様の機能があると嬉しいですが、残念ながらまだ実装されていません。
+そこでホットスワップ機能をプラグインという形で実装したので、今回はそのプラグインについて紹介します。</p>
+<h2 id="amplify-function-hotswap-plugin">amplify-function-hotswap-plugin</h2>
+<p><code>amplify-function-hotswap-plugin</code> という名前のプラグインを実装して公開しました。
+https://github.com/lambdasawa/amplify-function-hotswap-plugin にてソースコードとデモを確認することができます。</p>
+<h3 id="she-ji">設計</h3>
+<p>Amplify はプラグインの作り方を https://docs.amplify.aws/cli/plugins/authoring/ にて公開しており、この仕組みを利用することによって <code>amplify</code> コマンドのサブコマンドを <code>amplify-cli</code> のリポジトリに手を加えることをなく作成することができます。
+<code>amplify-function-hotswap-plugin</code> はこの仕組みを利用して <code>amplify amplify-function-hotswap-plugin watch</code> というコマンドでホットスワップを開始できるようになっています。</p>
+<p>このコマンドが実行されると <code>amplify-function-hotswap-plugin</code> は <code>amplify/backend/function</code> 以下のファイル監視を開始し、ファイル変更を検出するとその Lambda に対して <code>lambda:UpdateFunctionCode</code> のオペレーションを呼び出して Lambda のコードを更新します。
+これは素朴な操作なので短時間で完了します。
+参考程度に自分が開発に参加している Amplify のプロジェクトでは <code>amplify push</code> だと 2 分程度かかるところが、このホットスワップの仕組みでは 10 秒程度で完了します。</p>
+<p>また、 Amplify では <code>amplify/backend/function</code> 以下に Lambda 関数だけではなく Lambda レイヤーのコードが入ることもあります。
+<code>amplify-function-hotswap-plugin</code> ではそのケースにも対応しています。
+つまり、 Lambda レイヤーのコードが更新された場合は新たな Lambda レイヤーのコードがアップロードされ、そのレイヤーに依存している関数も同時に更新されます。
+この依存関係は <code>amplify/amplify-meta.json</code> を読み取ることで把握しています。</p>
+<p>AWS の API コールを行う際のクレデンシャルは <code>amplify/.config</code> 以下のファイルを参照して通常の <code>amplify</code> コマンドと同様のものを使用しています。</p>
+<h3 id="shi-zhuang">実装</h3>
+<p>いくつかボイラープレート的なファイルはありますが、本体の実装は https://github.com/lambdasawa/amplify-function-hotswap-plugin/blob/main/commands/watch.js の1ファイルのみです。</p>
+<p><a href="https://www.npmjs.com/package/node-watch"><code>node-watch</code></a> でファイル監視を行い、  <a href="https://www.npmjs.com/package/amplify-cli-core"><code>amplify-cli-core</code></a> で各種設定ファイルをパースし、 <code>aws-sdk</code> で実際に更新を行います。
+とても素朴な実装です。</p>
+<h3 id="jin-hou">今後</h3>
+<p>素朴な仕組みではありますが、自分が開発に参加しているプロジェクトのメンバーの皆さんはこのプラグインを利用してくれており、上手く機能しているようです。</p>
+<p>本来はこのような仕組みがプラグインではなく <code>amplify-cli</code> 自体に含まれているのが望ましいと考えており、  <a href="https://github.com/aws-amplify/amplify-cli/issues/8642">Issue</a> と <a href="https://github.com/aws-amplify/amplify-cli/pull/8686">プルリク</a> を作ってみました。
+しかし残念ながら上手く進めることができておらず、やりとりが止まってしまっています。
+何か上手く進めるためのアドバイスなどがあれば教えていただけると幸いです。</p>
+
+        </div>
+
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2023
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

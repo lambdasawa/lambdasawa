@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>λ沢.dev</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/style.css">
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/color/orange.css">
+
+        <link rel="stylesheet" href="https://www.lambdasawa.dev/color/background_blue.css">
+    
+    <link rel="stylesheet" href="https://www.lambdasawa.dev/font-hack-subset.css">
+
+    </head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://www.lambdasawa.dev" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            λ沢.dev
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://github.com/lambdasawa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            
+                <li><a href="https://zenn.dev/lambdasawa" target="_blank" rel="noopener noreferrer">Zenn</a></li>
+            
+                <li><a href="https://twitter.com/lambdasawa" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+            
+                <li><a href="https://www.wantedly.com/id/lambdasawa" target="_blank" rel="noopener noreferrer">Wantedly</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+    <div class="post">
+        
+    <h1 class="post-title"><a href="https://www.lambdasawa.dev/cheatsheet/aws-s3/">S3</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date"></span>
+
+    </div>
+
+    
+
+        
+        <div class="post-content">
+            <ul>
+<li>ref
+<ul>
+<li><a href="https://docs.aws.amazon.com/ja_jp/cli/latest/userguide/cli-services-s3-commands.html">https://docs.aws.amazon.com/ja_jp/cli/latest/userguide/cli-services-s3-commands.html</a></li>
+<li><a href="https://docs.aws.amazon.com/cli/latest/reference/s3/index.html#use-of-exclude-and-include-filters">https://docs.aws.amazon.com/cli/latest/reference/s3/index.html#use-of-exclude-and-include-filters</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="aws-config">~/.aws/config</h2>
+<ul>
+<li><a href="https://docs.aws.amazon.com/cli/latest/topic/s3-config.html">ref</a></li>
+</ul>
+<pre data-lang="txt" style="background-color:#2b303b;color:#c0c5ce;" class="language-txt "><code class="language-txt" data-lang="txt"><span>[profile hoge]
+</span><span>s3 =
+</span><span>  max_concurrent_requests = 20
+</span><span>  max_queue_size = 10000
+</span><span>  multipart_threshold = 64MB
+</span><span>  multipart_chunksize = 16MB
+</span><span>  max_bandwidth = 50MB/s
+</span><span>  use_accelerate_endpoint = true
+</span></code></pre>
+<h2 id="baziyoningusaretabaketutowoxue-chu">バージョニングされたバケットを削除</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">pip</span><span> install boto3
+</span><span style="color:#bf616a;">BUCKET</span><span>=</span><span style="color:#a3be8c;">xxxx </span><span style="color:#bf616a;">python -c </span><span>&#39;</span><span style="color:#a3be8c;">import os; import boto3; s3 = boto3.resource(&quot;s3&quot;); b = s3.Bucket(os.getenv(&quot;BUCKET&quot;)); b.object_versions.all().delete(); b.delete()</span><span>&#39;
+</span></code></pre>
+<h2 id="aws-go-sdk-dedaunrodo">aws-go-sdk でダウンロード</h2>
+<ul>
+<li><a href="https://github.com/aws/aws-sdk-go/blob/16b6a407abb192af7335d72005c6f08b454f8042/service/s3/s3manager/download.go#L122-L135">ref</a></li>
+</ul>
+<pre data-lang="go" style="background-color:#2b303b;color:#c0c5ce;" class="language-go "><code class="language-go" data-lang="go"><span style="color:#bf616a;">s3Client </span><span>:= </span><span style="color:#bf616a;">s3</span><span>.</span><span style="color:#bf616a;">New</span><span>(</span><span style="color:#bf616a;">session</span><span>.</span><span style="color:#bf616a;">Must</span><span>(</span><span style="color:#bf616a;">session</span><span>.</span><span style="color:#bf616a;">NewSession</span><span>()))
+</span><span style="color:#bf616a;">s3Downloader </span><span>:= </span><span style="color:#bf616a;">s3manager</span><span>.</span><span style="color:#bf616a;">NewDownloaderWithClient</span><span>(</span><span style="color:#bf616a;">s3Client</span><span>, </span><span style="color:#b48ead;">func</span><span>(</span><span style="color:#bf616a;">d </span><span>*</span><span style="color:#bf616a;">s3manager</span><span>.</span><span style="color:#b48ead;">Downloader</span><span>) {
+</span><span>  </span><span style="color:#bf616a;">d</span><span>.</span><span style="color:#bf616a;">PartSize </span><span>= </span><span style="color:#d08770;">8 </span><span>* </span><span style="color:#d08770;">1024 </span><span>* </span><span style="color:#d08770;">1024
+</span><span>  </span><span style="color:#bf616a;">d</span><span>.</span><span style="color:#bf616a;">Concurrency </span><span>= </span><span style="color:#d08770;">8
+</span><span>  </span><span style="color:#bf616a;">d</span><span>.</span><span style="color:#bf616a;">BuffHerProvider </span><span>= </span><span style="color:#bf616a;">s3manager</span><span>.</span><span style="color:#bf616a;">NewPooledBufferedWriterReadFromProvider</span><span>(</span><span style="color:#d08770;">64 </span><span>* </span><span style="color:#d08770;">1024 </span><span>* </span><span style="color:#d08770;">1024</span><span>)
+</span><span>})
+</span></code></pre>
+<h2 id="other">other</h2>
+<ul>
+<li><a href="https://github.com/minio/minio">https://github.com/minio/minio</a></li>
+<li><a href="https://blog.flatt.tech/entry/s3_security">Amazon S3の脆弱な利用によるセキュリティリスクと対策</a></li>
+</ul>
+
+        </div>
+
+        
+    </div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright">
+                        <span>© 
+    2023
+ Powered by <a href="https://www.getzola.org/">Zola</a></span>
+                    <span class="copyright-theme">
+                        <span class="copyright-theme-sep">:: </span>
+                        Theme: <a href="https://github.com/pawroman/zola-theme-terminimal/">Terminimal</a> by pawroman
+                    </span>
+                </div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>
