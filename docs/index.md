@@ -410,18 +410,17 @@ b.delete()
 
 ### HTTP
 
-- Insomnia
-- Postman
-- httpie
-- curlie
-- Hoppscotch
-- httpbin
-- ngrok
-- Caddy
-- webhook.site
-- mitmproxy
-- BurpSuite
-- CyberChef
+- [httpie](https://httpie.io/)
+- [Insomnia](https://insomnia.rest/)
+- [Hoppscotch](https://hoppscotch.io/)
+- [Postman](https://www.postman.com/)
+- [httpbin.org](https://httpbin.org/)
+- [ngrok](https://ngrok.com/)
+- [Webhook.site](https://webhook.site)
+- [CyberChef](https://gchq.github.io/CyberChef/)
+- [Caddy](https://caddyserver.com/)
+- [mitmproxy](https://mitmproxy.org/)
+- [Burp Suite](https://portswigger.net/burp)
 
 ### WebSocket
 
@@ -662,9 +661,8 @@ b.delete()
   - <https://emojipedia.org/>
   - <http://emojitracker.com/>
   - <http://www.unicode.org/emoji/charts/full-emoji-list.html>
-- <https://github.com/jagracey/Awesome-Unicode#readme>
-- <https://github.com/Codepoints/awesome-codepoints#readme>
-
+- <https://github.com/jagracey/Awesome-Unicode>
+- <https://github.com/Codepoints/awesome-codepoints>
 - [文字化けとは](https://www.slideshare.net/tmtm/mojibake-49053739)
 - [文字化けテスター](https://tools.m-bsys.com/development_tooles/char_corruption.php)
 - [Unicode テーブル](https://unicode-table.com/en/)
@@ -697,11 +695,7 @@ b.delete()
   - [実装テクニックを学ぶ](https://kato-hiro.github.io/AtCoderClans/articles/implementation/)
 - [レッドコーダーが教える、競プロ・AtCoder 上達のガイドライン【中級編：目指せ水色コーダー！】](https://qiita.com/e869120/items/eb50fdaece12be418faa#2-2-2-12-%E5%80%8B%E3%81%AE%E5%9F%BA%E6%9C%AC%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0%E3%82%92%E3%83%9E%E3%82%B9%E3%82%BF%E3%83%BC%E3%81%99%E3%82%8B)
 - [競プロ典型 90 問](https://atcoder.jp/contests/typical90)
-- Rust
-  - [rust-lang-ja/atcoder-rust-resources Wiki / 2020 Update](https://github.com/rust-lang-ja/atcoder-rust-resources/wiki/2020-Update)
-- 数学
-  - [Cognicull](https://cognicull.com/ja/field)
-  - [高校数学の美しい物語](https://manabitimes.jp/math)
+- [rust-lang-ja/atcoder-rust-resources Wiki / 2020 Update](https://github.com/rust-lang-ja/atcoder-rust-resources/wiki/2020-Update)
 
 ### 数学
 
