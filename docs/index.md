@@ -137,6 +137,8 @@ title: "λ沢.dev"
   - <http://lambda-versions.com/>
 - [環境変数](https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/configuration-envvars.html)
 - [制限](https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/gettingstarted-limits.html)
+- [Serverless Applications Lens - AWS Well-Architected Framework - Serverless Applications Lens](https://docs.aws.amazon.com/wellarchitected/latest/serverless-applications-lens/welcome.html)
+- [Operator Guide - Introduction](https://docs.aws.amazon.com/lambda/latest/operatorguide/intro.html)
 - optimization
   - [Operating Lambda: パフォーマンスの最適化 – Part 1](https://aws.amazon.com/jp/blogs/news/operating-lambda-performance-optimization-part-1)
   - [AWS Lambda Performance Tuning Deep Dive〜本当に知りたいのは”ここ”だった 〜(AWS-46)](https://aws.amazon.com/jp/summits/japan/sessions/?aws-summit-japan-2022-cards.sort-by=item.additionalFields.sortOrder&aws-summit-japan-2022-cards.sort-order=asc&awsf.level=*all&awsf.session-category=*all&awsf.company-category=*all&awsf.industry=*all&awsf.use-case=*all&aws-summit-japan-2022-cards.q=Lambda%2BPerformance%2BTuning%2BDeep%2BDive&aws-summit-japan-2022-cards.q_operator=AND)
@@ -170,6 +172,7 @@ title: "λ沢.dev"
 ### AWS DynamoDB
 
 - [Best practices for designing and architecting with DynamoDB](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/best-practices.html)
+- [Amazon DynamoDB におけるシングルテーブル vs マルチテーブル設計 | Amazon Web Services ブログ](https://aws.amazon.com/jp/blogs/news/single-table-vs-multi-table-design-in-amazon-dynamodb/)
 - [Amazon DynamoDB Advanced Design Pattern](https://www.youtube.com/watch?v=Wd5gbLQ2a1E)
 - [Amazon DynamoDB Deep Dive](https://www.youtube.com/watch?v=16RYHfe89WY)
 - [LocalStack](https://hub.docker.com/r/localstack/localstack)
