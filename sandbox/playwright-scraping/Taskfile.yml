@@ -1,0 +1,12 @@
+version: "3"
+
+dotenv: [.env]
+
+tasks:
+  setup:
+    cmds:
+      - npm i
+
+  run:
+    cmds:
+      - docker compose run playwright

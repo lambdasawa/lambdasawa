@@ -1,0 +1,9 @@
+version: '3'
+services:
+  # https://playwright.dev/docs/docker
+  playwright:
+    image: mcr.microsoft.com/playwright:v1.34.3-jammy
+    command: npm run --silent start
+    working_dir: /opt/playwright
+    volumes:
+      - .:/opt/playwright
