@@ -1,0 +1,20 @@
+version: '3'
+
+tasks:
+  test:
+    cmds:
+      - |
+        set -e
+
+        http -v http://localhost:9200/_cluster/health
+
+        http -v http://localhost:9200/my-index
+
+        http -v PUT http://localhost:9200/my-index/_doc/1 'content-type: application/json' \
+          title="Sample Document", \
+          content="This is a sample document."
+
+        http -v http://localhost:9200/my-index/_doc/1
+
+        http -v POST http://localhost:9200/my-index/_search 'content-type: application/json' \
+          query:='{"match": {"content": "sample"}}'
