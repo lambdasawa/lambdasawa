@@ -1,6 +1,8 @@
 ---
-title: lambdasawa
+title: "λ沢.dev"
 ---
+
+## ログ
 
 - 2023-05-10 [AWS 上でサーバレス構成で HTTP レスポンスをストリーミングする](https://zenn.dev/lambdasawa/articles/aws-serverless-http-response-streaming)
 - 2022-12-31 [親がカフェを始めたので STUDIO と microCMS でサイトを構築した](/blog/cafe-sutdio-microcms)
@@ -200,7 +202,7 @@ b.delete()
 
 - `aws secretsmanager create-secret --name foo --secret-string '{"HOGE_API_KEY":"foo"}'`
 - `aws secretsmanager put-secret-value --secret-id foo --secret-string '{"HOGE_API_KEY":"bar"}'`
-- `aws secretsmanager get-secret-value --secret-id foo | jq -r '.SecretString | fromjson | .HOGE_API_KEY'`
+- `aws secretsmanager get-secret-value --secret-id foo \| jq -r '.SecretString \| fromjson \| .HOGE_API_KEY'`
 
 ### AWS CloudWatch Logs
 
@@ -208,7 +210,7 @@ b.delete()
 - [utern](https://github.com/knqyf263/utern)
 - [cw](https://github.com/lucagrulla/cw)
 - ロググループをまとめて削除
-  - `aws logs describe-log-groups --max-items 1000 | jq -r '.logGroups[] | .logGroupName | select(test("irisawa"))' | xargs -n 1 aws logs delete-log-group --log-group-name`
+  - `aws logs describe-log-groups --max-items 1000 \| jq -r '.logGroups[] \| .logGroupName \| select(test("irisawa"))' \| xargs -n 1 aws logs delete-log-group --log-group-name`
 
 ### AWS OpenTelemetry
 
@@ -272,11 +274,6 @@ b.delete()
 - [セキュアな Terraform の使い方 ～ 機密情報をコードに含めず環境構築するにはどうしたらいいの？](https://speakerdeck.com/harukasakihara/sekiyuanaterraformfalseshi-ifang-ji-mi-qing-bao-wokodonihan-mezuhuan-jing-gou-zhu-surunihadousitaraiifalse)
 - <https://github.com/gruntwork-io/terratest>
 - [Top 3 Terraform Testing Strategies for Ultra-Reliable Infrastructure-as-Code](https://www.contino.io/insights/top-3-terraform-testing-strategies-for-ultra-reliable-infrastructure-as-code)
-- [【シェル芸人への道】Bash の変数展開と真摯に向き合う](https://qiita.com/t_nakayama0714/items/80b4c94de43643f4be51)
-- [エムスリー bash スクリプティング研修](https://www.m3tech.blog/entry/2018/08/21/bash-scripting)
-- [Bash の括弧のノウハウ（まとめ）](https://qiita.com/Ping/items/f9b5175085026462b082)
-- [shellcheck](https://github.com/koalaman/shellcheck)
-- [shfmt](https://github.com/mvdan/sh#shfmt)
 
 ### PaaS
 
@@ -287,6 +284,12 @@ b.delete()
 - <https://supabase.com/>
 
 ### bash
+
+- [【シェル芸人への道】Bash の変数展開と真摯に向き合う](https://qiita.com/t_nakayama0714/items/80b4c94de43643f4be51)
+- [エムスリー bash スクリプティング研修](https://www.m3tech.blog/entry/2018/08/21/bash-scripting)
+- [Bash の括弧のノウハウ（まとめ）](https://qiita.com/Ping/items/f9b5175085026462b082)
+- [shellcheck](https://github.com/koalaman/shellcheck)
+- [shfmt](https://github.com/mvdan/sh#shfmt)
 
 ### tmux
 
@@ -314,7 +317,7 @@ b.delete()
 
 ### Kubernetes (k8s)
 
-- [Kubernetes ドキュメント | Kubernetes](https://kubernetes.io/ja/docs/home/)
+- [Kubernetes ドキュメント \| Kubernetes](https://kubernetes.io/ja/docs/home/)
 - [Lens Documentation](https://docs.k8slens.dev/)
 - [Skaffold](https://skaffold.dev/)
 
@@ -391,7 +394,7 @@ b.delete()
 - [プロフェッショナル SSL/TLS – 技術書出版と販売のラムダノート](https://www.lambdanote.com/products/tls)
 - [図解 X.509 証明書](https://qiita.com/TakahikoKawasaki/items/4c35ac38c52978805c69)
 - [RSA 鍵、証明書のファイルフォーマットについて](https://qiita.com/kunichiko/items/12cbccaadcbf41c72735)
-- [OpenSSL CSR Tool - Create Your CSR Faster | DigiCert.com](https://www.digicert.com/easy-csr/openssl.htm)
+- [OpenSSL CSR Tool - Create Your CSR Faster \| DigiCert.com](https://www.digicert.com/easy-csr/openssl.htm)
 
 ### HTTP
 
@@ -455,7 +458,7 @@ b.delete()
 
 ### OpenAPI
 
-- [OpenAPI Specification - Version 3.0.3 | Swagger](https://swagger.io/specification/)
+- [OpenAPI Specification - Version 3.0.3 \| Swagger](https://swagger.io/specification/)
 - [redocly-cli](https://github.com/Redocly/redocly-cli)
 - [RapiDoc](https://rapidocweb.com/)
 - [Stoplight](https://stoplight.io/)
@@ -542,8 +545,8 @@ b.delete()
   - [DartPad](https://dartpad.dev)
   - [A tour of the Dart language](https://dart.dev/guides/language/language-tour)
   - [Effective Dart](https://dart.dev/guides/language/effective-dart)
-- [Flutter documentation | Flutter](https://docs.flutter.dev/)
-- [Cookbook | Flutter](https://docs.flutter.dev/cookbook)
+- [Flutter documentation \| Flutter](https://docs.flutter.dev/)
+- [Cookbook \| Flutter](https://docs.flutter.dev/cookbook)
 - [pub.dev](https://pub.dev/packages?q=is%3Aflutter-favorite)
 - [Flutter の効率良い学び方](https://medium.com/flutter-jp/flutter-learning-c5640c5f05b9)
 - [Flutter 実践入門](https://zenn.dev/kazutxt/books/flutter_practice_introduction/)
@@ -562,16 +565,16 @@ b.delete()
   - <https://github.com/burhanrashid52/WhatTodo>
   - <https://github.com/GeekyAnts/flutter-login-home-animation>
   - <https://github.com/yumemi-inc/flutter-training-template>
-- [Layouts in Flutter | Flutter](https://docs.flutter.dev/development/ui/layout)
+- [Layouts in Flutter \| Flutter](https://docs.flutter.dev/development/ui/layout)
 - [Flutter の BoxConstraints を理解する](https://itome.team/blog/2019/12/flutter-advent-calendar-day9/)
-- [Navigation | Flutter](https://docs.flutter.dev/cookbook/navigation)
+- [Navigation \| Flutter](https://docs.flutter.dev/cookbook/navigation)
 - [Navigator class - widgets library - Dart API](https://api.flutter.dev/flutter/widgets/Navigator-class.html)
 - [Flutter の Navigation と Routing を理解する](https://itome.team/blog/2019/12/flutter-advent-calendar-day10/)
-- [Internationalizing Flutter apps | Flutter](https://docs.flutter.dev/development/accessibility-and-localization/internationalization#localizing-for-ios-updating-the-ios-app-bundle)
+- [Internationalizing Flutter apps \| Flutter](https://docs.flutter.dev/development/accessibility-and-localization/internationalization#localizing-for-ios-updating-the-ios-app-bundle)
 - [【2021 年版】Flutter の状態管理パターン総まとめ](https://qiita.com/datake914/items/f91acf30a640447c57c8)
 - [Flutter の状態管理手法の選定](https://medium.com/flutter-jp/state-1daa7fd66b94)
 - [Flutter 状態管理フローチャートを書いた(　 ´･‿･｀)](https://twitter.com/_mono/status/1170516947970097152)
-- [Inside Flutter | Flutter](https://docs.flutter.dev/resources/inside-flutter)
+- [Inside Flutter \| Flutter](https://docs.flutter.dev/resources/inside-flutter)
 - [Flutter の Widget ツリーの裏側で起こっていること](https://medium.com/flutter-jp/dive-into-flutter-4add38741d07)
 - [Stateful Widget のパフォーマンスを考慮した正しい扱い方](https://medium.com/flutter-jp/state-performance-7a5f67d62edd)
 - [【Flutter】Navigator.of(context) から理解する 3 つのツリー](https://zenn.dev/chooyan/articles/77a2ba6b02dd4f)
@@ -581,13 +584,13 @@ b.delete()
 - [ChangeNotifier class - foundation library - Dart API](https://api.flutter.dev/flutter/foundation/ChangeNotifier-class.html)
 - [ValueNotifier class - foundation library - Dart API](https://api.flutter.dev/flutter/foundation/ValueNotifier-class.html)
 - [ValueNotifier を使うメリットとその使い方 - Qiita](https://qiita.com/tetsufe/items/87c37f713309fb4b0e91)
-- [provider | Flutter Package](https://pub.dev/packages/provider)
+- [provider \| Flutter Package](https://pub.dev/packages/provider)
 - [Flutter の Provider パッケージを使いこなす](https://itome.team/blog/2019/12/flutter-advent-calendar-day7/)
-- [flutter_state_notifier | Flutter Package](https://pub.dev/packages/flutter_state_notifier)
-- [はじめに | Riverpod](https://riverpod.dev/ja/docs/getting_started)
-- [StateNotifierProvider | Riverpod](https://riverpod.dev/ja/docs/providers/state_notifier_provider)
-- [Provider | Riverpod](https://riverpod.dev/ja/docs/providers/provider)
-- [FutureProvider | Riverpod](https://riverpod.dev/ja/docs/providers/future_provider)
+- [flutter_state_notifier \| Flutter Package](https://pub.dev/packages/flutter_state_notifier)
+- [はじめに \| Riverpod](https://riverpod.dev/ja/docs/getting_started)
+- [StateNotifierProvider \| Riverpod](https://riverpod.dev/ja/docs/providers/state_notifier_provider)
+- [Provider \| Riverpod](https://riverpod.dev/ja/docs/providers/provider)
+- [FutureProvider \| Riverpod](https://riverpod.dev/ja/docs/providers/future_provider)
 - [長めだけどたぶんわかりやすい BLoC パターンの解説 - Qiita](https://qiita.com/kabochapo/items/8738223894fb74f952d3)
 
 ### 構造体の生成
