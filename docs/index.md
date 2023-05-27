@@ -398,6 +398,8 @@ b.delete()
   - <https://asnokaze.hatenablog.com/entry/2022/07/04/000036>
   - <https://gist.github.com/azu/8e70827e3a83b3038a9ceb8d5e596ec6>
   - <https://gist.github.com/nabettu/96fe5861efe2cf4dd2b264d455462584>
+- /etc/hosts
+  - <https://guumaster.github.io/hostctl/>
 
 ### TLS / SSL
 
@@ -701,10 +703,6 @@ b.delete()
 - 数学
   - [Cognicull](https://cognicull.com/ja/field)
   - [高校数学の美しい物語](https://manabitimes.jp/math)
-
-### /etc/hosts
-
-- <https://guumaster.github.io/hostctl/>
 
 ### 数学
 
