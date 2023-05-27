@@ -1,0 +1,16 @@
+version: '3'
+
+
+tasks:
+  dotenv:
+    cmds:
+      - |
+        echo '
+        API_KEY=op://dotenv/microcms-lambdasawa-test/api-key
+        ' | op inject >.env
+
+  test:
+    dotenv: [.env]
+    cmds:
+      - |
+        http -v "https://lambdasawa-test.microcms.io/api/v1/test" "x-microcms-api-key: $API_KEY"
