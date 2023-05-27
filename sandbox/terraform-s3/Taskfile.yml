@@ -1,0 +1,19 @@
+version: "3"
+
+env:
+  AWS_CONFIG_FILE: "{{.USER_WORKING_DIR}}/.aws"
+  AWS_PROFILE: sandbox
+
+tasks:
+  setup:
+    cmds:
+      - op read op://dotenv/aws/notesPlain >.aws
+
+  run:
+    cmds:
+      - terraform init
+      - terraform apply -auto-approve
+
+  destroy:
+    cmds:
+      - terraform destroy -auto-approve
