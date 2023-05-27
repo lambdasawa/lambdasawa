@@ -1,0 +1,15 @@
+version: "3"
+
+dotenv: [.env]
+
+tasks:
+  setup:
+    cmds:
+      - |
+        echo '
+        API_KEY=op://dotenv/openai/api-key
+        ' | op inject >.env
+
+  run:
+    cmds:
+      - go run ./...
