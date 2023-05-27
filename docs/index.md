@@ -389,8 +389,8 @@ b.delete()
 
 ### IP
 
-- checkip.amazonaws.com
-- db-ip.com
+- <https://checkip.amazonaws.com>
+- <https://db-ip.com>
 
 ### DNS
 
