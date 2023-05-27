@@ -1,3 +1,0 @@
-https://youtu.be/xxxx?t=855 foo
-https://youtu.be/xxxx?t=1425 bar
-https://youtu.be/xxxx?t=1852 fizz

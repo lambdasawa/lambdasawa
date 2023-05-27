@@ -1,6 +1,0 @@
-{
-  "terraform-ls.experimentalFeatures": {
-    "prefillRequiredFields": true,
-    "validateOnSave": true
-  }
-}
