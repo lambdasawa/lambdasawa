@@ -1,0 +1,15 @@
+version: "3"
+
+env:
+  TF_VAR_project_id:
+    sh: gcloud config get-value project
+
+tasks:
+  run:
+    cmds:
+      - terraform init
+      - terraform apply -auto-approve
+
+  destroy:
+    cmds:
+      - terraform destroy -auto-approve
