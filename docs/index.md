@@ -202,7 +202,7 @@ b.delete()
 
 - `aws secretsmanager create-secret --name foo --secret-string '{"HOGE_API_KEY":"foo"}'`
 - `aws secretsmanager put-secret-value --secret-id foo --secret-string '{"HOGE_API_KEY":"bar"}'`
-- `aws secretsmanager get-secret-value --secret-id foo \| jq -r '.SecretString \| fromjson \| .HOGE_API_KEY'`
+- `aws secretsmanager get-secret-value --secret-id foo | jq -r '.SecretString | fromjson | .HOGE_API_KEY'`
 
 ### AWS CloudWatch Logs
 
@@ -210,7 +210,7 @@ b.delete()
 - [utern](https://github.com/knqyf263/utern)
 - [cw](https://github.com/lucagrulla/cw)
 - ロググループをまとめて削除
-  - `aws logs describe-log-groups --max-items 1000 \| jq -r '.logGroups[] \| .logGroupName \| select(test("irisawa"))' \| xargs -n 1 aws logs delete-log-group --log-group-name`
+  - `aws logs describe-log-groups --max-items 1000 | jq -r '.logGroups[] | .logGroupName | select(test("irisawa"))' | xargs -n 1 aws logs delete-log-group --log-group-name`
 
 ### AWS OpenTelemetry
 
@@ -280,7 +280,7 @@ b.delete()
 - [terragrunt](https://terragrunt.gruntwork.io/docs/)
   - [CLI options](https://terragrunt.gruntwork.io/docs/reference/cli-options/)
   - [Built-in functions](https://terragrunt.gruntwork.io/docs/reference/built-in-functions/)
-- [tftarget:Terraform ターゲットを選択的に実行するための Go 製 CLI ツール | フューチャー技術ブログ](https://future-architect.github.io/articles/20230329a/)
+- [tftarget:Terraform ターゲットを選択的に実行するための Go 製 CLI ツール \| フューチャー技術ブログ](https://future-architect.github.io/articles/20230329a/)
 
 ### PaaS
 
@@ -699,7 +699,6 @@ b.delete()
 - [競プロ典型 90 問](https://atcoder.jp/contests/typical90)
 - Rust
   - [rust-lang-ja/atcoder-rust-resources Wiki / 2020 Update](https://github.com/rust-lang-ja/atcoder-rust-resources/wiki/2020-Update)
-  - [lambdasawa/rust-atcoder \_sandbox/src/bin/a.rs](https://github.com/lambdasawa/atcoder-rust/blob/main/_sandbox/src/bin/a.rs)
 - 数学
   - [Cognicull](https://cognicull.com/ja/field)
   - [高校数学の美しい物語](https://manabitimes.jp/math)
