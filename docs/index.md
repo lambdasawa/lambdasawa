@@ -711,24 +711,24 @@ b.delete()
 
 ### 開発環境
 
-- fish
-- direnv
-- asdf
-- zoxide
-- starship
-- sk
-- watchexec
-- cargo-make
-- exa
-- bat
-- rg
-- hgrep
-- fd
-- difft
-- delta
-- rip
-- sd
-- ouch
+- [fish](https://fishshell.com/docs/current/tutorial.html)
+- [direnv](https://direnv.net/)
+- [asdf](https://asdf-vm.com/manage/commands.html)
+- [zoxide](https://github.com/sharkdp/fd)
+- [starship](https://starship.rs/ja-jp/)
+- [sk](https://github.com/lotabout/skim)
+- [watchexec](https://github.com/watchexec/watchexec)
+- [cargo-make](https://sagiegurari.github.io/cargo-make/)
+- [exa](https://github.com/ogham/exa)
+- [bat](https://github.com/sharkdp/bat)
+- [rg](https://github.com/BurntSushi/ripgrep)
+- [hgrep](https://github.com/rhysd/hgrep)
+- [fd](https://github.com/sharkdp/fd)
+- [difft](https://github.com/Wilfred/difftastic)
+- [delta](https://github.com/dandavison/delta)
+- [rip](https://github.com/nivekuil/rip)
+- [sd](https://github.com/chmln/sd)
+- [ouch](https://github.com/ouch-org/ouch)
 - Raycast
 - IntelliJ IDEA
 - VSCode
