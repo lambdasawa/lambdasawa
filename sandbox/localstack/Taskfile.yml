@@ -1,0 +1,9 @@
+version: '3'
+
+env:
+  AWS_CONFIG_FILE: ./.aws/config
+
+tasks:
+  test:
+    cmds:
+      - aws --endpoint-url http://localhost:4566 s3 ls
