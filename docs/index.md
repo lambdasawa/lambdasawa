@@ -101,7 +101,7 @@ title: "λ沢.dev"
 - [AWS Extend Switch Roles](https://addons.mozilla.org/ja/firefox/addon/aws-extend-switch-roles3/)
 - <https://github.com/donnemartin/awesome-aws>
 - [lambda-versions.com](http://lambda-versions.com/)
-- [convert-datetime-to-cloudwatch-cron-expression-git-master.lambdasawa.vercel.app]
+- <https://convert-datetime-to-cloudwatch-cron-expression-git-master.lambdasawa.vercel.app>
 
 ### AWS IAM
 
@@ -274,6 +274,13 @@ b.delete()
 - [セキュアな Terraform の使い方 ～ 機密情報をコードに含めず環境構築するにはどうしたらいいの？](https://speakerdeck.com/harukasakihara/sekiyuanaterraformfalseshi-ifang-ji-mi-qing-bao-wokodonihan-mezuhuan-jing-gou-zhu-surunihadousitaraiifalse)
 - <https://github.com/gruntwork-io/terratest>
 - [Top 3 Terraform Testing Strategies for Ultra-Reliable Infrastructure-as-Code](https://www.contino.io/insights/top-3-terraform-testing-strategies-for-ultra-reliable-infrastructure-as-code)
+- tfmigrate
+  - <https://github.com/minamijoyo/tfmigrate>
+  - [Terraform の state 操作を git にコミットしたくて tfmigrate というツールを書いた - Qiita](https://qiita.com/minamijoyo/items/670eb100552b0834dd5e)
+- [terragrunt](https://terragrunt.gruntwork.io/docs/)
+  - [CLI options](https://terragrunt.gruntwork.io/docs/reference/cli-options/)
+  - [Built-in functions](https://terragrunt.gruntwork.io/docs/reference/built-in-functions/)
+- [tftarget:Terraform ターゲットを選択的に実行するための Go 製 CLI ツール | フューチャー技術ブログ](https://future-architect.github.io/articles/20230329a/)
 
 ### PaaS
 
@@ -282,6 +289,9 @@ b.delete()
 - <https://vercel.com/>
 - <https://hasura.io/>
 - <https://supabase.com/>
+- <https://www.cloudflare.com/ja>
+- <https://www.netlify.com/>
+- <https://www.gatsbyjs.com/products/cloud/>
 
 ### bash
 
@@ -494,6 +504,7 @@ b.delete()
 - <https://github.com/cockroachdb/errors>
 - <https://github.com/golang-migrate/migrate/tree/master/cmd/migrate>
 - <https://docs.sqlc.dev/en/latest/tutorials/getting-started-mysql.html>
+- [ko-build/ko: Build and deploy Go applications](https://github.com/ko-build/ko)
 
 ### TypeScript / JavaScript
 
