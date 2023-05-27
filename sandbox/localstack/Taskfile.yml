@@ -1,9 +1,13 @@
-version: '3'
+version: "3"
 
 env:
   AWS_CONFIG_FILE: ./.aws/config
 
 tasks:
-  test:
+  setup:
+    cmds:
+      - docker compose up -d
+
+  run:
     cmds:
       - aws --endpoint-url http://localhost:4566 s3 ls

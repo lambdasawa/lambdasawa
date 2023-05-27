@@ -9,6 +9,6 @@ tasks:
     cmds:
       - op read op://dotenv/aws/notesPlain >.aws
 
-  test:
+  run:
     cmds:
       - aws s3 ls

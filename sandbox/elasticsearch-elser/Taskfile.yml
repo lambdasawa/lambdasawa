@@ -1,7 +1,11 @@
-version: '3'
+version: "3"
 
 tasks:
-  test:
+  setup:
+    cmds:
+      - docker compose up -d
+
+  run:
     cmds:
       - |
         set -e
@@ -19,7 +23,7 @@ tasks:
         http -v POST http://localhost:9200/my-index/_search 'content-type: application/json' \
           query:='{"match": {"content": "sample"}}'
 
-  test-semantic-search:
+  run-semantic-search:
     # https://www.elastic.co/jp/blog/may-2023-launch-sparse-encoder-ai-model
     # https://www.elastic.co/jp/blog/whats-new-elastic-enterprise-search-8-8-0
     # https://www.elastic.co/guide/en/machine-learning/8.8/ml-nlp-elser.html

@@ -1,7 +1,11 @@
-version: '3'
+version: "3"
 
 tasks:
-  test:
+  setup:
+    cmds:
+      - docker compose up -d
+
+  run:
     cmds:
       - |
         set -e
