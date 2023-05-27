@@ -2,6 +2,8 @@
 title: "λ沢.dev"
 ---
 
+[GitHub](https://github.com/lambdasawa) / [Twitter](https://twitter.com/lambdasawa) / [Wantedly](https://www.wantedly.com/id/lambdasawa)
+
 ## ログ
 
 - 2023-05-10 [AWS 上でサーバレス構成で HTTP レスポンスをストリーミングする](https://zenn.dev/lambdasawa/articles/aws-serverless-http-response-streaming)
