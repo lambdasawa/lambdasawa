@@ -2,9 +2,9 @@
 title: "λ沢.dev"
 ---
 
-[GitHub](https://github.com/lambdasawa) / [Twitter](https://twitter.com/lambdasawa) / [Wantedly](https://www.wantedly.com/id/lambdasawa)
+[GitHub](https://github.com/lambdasawa) / [Twitter](https://twitter.com/lambdasawa) / [Wantedly](https://www.wantedly.com/id/lambdasawa) / [LAPRAS](https://lapras.com/public/lambdasawa)
 
-## ログ
+## log
 
 - 2023-05-10 [AWS 上でサーバレス構成で HTTP レスポンスをストリーミングする](https://zenn.dev/lambdasawa/articles/aws-serverless-http-response-streaming)
 - 2022-12-31 [親がカフェを始めたので STUDIO と microCMS でサイトを構築した](/blog/cafe-sutdio-microcms)
@@ -53,7 +53,7 @@ title: "λ沢.dev"
   <!-- - 2020-02-21 [郡道美玲ボタン](/blog/mirei-button-release) -->
   <!-- - 2019-09-28 [郡道美玲誤字bot](/blog/gundou-mirei-typo-bot) -->
 
-## メモ
+## memo
 
 ### AWS
 
@@ -609,6 +609,13 @@ b.delete()
 - [Provider \| Riverpod](https://riverpod.dev/ja/docs/providers/provider)
 - [FutureProvider \| Riverpod](https://riverpod.dev/ja/docs/providers/future_provider)
 - [長めだけどたぶんわかりやすい BLoC パターンの解説 - Qiita](https://qiita.com/kabochapo/items/8738223894fb74f952d3)
+
+## Android
+
+```sh
+adb tcpip 5555
+adb connect $(adb shell ip addr | grep inet | grep wlan | awk '{print $2}' | jc --ip-address | jq -r .ip):5555
+```
 
 ### 構造体の生成
 
