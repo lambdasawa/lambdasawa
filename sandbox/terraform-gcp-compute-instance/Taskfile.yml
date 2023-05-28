@@ -13,9 +13,7 @@ tasks:
   ssh:
     env:
       INSTANCE_NAME:
-        sh: |
-          terraform output -json |\
-            jq -r --arg key instance_name 'to_entries[] | select(.key == $ARGS.named.key) | .value.value'
+        sh: terraform output -raw instance_name
     cmds:
       - gcloud compute config-ssh
       - gcloud compute ssh $INSTANCE_NAME
