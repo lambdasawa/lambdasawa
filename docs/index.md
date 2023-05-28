@@ -58,72 +58,25 @@ title: "λ沢.dev"
 ### AWS
 
 - [ドキュメント](https://docs.aws.amazon.com/ja_jp/)
-- <https://github.com/aws-samples>
-- [AWS ざっくり料金計算](https://aws-rough.cc/)
-- [IAM Policy](https://docs.aws.amazon.com/ja_jp/service-authorization/latest/reference/reference_policies_actions-resources-contextkeys.html)
-- [CFn リソースのリファレンス](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
-- [CFn 組み込み関数のリファレンス](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference.html)
-- [Terraform](https://registry.terraform.io/providers/hashicorp/aws/latest/docs)
-- AWS CDK
-  - [ガイド](https://docs.aws.amazon.com/cdk/v2/guide/home.html)
-  - [リファレンス](https://docs.aws.amazon.com/cdk/api/v1/docs/aws-construct-library.html)
-  - [examples](https://github.com/aws-samples/aws-cdk-examples/tree/master/typescript)
-  - [API Reference](https://docs.aws.amazon.com/cdk/api/v2/docs/aws-construct-library.html)
-  - [Awesome CDK](https://github.com/kolomied/awesome-cdk)
-  - ベストプラクティス
-    - [Open CDK Guide](https://github.com/kevinslin/open-cdk)
-  - サンプル集
-    - [Construct Hub](https://constructs.dev/)
-    - [aws-samples/aws-cdk-examples](https://github.com/aws-samples/aws-cdk-examples)
-    - [cdk-patterns/serverless](https://github.com/cdk-patterns/serverless)
-- sls
-  - [リファレンス](https://www.serverless.com/framework/docs/providers/aws/guide/serverless.yml)
-  - [examples](https://www.serverless.com/examples/)
 - [AWS CLI](https://docs.aws.amazon.com/cli/latest/reference)
-- aws-vault
+- [aws-vault を使って AWS のアクセスキーを暗号化して扱おう | microCMS ブログ](https://blog.microcms.io/aws-vault-introduction/)
   - [github](https://github.com/99designs/aws-vault)
   - [usage](https://github.com/99designs/aws-vault/blob/master/USAGE.md)
   - [blog](https://blog.microcms.io/aws-vault-introduction)
   - [Pass environment variables into docker](https://github.com/99designs/aws-vault/issues/378#issuecomment-501114949)
-- starship
-  - [github](https://starship.rs/ja-JP/config/#aws)
-  - プロンプトに現在アクティブな AWS のプロファイル名を出せる。
-  - 間違ったプロファイルで作業を防止するのに役立つ。
-- awscurl
-  - [github](https://github.com/okigan/awscurl)
-  - SigV4 の署名付きで直接 API を叩きたいときに使える。
-  - 例えば [OpenSearch](https://opensearch.org/docs/latest/opensearch/rest-api/index/) の `_search` を直接叩いてデバッグしたいときなど…。
+- [awscurl](https://github.com/okigan/awscurl)
   - `awscurl --service es --profile lambdasawa --region ap-northeast-1 "https://opensearch.example.com/_cat"`
-- former2
-  - [github](https://github.com/iann0036/former2)
-  - 既存の AWS リソースを読み込んで CFn,Terraform,AWS CDK のコードを生成してくれるツール。
-- iamlive
-  - [github](https://github.com/iann0036/iamlive)
-  - ローカルマシンの API 呼び出しを監視して IAM ポリシーを生成してくれるツール。
 - [AWS Extend Switch Roles](https://addons.mozilla.org/ja/firefox/addon/aws-extend-switch-roles3/)
-- <https://github.com/donnemartin/awesome-aws>
-- [lambda-versions.com](http://lambda-versions.com/)
-- <https://convert-datetime-to-cloudwatch-cron-expression-git-master.lambdasawa.vercel.app>
+- [aws-samples](https://github.com/aws-samples)
+- [awesome-aws](https://github.com/donnemartin/awesome-aws)
+- [AWS ざっくり料金計算](https://aws-rough.cc/)
 
 ### AWS IAM
 
-- [各フィールドのリファレンス](https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/reference_policies_elements.html)
-- [Condition で使える式のリファレンス](https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/reference_policies_condition-keys.html)
-- [各 AWS サービス固有の情報](https://docs.aws.amazon.com/ja_jp/service-authorization/latest/reference/reference_policies_actions-resources-contextkeys.html)
-- [terraform iam_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy)
-  - [terraform iam_role_policy_attachment](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment)
-  - [terraform iam_group_policy_attachment](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_group_policy_attachment)
-  - [terraform iam_user_policy_attachment](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user_policy_attachment)
-- <https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/reference_aws-services-that-work-with-iam.html>
-- [principal の一覧](https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/reference_policies_elements_principal.html)
-- [terraform iam_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role)
-- [terraform iam_group](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_group)
-- [terraform iam_user_group_membership](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user_group_membership)
-- [terraform iam_user](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user)
-- [terraform iam_access_key](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_access_key)
-- リファレンス
-  - [イントロダクション](https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/introduction.html)
-  - [ベストプラクティス](https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/best-practices.html)
+- [イントロダクション](https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/introduction.html)
+- [ベストプラクティス](https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/best-practices.html)
+- [IAM Policy JSON リファレンス](https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/reference_policies_elements.html)
+- [Actions, ARN のフォーマットの一覧](https://docs.aws.amazon.com/ja_jp/service-authorization/latest/reference/reference_policies_actions-resources-contextkeys.html)
 - Black belt
   - [【AWS Black Belt Online Seminar】AWS Identity and Access Management (AWS IAM) Part1](https://www.youtube.com/watch?v=K7F5yTThynw)
     - [PDF](https://d1.awsstatic.com/webinars/jp/pdf/services/20190129_AWS-BlackBelt_IAM_Part1.pdf)
@@ -148,6 +101,8 @@ title: "λ沢.dev"
   - [AWS CDK](https://docs.aws.amazon.com/cdk/api/v1/docs/aws-lambda-readme.html)
   - [SAM](https://github.com/aws/aws-sam-cli)
   - [Serverless Framework](https://www.serverless.com/)
+    - [リファレンス](https://www.serverless.com/framework/docs/providers/aws/guide/serverless.yml)
+    - [examples](https://www.serverless.com/examples/)
   - [Serverless Stack](https://serverless-stack.com/)
   - [fujiwara/lambroll](https://github.com/fujiwara/lambroll)
   - [fujiwara/lamblocal](https://github.com/fujiwara/lamblocal)
@@ -217,6 +172,10 @@ b.delete()
 - ロググループをまとめて削除
   - `aws logs describe-log-groups --max-items 1000 | jq -r '.logGroups[] | .logGroupName | select(test("irisawa"))' | xargs -n 1 aws logs delete-log-group --log-group-name`
 
+### AWS EventBridge
+
+- <https://convert-datetime-to-cloudwatch-cron-expression-git-master.lambdasawa.vercel.app>
+
 ### AWS OpenTelemetry
 
 - [open-telemetry/opentelemetry-go](https://github.com/open-telemetry/opentelemetry-go)
@@ -232,11 +191,39 @@ b.delete()
 - [コレクターのリリース](https://github.com/open-telemetry/opentelemetry-collector-releases)
 - [Lambda デフォルトの `collector.yaml`](https://github.com/aws-observability/aws-otel-lambda/blob/main/adot/collector/config.yaml)
 
+### AWS CDK
+
+- [ガイド](https://docs.aws.amazon.com/cdk/v2/guide/home.html)
+- [リファレンス](https://docs.aws.amazon.com/cdk/api/v1/docs/aws-construct-library.html)
+- [examples](https://github.com/aws-samples/aws-cdk-examples/tree/master/typescript)
+- [API Reference](https://docs.aws.amazon.com/cdk/api/v2/docs/aws-construct-library.html)
+- [Awesome CDK](https://github.com/kolomied/awesome-cdk)
+- ベストプラクティス
+  - [Open CDK Guide](https://github.com/kevinslin/open-cdk)
+- サンプル集
+  - [Construct Hub](https://constructs.dev/)
+  - [aws-samples/aws-cdk-examples](https://github.com/aws-samples/aws-cdk-examples)
+  - [cdk-patterns/serverless](https://github.com/cdk-patterns/serverless)
+
+### AWS CloudFormation
+
+- [CFn リソースのリファレンス](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
+- [CFn 組み込み関数のリファレンス](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference.html)
+
 ### Terraform
 
 - [AWS provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs)
   - [backend](https://www.terraform.io/language/settings/backends/s3)
-  - [IAM Role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role)
+  - IAM
+    - [terraform iam_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy)
+    - [terraform iam_role_policy_attachment](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment)
+    - [terraform iam_group_policy_attachment](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_group_policy_attachment)
+    - [terraform iam_user_policy_attachment](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user_policy_attachment)
+    - [terraform iam_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role)
+    - [terraform iam_group](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_group)
+    - [terraform iam_user_group_membership](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user_group_membership)
+    - [terraform iam_user](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user)
+    - [terraform iam_access_key](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_access_key)
   - [Lambda](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function)
   - [S3](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket)
   - [DynamoDB](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dynamodb_table)
@@ -708,6 +695,10 @@ adb connect $(adb shell ip addr | grep inet | grep wlan | awk '{print $2}' | jc 
 - [レッドコーダーが教える、競プロ・AtCoder 上達のガイドライン【中級編：目指せ水色コーダー！】](https://qiita.com/e869120/items/eb50fdaece12be418faa#2-2-2-12-%E5%80%8B%E3%81%AE%E5%9F%BA%E6%9C%AC%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0%E3%82%92%E3%83%9E%E3%82%B9%E3%82%BF%E3%83%BC%E3%81%99%E3%82%8B)
 - [競プロ典型 90 問](https://atcoder.jp/contests/typical90)
 - [rust-lang-ja/atcoder-rust-resources Wiki / 2020 Update](https://github.com/rust-lang-ja/atcoder-rust-resources/wiki/2020-Update)
+
+## 機械学習
+
+- [Cloud GPUs - The Full Stack](https://fullstackdeeplearning.com/cloud-gpus/)
 
 ### 数学
 
