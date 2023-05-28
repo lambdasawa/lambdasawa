@@ -1,12 +1,11 @@
 version: "3"
 
-dotenv: [.env]
-
 tasks:
   setup:
     cmds:
       - poetry install
 
   run:
+    desc: 'TODO: WIP'
     cmds:
       - poetry run python youtube_transcribe/main.py
