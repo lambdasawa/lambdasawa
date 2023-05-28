@@ -9,6 +9,7 @@ packages = [{include = "youtube_transcribe"}]
 [tool.poetry.dependencies]
 python = "^3.7"
 yt-dlp = "^2023.3.4"
+openai-whisper = "20230306"
 
 
 [build-system]
