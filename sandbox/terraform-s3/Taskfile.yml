@@ -9,7 +9,7 @@ tasks:
     cmds:
       - op read op://dotenv/aws/notesPlain >.aws
 
-  run:
+  deploy:
     cmds:
       - terraform init
       - terraform apply -auto-approve

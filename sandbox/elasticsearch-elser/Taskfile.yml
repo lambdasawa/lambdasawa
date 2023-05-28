@@ -34,3 +34,7 @@ tasks:
         cat semantic-search/pipeline.json | http -v PUT http://localhost:9200/_ingest/pipeline/elser-v1-test
         cat semantic-search/document.json | http -v PUT http://localhost:9200/my-index/_doc/1
         cat semantic-search/query.json | http -v POST http://localhost:9200/my-index/_search
+
+  clean:
+    cmds:
+      - docker compose down

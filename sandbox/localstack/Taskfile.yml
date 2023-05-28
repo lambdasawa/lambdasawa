@@ -11,3 +11,7 @@ tasks:
   run:
     cmds:
       - aws --endpoint-url http://localhost:4566 s3 ls
+
+  clean:
+    cmds:
+      - docker compose down

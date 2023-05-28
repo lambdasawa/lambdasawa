@@ -22,3 +22,7 @@ tasks:
 
         http -v POST http://localhost:9200/my-index/_search 'content-type: application/json' \
           query:='{"match": {"content": "sample"}}'
+
+  clean:
+    cmds:
+      - docker compose down

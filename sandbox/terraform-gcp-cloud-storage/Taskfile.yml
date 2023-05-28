@@ -5,7 +5,7 @@ env:
     sh: gcloud config get-value project
 
 tasks:
-  run:
+  deploy:
     cmds:
       - terraform init
       - terraform apply -auto-approve
