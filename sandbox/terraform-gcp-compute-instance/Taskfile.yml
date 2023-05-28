@@ -1,0 +1,25 @@
+version: "3"
+
+env:
+  TF_VAR_project_id:
+    sh: gcloud config get-value project
+
+tasks:
+  run:
+    cmds:
+      - terraform init
+      - terraform apply -auto-approve
+
+  ssh:
+    env:
+      INSTANCE_NAME:
+        sh: |
+          terraform output -json |\
+            jq -r --arg key instance_name 'to_entries[] | select(.key == $ARGS.named.key) | .value.value'
+    cmds:
+      - gcloud compute config-ssh
+      - gcloud compute ssh $INSTANCE_NAME
+
+  destroy:
+    cmds:
+      - terraform destroy -auto-approve
