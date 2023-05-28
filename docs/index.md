@@ -59,7 +59,7 @@ title: "λ沢.dev"
 
 - [ドキュメント](https://docs.aws.amazon.com/ja_jp/)
 - [AWS CLI](https://docs.aws.amazon.com/cli/latest/reference)
-- [aws-vault を使って AWS のアクセスキーを暗号化して扱おう | microCMS ブログ](https://blog.microcms.io/aws-vault-introduction/)
+- [aws-vault を使って AWS のアクセスキーを暗号化して扱おう \| microCMS ブログ](https://blog.microcms.io/aws-vault-introduction/)
   - [github](https://github.com/99designs/aws-vault)
   - [usage](https://github.com/99designs/aws-vault/blob/master/USAGE.md)
   - [blog](https://blog.microcms.io/aws-vault-introduction)
@@ -129,7 +129,7 @@ title: "λ沢.dev"
 ### AWS DynamoDB
 
 - [Best practices for designing and architecting with DynamoDB](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/best-practices.html)
-- [Amazon DynamoDB におけるシングルテーブル vs マルチテーブル設計 | Amazon Web Services ブログ](https://aws.amazon.com/jp/blogs/news/single-table-vs-multi-table-design-in-amazon-dynamodb/)
+- [Amazon DynamoDB におけるシングルテーブル vs マルチテーブル設計 \| Amazon Web Services ブログ](https://aws.amazon.com/jp/blogs/news/single-table-vs-multi-table-design-in-amazon-dynamodb/)
 - [Amazon DynamoDB Advanced Design Pattern](https://www.youtube.com/watch?v=Wd5gbLQ2a1E)
 - [Amazon DynamoDB Deep Dive](https://www.youtube.com/watch?v=16RYHfe89WY)
 - [LocalStack](https://hub.docker.com/r/localstack/localstack)
