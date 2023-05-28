@@ -18,6 +18,20 @@ tasks:
       - gcloud compute config-ssh
       - gcloud compute ssh $INSTANCE_NAME
 
+  start:
+    env:
+      INSTANCE_NAME:
+        sh: terraform output -raw instance_name
+    cmds:
+      - gcloud compute instances start $INSTANCE_NAME
+
+  stop:
+    env:
+      INSTANCE_NAME:
+        sh: terraform output -raw instance_name
+    cmds:
+      - gcloud compute instances stop $INSTANCE_NAME
+
   destroy:
     cmds:
       - terraform destroy -auto-approve
