@@ -21,6 +21,12 @@ resource "google_service_account" "default" {
   display_name = "Sandbox Service Account"
 }
 
+resource "google_project_iam_member" "bucket_list_access" {
+  project = var.project_id
+  role    = "roles/storage.admin"
+  member  = "serviceAccount:${google_service_account.default.email}"
+}
+
 resource "google_compute_instance" "default" {
   name         = "test"
   machine_type = "e2-medium"
@@ -33,7 +39,11 @@ resource "google_compute_instance" "default" {
   }
 
   network_interface {
-    network = "default"
+    access_config {
+      network_tier = "PREMIUM"
+    }
+
+    subnetwork = "default"
   }
 
   service_account {
