@@ -28,8 +28,10 @@ resource "google_project_iam_member" "bucket_list_access" {
 }
 
 resource "google_compute_instance" "default" {
-  name         = "test"
-  machine_type = "e2-medium"
+  name = "sandbox"
+
+  # https://cloud.google.com/compute/vm-instance-pricing?hl=ja#n1_predefined
+  machine_type = "n1-standard-8"
   zone         = "asia-northeast1-a"
 
   boot_disk {
@@ -49,6 +51,11 @@ resource "google_compute_instance" "default" {
   service_account {
     email  = google_service_account.default.email
     scopes = ["cloud-platform"]
+  }
+
+  scheduling {
+    preemptible       = true
+    automatic_restart = false
   }
 }
 
