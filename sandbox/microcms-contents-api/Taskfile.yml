@@ -7,7 +7,7 @@ tasks:
     cmds:
       - |
         echo '
-        API_KEY=op://dotenv/microcms-lambdasawa-test/api-key
+        API_KEY=op://sandbox/microcms-lambdasawa-test/api-key
         ' | op inject >.env
 
   run:

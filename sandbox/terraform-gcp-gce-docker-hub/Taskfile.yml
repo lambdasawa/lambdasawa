@@ -2,7 +2,7 @@ version: "3"
 
 env:
   TFSTATE_BUCKET:
-    sh: op read op://dotenv/terraform/gcs-backend-bucket
+    sh: op read op://sandbox/terraform/gcs-backend-bucket
   TFSTATE_PREFIX:
     sh: basename $PWD
   TF_VAR_project_id:

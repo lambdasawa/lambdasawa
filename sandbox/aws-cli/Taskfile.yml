@@ -7,7 +7,7 @@ env:
 tasks:
   setup:
     cmds:
-      - op read op://dotenv/aws/notesPlain >.aws
+      - op read op://sandbox/aws/notesPlain >.aws
 
   run:
     cmds:

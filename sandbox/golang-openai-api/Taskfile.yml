@@ -7,7 +7,7 @@ tasks:
     cmds:
       - |
         echo '
-        API_KEY=op://dotenv/openai/api-key
+        API_KEY=op://sandbox/openai/api-key
         ' | op inject >.env
 
   run:
