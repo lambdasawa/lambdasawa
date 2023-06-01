@@ -26,7 +26,7 @@ module "gce-container" {
   version = "~> 2.0"
 
   container = {
-    image = "openjdk"
+    image = "nginx"
 
     env = [
       {
@@ -34,13 +34,6 @@ module "gce-container" {
         value = "Hello World!"
       }
     ]
-
-    stdin = false
-    tty   = false
-
-    securityContext = {
-      privileged : true
-    }
   }
 
   restart_policy = "Always"
@@ -84,6 +77,7 @@ resource "google_compute_instance" "default" {
   deletion_protection = false
   enable_display      = false
 
+  tags = ["http-server", "https-server"]
 }
 
 output "instance_name" {
