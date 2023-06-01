@@ -1,0 +1,13 @@
+version: "3"
+
+env:
+  PROJECT_ID:
+    sh: gcloud config get-value project
+  KO_DOCKER_REPO:
+    sh: echo "gcr.io/$(gcloud config get-value project)/$(basename $PWD)"
+
+tasks:
+  deploy:
+    cmds:
+      - ko publish ./cmd/app
+      - gcloud run deploy --image=$(ko build ./cmd/app)
