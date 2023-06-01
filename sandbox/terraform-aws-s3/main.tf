@@ -21,5 +21,5 @@ data "aws_region" "current" {}
 data "aws_caller_identity" "current" {}
 
 resource "aws_s3_bucket" "example" {
-  bucket = "lambdasawa-sandbox-terraform-s3"
+  bucket = "lambdasawa-sandbox-terraform-aws-s3"
 }
