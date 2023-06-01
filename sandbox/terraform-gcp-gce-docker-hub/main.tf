@@ -19,7 +19,7 @@ provider "google" {
 }
 
 resource "google_service_account" "default" {
-  account_id   = "sandbox-service-account"
+  account_id   = "sandbox-gce-docker-hub"
   display_name = "Sandbox Service Account"
 }
 

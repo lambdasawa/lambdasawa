@@ -23,7 +23,7 @@ provider "google" {
 }
 
 resource "google_service_account" "default" {
-  account_id   = "sandbox-service-account"
+  account_id   = "sandbox-gce-pytorch"
   display_name = "Sandbox Service Account"
 }
 
