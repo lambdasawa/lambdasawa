@@ -1,0 +1,37 @@
+version: "3"
+
+env:
+  TF_VAR_project_id:
+    sh: gcloud config get-value project
+
+tasks:
+  deploy:
+    cmds:
+      - terraform init
+      - terraform apply -auto-approve
+
+  ssh:
+    env:
+      INSTANCE_NAME:
+        sh: terraform output -raw instance_name
+    cmds:
+      - gcloud compute config-ssh
+      - gcloud compute ssh $INSTANCE_NAME
+
+  start:
+    env:
+      INSTANCE_NAME:
+        sh: terraform output -raw instance_name
+    cmds:
+      - gcloud compute instances start $INSTANCE_NAME
+
+  stop:
+    env:
+      INSTANCE_NAME:
+        sh: terraform output -raw instance_name
+    cmds:
+      - gcloud compute instances stop $INSTANCE_NAME
+
+  destroy:
+    cmds:
+      - terraform destroy -auto-approve
