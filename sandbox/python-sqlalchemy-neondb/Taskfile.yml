@@ -1,0 +1,14 @@
+version: "3"
+
+env:
+  CONNECTION_URL:
+    sh: op read op://sandbox/neondb/url
+
+tasks:
+  setup:
+    cmds:
+      - poetry install
+
+  run:
+    cmds:
+      - poetry run python python_sqlalchemy_neondb/main.py
