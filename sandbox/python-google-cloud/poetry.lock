@@ -167,6 +167,24 @@ reauth = ["pyu2f (>=0.1.5)"]
 requests = ["requests (>=2.20.0,<3.0.0dev)"]
 
 [[package]]
+name = "google-cloud-billing"
+version = "1.10.1"
+description = "Google Cloud Billing API client library"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "google-cloud-billing-1.10.1.tar.gz", hash = "sha256:53449f244fcde283bdf971abf2a1a9d7469f28dccfd9f18d8aa1edcf00e7493c"},
+    {file = "google_cloud_billing-1.10.1-py2.py3-none-any.whl", hash = "sha256:98475d28502cea01d88235ca7d21c21982b00b3541c4464df70da93f6bac78b6"},
+]
+
+[package.dependencies]
+google-api-core = {version = ">=1.34.0,<2.0.0 || >=2.11.0,<3.0.0dev", extras = ["grpc"]}
+grpc-google-iam-v1 = ">=0.12.4,<1.0.0dev"
+proto-plus = {version = ">=1.22.2,<2.0.0dev", markers = "python_version >= \"3.11\""}
+protobuf = ">=3.19.5,<3.20.0 || >3.20.0,<3.20.1 || >3.20.1,<4.21.0 || >4.21.0,<4.21.1 || >4.21.1,<4.21.2 || >4.21.2,<4.21.3 || >4.21.3,<4.21.4 || >4.21.4,<4.21.5 || >4.21.5,<5.0.0dev"
+
+[[package]]
 name = "google-cloud-core"
 version = "2.3.2"
 description = "Google Cloud API client core library"
@@ -590,4 +608,4 @@ socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "b9fdfb685bacddf998ab6bbfdecaa7db7e6e2dfc6a6ebd4fbce544bcdbbc891c"
+content-hash = "602ed5d67f5fb2b2a0ff9360e154006f80b2ae495a5ca455dc620122620ff474"
