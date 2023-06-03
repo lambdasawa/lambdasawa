@@ -470,8 +470,8 @@ b.delete()
 
 ### GitHub Actions
 
-- [About workflows - GitHub Docs](https://docs.github.com/en/actions/using-workflows/about-workflows)
-- [About custom actions - GitHub Docs](https://docs.github.com/en/actions/creating-actions/about-custom-actions)
+- [Workflow syntax for GitHub Actions - GitHub Docs](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions)
+- [integrations/slack: Bring your code to the conversations you care about with the GitHub and Slack integration](https://github.com/integrations/slack#readme)
 - [actions/github-script: Write workflows scripting the GitHub API in JavaScript](https://github.com/actions/github-script)
 - [actions/toolkit: The GitHub ToolKit for developing GitHub Actions.](https://github.com/actions/toolkit)
 - [rhysd/actionlint: Static checker for GitHub Actions workflow files](https://github.com/rhysd/actionlint)
