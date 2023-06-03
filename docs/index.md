@@ -210,6 +210,36 @@ b.delete()
 - [CFn リソースのリファレンス](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
 - [CFn 組み込み関数のリファレンス](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference.html)
 
+### GCP (Google Cloud)
+
+- [Google Cloud プロダクト](https://cloud.google.com/products?hl=ja)
+- [gcloud CLI クイック リファレンス](https://cloud.google.com/sdk/docs/cheatsheet?hl=ja)
+
+### VPS
+
+- <https://www.digitalocean.com/>
+- <https://www.linode.com/ja/>
+- <https://www.vultr.com/>
+
+### PaaS
+
+- <https://fly.io/>
+- <https://render.com/>
+- <https://vercel.com/>
+- <https://hasura.io/>
+- <https://supabase.com/>
+- <https://www.cloudflare.com/ja>
+- <https://www.netlify.com/>
+- <https://www.gatsbyjs.com/products/cloud/>
+
+### DBaaS
+
+- <https://planetscale.com/>
+- <https://neon.tech/>
+- <https://www.cockroachlabs.com/>
+- <https://upstash.com/>
+- <https://www.elastic.co/jp/cloud/>
+
 ### Terraform
 
 - [AWS provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs)
@@ -274,17 +304,6 @@ b.delete()
   - [Built-in functions](https://terragrunt.gruntwork.io/docs/reference/built-in-functions/)
 - [tftarget:Terraform ターゲットを選択的に実行するための Go 製 CLI ツール \| フューチャー技術ブログ](https://future-architect.github.io/articles/20230329a/)
 
-### PaaS
-
-- <https://fly.io/>
-- <https://render.com/>
-- <https://vercel.com/>
-- <https://hasura.io/>
-- <https://supabase.com/>
-- <https://www.cloudflare.com/ja>
-- <https://www.netlify.com/>
-- <https://www.gatsbyjs.com/products/cloud/>
-
 ### bash
 
 - [【シェル芸人への道】Bash の変数展開と真摯に向き合う](https://qiita.com/t_nakayama0714/items/80b4c94de43643f4be51)
@@ -323,20 +342,21 @@ b.delete()
 - [Lens Documentation](https://docs.k8slens.dev/)
 - [Skaffold](https://skaffold.dev/)
 
-### Database (RDB)
+### GUI DB Client
 
 - <https://www.jetbrains.com/datagrip>
 - <https://arctype.com>
 - <https://github.com/mtxr/vscode-sqltools>
+
+### DB migration tool
+
 - <https://github.com/golang-migrate/migrate>
 - <https://github.com/k0kubun/sqldef>
+
+### ERD
+
 - <https://github.com/BurntSushi/erd>
 - <https://github.com/schemaspy/schemaspy>
-- <https://planetscale.com/>
-- <https://neon.tech/>
-- <https://www.cockroachlabs.com/>
-- <https://upstash.com/>
-- <https://www.elastic.co/jp/cloud/>
 
 ### MySQL
 
