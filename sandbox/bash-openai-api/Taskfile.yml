@@ -1,0 +1,22 @@
+version: "3"
+
+dotenv: [.env]
+
+tasks:
+  setup:
+    cmds:
+      - |
+        echo '
+        API_KEY=op://sandbox/openai/api-key
+        ' | op inject >.env
+
+  embed:
+    cmds:
+      - |
+        curl https://api.openai.com/v1/embeddings \
+          -H "Authorization: Bearer $API_KEY" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "input": "Input text to embed, encoded as a string or array of tokens. To embed multiple inputs in a single request, pass an array of strings or array of token arrays. Each input must not exceed the max input tokens for the model (8191 tokens for text-embedding-ada-002). Example Python code for counting tokens.",
+            "model": "text-embedding-ada-002"
+          }'
