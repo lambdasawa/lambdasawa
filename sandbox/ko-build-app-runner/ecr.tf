@@ -1,5 +1,7 @@
 resource "aws_ecr_repository" "main" {
   name = "sandbox-ko-build-app-runner"
+
+  force_delete = true
 }
 
 data "archive_file" "main" {
