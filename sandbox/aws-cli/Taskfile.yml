@@ -12,3 +12,7 @@ tasks:
   run:
     cmds:
       - aws s3 ls
+
+  shell:
+    cmds:
+      - bash
