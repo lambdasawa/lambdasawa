@@ -24,7 +24,7 @@ tasks:
         sh: terraform output -raw instance_name
     dir: terraform/
     cmds:
-      - gcloud compute config-ssh
+      - gcloud compute config-ssh --remove
       - gcloud compute ssh $INSTANCE_NAME
 
   start:
