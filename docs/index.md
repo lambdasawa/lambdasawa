@@ -798,6 +798,10 @@ adb connect $(adb shell ip addr | grep inet | grep wlan | awk '{print $2}' | jc 
 - <https://btoshop.jp/products/adskbcc>
 - Helix Logo Editor
 
+### Kinesis Advantage Keyboard 360
+
+![kinesis](./assets/kinesis-advantage-360.png)
+
 ### Chromecast
 
 - <https://github.com/vishen/go-chromecast>
