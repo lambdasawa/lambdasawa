@@ -30,16 +30,18 @@ resource "google_project_iam_member" "bucket_list_access" {
 }
 
 resource "google_compute_instance" "default" {
-  name = "yt-dlp"
+  count = 6
+
+  name = "yt-dlp-${count.index}"
 
   # https://cloud.google.com/compute/vm-instance-pricing?hl=ja#n1_predefined
-  machine_type = "n1-standard-8"
+  machine_type = "n1-standard-4"
   zone         = "asia-northeast1-a"
 
   boot_disk {
     initialize_params {
       image = "debian-cloud/debian-11"
-      size  = 500
+      size  = 32
       type  = "pd-ssd"
     }
   }
@@ -64,5 +66,5 @@ resource "google_compute_instance" "default" {
 }
 
 output "instance_name" {
-  value = google_compute_instance.default.name
+  value = google_compute_instance.default[0].name
 }
