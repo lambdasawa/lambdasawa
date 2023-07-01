@@ -1,9 +1,0 @@
-version: "3"
-
-tasks:
-  run:
-    desc: |
-      Usage: task run host=example.com name=foo
-    cmds:
-      - cp "$(find ~/Library/Application\ Support/Firefox/Profiles/ -name cookies.sqlite)" ./cookies.sqlite
-      - sqlite3 ./cookies.sqlite '.headers on' 'select value from moz_cookies where host = "{{.host}}" and name = "{{.name}}";'
