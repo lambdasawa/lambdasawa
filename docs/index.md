@@ -6,6 +6,7 @@ title: "λ沢.dev"
 
 ## log
 
+- 2023-07-25 [Burp Suite Certified Practitioner 受験レポート](./blog/bscp-review.md)
 - 2023-05-10 [AWS 上でサーバレス構成で HTTP レスポンスをストリーミングする](https://zenn.dev/lambdasawa/articles/aws-serverless-http-response-streaming)
 - 2022-12-31 [親がカフェを始めたので STUDIO と microCMS でサイトを構築した](/blog/cafe-sutdio-microcms)
 - 2022-10-22 [LaunchDarkly による Feature Flags 制御の基礎](https://zenn.dev/lambdasawa/articles/feature-flags-control-by-launchdarkly-basic)
