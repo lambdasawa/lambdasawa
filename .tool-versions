@@ -1,5 +1,5 @@
 flutter 3.7.0-stable
-golang 1.20.5
+golang 1.21.0
 golangci-lint 1.49.0
 java openjdk-19
 mysql 8.0.30
