@@ -65,7 +65,7 @@ utc_time_offset = "+0"
 
 [cmd_duration]
 format = "[$duration](white) "
-min_time = 0
+min_time = 1
 show_milliseconds = true
 style = "white"
 
