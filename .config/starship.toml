@@ -1,8 +1,8 @@
 format = """\
+  $env_var\
   $username\
   $hostname\
   $directory\
-  $env_var\
   $git_branch\
   $git_commit\
   $git_state\
@@ -29,16 +29,16 @@ format = """\
   $character\
 """
 
-[directory]
-style = 'green'
-
 [env_var.STARSHIP_SHELL]
 default = ""
-format = "([$env_value](cyan) )"
+format = "([$env_value](green) )"
 
 [env_var.ENV]
 default = ""
 format = "([$env_value](yellow) )"
+
+[directory]
+style = 'cyan'
 
 [git_branch]
 format = "[$symbol$branch(:$remote_branch)]($style) "
