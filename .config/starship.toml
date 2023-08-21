@@ -8,11 +8,11 @@ format = """\
   $git_state\
   $git_status\
   $hg_branch\
-  $time\
-  $cmd_duration\
   $jobs\
   $battery\
   $memory_usage\
+  $cmd_duration\
+  $time\
   $aws\
   $gcloud\
   $kubernetes\
@@ -29,25 +29,28 @@ format = """\
   $character\
 """
 
+[directory]
+style = 'green'
+
 [env_var.STARSHIP_SHELL]
 default = ""
-format = "([$env_value](bold green) )"
+format = "([$env_value](cyan) )"
 
 [env_var.ENV]
 default = ""
-format = "([$env_value](bold green) )"
+format = "([$env_value](yellow) )"
 
 [git_branch]
 format = "[$symbol$branch(:$remote_branch)]($style) "
 symbol = ""
 
 [git_status]
+format = "[$all_status$ahead_behind](red)"
 ahead = "ahead "
 behind = "behind "
 conflicted = "conflicted "
 deleted = "deleted "
 diverged = "diverged "
-format = "[$all_status$ahead_behind](bold yellow)"
 modified = "modified "
 renamed = "renamed "
 staged = "staged "
@@ -64,7 +67,7 @@ utc_time_offset = "+0"
 format = "[$duration](white) "
 min_time = 0
 show_milliseconds = true
-style = "bold white"
+style = "white"
 
 [aws]
 format = "[aws:$profile/$region](blue) "
@@ -75,6 +78,11 @@ us-east-1 = "UE1"
 
 [gcloud]
 format = "[gcp:$project](cyan) "
+detect_env_vars = [
+  "GOOGLE_CLOUD_PROJECT",
+  "CLOUDSDK_CORE_ACCOUNT",
+  "CLOUDSDK_CORE_PROJECT",
+]
 
 [kubernetes]
 format = "[k8s:$context/$namespace]($style) "
@@ -104,6 +112,6 @@ format = "[py:$version]($style) "
 format = "[dart:$version]($style) "
 
 [character]
-error_symbol = "[\\( ^ω^ ;\\)](bold red)"
-success_symbol = "[\\( ◠‿◠ \\)](bold green)"
-vicmd_symbol = "[\\( ◠‿◠ \\)](bold green)"
+error_symbol = "[|>](red)"
+success_symbol = "[|>](green)"
+vicmd_symbol = "[|>](green)"
