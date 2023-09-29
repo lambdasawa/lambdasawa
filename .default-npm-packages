@@ -1,7 +1,0 @@
-yarn
-eslint
-prettier
-@devcontainers/cli
-@redocly/cli
-json-diff
-quicktype

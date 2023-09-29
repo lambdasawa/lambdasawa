@@ -1,6 +1,0 @@
-#!/bin/bash
-
-set -e
-
-# shellcheck disable=SC2068
-exa -labghT --time-style iso --git $@

@@ -1,3 +1,0 @@
-#!/usr/bin/env node
-
-console.log(encodeURIComponent(require("fs").readFileSync("/dev/stdin").toString("utf-8")));

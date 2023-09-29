@@ -1,9 +1,0 @@
-#!/bin/bash
-
-set -e
-
-sk \
-	--preview 'show {}' \
-	--prompt '> ' \
-	--color='dark,fg:#dddddd,bg:#222222,matched:#ff8c00,matched_bg:#222222,current:#bbbbbb,current_bg:#444444,current_match:#ff8c00,current_match_bg:#222222,prompt:#ff8c00' \
-	"$@"

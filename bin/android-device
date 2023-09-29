@@ -1,3 +1,0 @@
-#!/bin/bash
-
-adb devices -l | grep -v 'List of devices attached' | filter | awk '{print $1}'

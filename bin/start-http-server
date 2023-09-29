@@ -1,9 +1,0 @@
-#!/bin/bash
-
-set -euo pipefail
-
-port="${1:-8888}"
-
-echo "http://localhost:$port"
-
-python3 -m http.server "$port"
