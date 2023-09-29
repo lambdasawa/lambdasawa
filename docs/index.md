@@ -26,12 +26,10 @@ title: "λ沢.dev"
 - 2021-12-08 [Amplify で function の hotswap を実現する方法について](/blog/amplify-hotswap)
 - 2021-10-30 [Serverless Stack の Live Lambda Development の仕組み](/blog/serverless-stack-live-lambda-developmet-internal)
 - 2021-09-20 株式会社 microCMS 入社
-- 2021-08-08 [ブログをリニューアルしました](/blog/blog-renewal)
 - 2021-05-03 [microCMS の API クライアントを生成するツールを作った](/blog/microcms-sdk-generator)
 - 2021-04-07 [AWS SAA に合格するまでにやったこと](/blog/aws-saa)
 - 2021-04-04 [AWS Certified Solutions Architect – Associate](/blog/certified-solutions-architect-associate)
 - 2020-08-21 [Hack The Box: Traceback](/blog/hack-the-box-traceback)
-- 2020-05-03 [direnv と sops で設定を管理する](/blog/direnv-sops)
 - 2020-01-13 ANYCOLOR 株式会社 入社
 - 2016-12-01 株式会社 Abby 入社
 - 2015-08-10 セキュリティキャンプ 2015 全国大会 参加
@@ -46,8 +44,10 @@ title: "λ沢.dev"
     <!-- - 2021-07-26 [ヘッドレスな LGTM 画像ジェネレータを作りました](/blog/headless-lgtm-generator-blog) -->
     <!-- - 2021-06-21 [Google Authenticator 的なやつを Go で実装した](/blog/google-authentiator-golang) -->
     <!-- - 2021-02-24 [AWS Lambda のパッチバージョンを確認できるサイトを作りました](/blog/aws-lambda-runtime-patch-versions) -->
+    <!-- - 2021-08-08 [ブログをリニューアルしました](/blog/blog-renewal) -->
     <!-- - 2020-05-28 [郡道美玲にモーニングコールをしてもらう](/blog/gundou-mirei-morning-call) -->
     <!-- - 2020-05-03 [郡道美玲 Text to Speech](/blog/mirei-tts-release) -->
+    <!-- - 2020-05-03 [direnv と sops で設定を管理する](/blog/direnv-sops) -->
     <!-- - 2020-04-16 [おしゃべり郡道のインフラ](/blog/mirei-tts-infra) -->
     <!-- - 2020-03-29 [自分のブログ & ポートフォリオ的なサイトを作りました](/blog/www-lambdasawa-net) -->
     <!-- - 2020-03-15 [郡道美玲版の棒読みちゃん的なサイトを作りました](/blog/mirei-tts) -->
