@@ -4,9 +4,9 @@ title: "λ沢.dev"
 
 [About](https://bento.me/lambdasawa) / [GitHub](https://github.com/lambdasawa) / [Twitter](https://twitter.com/lambdasawa) / [Wantedly](https://www.wantedly.com/id/lambdasawa)
 
-## log
-
+- 2023-09-08 [microCMS FM #4 \| microCMS のバックエンドを支える働き](https://twitter.com/micro_cms/status/1700078377141772646)
 - 2023-07-25 [Burp Suite Certified Practitioner 受験レポート](./blog/bscp-review.md)
+- 2023-07-25 Burp Suite Certified Practitioner 合格
 - 2023-05-10 [AWS 上でサーバレス構成で HTTP レスポンスをストリーミングする](https://zenn.dev/lambdasawa/articles/aws-serverless-http-response-streaming)
 - 2022-12-31 [親がカフェを始めたので STUDIO と microCMS でサイトを構築した](/blog/cafe-sutdio-microcms)
 - 2022-10-22 [LaunchDarkly による Feature Flags 制御の基礎](https://zenn.dev/lambdasawa/articles/feature-flags-control-by-launchdarkly-basic)
@@ -32,24 +32,24 @@ title: "λ沢.dev"
 - 2021-04-04 [AWS Certified Solutions Architect – Associate](/blog/certified-solutions-architect-associate)
 - 2020-08-21 [Hack The Box: Traceback](/blog/hack-the-box-traceback)
 - 2020-05-03 [direnv と sops で設定を管理する](/blog/direnv-sops)
-- 2020-03-29 [自分のブログ & ポートフォリオ的なサイトを作りました](/blog/www-lambdasawa-net)
 - 2020-01-13 ANYCOLOR 株式会社 入社
-- 2016-11-30 株式会社 Abby 入社
+- 2016-12-01 株式会社 Abby 入社
 - 2015-08-10 セキュリティキャンプ 2015 全国大会 参加
 - 2015-05-06 [セキュリティキャンプ 2015 応募用紙](/blog/security-camp)
 - 2014-06-19 情報セキュリティスペシャリスト試験 合格
 - 2014-06-19 Ruby Association Certified Ruby Programmer Gold 合格
-- 2014-03-31 太田情報商科専門学校 総合カリキュラム学科
+- 2014-01-01 太田情報商科専門学校 総合カリキュラム学科 入学
 - 2013-11-08 パソコン甲子園 本戦出場
 - 2012-10-15 応用情報技術者試験 合格
 - 2011-04-01 高崎商科大学附属高等学校 総合ビジネス科 入学
-  <!-- - 2021-08-26 [Lambda のパッチバージョンが見れるサイトを機械可読にした](/blog/machine-readable-aws-lambda-versions) -->
-  <!-- - 2021-07-26 [ヘッドレスな LGTM 画像ジェネレータを作りました](/blog/headless-lgtm-generator-blog) -->
-  <!-- - 2021-06-21 [Google Authenticator 的なやつを Go で実装した](/blog/google-authentiator-golang) -->
-  <!-- - 2021-02-24 [AWS Lambda のパッチバージョンを確認できるサイトを作りました](/blog/aws-lambda-runtime-patch-versions) -->
-  <!-- - 2020-05-28 [郡道美玲にモーニングコールをしてもらう](/blog/gundou-mirei-morning-call) -->
-  <!-- - 2020-05-03 [郡道美玲 Text to Speech](/blog/mirei-tts-release) -->
-  <!-- - 2020-04-16 [おしゃべり郡道のインフラ](/blog/mirei-tts-infra) -->
-  <!-- - 2020-03-15 [郡道美玲版の棒読みちゃん的なサイトを作りました](/blog/mirei-tts) -->
-  <!-- - 2020-02-21 [郡道美玲ボタン](/blog/mirei-button-release) -->
-  <!-- - 2019-09-28 [郡道美玲誤字bot](/blog/gundou-mirei-typo-bot) -->
+    <!-- - 2021-08-26 [Lambda のパッチバージョンが見れるサイトを機械可読にした](/blog/machine-readable-aws-lambda-versions) -->
+    <!-- - 2021-07-26 [ヘッドレスな LGTM 画像ジェネレータを作りました](/blog/headless-lgtm-generator-blog) -->
+    <!-- - 2021-06-21 [Google Authenticator 的なやつを Go で実装した](/blog/google-authentiator-golang) -->
+    <!-- - 2021-02-24 [AWS Lambda のパッチバージョンを確認できるサイトを作りました](/blog/aws-lambda-runtime-patch-versions) -->
+    <!-- - 2020-05-28 [郡道美玲にモーニングコールをしてもらう](/blog/gundou-mirei-morning-call) -->
+    <!-- - 2020-05-03 [郡道美玲 Text to Speech](/blog/mirei-tts-release) -->
+    <!-- - 2020-04-16 [おしゃべり郡道のインフラ](/blog/mirei-tts-infra) -->
+    <!-- - 2020-03-29 [自分のブログ & ポートフォリオ的なサイトを作りました](/blog/www-lambdasawa-net) -->
+    <!-- - 2020-03-15 [郡道美玲版の棒読みちゃん的なサイトを作りました](/blog/mirei-tts) -->
+    <!-- - 2020-02-21 [郡道美玲ボタン](/blog/mirei-button-release) -->
+    <!-- - 2019-09-28 [郡道美玲誤字bot](/blog/gundou-mirei-typo-bot) -->
