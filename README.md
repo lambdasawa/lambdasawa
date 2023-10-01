@@ -36,4 +36,3 @@
 - 2014-06-19 Ruby Association Certified Ruby Programmer Gold 合格
 - 2013-11-08 パソコン甲子園 本戦出場
 - 2012-10-15 応用情報技術者試験 合格
-- 1995-06-16 生まれる
