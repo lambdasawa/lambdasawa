@@ -1,6 +1,8 @@
-## memo
+---
+title: memo
+---
 
-### AWS
+## AWS
 
 - [ドキュメント](https://docs.aws.amazon.com/ja_jp/)
 - [AWS CLI](https://docs.aws.amazon.com/cli/latest/reference)
@@ -16,7 +18,7 @@
 - [awesome-aws](https://github.com/donnemartin/awesome-aws)
 - [AWS ざっくり料金計算](https://aws-rough.cc/)
 
-### AWS IAM
+## AWS IAM
 
 - [イントロダクション](https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/introduction.html)
 - [ベストプラクティス](https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/best-practices.html)
@@ -31,7 +33,7 @@
   - [AWS の薄い本 Ⅱ アカウントセキュリティのベーシックセオリー](https://www.amazon.co.jp/dp/B08F3BVSJQ)
   - [要点整理から攻略する『AWS 認定 セキュリティ-専門知識』 (Compass Books シリーズ)](https://www.amazon.co.jp/dp/B08DCLRHC7)
 
-### AWS Lambda
+## AWS Lambda
 
 - [ランタイム](https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/lambda-runtimes.html)
   - <http://lambda-versions.com/>
@@ -52,7 +54,7 @@
   - [fujiwara/lambroll](https://github.com/fujiwara/lambroll)
   - [fujiwara/lamblocal](https://github.com/fujiwara/lamblocal)
 
-### AWS ECS
+## AWS ECS
 
 - [ecs-cli](https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/cmd-ecs-cli.html)
 - [AWS CDK](https://docs.aws.amazon.com/cdk/api/latest/docs/aws-ecs-readme.html)
@@ -60,7 +62,7 @@
 - [docker-compose ECS plugin](https://docs.docker.com/cloud/ecs-integration/)
 - [ecspresso](https://github.com/kayac/ecspresso)
 
-### AWS EC2
+## AWS EC2
 
 - [EC2 インスタンスへのシェルアクセスサービスを雑にまとめてみた](https://dev.classmethod.jp/articles/choosing-the-right-shell-access-solution-to-aws-ec2)
 - <https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html>
@@ -71,7 +73,7 @@
 - <https://aws.amazon.com/jp/blogs/compute/new-using-amazon-ec2-instance-connect-for-ssh-access-to-your-ec2-instances/>
 - <https://github.com/aws/aws-ec2-instance-connect-cli>
 
-### AWS DynamoDB
+## AWS DynamoDB
 
 - [Best practices for designing and architecting with DynamoDB](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/best-practices.html)
 - [Amazon DynamoDB におけるシングルテーブル vs マルチテーブル設計 \| Amazon Web Services ブログ](https://aws.amazon.com/jp/blogs/news/single-table-vs-multi-table-design-in-amazon-dynamodb/)
@@ -84,7 +86,7 @@
 - ローカルで動く管理画面
   - `env DYNAMO_ENDPOINT=http://localhost:8000 PORT=8001 dynamodb-admin`
 
-### AWS S3
+## AWS S3
 
 - [AWS CLI S3 Configuration — AWS CLI Command Reference](https://docs.aws.amazon.com/cli/latest/topic/s3-config.html)
 - [AWS CLI での高レベル (S3) コマンドの使用 - AWS Command Line Interface](https://docs.aws.amazon.com/ja_jp/cli/latest/userguide/cli-services-s3-commands.html)
@@ -92,7 +94,7 @@
 - [minio/minio: High Performance Object Storage for AI](https://github.com/minio/minio)
 - [Amazon S3 の脆弱な利用によるセキュリティリスクと対策 - Flatt Security Blog](https://blog.flatt.tech/entry/s3_security)
 
-#### バージョニングされたバケットを削除
+### バージョニングされたバケットを削除
 
 ```python
 import os
@@ -103,13 +105,13 @@ b.object_versions.all().delete()
 b.delete()
 ```
 
-### AWS Secret Manager
+## AWS Secret Manager
 
 - `aws secretsmanager create-secret --name foo --secret-string '{"HOGE_API_KEY":"foo"}'`
 - `aws secretsmanager put-secret-value --secret-id foo --secret-string '{"HOGE_API_KEY":"bar"}'`
 - `aws secretsmanager get-secret-value --secret-id foo | jq -r '.SecretString | fromjson | .HOGE_API_KEY'`
 
-### AWS CloudWatch Logs
+## AWS CloudWatch Logs
 
 - [CloudWatch Logs Insight クエリ構文](https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html)
 - [utern](https://github.com/knqyf263/utern)
@@ -117,11 +119,11 @@ b.delete()
 - ロググループをまとめて削除
   - `aws logs describe-log-groups --max-items 1000 | jq -r '.logGroups[] | .logGroupName | select(test("irisawa"))' | xargs -n 1 aws logs delete-log-group --log-group-name`
 
-### AWS EventBridge
+## AWS EventBridge
 
 - <https://convert-datetime-to-cloudwatch-cron-expression-git-master.lambdasawa.vercel.app>
 
-### AWS OpenTelemetry
+## AWS OpenTelemetry
 
 - [open-telemetry/opentelemetry-go](https://github.com/open-telemetry/opentelemetry-go)
 - [open-telemetry/opentelemetry-go-contrib](https://github.com/open-telemetry/opentelemetry-go-contrib)
@@ -136,7 +138,7 @@ b.delete()
 - [コレクターのリリース](https://github.com/open-telemetry/opentelemetry-collector-releases)
 - [Lambda デフォルトの `collector.yaml`](https://github.com/aws-observability/aws-otel-lambda/blob/main/adot/collector/config.yaml)
 
-### AWS CDK
+## AWS CDK
 
 - [ガイド](https://docs.aws.amazon.com/cdk/v2/guide/home.html)
 - [リファレンス](https://docs.aws.amazon.com/cdk/api/v1/docs/aws-construct-library.html)
@@ -150,23 +152,23 @@ b.delete()
   - [aws-samples/aws-cdk-examples](https://github.com/aws-samples/aws-cdk-examples)
   - [cdk-patterns/serverless](https://github.com/cdk-patterns/serverless)
 
-### AWS CloudFormation
+## AWS CloudFormation
 
 - [CFn リソースのリファレンス](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
 - [CFn 組み込み関数のリファレンス](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference.html)
 
-### GCP (Google Cloud)
+## GCP (Google Cloud)
 
 - [Google Cloud プロダクト](https://cloud.google.com/products?hl=ja)
 - [gcloud CLI クイック リファレンス](https://cloud.google.com/sdk/docs/cheatsheet?hl=ja)
 
-### VPS
+## VPS
 
 - <https://www.digitalocean.com/>
 - <https://www.linode.com/ja/>
 - <https://www.vultr.com/>
 
-### PaaS
+## PaaS
 
 - <https://fly.io/>
 - <https://render.com/>
@@ -177,7 +179,7 @@ b.delete()
 - <https://www.netlify.com/>
 - <https://www.gatsbyjs.com/products/cloud/>
 
-### DBaaS
+## DBaaS
 
 - <https://planetscale.com/>
 - <https://neon.tech/>
@@ -185,7 +187,7 @@ b.delete()
 - <https://upstash.com/>
 - <https://www.elastic.co/jp/cloud/>
 
-### Terraform
+## Terraform
 
 - [AWS provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs)
   - [backend](https://www.terraform.io/language/settings/backends/s3)
@@ -249,7 +251,7 @@ b.delete()
   - [Built-in functions](https://terragrunt.gruntwork.io/docs/reference/built-in-functions/)
 - [tftarget:Terraform ターゲットを選択的に実行するための Go 製 CLI ツール \| フューチャー技術ブログ](https://future-architect.github.io/articles/20230329a/)
 
-### bash
+## bash
 
 - [【シェル芸人への道】Bash の変数展開と真摯に向き合う](https://qiita.com/t_nakayama0714/items/80b4c94de43643f4be51)
 - [エムスリー bash スクリプティング研修](https://www.m3tech.blog/entry/2018/08/21/bash-scripting)
@@ -257,13 +259,13 @@ b.delete()
 - [shellcheck](https://github.com/koalaman/shellcheck)
 - [shfmt](https://github.com/mvdan/sh#shfmt)
 
-### tmux
+## tmux
 
 - [tmux](https://github.com/tmux/tmux/wiki)
 - [tmuxinator](https://github.com/tmuxinator/tmuxinator)
 - [tmux-jump](https://github.com/schasse/tmux-jump)
 
-### Docker
+## Docker
 
 - [ref](https://docs.docker.com/engine/reference/builder/)
 - [ref (ja)](https://docs.docker.jp/engine/reference/builder.html)
@@ -281,29 +283,29 @@ b.delete()
   - [mailhog](https://hub.docker.com/r/mailhog/mailhog)
   - [elasticsearch](https://www.docker.elastic.co/r/elasticsearch)
 
-### Kubernetes (k8s)
+## Kubernetes (k8s)
 
 - [Kubernetes ドキュメント \| Kubernetes](https://kubernetes.io/ja/docs/home/)
 - [Lens Documentation](https://docs.k8slens.dev/)
 - [Skaffold](https://skaffold.dev/)
 
-### GUI DB Client
+## GUI DB Client
 
 - <https://www.jetbrains.com/datagrip>
 - <https://arctype.com>
 - <https://github.com/mtxr/vscode-sqltools>
 
-### DB migration tool
+## DB migration tool
 
 - <https://github.com/golang-migrate/migrate>
 - <https://github.com/k0kubun/sqldef>
 
-### ERD
+## ERD
 
 - <https://github.com/BurntSushi/erd>
 - <https://github.com/schemaspy/schemaspy>
 
-### MySQL
+## MySQL
 
 - <https://dev.mysql.com/doc/refman/5.6/ja/func-op-summary-ref.html>
 - <https://dev.mysql.com/doc/refman/8.0/ja/mysqlpump.html>
@@ -321,7 +323,7 @@ b.delete()
   - [ref](https://dev.mysql.com/doc/refman/8.0/ja/charset-collation-names.html)
   - [MySQL 8.0 の Charset utf8mb4 での日本語環境で使う Collation で文字比較をしてみる](https://kazuhira-r.hatenablog.com/entry/2021/05/08/232717)
 
-### Redis
+## Redis
 
 - <https://github.com/qishibo/AnotherRedisDesktopManager>
 - <https://github.com/joeferner/redis-commander>
@@ -331,7 +333,7 @@ b.delete()
 - <https://github.com/dragonflydb/dragonfly>
 - <https://hub.docker.com/_/redis>
 
-### Elasticsearch
+## Elasticsearch
 
 - [guide](https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html)
 - [awesome](https://github.com/dzharii/awesome-elasticsearch)
@@ -344,12 +346,12 @@ b.delete()
 - [Query DSL](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html)
 - <https://github.com/lmenezes/cerebro>
 
-### IP
+## IP
 
 - <https://checkip.amazonaws.com>
 - <https://db-ip.com>
 
-### DNS
+## DNS
 
 - deny list
   - <https://asnokaze.hatenablog.com/entry/2022/07/04/000036>
@@ -358,14 +360,14 @@ b.delete()
 - /etc/hosts
   - <https://guumaster.github.io/hostctl/>
 
-### TLS / SSL
+## TLS / SSL
 
 - [プロフェッショナル SSL/TLS – 技術書出版と販売のラムダノート](https://www.lambdanote.com/products/tls)
 - [図解 X.509 証明書](https://qiita.com/TakahikoKawasaki/items/4c35ac38c52978805c69)
 - [RSA 鍵、証明書のファイルフォーマットについて](https://qiita.com/kunichiko/items/12cbccaadcbf41c72735)
 - [OpenSSL CSR Tool - Create Your CSR Faster \| DigiCert.com](https://www.digicert.com/easy-csr/openssl.htm)
 
-### HTTP
+## HTTP
 
 - [httpie](https://httpie.io/)
 - [Insomnia](https://insomnia.rest/)
@@ -379,15 +381,15 @@ b.delete()
 - [mitmproxy](https://mitmproxy.org/)
 - [Burp Suite](https://portswigger.net/burp)
 
-### WebSocket
+## WebSocket
 
 - <https://github.com/vi/websocat>
 
-### CSV
+## CSV
 
 - [multiprocessio/dsq: Commandline tool for running SQL queries against JSON, CSV, Excel, Parquet, and more.](https://github.com/multiprocessio/dsq#usage)
 
-### JSON
+## JSON
 
 - [jq Manual (development version)](https://stedolan.github.io/jq/manual/#Basicfilters)
 - [jq Language Description · stedolan/jq Wiki](https://github.com/stedolan/jq/wiki/jq-Language-Description)
@@ -395,25 +397,25 @@ b.delete()
 - [gron](https://github.com/tomnomnom/gron)
 - [jc](https://github.com/kellyjonbrazil/jc)
 
-### JWT
+## JWT
 
 - <https://jwt.io/>
 - <https://github.com/mike-engel/jwt-cli>
 
-### zip, tar, gz, bz2
+## zip, tar, gz, bz2
 
 - <https://github.com/ouch-org/ouch>
 - <https://github.com/sstadick/crabz>
 - <https://github.com/mholt/archiver>
 - <https://github.com/paulirish/dotfiles/blob/4708afc97acd00554aa69093ee591cfcc501d73f/.functions#L113-L124>
 
-### git
+## git
 
 - tig
 - ghq
 - lefthook
 
-### GitHub Actions
+## GitHub Actions
 
 - [Workflow syntax for GitHub Actions - GitHub Docs](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions)
 - [integrations/slack: Bring your code to the conversations you care about with the GitHub and Slack integration](https://github.com/integrations/slack#readme)
@@ -424,7 +426,7 @@ b.delete()
 - [mxschmitt/action-tmate: Debug your GitHub Actions via SSH by using tmate to get access to the runner system itself.](https://github.com/mxschmitt/action-tmate)
 - [Push event doesn't trigger workflow on push paths (github actions) - Stack Overflow](https://stackoverflow.com/questions/67550727/push-event-doesnt-trigger-workflow-on-push-paths-github-actions)
 
-### OpenAPI
+## OpenAPI
 
 - [OpenAPI Specification - Version 3.0.3 \| Swagger](https://swagger.io/specification/)
 - [redocly-cli](https://github.com/Redocly/redocly-cli)
@@ -432,7 +434,7 @@ b.delete()
 - [Stoplight](https://stoplight.io/)
 - [spectral](https://github.com/stoplightio/spectral)
 
-### gRPC
+## gRPC
 
 - <https://github.com/grpc-ecosystem/awesome-grpc>
   - <https://github.com/grpc-ecosystem>
@@ -440,11 +442,11 @@ b.delete()
 - [.proto](https://developers.google.com/protocol-buffers/docs/proto3)
 - [golang](https://www.grpc.io/docs/languages/go/quickstart/)
 
-### GraphQL
+## GraphQL
 
 - <https://github.com/graphql/graphiql>
 
-### Go (golang)
+## Go (golang)
 
 - [Playground](https://go.dev/play/)
 - [Standard Library](https://pkg.go.dev/std)
@@ -464,7 +466,7 @@ b.delete()
 - <https://docs.sqlc.dev/en/latest/tutorials/getting-started-mysql.html>
 - [ko-build/ko: Build and deploy Go applications](https://github.com/ko-build/ko)
 
-### TypeScript / JavaScript
+## TypeScript / JavaScript
 
 - [仕事ですぐに使える TypeScript](https://future-architect.github.io/typescript-guide/)
 - [サバイバル TypeScript](https://typescriptbook.jp/)
@@ -484,7 +486,7 @@ b.delete()
 - <https://github.com/wclr/ts-node-dev>
 - <https://github.com/rollup/rollup>
 
-### Ruby
+## Ruby
 
 - [リファレンス](https://docs.ruby-lang.org/ja/3.1/doc/index.html)
 - [組み込みライブラリ/標準ライブラリの検索](https://docs.ruby-lang.org/ja/search/)
@@ -492,7 +494,7 @@ b.delete()
 - [API](https://api.rubyonrails.org/)
 - [nil? empty? blank? present?](https://medium.com/le-wagon/how-to-use-nil-blank-present-exists-in-rails-5-fe03e78ab979)
 
-### Rust
+## Rust
 
 - [Standard Library](https://doc.rust-lang.org/std/index.html)
 - [crates.io](https://crates.io/)
@@ -508,7 +510,7 @@ b.delete()
 - diesel
   - <https://diesel.rs/guides/getting-started.html>
 
-### Flutter
+## Flutter
 
 - Dart
   - [DartPad](https://dartpad.dev)
@@ -569,7 +571,7 @@ adb tcpip 5555
 adb connect $(adb shell ip addr | grep inet | grep wlan | awk '{print $2}' | jc --ip-address | jq -r .ip):5555
 ```
 
-### 構造体の生成
+## 構造体の生成
 
 - [transform.tools](https://transform.tools/json-to-go)
 - [quicktype](https://app.quicktype.io/)
@@ -578,7 +580,7 @@ adb connect $(adb shell ip addr | grep inet | grep wlan | awk '{print $2}' | jc 
 - [gqlgen](https://github.com/99designs/gqlgen)
 - [sqlboiler](https://github.com/volatiletech/sqlboiler)
 
-### 正規表現 (regexp)
+## 正規表現 (regexp)
 
 - <https://github.com/aloisdg/awesome-regex>
 - <https://www.regexplanet.com/cookbook/index.html>
@@ -605,12 +607,12 @@ adb connect $(adb shell ip addr | grep inet | grep wlan | awk '{print $2}' | jc 
 - [Regex Viz](https://regex-vis.com/)
 - [Regexper](https://regexper.com)
 
-### OpenID Connect (OIDC)
+## OpenID Connect (OIDC)
 
 - [一番分かりやすい OpenID Connect の説明](https://qiita.com/TakahikoKawasaki/items/498ca08bbfcc341691fe)
 - [OpenID Connect \| Google Identity Platform](https://developers.google.com/identity/protocols/oauth2/openid-connect)
 
-### Unicode
+## Unicode
 
 - <https://blog.jxck.io/entries/2017-03-02/unicode-in-javascript.html>
 - <https://engineering.linecorp.com/ja/blog/the-7-ways-of-counting-characters/>
@@ -633,13 +635,13 @@ adb connect $(adb shell ip addr | grep inet | grep wlan | awk '{print $2}' | jc 
 - [UTF-8 テーブル](https://www.fileformat.info/info/charset/UTF-8/list.htm)
 - [Shift-JIS テーブル](https://uic.jp/charset/show/cp932/)
 
-### 負荷テスト (load testing)
+## 負荷テスト (load testing)
 
 - [grafana/k6-template-typescript: Template to use TypeScript with k6](https://github.com/grafana/k6-template-typescript)
 - [Gatling](https://gatling.io/docs/gatling/)
 - [Locust - A modern load testing framework](https://locust.io/)
 
-### クレデンシャル管理
+## クレデンシャル管理
 
 - [1Password の CLI で環境変数を管理する](https://zenn.dev/lambdasawa/articles/op-cli-and-environment-variables)
 - [sops](https://github.com/mozilla/sops)
@@ -647,7 +649,7 @@ adb connect $(adb shell ip addr | grep inet | grep wlan | awk '{print $2}' | jc 
 - [git-crypt](https://github.com/AGWA/git-crypt)
 - [secretlint](ttps://github.com/secretlint/secretlint)
 
-### AtCoder
+## AtCoder
 
 - [AtCoder（競技プログラミング）の色・ランクと実力評価、問題例](https://chokudai.hatenablog.com/entry/2019/02/11/155904)
 - [AtCoder - lambdasawa](https://atcoder.jp/users/lambdasawa/history?contestType=algo)
@@ -665,13 +667,13 @@ adb connect $(adb shell ip addr | grep inet | grep wlan | awk '{print $2}' | jc 
 
 - [Cloud GPUs - The Full Stack](https://fullstackdeeplearning.com/cloud-gpus/)
 
-### 数学
+## 数学
 
 - <https://ja.wolframalpha.com/>
 - <https://cognicull.com/ja/field>
 - [150 分で学ぶ高校数学の基礎](https://speakerdeck.com/e869120/150-fen-dexue-bugao-xiao-shu-xue-noji-chu)
 
-### 開発環境
+## 開発環境
 
 - [fish](https://fishshell.com/docs/current/tutorial.html)
 - [direnv](https://direnv.net/)
@@ -697,7 +699,7 @@ adb connect $(adb shell ip addr | grep inet | grep wlan | awk '{print $2}' | jc 
 - VSCode
 - 1Password
 
-### VSCode
+## VSCode
 
 - [Code Ace Jumper](https://marketplace.visualstudio.com/items?itemName=lucax88x.codeacejumper)
 - [expand-region](https://marketplace.visualstudio.com/items?itemName=letrieu.expand-region)
@@ -714,7 +716,7 @@ adb connect $(adb shell ip addr | grep inet | grep wlan | awk '{print $2}' | jc 
 - [Monokai Pro](https://marketplace.visualstudio.com/items?itemName=monokai.theme-monokai-pro-vscode)
 - [GistPad](https://marketplace.visualstudio.com/items?itemName=vsls-contrib.gistfs)
 
-### Firefox
+## Firefox
 
 - [Tree Style Tab](https://addons.mozilla.org/ja/firefox/addon/tree-style-tab/)
 - [Tridactyl](https://addons.mozilla.org/ja/firefox/addon/tridactyl-vim)
@@ -723,7 +725,7 @@ adb connect $(adb shell ip addr | grep inet | grep wlan | awk '{print $2}' | jc 
 - [AWS Extend Switch Roles](https://addons.mozilla.org/ja/firefox/addon/aws-extend-switch-roles3)
 - [Notion Boost](https://addons.mozilla.org/ja/firefox/addon/notion-boost/)
 
-### オンラインコンパイラ
+## オンラインコンパイラ
 
 - [Ideone](https://www.ideone.com/)
 - [wandbox](https://wandbox.org/)
@@ -738,25 +740,25 @@ adb connect $(adb shell ip addr | grep inet | grep wlan | awk '{print $2}' | jc 
 - [CodeSandbox](https://codesandbox.io/)
 - [StackBlitz](https://stackblitz.com/)
 
-### Corne Cherry
+## Corne Cherry
 
 - <https://btoshop.jp/products/adskbcc>
 - Helix Logo Editor
 
-### Kinesis Advantage Keyboard 360
+## Kinesis Advantage Keyboard 360
 
 ![kinesis](./assets/kinesis-advantage-360.png)
 
-### Chromecast
+## Chromecast
 
 - <https://github.com/vishen/go-chromecast>
 
-### YouTube
+## YouTube
 
 - <https://github.com/yt-dlp/yt-dlp>
 - <https://github.com/mpv-player/mpv>
 
-### Slack 絵文字
+## Slack 絵文字
 
 - <https://emoji-gen.ninja/>
 - <https://zk-phi.github.io/MEGAMOJI/>
@@ -765,7 +767,7 @@ adb connect $(adb shell ip addr | grep inet | grep wlan | awk '{print $2}' | jc 
   - ドメインに `omise` という文字列が含まれているが無料。
 - <https://slackmojis.com/>
 
-### macOS
+## macOS
 
 - <https://github.com/mas-cli/mas>
 - `defaults write -g AppleShowAllFiles -bool true`
