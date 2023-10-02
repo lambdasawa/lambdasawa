@@ -1,7 +1,3 @@
----
-title: λ沢
----
-
 [About](https://bento.me/lambdasawa) / [GitHub](https://github.com/lambdasawa) / [Twitter](https://twitter.com/lambdasawa) / [Wantedly](https://www.wantedly.com/id/lambdasawa)
 
 - 2023-10-01 株式会社 Flatt Security 入社
