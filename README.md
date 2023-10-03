@@ -1,5 +1,7 @@
 [About](https://bento.me/lambdasawa) / [GitHub](https://github.com/lambdasawa) / [Twitter](https://twitter.com/lambdasawa) / [Wantedly](https://www.wantedly.com/id/lambdasawa)
 
+- 2023-10-03 [Offsec Web Expert 受験レポート](https://www.lambdasawa.dev/blog/oswe-review)
+- 2023-10-03 Offsec Web Expert 合格
 - 2023-10-01 株式会社 Flatt Security 入社
 - 2023-09-08 [(microCMS FM #4) microCMS のバックエンドを支える働き](https://twitter.com/micro_cms/status/1700078377141772646)
 - 2023-07-25 [Burp Suite Certified Practitioner 受験レポート](https://www.lambdasawa.dev/blog/bscp-review)
