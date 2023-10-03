@@ -1,6 +1,4 @@
----
-title: OffSec Web Expert 受験レポート
----
+# OffSec Web Expert 受験レポート
 
 2023 年の 9 月末頃に OffSec Web Expert (OSWE) という Web セキュリティに関する試験を受けました。
 そして本日 (2023/10/03) 合格通知が届きました。
