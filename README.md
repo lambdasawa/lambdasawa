@@ -1,8 +1,8 @@
-# λ沢 (pronounced as lambda sour)
-
 [About](https://bento.me/lambdasawa) / [GitHub](https://github.com/lambdasawa) / [Twitter](https://twitter.com/lambdasawa) / [Wantedly](https://www.wantedly.com/id/lambdasawa)
 
-- 2023-07-25 [Offsec Web Expert 受験レポート](https://www.lambdasawa.dev/blog/oswe-review)
+- 2023-10-03 [Offsec Web Expert 受験レポート](https://www.lambdasawa.dev/blog/oswe-review)
+- 2023-10-03 Offsec Web Expert 合格
+- 2023-10-01 株式会社 Flatt Security 入社
 - 2023-09-08 [(microCMS FM #4) microCMS のバックエンドを支える働き](https://twitter.com/micro_cms/status/1700078377141772646)
 - 2023-07-25 [Burp Suite Certified Practitioner 受験レポート](https://www.lambdasawa.dev/blog/bscp-review)
 - 2023-07-25 Burp Suite Certified Practitioner 合格
@@ -37,4 +37,3 @@
 - 2014-06-19 Ruby Association Certified Ruby Programmer Gold 合格
 - 2013-11-08 パソコン甲子園 本戦出場
 - 2012-10-15 応用情報技術者試験 合格
-- 1995-06-16 生まれる
