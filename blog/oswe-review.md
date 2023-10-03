@@ -1,8 +1,6 @@
----
-title: OffSec Web Expert 受験レポート
----
+# OffSec Web Expert 受験レポート
 
-2023 年の 9 月末頃に OffSec Web Expert (OSWE) という Web セキュリティに関する試験を受けました。
+主に腕試し目的で 2023 年の 9 月末頃に OffSec Web Expert (OSWE) という Web セキュリティに関する試験を受けました。
 そして本日 (2023/10/03) 合格通知が届きました。
 
 <https://www.credential.net/16baebe1-71fe-4a55-87a8-4592bbff3d22>
@@ -89,6 +87,9 @@ OSWE に関しては恐らく隔離されているのでこういった実際は
 OSWE とは関係ない話ですが、この日に BSCP を受験しました。
 合否通知は後日なのですが、全てのタスクを完了したため不正を疑われなければ合格だろうという状況でした。
 (実際に合格していました)
+
+BSCP とは Burp Suite を作っている PortSwigger 社の提供する Web セキュリティに関する試験です。
+以前 [BSCP の受験レポート](https://www.lambdasawa.dev/blog/bscp-review) も書いたので、興味がある方は読んでいただけたら嬉しいです。
 
 ### 07/23 申し込み
 
