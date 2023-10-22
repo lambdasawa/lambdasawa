@@ -1,5 +1,5 @@
 ---
-title: memo
+title: cheatsheet
 ---
 
 ## AWS
@@ -505,6 +505,13 @@ $ curl -sSL https://raw.githubusercontent.com/github/gitignore/main/Python.gitig
 
 $ pip freeze >requirements.txt
 $ pip install -r requirements.txt
+```
+
+or...
+
+```sh
+python -m venv venv
+. ./venv/bin/activate.fish
 ```
 
 ## Rust
