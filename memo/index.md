@@ -494,6 +494,19 @@ b.delete()
 - [API](https://api.rubyonrails.org/)
 - [nil? empty? blank? present?](https://medium.com/le-wagon/how-to-use-nil-blank-present-exists-in-rails-5-fe03e78ab979)
 
+## Python
+
+```sh
+$ cat .rtx.toml
+[tools]
+python = { version = '3.12', virtualenv = '.venv' }
+
+$ curl -sSL https://raw.githubusercontent.com/github/gitignore/main/Python.gitignore -o .gitignore
+
+$ pip freeze >requirements.txt
+$ pip install -r requirements.txt
+```
+
 ## Rust
 
 - [Standard Library](https://doc.rust-lang.org/std/index.html)
