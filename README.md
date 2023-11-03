@@ -1,5 +1,6 @@
 [About](https://bento.me/lambdasawa) / [GitHub](https://github.com/lambdasawa) / [Twitter](https://twitter.com/lambdasawa) / [Wantedly](https://www.wantedly.com/id/lambdasawa)
 
+- 2023-11-03 [デスクトップ環境のこだわり](https://www.lambdasawa.dev/blog/desktop-environment)
 - 2023-10-03 [OffSec Web Expert 受験レポート](https://www.lambdasawa.dev/blog/oswe-review)
 - 2023-10-03 OffSec Web Expert 合格
 - 2023-10-01 株式会社 Flatt Security 入社
