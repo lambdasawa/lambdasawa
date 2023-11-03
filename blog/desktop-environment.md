@@ -2,6 +2,8 @@
 title: デスクトップ環境のこだわり
 ---
 
+最近キーマップ系を色々いじったので整理も兼ねて思想とかを色々書き残しておく。
+
 ## PC
 
 - 一緒に仕事をする人が Mac を使っているので Mac を使っている
@@ -14,6 +16,7 @@ title: デスクトップ環境のこだわり
 - Kensington Slim Blade を使い続けている
 - 特に不満はない
 - クリック音がデカいのはちょっと気になる
+
 ## キーボード
 
 - REALFORCE → HHKB → Kinesis Advantage 2 → ErgoDox → Viterbi → Iris → Corne という流れで色々変えてきた
@@ -61,20 +64,23 @@ title: デスクトップ環境のこだわり
 	- Raycast などのランチャーアプリが適切に設定されていれば…という前提
 	- アプリを切り替えるのが億劫だと出来るだけ多くのウィンドウが前面に見えている状態が望ましいとは思っている
 	- Raycast などのランチャーアプリが適切に設定されていればアプリの切り替えは億劫でなくなる
-- とはいえ、ディスプレイが縦に長いと嬉しいシーンもあるので [ASUS の適当なモニタ](https://www.asus.com/jp/displays-desktops/monitors/eye-care/vg278qr-j/  ) を2枚使って片方は横置き、もう片方は縦置きにしている
+- とはいえ、ディスプレイが縦に長いと嬉しいシーンもあるので [ASUS の適当なモニタ](https://www.asus.com/jp/displays-desktops/monitors/eye-care/vg278qr-j/) を2枚使って片方は横置き、もう片方は縦置きにしている
 
 ## デスク
 
-- ニトリの幅120×奥行75×高さ70cmのダイニングテーブルとされているやつ
-- https://www.nitori-net.jp/ec/product/4016350/
+- ニトリの幅120×奥行75×高さ70cmのダイニングテーブルとされている[やつ](https://www.nitori-net.jp/ec/product/4016350/)
+
 ## 椅子
 
-- ニトリのゲーミングチェアとされているやつ
-- https://www.nitori-net.jp/ec/product/6620873/
+- ニトリのゲーミングチェアとされている[やつ](https://www.nitori-net.jp/ec/product/6620873/)
 
 ### レイヤー
 
-デフォルトレイヤー:
+[keymap.c](https://github.com/lambdasawa/qmk_firmware/blob/master/keyboards/crkbd/keymaps/lambdasawa/keymap.c)
+
+![](/blog/static/desktop-environment-keymap.png)
+
+#### 0: デフォルトレイヤー
 
 - 普通の QWERTY 配列
 - 左右の端に F13~F20 が割り当ててある
@@ -84,29 +90,11 @@ title: デスクトップ環境のこだわり
 - 記号は基本的に他のレイヤーにあるが、句読点はよく使うのでこのレイヤーにある
 - 親指に修飾キーとレイヤー切り替えのキーがある
 
-```c
-  [0] = LAYOUT_split_3x6_3(
-      KC_F13 , KC_Q   , KC_W   , KC_E   , KC_R   , KC_T   ,                      KC_Y   , KC_U   , KC_I   , KC_O   , KC_P   , KC_F18 ,
-      KC_F16 , KC_A   , KC_S   , KC_D   , KC_F   , KC_G   ,                      KC_H   , KC_J   , KC_K   , KC_L   , KC_RALT, KC_F19 ,
-      KC_F17 , KC_Z   , KC_X   , KC_C   , KC_V   , KC_B   ,                      KC_N   , KC_M   , KC_COMM, KC_DOT , KC_RSFT, KC_F20 ,
-                                          MO(1)  , KC_LGUI, KC_LCTL,    KC_RALT, KC_RSFT, MO(2)
-  ),
-```
-
-記号レイヤー:
+#### 1: 記号レイヤー
 
 記号があるだけ。このレイヤーには面白みがない。
 
-```c
- [1] = LAYOUT_split_3x6_3(
-      _______, KC_PLUS, KC_MINS, KC_ASTR, KC_SLSH, KC_PERC,                      KC_AT  , KC_COLN, KC_SCLN, KC_LBRC, KC_RBRC, _______,
-      _______, KC_HASH, KC_AMPR, KC_PIPE, KC_EQL , KC_EXLM,                      KC_TILD, KC_QUOT, KC_DQUO, KC_LPRN, KC_RPRN, _______,
-      _______, KC_CIRC, KC_DLR , KC_BSLS, KC_UNDS, KC_QUES,                      KC_GRV , KC_LT  , KC_GT  , KC_LCBR, KC_RCBR, _______,
-                                          MO(3)  , _______, _______,    _______, _______, MO(3)
- ),
-```
-
-なんか色々あるレイヤー:
+#### 2: なんか色々あるレイヤー
 
 - 左手
 	- 通常は T がある位置にマウスの右クリックが並んでいる
@@ -127,16 +115,7 @@ title: デスクトップ環境のこだわり
 		- これも F13~F20 と同じでアプリケーションにデフォルトで定義されているショートカットキーと被らなくて便利
 		- だけどまだ使いこなせてない
 
-```c
-  [2] = LAYOUT_split_3x6_3(
-      _______, KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, KC_BTN2,                      HYPR_1 , HYPR_2 , HYPR_3 , HYPR_4 , HYPR_5 , _______,
-      _______, KC_LEFT, KC_DOWN, KC_UP  , KC_RGHT, KC_WH_U,                      KANA   , KC_ENT , KC_SPC , KC_TAB , KC_RALT, _______,
-      _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END , KC_WH_D,                      EISU   , KC_BSPC, KC_DEL , KC_ESC , KC_RSFT, _______,
-                                          MO(3)  , _______, _______,    _______, _______, MO(3)
-  ),
-```
-
-ファンクションキーと数字キーがあるレイヤー:
+#### 3: ファンクションキーと数字キーがあるレイヤー
 
 - 左手にファンクションキー
 - 右手に数字キーがテンキー的な配列である
@@ -145,17 +124,6 @@ title: デスクトップ環境のこだわり
 	- MEH_4~MEH_6 にスクリーンショット撮影系の処理を割り当てるよう Mac の System Preferences をいじってある
 	- MEH_1~MEH_3 はまだ未割り当て
 
-```c
-  [3] = LAYOUT_split_3x6_3(
-      _______, KC_F1  , KC_F2  , KC_F3  , KC_F4  , MEH_1  ,                      KC_DOT , KC_7   , KC_8   , KC_9   , MEH_4  , _______,
-      _______, KC_F5  , KC_F6  , KC_F7  , KC_F9  , MEH_2  ,                      KC_COMM, KC_4   , KC_5   , KC_6   , MEH_5  , _______,
-      _______, KC_F9  , KC_F10 , KC_F11 , KC_F12 , MEH_3  ,                      KC_0   , KC_1   , KC_2   , KC_3   , MEH_6  , _______,
-                                          XXXXXXX, _______, _______,    _______, _______, XXXXXXX
-  ),
-```
-
-
-https://github.com/lambdasawa/qmk_firmware/blob/master/keyboards/crkbd/keymaps/lambdasawa/keymap.c
 
 ## Raycast
 
@@ -176,16 +144,7 @@ https://github.com/lambdasawa/qmk_firmware/blob/master/keyboards/crkbd/keymaps/l
 - hoge fuga Quarter 系のコマンドを実行すると、ウィンドウのサイズがディスプレイの4分の1のサイズになって hoge fuga の位置に移動する
 	- Command+Option+F17 を押すと Bottom Left に移動するように一番上の行で定義されている
 	- なぜ F17 が Bottom Left か？
-	- F17 はキーボードの左下にマッピングされているので
-
-```c
-  [0] = LAYOUT_split_3x6_3(
-      KC_F13 , KC_Q   , KC_W   , KC_E   , KC_R   , KC_T   ,                      KC_Y   , KC_U   , KC_I   , KC_O   , KC_P   , KC_F18 ,
-      KC_F16 , KC_A   , KC_S   , KC_D   , KC_F   , KC_G   ,                      KC_H   , KC_J   , KC_K   , KC_L   , KC_RALT, KC_F19 ,
-      KC_F17 , KC_Z   , KC_X   , KC_C   , KC_V   , KC_B   ,                      KC_N   , KC_M   , KC_COMM, KC_DOT , KC_RSFT, KC_F20 ,
-                                          MO(1)  , KC_LGUI, KC_LCTL,    KC_RALT, KC_RSFT, MO(2)
-  ),
-```
+	- F17 はキーボードの左下にマッピングされているから
 
 こんなイメージ。
 
@@ -212,6 +171,7 @@ https://github.com/lambdasawa/qmk_firmware/blob/master/keyboards/crkbd/keymaps/l
 - search snippets
 	- 開発/テスト対象のアプリケーションにテストデータとしてよく使うデータをスニペットに登録してる
 	- これをすぐ出せるようにしている
+
 ### raycast/script-commands
 
 - 使ってない
@@ -225,6 +185,8 @@ https://github.com/lambdasawa/qmk_firmware/blob/master/keyboards/crkbd/keymaps/l
 - 言語に依存しないプラグインに絞って言及すると AceJump と String Manipulation を入れてる
 - Theme は Monokai Pro を使っている
 	- 多分これが一番可愛いと思います
+
+その他、色々ショートカットキーを定義している。
 
 ###  F13~20
 
@@ -268,10 +230,20 @@ https://github.com/lambdasawa/qmk_firmware/blob/master/keyboards/crkbd/keymaps/l
 |                          | F16 | -   | F19 | Split Right          |
 | Close All Tabs           | F17 | -   | F20 | Split Down           |
 
+### Tool Windows 系のショートカットキー
+
+- Option+v -> Commit ウィンドウにフォーカス
+- Option+p -> Project ウィンドウにフォーカス
+- Option+b -> Bookmark ウィンドウにフォーカス
+- Option+f -> Find ウィンドウにフォーカス
+- Option+r -> Run ウィンドウにフォーカス
+- Option+s -> Structure ウィンドウにフォーカス
+- Option+d -> Database ウィンドウにフォーカス
+
 ### その他
 
-- Option+m: string manipulation
-	- これはプラグイン
+- Option+m: String Manipulation
+	- String Manipulation のショートカットキー
 	- snake_case から camelCase への変換、BASE64 デコードなど細かい文字列操作が色々できる
 
 ## VSCode
@@ -288,3 +260,7 @@ https://github.com/lambdasawa/qmk_firmware/blob/master/keyboards/crkbd/keymaps/l
 	- Command+Option+f で通常の Firefox  を起動 (Firefox なので f)
 - DeepL のエクステンションを有効化すると一部のアプリケーションでテキストボックスがバグることがあったので入れてない
 	- DeepL はデスクトップアプリケーション経由で使っている
+
+----
+
+皆さんのこだわりもどこかで発信していただけたら嬉しいです…🙏
