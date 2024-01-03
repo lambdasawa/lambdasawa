@@ -1,4 +1,27 @@
-[λ沢.dev](https://www.lambdasawa.dev/) / [GitHub](https://github.com/lambdasawa) / [Zenn.dev](https://zenn.dev/lambdasawa) / [Wantedly](https://www.wantedly.com/id/lambdasawa) / [LAPRAS](https://lapras.com/public/lambdasawa) / [Findy](https://findy-code.io/share_profiles/EI2gaxVje83Nn) / [Twitter](https://twitter.com/lambdasawa) / [Facebook](https://www.facebook.com/lambdasawa) / [Instagram](https://www.instagram.com/lambdasawa/) / [Threads](https://www.threads.net/@lambdasawa) / [Bluesky](https://bsky.app/profile/lambdasawa.bsky.social) / [Mastodon](https://mstdn.jp/@lambdasawa) / [Misskey](https://misskey.io/@lambdasawa) / [nostr](https://coracle.social/npub1m8a7uuzrrad6e9tecn4n69nrzgucxydpa0s850c7vhzpqa0hcuuqkg5akj) / [Amazon ほしい物リスト](https://www.amazon.co.jp/hz/wishlist/ls/3GEP6B955K47M) / [Steam ウィッシュリスト](https://store.steampowered.com/wishlist/profiles/76561198288017158#sort=order)
+---
+title: λ沢.dev
+---
+
+## link
+
+- [λ沢.dev](https://www.lambdasawa.dev/)
+- [GitHub](https://github.com/lambdasawa)
+- [Zenn.dev](https://zenn.dev/lambdasawa)
+- [Wantedly](https://www.wantedly.com/id/lambdasawa)
+- [LAPRAS](https://lapras.com/public/lambdasawa)
+- [Findy](https://findy-code.io/share_profiles/EI2gaxVje83Nn)
+- [Twitter](https://twitter.com/lambdasawa)
+- [Facebook](https://www.facebook.com/lambdasawa)
+- [Instagram](https://www.instagram.com/lambdasawa/)
+- [Threads](https://www.threads.net/@lambdasawa)
+- [Bluesky](https://bsky.app/profile/lambdasawa.bsky.social)
+- [Mastodon](https://mstdn.jp/@lambdasawa)
+- [Misskey](https://misskey.io/@lambdasawa)
+- [nostr](https://coracle.social/npub1m8a7uuzrrad6e9tecn4n69nrzgucxydpa0s850c7vhzpqa0hcuuqkg5akj)
+- [Amazon ほしい物リスト](https://www.amazon.co.jp/hz/wishlist/ls/3GEP6B955K47M)
+- [Steam ウィッシュリスト](https://store.steampowered.com/wishlist/profiles/76561198288017158#sort=order)
+
+## log
 
 - 2023-10-03 [OffSec Web Expert 受験レポート](https://www.lambdasawa.dev/blog/oswe-review)
 - 2023-10-03 OffSec Web Expert 合格
