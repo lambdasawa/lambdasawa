@@ -10,7 +10,7 @@ title: λ沢.dev
 - [Wantedly](https://www.wantedly.com/id/lambdasawa)
 - [LAPRAS](https://lapras.com/public/lambdasawa)
 - [Findy](https://findy-code.io/share_profiles/EI2gaxVje83Nn)
-- [Twitter](https://twitter.com/lambdasawa)
+- [X (Twitter)](https://twitter.com/lambdasawa)
 - [Facebook](https://www.facebook.com/lambdasawa)
 - [Instagram](https://www.instagram.com/lambdasawa/)
 - [Threads](https://www.threads.net/@lambdasawa)
