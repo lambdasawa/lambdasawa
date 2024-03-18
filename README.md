@@ -1,4 +1,4 @@
-# lambdasawa
+# λ沢
 
 - [GitHub](https://github.com/lambdasawa)
 - [X (Twitter)](https://twitter.com/lambdasawa)
