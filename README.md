@@ -14,7 +14,7 @@ Security Researcher specializing in web application penetration testing and clou
 
 ## Certifications
 - [OffSec Web Expert (OSWE)](https://www.credential.net/16baebe1-71fe-4a55-87a8-4592bbff3d22)
-- [Burp Suite Certified Practitioner](https://portswigger.net/web-security/e/c/7d64775ef79f069d)
+- [Burp Suite Certified Practitioner (BSCP)](https://portswigger.net/web-security/e/c/7d64775ef79f069d)
 - [AWS Red Team Expert (ARTE)](https://training.hacktricks.xyz/certificates/b6c7ede3-b49d-4c09-bba4-16ffb00c6ea6)
 - [GCP Red Team Expert (GRTE)](https://training.hacktricks.xyz/certificates/23054ec2-c11d-4cda-9d78-0bb2f9db7ea3)
 - [Azure Red Team Expert (AzRTE)](https://training.hacktricks.xyz/certificates/4113d2c0-0242-4c8f-ab3b-9636d311fa46)
