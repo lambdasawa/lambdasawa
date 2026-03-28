@@ -2,7 +2,7 @@
 Security Researcher specializing in web application penetration testing and cloud security research.
 
 - Working as a security engineer at [GMO Flatt Security](https://flatt.tech/en), focusing on web application pentesting
-- Hunting vulnerabilities through [Google VRP](https://bughunters.google.com/profile/fec08483-ebe2-4863-b043-d2e99a617fea), focusing on Cloud VRP, currently ranked 215th / 1,887 (Top 12%)
+- Hunting vulnerabilities through [Google VRP](https://bughunters.google.com/profile/fec08483-ebe2-4863-b043-d2e99a617fea), focusing on Cloud VRP, currently ranked 177th / 1,905 (Top 10%)
 
 ## CVEs / Vulnerability Disclosures
 - [SSRF Exposes OpenAI API Keys in berriai/litellm](https://huntr.com/bounties/4001e1a2-7b7a-4776-a3ae-e6692ec3d997)
